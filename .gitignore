@@ -68,3 +68,5 @@ typings/
 *.DS_Store
 
 www/css/style\.css
+
+package-lock.json
