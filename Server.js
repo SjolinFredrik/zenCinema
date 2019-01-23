@@ -87,6 +87,13 @@ module.exports = class Server {
             res.sendFile(path.join(__dirname, '/www/index.html'));
         });
 
+       
+       const models = {
+        //    films: require('./models/Film'),
+           showings: require('./models/Showing')
+    }
+
+       
         // Start the web server
         app.listen(3005, () => console.log('Go to the cinema on port 3005'));
 
