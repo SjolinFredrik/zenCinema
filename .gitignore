@@ -67,6 +67,6 @@ typings/
 #Skip DS_Store files
 *.DS_Store
 
-www/css/style\.css
+www/css/styles\.css
 
 package-lock.json
