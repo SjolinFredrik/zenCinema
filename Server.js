@@ -88,12 +88,12 @@ module.exports = class Server {
         });
 
         // Set keys to names of rest routes
-        const models = {
-            films: require('./models/Film')
-            // showings: require('./models/Showing')
-        }
+        // const models = {
+        //     films: require('./models/Film')
+        //     // showings: require('./models/Showing')
+        // }
 
-        new Routes(models.films);    
+        // new Routes(models.films);    
         
 
         // Start the web server
