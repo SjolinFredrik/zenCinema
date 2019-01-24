@@ -7,6 +7,7 @@ const config = require('./config.json');
 const fs = require('fs');
 const path = require('path');
 const Routes = require('./Routes');
+const FilmsRoutes = require('./FilmsRoutes');
 
 
 const flexjson = require('jsonflex')({
@@ -77,6 +78,16 @@ module.exports = class Server {
 
         app.use(flexjson);
 
+        // Set keys to names of rest routes
+        const models = {
+            films: require('./models/Film')
+            // showings: require('./models/Showing')
+        }
+
+        new Routes(app, db, models);  
+        
+        new FilmsRoutes(app, db, models.films);
+        
         // Serve the index page everywhere so that the
         // frontend router can decide what to do
         app.use((req, res, next) => {
@@ -87,13 +98,6 @@ module.exports = class Server {
             res.sendFile(path.join(__dirname, '/www/index.html'));
         });
 
-        // Set keys to names of rest routes
-        const models = {
-            films: require('./models/Film')
-            // showings: require('./models/Showing')
-        }
-
-        new Routes(models.films);    
         
 
         // Start the web server
