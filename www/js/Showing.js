@@ -1,4 +1,4 @@
-class Showing extends Component{
+class Showing extends REST{
 
   async createShowing() {
     let date = new Date();
