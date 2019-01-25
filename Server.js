@@ -77,6 +77,14 @@ module.exports = class Server {
 
         app.use(flexjson);
 
+        // Set keys to names of rest routes
+        const models = {
+            // films: require('./models/Film')
+            showings: require('./models/Showing')
+        }
+
+        new Routes(app, db, models);    
+        
         // Serve the index page everywhere so that the
         // frontend router can decide what to do
         app.use((req, res, next) => {
@@ -87,15 +95,7 @@ module.exports = class Server {
             res.sendFile(path.join(__dirname, '/www/index.html'));
         });
 
-        // Set keys to names of rest routes
-        // const models = {
-        //     films: require('./models/Film')
-        //     // showings: require('./models/Showing')
-        // }
-
-        // new Routes(models.films);    
         
-
         // Start the web server
         app.listen(3005, () => console.log('Go to the cinema on port 3005'));
 
