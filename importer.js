@@ -11,13 +11,13 @@ db.once('open', () => {
 });
 
 // Load Mongoose models
-let Film = require('./Film');
+let Film = require('./models/Film');
 
 // Load the json data from file
 let filmData = require('./films.json');
 
 async function importJsonDataToDb(){
-  let allFilmsCount = await Film.count();
+  let allFilmsCount = await Film.count();  
   // if the db already contains films then delete them
   if(allFilmsCount > 0){
     console.log('Deleted old films', await Film.remove({}));
@@ -30,7 +30,7 @@ async function importJsonDataToDb(){
   }
   // after the import count the films again
   allFilmsCount = await Film.count();
-  console.log(`Imported ${allFilmsCount} books to the database`);
+  console.log(`Imported ${allFilmsCount} films to the database`);
   // Exit the app
   process.exit();
 }
