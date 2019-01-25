@@ -1,3 +1,6 @@
+let time = new Showing();
+
+time.createShowing();
 async function testNewLogin(){
   let fredrik = {
     "firstName": "Fredrik",
