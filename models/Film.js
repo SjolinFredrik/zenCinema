@@ -3,18 +3,18 @@ const Schema = mongoose.Schema;
 
 let filmSchema = new Schema ({
     "title": {type: String, required: true},
-    "productionCountries": [],
+    "productionCountries": [{type: String}],
     "productionYear": {type: Number, required:true},
     "length": Number,
     "genre": String,
     "distributor": String,
     "language": String,
     "subtitles": String,
-    "director": {type: String, required: true},
-    "actors": [],
+    "directors": {type: String, required: true},
+    "actors": [{type: String}],
     "description": String,
-    "images": [],
-    "youtubeTrailers": [],
+    "images": [{type: String}],
+    "youtubeTrailers": [{type: String}],
     "reviews": []
 });
 
