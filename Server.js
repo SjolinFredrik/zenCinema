@@ -7,6 +7,7 @@ const config = require('./config.json');
 const fs = require('fs');
 const path = require('path');
 const Routes = require('./Routes');
+const FilmsRoutes = require('./FilmsRoutes');
 
 
 const flexjson = require('jsonflex')({
@@ -79,11 +80,13 @@ module.exports = class Server {
 
         // Set keys to names of rest routes
         const models = {
-            // films: require('./models/Film')
-            showings: require('./models/Showing')
+            films: require('./models/Film')
+            // showings: require('./models/Showing')
         }
 
-        new Routes(app, db, models);    
+        new Routes(app, db, models);  
+        
+        new FilmsRoutes(app, db, models.films);
         
         // Serve the index page everywhere so that the
         // frontend router can decide what to do
@@ -96,6 +99,7 @@ module.exports = class Server {
         });
 
         
+
         // Start the web server
         app.listen(3005, () => console.log('Go to the cinema on port 3005'));
 
