@@ -1,4 +1,4 @@
-class Component {
+class Component extends REST {
 
   constructor(){
     this.addUniqueId();

@@ -1,14 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const CreateRestRoutes = require('./CreateRestRoutes')
 // Require sass compiler
 const Sass = require('./sass');
 const config = require('./config.json');
 const fs = require('fs');
 const path = require('path');
-const Routes = require('./Routes');
-const FilmsRoutes = require('./FilmsRoutes');
-
 
 const flexjson = require('jsonflex')({
     jsonDir: '/www/json', // directory on server to save json to
@@ -83,10 +81,6 @@ module.exports = class Server {
             films: require('./models/Film')
             // showings: require('./models/Showing')
         }
-
-        new Routes(app, db, models);  
-        
-        new FilmsRoutes(app, db, models.films);
         
         // Serve the index page everywhere so that the
         // frontend router can decide what to do
@@ -98,7 +92,8 @@ module.exports = class Server {
             res.sendFile(path.join(__dirname, '/www/index.html'));
         });
 
-        
+        //create all necessary rest routes for the models
+        new CreateRestRoutes(app, db, models);
 
         // Start the web server
         app.listen(3005, () => console.log('Go to the cinema on port 3005'));
