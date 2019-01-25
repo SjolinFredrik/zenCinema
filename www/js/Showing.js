@@ -1,4 +1,4 @@
-class Showing extends REST{
+class Showing extends component{
 
   
 }
