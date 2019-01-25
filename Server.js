@@ -84,9 +84,9 @@ module.exports = class Server {
             // showings: require('./models/Showing')
         }
 
-        new Routes(app, db, models);  
+        new Routes(app, models);  
         
-        new FilmsRoutes(app, db, models.films);
+        new FilmsRoutes(app, models.films);
         
         // Serve the index page everywhere so that the
         // frontend router can decide what to do

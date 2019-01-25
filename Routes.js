@@ -1,7 +1,6 @@
 module.exports = class Routes {
-    constructor(app, db, models) {
+    constructor(app, models) {
         this.app = app;
-        this.db = db;
         for(let key in models){
             this.addRoutes(key, models[key]);
           }
