@@ -12,9 +12,9 @@
     "distributor": "Universal Pictures",
     "directors": "Chris Renaud",
     "actors": [
-      "Kevin Hart",
-      "Louis C.K.",
-      "Eric Stonestreet"
+      "Kodjo Akolor",
+      "Erik Haag",
+      "Fredde Granberg"
     ],
     "description": "<p>En Jack Russell Terrier heter Max lever med sin ägare Katie i en Manhattan lägenhet. Medan hon är på jobbet under dagen hänger han ute med andra husdjur i byggnaden: Tabby-katt Chloe, Pugen Mel, Taxen Buddy och Budgerigar Sweet Pea. En dag adopterar Katie Duke, en stor mongrel från ett hundhem, och lämnar Max avundsjuk på grund av hennes delade fokus på Duke. Förskräckt av Maxs inställning till honom, försöker Duke att överge Max i en gränd, men de attackeras båda av katter som leds av Sphynx cat Ozone, som stjäl deras hundhalsband och låter dem fångas av Animal Control. Duke fruktar att han kommer att dödas om han åker tillbaka till hundhemmet. När Gidget, en vit Pomeranian som är (inte så) i hemlighet kär i Max, upptäcker att han saknas, bestämmer hon sig för att hitta honom. Låt äventyret börja.</p>",
     "images": [
@@ -32,7 +32,7 @@
         "max": "5"
       },
       {
-        "source": "moviezine.se",
+        "source": "moviezine",
         "quote": "träffsäkert och underhållande om våra fyrbenta vännner",
         "stars": "4",
         "max": "5"
@@ -217,7 +217,7 @@
     "reviews": [
       {
         "source": "aftonbladet",
-        "quote": "M Night Shyamlans ”Glass” är skrattretande pretentiös – och alldeles, alldeles underbar",
+        "quote": "M. Night Shyamlans ”Glass” är skrattretande pretentiös – och alldeles, alldeles underbar",
         "stars": "3",
         "max": "5"
       },
