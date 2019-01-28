@@ -79,6 +79,7 @@ module.exports = class Server {
             res.send(html);
         });
 
+        
         // start the sass compiler
         for (let conf of config.sass) {
             new Sass(conf);
