@@ -48,7 +48,7 @@ module.exports = class Server {
         const models = {
             films: require('./models/Film'),
             showings: require('./models/Showing'),
-            users: require('./models/User')
+            users: require('./models/User'),
             bookings: require('./models/Booking'),
             saloons: require('./models/Saloon')
         }
