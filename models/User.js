@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 let userSchema = new Schema ({
   "firstName": {type: String, required: true},
   "lastName": {type: String, required: true},
-  "email": {type: String, required: true},
+  "email": {type: String, required: true, unique: true},
   "password": {type: String, required: true},
   "bookings": [{type: Schema.Types.ObjectId, ref:"Booking", required: true}],
   "admin": {type: Boolean, default: "false"}
