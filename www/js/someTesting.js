@@ -4,4 +4,4 @@ let time = new Showing();
 
 let newUser = new User();
 
-newUser.createUser();
+//newUser.createUser();
