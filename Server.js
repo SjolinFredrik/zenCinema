@@ -48,8 +48,9 @@ module.exports = class Server {
         const models = {
             films: require('./models/Film'),
             showings: require('./models/Showing'),
-            bookings: require('./models/Booking'),
             users: require('./models/User')
+            bookings: require('./models/Booking'),
+            saloons: require('./models/Saloon')
         }
         //create all necessary rest routes for the models
         new CreateRestRoutes(app, db, models);
@@ -79,6 +80,7 @@ module.exports = class Server {
             res.send(html);
         });
 
+        
         // start the sass compiler
         for (let conf of config.sass) {
             new Sass(conf);
