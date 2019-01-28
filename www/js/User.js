@@ -1,13 +1,12 @@
 class User extends REST {
 
-  async createUser() {
+  static async createUser() {
 
     let user = new User({
-      "firstName": "Fredrik",
-      "lastName": "Sjölins",
-      "email": "sjölin@hotmalessss.sex",
-      "password": "abc123",
-      "admin": true
+      "firstName": $('.firstName-input').val(),
+      "lastName": $('.lastName-input').val(),
+      "email": $('.email-input').val(),
+      "password": $('.password-input').val(),
     });
 
     console.log(await user.save());
