@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let showingSchema = new Schema({
-"salon": String,
-"film": String,
+"salon": { type: Schema.Types.ObjectId, ref: 'Salon'},
+"film": { type: Schema.Types.ObjectId, ref: 'Film'},
 "date": String,
 "time": String
 });
