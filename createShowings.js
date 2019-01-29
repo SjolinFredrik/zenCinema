@@ -25,6 +25,10 @@ let shuffleArr = (array) => {
   return array;
 }
 
+function randomItem(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
 async function createAndAddShowingsTo() {
   let showingsCount = await Showing.count();
 
@@ -43,15 +47,18 @@ async function createAndAddShowingsTo() {
       date.setDate(date.getDate() + 1);
     }
 
+    let film = randomItem(movies);
+    let saloon = randomItem(saloons);
+
     let showtime = new Showing({
-      "salon": saloons.pop(),
+      "saloon": saloon,
       /* auditorium.splice(Math.floor(Math.random() * auditorium.length), 1) */
-      "film": shuffleArr(movies).pop(),
+      "film": film,
       /* movies.splice(Math.floor(Math.random() * movies.length), 1) */
-      "date": date.toString().split(' ').slice(0, 4).join(' '),
+      "date": date.getTime(),
       "time": 17 + Math.floor(Math.random() * 3) + ':' + (Math.round(Math.random() < 0.5 ? 15 : 45))
     });
-    console.log(await showtime.save());
+    await showtime.save();
   }
 
   showingsCount = await Showing.count();

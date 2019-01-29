@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let showingSchema = new Schema({
-"salon": { type: Schema.Types.ObjectId, ref: 'Salon'},
+"saloon": { type: Schema.Types.ObjectId, ref: 'Saloon'},
 "film": { type: Schema.Types.ObjectId, ref: 'Film'},
-"date": String,
+"date": Number,
 "time": String
 });
 
