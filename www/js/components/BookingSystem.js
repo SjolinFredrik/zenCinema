@@ -29,7 +29,10 @@ class BookingSystem extends Component {
           this.render();
         });
       });
-    
+      this.addEvents({
+        'click .save-booking': 'saveBooking'
+  
+      }); 
   }
 
   async showingData(showingId) {
@@ -54,5 +57,16 @@ class BookingSystem extends Component {
       takenSeats = takenSeats.concat(seats);
     }
     return takenSeats;
+  }
+
+  async saveBooking() {
+    this.newBooking = new Booking({
+      "customer": '5c51a472fe47141770028de9', 
+      "show": this.showing._id,
+      "seats":  ['2-1', '2-2'],
+      "bookingNumber": '236'
+    });
+    await this.newBooking.save();
+    this.render();
   }
 }
