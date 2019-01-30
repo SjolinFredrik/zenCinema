@@ -18,7 +18,7 @@ class BookingSystem extends Component {
 
           this.saloonSchema = saloonSchemaData.seatsPerRow;
           this.film = filmData;
-          this.seatsGrid = new SeatsGrid(this.saloonSchema).createGrid();
+          this.seatsGrid = new SeatsGrid(this.saloonSchema);
 
           console.log(this.saloonSchema);
           console.log(this.film);

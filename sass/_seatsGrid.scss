@@ -1,0 +1,21 @@
+.seats-grid {
+  position: relative;
+}
+
+.seats-row {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 5px;
+  margin: auto;
+  .seat {
+    display: table-cell;
+    background-color: $accent-dark;
+    border-radius: 3px;
+    padding: 7px 10px;
+    white-space: nowrap;
+    cursor: pointer;
+    &:hover {
+      background-color: $accent-light;
+    }
+  }
+}
