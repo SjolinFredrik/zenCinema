@@ -5,7 +5,9 @@ class LoginPage extends Component {
     this.addRoute('/login', 'Login');
     this.addEvents({
       'click .register-link': 'showRegister',
-      'click .saveNewUser-btn': 'saveUser'
+      'click .saveNewUser-btn': 'saveUser',
+      'click .login-btn ': 'saveLogin'
+
     });
   }
   showRegister() {
@@ -31,14 +33,11 @@ class LoginPage extends Component {
     );
   }
 
-  saveUser() { 
+  saveUser() {
     User.createUser();
-  //   $('.login-form').append(`<div class="alert alert-success" role="alert">
-  //   Användaren är nu sparad, välkommen ${$('.firstName-input').val()}!
-  //  </div>`);
-  let newName = $('.firstName-input').val()
-  let newEmail = $('.email-input').val()
-  $('.login-form').empty();
+    let newName = $('.firstName-input').val()
+    let newEmail = $('.email-input').val()
+    $('.login-form').empty();
     $('.login-form').append(
       `
       <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -56,10 +55,25 @@ class LoginPage extends Component {
         <br>
         <p class="register-link">Skapa ny användare</p>
         <br>
-        <button type="button" class="btn btn-primary mt-4">Logga in</button>
+        <button type="button" class="btn btn-primary login-btn mt-4">Logga in</button>
       </section>
       `
     );
   };
+
+  saveLogin() {
+    Login.loginUser();
+    $('.login-form').append(
+      `
+     <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Välkommen in</strong> Du är nu en ZONKey!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+      </button>
+     </div>
+     `
+    )
+
+  }
 
 }

@@ -11,4 +11,6 @@ class User extends REST {
 
     console.log(await user.save());
   }
+
+  
 }
