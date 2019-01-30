@@ -23,7 +23,7 @@ class LoginPage extends Component {
           <p>Lösenord:</p>
           <input class="password-input mb-3" type="password">
           <p>Bekräfta lösenord:</p>
-          <input class="password-input mb-3" type="password">
+          <input class="passwordConfirm-input mb-3" type="password">
           <br>
           <button type="button" class="btn btn-primary saveNewUser-btn mt-4">Bekräfta</button>
         </section>
