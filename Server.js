@@ -2,7 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const CreateRestRoutes = require('./CreateRestRoutes')
-const bcrypt = require('bcryptjs');
+/****************Login*************/
+const LoginHandler = require('./LoginHandler');
+const settings = require('./settings.json');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 // Require sass compiler
 const Sass = require('./sass');
 const config = require('./config.json');
@@ -56,6 +60,8 @@ module.exports = class Server {
         }
         //create all necessary rest routes for the models
         new CreateRestRoutes(app, db, models);
+        //create special routes for login
+        new LoginHandler (app, models.users);
 
         // Serve static files from www
         app.use(express.static('www'));
@@ -101,6 +107,7 @@ module.exports = class Server {
             }
             res.sendFile(path.join(__dirname, '/www/index.html'));
         });
+
 
 
 

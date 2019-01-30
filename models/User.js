@@ -11,9 +11,10 @@ let userSchema = new Schema ({
   "admin": {type: Boolean, default: "false"}
 });
 
+
 // UNCOMMENT once bcrypt up n running
-// userSchema.pre('save', async function(){
-//   this.password = await bcrypt.hash(this.password + passwordSalt, 10);
-// });
+userSchema.pre('save', async function(){
+this.password = await bcrypt.hash(this.password + passwordSalt, 10);
+});
 
 module.exports = db.model('User', userSchema);
