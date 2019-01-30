@@ -21,10 +21,7 @@ class SeatsGrid extends Component {
         row.seats.push(seat);
       }
       hall.push(row);
-      console.log(hall);
     }
-
-
     return hall;
   }
 }
