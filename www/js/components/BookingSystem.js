@@ -60,11 +60,21 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
+    let bookings = await Booking.find();
+    console.log(bookings);
+    let number = 0;
+    if (bookings.length > 0) {
+      let lastBookingNumber = parseInt(bookings[bookings.length - 1].bookingNumber);
+      number = (lastBookingNumber + 1);
+    }
+    else {
+      number = 1;
+    }
     this.newBooking = new Booking({
       "customer": '5c51a472fe47141770028de9', 
       "show": this.showing._id,
-      "seats":  ['2-1', '2-2'],
-      "bookingNumber": '236'
+      "seats":  ['5-3', '5-4', '5-5'],
+      "bookingNumber": number
     });
     await this.newBooking.save();
     this.render();
