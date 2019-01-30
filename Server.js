@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const CreateRestRoutes = require('./CreateRestRoutes')
+const bcrypt = require('bcryptjs');
 // Require sass compiler
 const Sass = require('./sass');
 const config = require('./config.json');
