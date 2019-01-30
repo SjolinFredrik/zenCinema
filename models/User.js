@@ -14,7 +14,9 @@ let userSchema = new Schema ({
 
 // UNCOMMENT once bcrypt up n running
 userSchema.pre('save', async function(){
-this.password = await bcrypt.hash(this.password + passwordSalt, 10);
+  console.log("yo");
+  this.password = await bcrypt.hash(this.password + passwordSalt, 10);
+  console.log("yo2");
 });
 
 module.exports = db.model('User', userSchema);
