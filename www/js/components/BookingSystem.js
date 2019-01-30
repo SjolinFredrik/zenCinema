@@ -12,17 +12,20 @@ class BookingSystem extends Component {
         console.log(this.saloon);
       })
       .then(() => {
-        return Promise.all([this.findSaloonSchema(this.saloon), this.findFilm(this.film)]).then(data => {
+        return Promise.all([this.findSaloonSchema(this.saloon), this.findFilm(this.film), this.findTakenSeats()]).then(data => {
           const saloonSchemaData = data[0];
           const filmData = data[1];
+          const takenSeats = data[2];
 
           this.saloonSchema = saloonSchemaData.seatsPerRow;
           this.film = filmData;
           this.seatsGrid = new SeatsGrid(this.saloonSchema);
+          this.takenSeats = takenSeats;
 
           console.log(this.saloonSchema);
           console.log(this.film);
           console.log(this.seatsGrid);
+          console.log(this.takenSeats);
           this.render();
         });
       });
@@ -40,5 +43,16 @@ class BookingSystem extends Component {
 
   async findFilm(filmId) {
     return await Film.find(filmId);
+  }
+
+  async findTakenSeats() {
+    let bookings = await Booking.find(`.find().populate('show').exec()`);
+    let takenSeats = [];
+    for (let i = 0; i < bookings.length; i++) {
+      let booking = bookings[i];
+      let seats = booking.seats;
+      takenSeats = takenSeats.concat(seats);
+    }
+    return takenSeats;
   }
 }
