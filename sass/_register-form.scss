@@ -1,5 +1,5 @@
-section.loginPage {
-  .login-form {
+section.registerPage {
+  .register-form {
     background-color: #fff;
     color: #000;
     margin: 0 auto;
@@ -13,7 +13,9 @@ section.loginPage {
       }
       .register-link {
         color: $primary;      
+        display: inline-block;  
         &:hover {
+          cursor: pointer;
           font-weight: bold;
         }
       }

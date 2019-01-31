@@ -1,10 +1,10 @@
 class Login extends REST {
  
-  static async loginUser() {
+  static async loginUser(email, password) {
 
     let login = new Login({
-      "email": $('.email-input').val(),
-      "password": $('.password-input').val()
+      "email": email,
+      "password": password
     });
     
     console.log(await login.save());
