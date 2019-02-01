@@ -1,18 +1,18 @@
-// // async function testLogin(){
-// // }
+async function testLogin(){
+}
    
-// //   async function testCheckLogin(){
-// //     console.log(await Login.find());
-// //   }
+  async function testCheckLogin(){
+    console.log(await Login.find());
+  }
    
-// //   async function testLogout(){
-// //     let loginObj = new Login();
-// //     console.log(await loginObj.delete());
-// //   }
+  async function testLogout(){
+    let loginObj = new Login();
+    console.log(await loginObj.delete());
+  }
 
-//   // testLogin();
-//   // testCheckLogin();
-//   // testLogout();
+  testLogin();
+  testCheckLogin();
+  testLogout();
   
 //     async function showingsPopulatedFilms() {
 //     let showings = await Showing.find();

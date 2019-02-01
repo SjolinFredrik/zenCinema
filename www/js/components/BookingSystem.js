@@ -78,6 +78,7 @@ class BookingSystem extends Component {
       "seats":  ['5-5', '5-6'],
       "bookingNumber": number
     });
+    
     await this.newBooking.save();
     
     let message = $('<div class="container"/>');

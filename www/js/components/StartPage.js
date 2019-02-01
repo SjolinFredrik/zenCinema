@@ -18,18 +18,10 @@ class StartPage extends Component {
   getFilmsFromShowings() {
     this.showListForSeveralDaysFromToday(2).then(data => {
       this.actualShowings = data;
-      // for (let i = 0; i < this.actualShowings.length; i++) {
-      //   let showing = this.actualShowings[i];
-      //   let date = new Date(showing.date);
-      //   showing.date = date.toISOString().slice(0,10);
-      // }
-
       this.actualFilms = [];
       let actualFilm = '';
-      console.log( this.actualShowings);
       for (let i = 0; i < this.actualShowings.length; i++) {
         let film = this.actualShowings[i].film;
-        console.log(film);
         actualFilm = new Film(film);
         this.actualFilms.push(actualFilm);
       }
