@@ -5,11 +5,10 @@ class BookingSystem extends Component {
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
-        console.log(this.showing);
         this.showingDate = new Date(this.showing.date).toString().slice(0,10);
         this.saloon = this.showing.saloon;
         this.film = this.showing.film;
-        console.log(this.saloon);
+        this.time = this.showing.time;
       })
       .then(() => {
         return Promise.all([this.findSaloonSchema(this.saloon), this.findFilm(this.film), this.findTakenSeats()]).then(data => {
@@ -21,15 +20,13 @@ class BookingSystem extends Component {
           this.film = filmData;
           this.takenSeats = takenSeats;
           this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats);
-
-          console.log(this.saloonSchema);
-          console.log(this.film);
-          console.log(this.seatsGrid);
-          console.log(this.takenSeats);
           this.render();
         });
       });
-    
+      this.addEvents({
+        'click .save-booking': 'saveBooking'
+  
+      }); 
   }
 
   async showingData(showingId) {
@@ -54,5 +51,43 @@ class BookingSystem extends Component {
       takenSeats = takenSeats.concat(seats);
     }
     return takenSeats;
+  }
+
+  async saveBooking() {
+    let bookings = await Booking.find();
+    let saltArray = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    saltArray = saltArray.split("");
+    let salt = '';
+    let lastBookingNumber = '';
+    for (let i = 0; i <= 3; i++) {
+      let letter = saltArray[Math.floor(Math.random() * saltArray.length)];
+      salt = salt + letter;
+    }
+    let number = 0;
+    if (bookings.length <= 0) {
+        number = salt + 1;
+    }
+    if (bookings.length > 0) {
+      lastBookingNumber = bookings[bookings.length - 1].bookingNumber;
+      lastBookingNumber = parseInt(lastBookingNumber.split("").splice(4));
+      number = salt + (lastBookingNumber + 1);
+    }
+    this.newBooking = new Booking({
+      "customer": '5c51a472fe47141770028de9', 
+      "show": this.showing._id,
+      "seats":  ['5-5', '5-6'],
+      "bookingNumber": number
+    });
+    
+    await this.newBooking.save();
+    
+    let message = $('<div class="container"/>');
+    let text = $('<div class="row"/>');
+    let list = $(`<div class="col-7 mx-auto"><h3>Tack för bokning!</h3><p>Din bokning:</p><dl><dt>Film: ${this.film.title}</dt><dd>Date: ${this.showingDate}, tid: ${this.time}</dd><dd>Platser: ${this.newBooking.seats.join(", ")}</dd></dl></div>`);
+    message.append(text.append(list));
+    let container = this.baseEl.parents('main');
+    container.empty();
+    container.append(message);
+    this.render();
   }
 }
