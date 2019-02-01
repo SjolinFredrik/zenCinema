@@ -9,7 +9,7 @@ class Showing extends Component {
     this.saloon = data.saloon;
   }
 
-  static get dateToString() {
-    return this.date = new Date(this.date).toDateString();
+  get dateToString() {
+    return new Date(this.date).toString().slice(0,10);
   }
 }
