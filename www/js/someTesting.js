@@ -15,7 +15,7 @@
 //   // testLogout();
 async function showingsPopulatedFilms() {
   let showings = await Showing.find();
-  
+  console.log(showings);
   // for (let i = 0; i < showings.length; i++) {
   //   let showing = showings[i];
   //   let showingObj = new Showing(showing);
