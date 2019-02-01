@@ -5,6 +5,8 @@ class PageContent extends Component {
     this.startPage = new StartPage();
     this.missingPage = new MissingPage();
     this.loginPage = new LoginPage();
+    this.bookingPage = new BookingPage();
+    this.registerPage = new RegisterPage();
     this.filmPage = new FilmPage();
   }
   

@@ -1,0 +1,25 @@
+.seats-grid {
+  margin-top: 30px;
+}
+
+.seats-row {
+  display: table;
+  table-layout: fixed;
+  border-spacing: 5px;
+  margin: auto;
+  .seat {
+    display: table-cell;
+    background-color: $accent-light;
+    border-radius: 3px;
+    padding: 7px 10px;
+    white-space: nowrap;
+    cursor: pointer;
+    &:hover {
+      background-color: $accent-dark;
+    }
+    &.taken {
+      cursor: default;
+      background-color: $accent-dark;
+    }
+  }
+}
