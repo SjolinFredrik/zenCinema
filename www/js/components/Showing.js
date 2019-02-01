@@ -9,18 +9,7 @@ class Showing extends Component {
     this.saloon = data.saloon;
   }
 
-  static async getMyData() {
-    let myData = {
-      saloon: this.saloon,
-      film: this.film,
-      date: this.date,
-      time: this.time
-    }
-    return myData;
+  static get dateToString() {
+    return this.date = new Date(this.date).toDateString();
   }
-
-  // async showMe() {
-  //   await this.getMyData;
-  //   this.render();
-  // }
 }
