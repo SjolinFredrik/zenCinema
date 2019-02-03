@@ -1,0 +1,18 @@
+<section class="booking-system container">
+  <h2>Boka biljetter</h2>
+  <p>${this.showingDate ? this.showingDate : ''}</p>
+  <p>${this.film ? this.film : ''}</p>
+  <div>Place for tickets counter</div>
+  <div class="row">
+    <div class="col-7 mx-auto">
+        ${this.seatsGrid ? this.seatsGrid : ''}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-7 mx-auto py-4">
+      <button type="button" class="btn btn-secondary" >Gå vidare</button>
+      <button type="button" class="btn btn-secondary save-booking" >Boka</button>
+
+    </div>
+  </div>
+</section>
