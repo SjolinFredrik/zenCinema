@@ -1,4 +1,4 @@
-class TIcketPrice extends Component {
+class TicketPrice extends Component {
 
   constructor(data) {
     super();

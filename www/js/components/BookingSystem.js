@@ -25,7 +25,6 @@ class BookingSystem extends Component {
       });
       this.addEvents({
         'click .save-booking': 'saveBooking'
-  
       }); 
   }
 
