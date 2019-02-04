@@ -81,13 +81,7 @@ class BookingSystem extends Component {
     
     await this.newBooking.save();
     
-    let message = $('<div class="container"/>');
-    let text = $('<div class="row"/>');
-    let list = $(`<div class="col-7 mx-auto"><h3>Tack för bokning!</h3><p>Din bokning:</p><dl><dt>Film: ${this.film.title}</dt><dd>Date: ${this.showingDate}, tid: ${this.time}</dd><dd>Platser: ${this.newBooking.seats.join(", ")}</dd></dl></div>`);
-    message.append(text.append(list));
-    let container = this.baseEl.parents('main');
-    container.empty();
-    container.append(message);
+    this.message = new Message('newBooking', this.newBooking);
     this.render();
   }
 }
