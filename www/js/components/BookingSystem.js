@@ -1,7 +1,7 @@
 class BookingSystem extends Component {
-  constructor() {
+  constructor(showingId) {
     super();
-    this.showingId = '5c50420eeff29e2278cf0e30';
+    this.showingId = showingId;
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
@@ -45,10 +45,13 @@ class BookingSystem extends Component {
   async findTakenSeats() {
     let bookings = await Booking.find(`.find().populate('show').exec()`);
     let takenSeats = [];
+
     for (let i = 0; i < bookings.length; i++) {
       let booking = bookings[i];
-      let seats = booking.seats;
-      takenSeats = takenSeats.concat(seats);
+      if (booking.show._id === this.showingId) {
+        let seats = booking.seats;        
+        takenSeats = takenSeats.concat(seats);
+      }
     }
     return takenSeats;
   }
@@ -75,7 +78,7 @@ class BookingSystem extends Component {
     this.newBooking = new Booking({
       "customer": '5c51a472fe47141770028de9', 
       "show": this.showing._id,
-      "seats":  ['5-5', '5-6'],
+      "seats":  ['1-5', '1-6'],
       "bookingNumber": number
     });
     

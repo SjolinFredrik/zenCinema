@@ -4,3 +4,20 @@
     max-width: 400px;
   }
 }
+
+.about-film {
+  display: none;
+}
+
+.film-page-content {
+  .about-film {
+    display: block;
+  }
+  .a-over {
+    display: none;
+  }
+
+  .film-title {
+    display: none;
+  }
+}

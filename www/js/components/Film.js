@@ -16,7 +16,18 @@ class Film extends Component {
     this.youtubeTrailers = data.youtubeTrailers;
     this.reviews = data.reviews;
     this._id = data._id;
+
+    this.addEvents({
+      'click .a-over': 'catchFilmId'
+    });
   }
+
+  catchFilmId() {
+    App.filmId = this._id;
+    return App.filmId;
+  }
+
+
 
 
 }
