@@ -29,7 +29,7 @@ class FilmPageContent extends Component {
   }
 
   async showFilmInfo(filmId) {
-    let film = await Film.find(this.filmId);
+    let film = await Film.find(filmId);
     return film;
   }
 }
