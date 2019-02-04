@@ -18,6 +18,7 @@ class Message extends Component {
         this.filmTitle = data[0].film.title;
         this.time = data[0].time;
         this.date = new Date(data[0].date).toDateString();
+        this.saloon = data[0].saloon.name;
         this.render();
       });
     }
@@ -29,7 +30,7 @@ class Message extends Component {
 
   async showInfo() {
     let show = this.data.show;
-    let showData = await Showing.find(`.find({_id: '${show}'}).populate('film').exec()`);
+    let showData = await Showing.find(`.find({_id: '${show}'}).populate('film').populate('saloon').exec()`);
     return showData;
   }
 

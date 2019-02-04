@@ -55,7 +55,7 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-    let bookings = await Booking.find();
+    let bookings = await Booking.find(`.find().limit(1).sort({$natural: -1})`);
     let saltArray = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
     saltArray = saltArray.split("");
     let salt = '';
@@ -65,11 +65,11 @@ class BookingSystem extends Component {
       salt = salt + letter;
     }
     let number = 0;
-    if (bookings.length <= 0) {
+    if (bookings.length === 0) {
         number = salt + 1;
     }
     if (bookings.length > 0) {
-      lastBookingNumber = bookings[bookings.length - 1].bookingNumber;
+      lastBookingNumber = bookings[0].bookingNumber;
       lastBookingNumber = parseInt(lastBookingNumber.split("").splice(4));
       number = salt + (lastBookingNumber + 1);
     }
