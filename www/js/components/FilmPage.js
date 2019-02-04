@@ -2,13 +2,18 @@ class FilmPage extends Component {
 
   constructor() {
     super();
-    this.addRoute(`/film-to-book`);
+    this.addRoute(`/film`);
   }
 
   mount() {
-    this.filmId = App.filmId;
-    this.content = new FilmPageContent(this.filmId);
-    this.render();
+    if (App.filmId) {
+      this.filmId = App.filmId;
+      this.content = new FilmPageContent(this.filmId);
+      this.render();
+    }
+    else {
+      return;
+    }
   }
 
 }

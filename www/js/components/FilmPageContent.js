@@ -2,17 +2,20 @@ class FilmPageContent extends Component {
   constructor(filmId) {
     super();
     this.filmId = filmId;
-    console.log('I am filmpage!', this.filmId);
-    this.showingsPopulatedFilms(this.filmId).then((data) => {
-      this.filmShowings = data;
-      console.log(this.filmShowings);
+    this.showFilmInfo(this.filmId).then(data => {
+      this.film = new Film(data);
       this.render();
-    });
+    })
+    .then(this.showingsPopulatedFilms(this.filmId).then((data) => {
+      this.filmShowings = data;
+      this.render();
+    })
+    );
+    
   }
 
   async showingsPopulatedFilms(filmId) {
     let showings = await Showing.find(`.find().populate('film').populate('saloon').exec()`);
-    console.log(showings);
 
     let filmShowings = [];
     for (let i = 0; i < showings.length; i++) {
@@ -26,5 +29,10 @@ class FilmPageContent extends Component {
       }
     }
     return filmShowings;
+  }
+
+  async showFilmInfo(filmId) {
+    let film = await Film.find(this.filmId);
+    return film;
   }
 }

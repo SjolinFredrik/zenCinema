@@ -24,7 +24,6 @@ class Film extends Component {
 
   catchFilmId() {
     App.filmId = this._id;
-    console.log(App.filmId);
     return App.filmId;
   }
 
