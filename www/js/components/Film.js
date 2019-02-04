@@ -7,7 +7,7 @@ class Film extends Component {
     this.length = data.length;
     this.genre = data.genre;
     this.distributor = data.distributor;
-    this.language = data.language
+    this.language = data.language;
     this.subtitles = data.subtitles;
     this.directors= data.directors;
     this.actors = data.actors;
