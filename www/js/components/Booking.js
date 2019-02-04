@@ -6,7 +6,7 @@ class Booking extends Component {
     this.show = data.show;
     this.seats = data.seats;
     this.bookingNumber = data.bookingNumber;
-    console.log(this.show._id);
+    console.log(this.show, 'Show for last booking');
   }
 
   // mount() {
