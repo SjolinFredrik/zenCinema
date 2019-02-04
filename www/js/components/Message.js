@@ -4,6 +4,9 @@ class Message extends Component {
     this.type = type;
     this.data = data;
     this.chooseHeadingAndText;
+    this.addEvents( {
+      'click .close-message': 'removeMe'
+    });
     
   }
 
@@ -28,5 +31,10 @@ class Message extends Component {
     let show = this.data.show;
     let showData = await Showing.find(`.find({_id: '${show}'}).populate('film').exec()`);
     return showData;
+  }
+
+  removeMe() {
+    this.baseEl.remove();
+    this.render();
   }
 }

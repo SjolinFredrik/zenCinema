@@ -1,0 +1,10 @@
+.message-wrap {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100vh;
+  background-color: transparentize($primary, .05);
+  padding: 20%;
+}
