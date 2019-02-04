@@ -4,16 +4,29 @@ class Message extends Component {
     this.type = type;
     this.data = data;
     this.chooseHeadingAndText;
+    
   }
 
   get chooseHeadingAndText() {
     if (this.type === 'newBooking') {
       this.heading = 'Tack för din bokning!';
-      this.text = "Se info sin bokning nedan:";
+      this.text = "Se info om sin bokning nedan:";
+      this.showInfo().then(data => {
+        this.filmTitle = data[0].film.title;
+        this.time = data[0].time;
+        this.date = new Date(data[0].date).toDateString();
+        this.render();
+      });
     }
     if (this.type === 'newUser') {
       this.heading = 'User har skapat';
       this.text = 'Hitta på någon text, var snälla!'
     }
+  }
+
+  async showInfo() {
+    let show = this.data.show;
+    let showData = await Showing.find(`.find({_id: '${show}'}).populate('film').exec()`);
+    return showData;
   }
 }
