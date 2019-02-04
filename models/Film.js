@@ -10,7 +10,7 @@ let filmSchema = new Schema ({
     "distributor": String,
     "language": String,
     "subtitles": String,
-    "directors": {type: String, required: true},
+    "directors": [{type: String, required: true}],
     "actors": [{type: String}],
     "description": String,
     "images": [{type: String}],

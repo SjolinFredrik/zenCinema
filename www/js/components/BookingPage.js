@@ -5,8 +5,10 @@ class BookingPage extends Component {
   }
 
   mount() {
-    this.showingId = App.showingId;
-    this.bookingSystem = new BookingSystem(this.showingId);
-    this.render();
+    if (App.showingId) {
+      this.showingId = App.showingId;
+      this.bookingSystem = new BookingSystem(this.showingId);
+      this.render();
+    }
   }
 }
