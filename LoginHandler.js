@@ -29,7 +29,7 @@ module.exports = class LoginHandler {
       // save changes to session
       req.session.save();
       // successfully logged in!
-      res.json({loggedIn: true});
+      res.json({loggedIn: true, user: user});
     });
  
   }
@@ -40,7 +40,7 @@ module.exports = class LoginHandler {
         res.json({error: 'Not logged in!'});
         return;
       }
-      res.json({email: req.session.user.email, loggedIn: true});
+      res.json({user: req.session.user, loggedIn: true});
     });
   }
  

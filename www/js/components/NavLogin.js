@@ -12,9 +12,10 @@ class NavLogin extends Component {
 
   async checkLogin(){
     let result = await Login.find();
-    console.log(result);
+    console.log(result.user);
     if (result.loggedIn) {
       this.loggedIn = true;
+      this.loggedInUser = result.user;
       this.render();
     }
   }
@@ -34,6 +35,8 @@ class NavLogin extends Component {
 
     if (result.loggedIn) {
       this.loggedIn = true;
+      console.log(result.user);
+      this.loggedInUser = result.user;
       this.render();
     }
   }
