@@ -15,14 +15,14 @@ module.exports = class LoginHandler {
       let data = req.body;
       let user = await this.User.findOne({email: data.email});
       if(!user){
-        res.json({error: 'No such user!'});
+        res.json({loggedIn: false, error: 'No such user!'});
         return;
       }
       // compare the password sent in the request (data.password)
       // with the encrypted password stored in the db (user.password)
       let match = await bcrypt.compare(data.password + passwordSalt, user.password);
       if(!match){
-        res.json({error: 'The password does not match!'});
+        res.json({loggedIn: false, error: 'The password does not match!'});
         return;
       }
       req.session.user = user;
@@ -40,7 +40,7 @@ module.exports = class LoginHandler {
         res.json({error: 'Not logged in!'});
         return;
       }
-      res.json({email: req.session.user.email});
+      res.json({email: req.session.user.email, loggedIn: true});
     });
   }
  
@@ -48,7 +48,7 @@ module.exports = class LoginHandler {
     this.app.delete('/json/login/*', (req, res) => {
       delete req.session.user;
       req.session.save();
-      res.json({loggedOut: true});
+      res.json({loggedIn: false});
     });
   }
  
