@@ -6,5 +6,6 @@ class Booking extends Component {
     this.show = data.show;
     this.seats = data.seats;
     this.bookingNumber = data.bookingNumber;
+    this.totalCost = data.totalCost;
   }
 }

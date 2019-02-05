@@ -4,7 +4,6 @@ class TicketPrice extends Component {
     super();
     this.name = data.name;
     this.price = data.price;
-
   }
 
 }

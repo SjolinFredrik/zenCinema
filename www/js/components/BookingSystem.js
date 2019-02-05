@@ -53,7 +53,7 @@ class BookingSystem extends Component {
     return takenSeats;
   }
 
-  async saveBooking() {
+  async generateBookingNumber() {
     let bookings = await Booking.find(`.find().limit(1).sort({$natural: -1})`);
     let saltArray = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
     saltArray = saltArray.split("");
@@ -72,14 +72,34 @@ class BookingSystem extends Component {
       lastBookingNumber = parseInt(lastBookingNumber.split("").splice(4));
       number = salt + (lastBookingNumber + 1);
     }
+    return number;
+  }
 
+  async totalCost() {
+    let totalCost = 0;
+    let ticketType = '';
+    let ticketsCost = 0;
+    for (let i = 0; i < this.ticketSelection.tickets.length; i++) {
+      ticketType = this.ticketSelection.tickets[i];
+      let ticketsQuantity = ticketType.baseEl.find('input').val();
+      ticketsCost = parseInt(ticketType.price) * ticketsQuantity;
+      totalCost = totalCost + ticketsCost;
+    }
+    return totalCost;
+  }
 
+  async saveBooking() {
+
+    let totalCost = await this.totalCost();
+
+    let number = await this.generateBookingNumber();
 
     this.newBooking = new Booking({
       "customer": '5c51a472fe47141770028de9', 
       "show": this.showing._id,
       "seats":  ['5-5', '5-6'],
-      "bookingNumber": number
+      "bookingNumber": number,
+      "totalCost": totalCost + " SEK"
     });
 
     
