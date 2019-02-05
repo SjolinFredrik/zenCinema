@@ -7,7 +7,11 @@ class Showing extends Component {
     this.time = data.time;
     this.date = data.date;
     this.saloon = data.saloon;
-    
+    this.getPrices().then(data =>{
+      this.prices = data;
+      this.render();
+    });
+
     this.addEvents({
       'click .book-film': 'catchShowingId'
     });
@@ -21,5 +25,10 @@ class Showing extends Component {
   catchShowingId() {
     App.showingId = this._id;
     return App.showingId;
+  }
+
+  async getPrices() {
+    let prices = await TicketPrice.find();
+    return prices;
   }
 }

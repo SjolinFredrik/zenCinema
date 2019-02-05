@@ -2,7 +2,7 @@
   <h2>Boka biljetter</h2>
   <p>${this.showingDate ? this.showingDate : ''}</p>
   <p>${this.film ? this.film : ''}</p>
-  <div>Place for tickets counter</div>
+  <div>${this.ticketSelection ? this.ticketSelection : 'I have no ticketSelection'}</div>
   <div class="row">
     <div class="col-7 mx-auto">
         ${this.seatsGrid ? this.seatsGrid : ''}

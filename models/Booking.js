@@ -5,7 +5,8 @@ let bookingSchema = new Schema({
   "customer": {type: Schema.Types.ObjectId, ref: 'User'},
   "show": {type: Schema.Types.ObjectId, ref: 'Showing'},
   "seats": [],
-  "bookingNumber": String
+  "bookingNumber": String,
+  "totalCost": String
 
 });
 
