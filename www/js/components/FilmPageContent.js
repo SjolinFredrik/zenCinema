@@ -15,24 +15,21 @@ class FilmPageContent extends Component {
   }
 
   async showingsPopulatedFilms(filmId) {
-    let showings = await Showing.find(`.find().populate('film').populate('saloon').exec()`);
+    let today = new Date().getTime();
+    let showings = await Showing.find(`.find({date: {$gte: ${today}}, film: '${filmId}' }).populate('saloon').populate('film').exec()`);
+
 
     let filmShowings = [];
     for (let i = 0; i < showings.length; i++) {
       let showing = showings[i];
-      if (showing.film._id === filmId) {
-        let showingObj = new Showing(showing);
+      let showingObj = new Showing(showing);
         filmShowings.push(showingObj);
-      }
-      else {
-        continue;
-      }
     }
     return filmShowings;
   }
 
   async showFilmInfo(filmId) {
-    let film = await Film.find(this.filmId);
+    let film = await Film.find(filmId);
     return film;
   }
 }

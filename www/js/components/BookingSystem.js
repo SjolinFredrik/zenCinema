@@ -54,8 +54,6 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-
-    //generate booking's number
     let bookings = await Booking.find(`.find().limit(1).sort({$natural: -1})`);
     let saltArray = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
     saltArray = saltArray.split("");
