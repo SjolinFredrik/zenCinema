@@ -1,14 +1,5 @@
 class Login extends REST {
- 
-  static async loginUser(email, password) {
 
-    let login = new Login({
-      "email": email,
-      "password": password
-    });
-    
-    console.log(await login.save());
-  }
     // Please note: 
     // Login is not our traditional kind
     // of class extending REST
