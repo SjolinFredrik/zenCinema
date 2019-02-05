@@ -7,7 +7,7 @@ class Film extends Component {
     this.length = data.length;
     this.genre = data.genre;
     this.distributor = data.distributor;
-    this.language = data.language
+    this.language = data.language;
     this.subtitles = data.subtitles;
     this.directors= data.directors;
     this.actors = data.actors;
@@ -16,7 +16,18 @@ class Film extends Component {
     this.youtubeTrailers = data.youtubeTrailers;
     this.reviews = data.reviews;
     this._id = data._id;
+
+    this.addEvents({
+      'click .a-over': 'catchFilmId'
+    });
   }
+
+  catchFilmId() {
+    App.filmId = this._id;
+    return App.filmId;
+  }
+
+
 
 
 }

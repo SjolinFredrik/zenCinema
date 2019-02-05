@@ -1,7 +1,7 @@
 class BookingSystem extends Component {
-  constructor() {
+  constructor(showingId) {
     super();
-    this.showingId = '5c50420eeff29e2278cf0e30';
+    this.showingId = showingId;
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
@@ -43,7 +43,7 @@ class BookingSystem extends Component {
   }
 
   async findTakenSeats() {
-    let bookings = await Booking.find(`.find().populate('show').exec()`);
+    let bookings = await Booking.find(`.find({show: '${this.showingId}'}).populate('show').exec()`);
     let takenSeats = [];
     for (let i = 0; i < bookings.length; i++) {
       let booking = bookings[i];
@@ -54,7 +54,7 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-    let bookings = await Booking.find();
+    let bookings = await Booking.find(`.find().limit(1).sort({$natural: -1})`);
     let saltArray = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
     saltArray = saltArray.split("");
     let salt = '';
@@ -64,11 +64,11 @@ class BookingSystem extends Component {
       salt = salt + letter;
     }
     let number = 0;
-    if (bookings.length <= 0) {
+    if (bookings.length === 0) {
         number = salt + 1;
     }
     if (bookings.length > 0) {
-      lastBookingNumber = bookings[bookings.length - 1].bookingNumber;
+      lastBookingNumber = bookings[0].bookingNumber;
       lastBookingNumber = parseInt(lastBookingNumber.split("").splice(4));
       number = salt + (lastBookingNumber + 1);
     }
@@ -78,16 +78,12 @@ class BookingSystem extends Component {
       "seats":  ['5-5', '5-6'],
       "bookingNumber": number
     });
+
     
     await this.newBooking.save();
     
-    let message = $('<div class="container"/>');
-    let text = $('<div class="row"/>');
-    let list = $(`<div class="col-7 mx-auto"><h3>Tack för bokning!</h3><p>Din bokning:</p><dl><dt>Film: ${this.film.title}</dt><dd>Date: ${this.showingDate}, tid: ${this.time}</dd><dd>Platser: ${this.newBooking.seats.join(", ")}</dd></dl></div>`);
-    message.append(text.append(list));
-    let container = this.baseEl.parents('main');
-    container.empty();
-    container.append(message);
+    this.message = new Message('newBooking', this.newBooking);
     this.render();
+    this.newBooking = '';
   }
 }

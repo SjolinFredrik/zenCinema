@@ -7,20 +7,19 @@ class Showing extends Component {
     this.time = data.time;
     this.date = data.date;
     this.saloon = data.saloon;
+    
+    this.addEvents({
+      'click .book-film': 'catchShowingId'
+    });
   }
 
-  static async getMyData() {
-    let myData = {
-      saloon: this.saloon,
-      film: this.film,
-      date: this.date,
-      time: this.time
-    }
-    return myData;
+  get dateToString() {
+    return new Date(this.date).toString().slice(0,10);
   }
 
-  // async showMe() {
-  //   await this.getMyData;
-  //   this.render();
-  // }
+  
+  catchShowingId() {
+    App.showingId = this._id;
+    return App.showingId;
+  }
 }

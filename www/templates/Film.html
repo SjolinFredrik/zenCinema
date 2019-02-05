@@ -1,6 +1,18 @@
-<section class="film-card card col-6 mb-5 mx-auto">
-    <a class="a-over" title="${this.title}" href="#"></a>
+<section class="film-card card col-sm-6 mb-5 mx-auto">
+    <a class="a-over" title="${this.title}" data-id="this._id" href="/film"></a>
     <h2>${this.title}</h2>
-    <p>${this.directors}</p>
+    <p>${this.directors.length > 0 ? this.directors.join(', ') : this.directors}</p>
     <img class="img-fluid mx-auto" src="/images/movies/${this.images[0]}">
+    <dl class="about-film">
+        <dd>${this.description}</dd>
+        <dd>${this.productionCountries.join(', ')}</dd>
+        <dd>${this.productionYear}</dd>
+        <dd>${this.length}</dd>
+        <dd>${this.genre}</dd>
+        <dd>${this.distributor}</dd>
+        <dd>${this.language}</dd>
+        <dd>${this.subtitles}</dd>
+        <dd>${this.actors.join(', ')}</dd>
+        <dd>${this.description}</dd>
+    </dl>
 </section>
