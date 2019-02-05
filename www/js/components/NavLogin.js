@@ -6,6 +6,16 @@ class NavLogin extends Component {
       'click .login-btn': 'login'
     });
     this.loggedIn = false;
+    this.checkLogin();
+  }
+
+  async checkLogin(){
+    let result = await Login.find();
+    console.log(result);
+    if (result.loggedIn) {
+      this.loggedIn = true;
+      this.render();
+    }
   }
 
   async login(e) {
