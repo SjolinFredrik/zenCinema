@@ -1,6 +1,17 @@
 <div class="btn-group">
+  ${this.loggedIn ? `
   <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="LoginToggle" data-toggle="dropdown"
-  aria-haspopup="true" aria-expanded="false">
+    aria-haspopup="true" aria-expanded="false">
+    Hej, Namn!
+  </button>
+  <div class="dropdown-menu dropdown-menu-lg-right login-menu">
+    <a class="dropdown-item" href="/my-bookings">Mina bokningar</a>
+    <div class="dropdown-divider"></div>
+    <button class="btn btn-primary logout-btn mt-2">Logga ut</button>
+  </div>
+  ` : `
+  <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="LoginToggle" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
     Logga in
   </button>
   <div class="dropdown-menu dropdown-menu-lg-right login-menu">
@@ -24,4 +35,5 @@
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="/register">Registrera ny användare</a>
   </div>
+  `}
 </div>

@@ -5,6 +5,7 @@ class NavLogin extends Component {
     this.addEvents({
       'click .login-btn': 'login'
     });
+    this.loggedIn = false;
   }
 
   async login(e) {
@@ -20,6 +21,10 @@ class NavLogin extends Component {
 
     let result = await login.save();
 
-    console.log(result.loggedIn);
+    if (result.loggedIn) {
+      this.loggedIn = true;
+      this.render();
+    }
   }
+
 }
