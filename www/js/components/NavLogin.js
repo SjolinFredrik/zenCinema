@@ -3,7 +3,8 @@ class NavLogin extends Component {
   constructor() {
     super();
     this.addEvents({
-      'click .login-btn': 'login'
+      'click .login-btn': 'login',
+      'click .logout-btn': 'logout'
     });
     this.loggedIn = false;
     this.checkLogin();
@@ -35,6 +36,13 @@ class NavLogin extends Component {
       this.loggedIn = true;
       this.render();
     }
+  }
+
+  async logout(){
+    let loginObj = new Login();
+    await loginObj.delete();
+    this.loggedIn = false;
+    this.render();
   }
 
 }
