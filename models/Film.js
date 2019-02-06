@@ -15,7 +15,8 @@ let filmSchema = new Schema ({
     "description": String,
     "images": [{type: String}],
     "youtubeTrailers": [{type: String}],
-    "reviews": []
+    "reviews": [],
+    "link": String
 });
 
 module.exports = db.model('Film', filmSchema);
