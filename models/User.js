@@ -7,8 +7,15 @@ let userSchema = new Schema ({
   "lastName": {type: String, required: true},
   "email": {type: String, required: true, unique: true},
   "password": {type: String, required: true},
-  "bookings": [{type: Schema.Types.ObjectId, ref:"Booking", required: true}],
+  //"bookings": [{type: Schema.Types.ObjectId, ref:"Booking", required: true}],
   "admin": {type: Boolean, default: "false"}
+}, { toJSON: { virtuals: true } });
+
+userSchema.virtual('bookings',  {
+  ref: 'Booking',
+  localField: '_id', 
+  foreignField: 'customer',
+  justOne: false
 });
 
 

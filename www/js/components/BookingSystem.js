@@ -94,15 +94,26 @@ class BookingSystem extends Component {
 
     let number = await this.generateBookingNumber();
 
+    
+
+    let customer = await Login.find();
+    let customerId
+    if (!customer.loggedIn) {
+      customerId = '5c51a472fe47141770028de9'
+    }
+    else {
+      customerId = customer.user._id;
+    }
+    
+
     this.newBooking = new Booking({
-      "customer": '5c51a472fe47141770028de9', 
+      "customer": customerId, 
       "show": this.showing._id,
       "seats":  ['5-5', '5-6'],
       "bookingNumber": number,
       "totalCost": totalCost + " SEK"
     });
 
-    
     await this.newBooking.save();
     
     this.message = new Message('newBooking', this.newBooking);
