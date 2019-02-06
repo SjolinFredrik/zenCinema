@@ -5,5 +5,10 @@ nav {
   }
   .login-menu {
     min-width: 250px;
+    .logout-btn {
+      margin-left: auto;
+      margin-right: auto;
+      display: block; 
+    }
   }
 }
