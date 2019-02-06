@@ -43,10 +43,11 @@
         "stars": "3",
         "max": "5"
       }
-    ]
+    ],
+    "link": "husdjurens-hemliga-liv"
   },
   {
-    "title": "Bohemian rapsody",
+    "title": "Bohemian Rhapsody",
     "productionCountries": [
       "Storbritannien",
       "USA"
@@ -92,7 +93,8 @@
         "stars": "4",
         "max": "5"
       }
-    ]
+    ],
+    "link": "bohemian-rhapsody"
   },
   {
     "title": "A star is born",
@@ -137,7 +139,8 @@
         "stars": "4",
         "max": "5"
       }
-    ]
+    ],
+    "link": "a-star-is-born"
   },
   {
     "title": "Bumblebee",
@@ -185,7 +188,8 @@
         "stars": "4",
         "max": "5"
       }
-    ]
+    ],
+    "link": "bumblebee"
   },
   {
     "title": "Glass",
@@ -233,6 +237,7 @@
         "stars": "4",
         "max": "5"
       }
-    ]
+    ],
+    "link": "glass"
   }
 ]
