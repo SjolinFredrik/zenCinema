@@ -16,7 +16,7 @@ class StartPage extends Component {
   }
 
   getFilmsFromShowings() {
-    this.showListForSeveralDaysFromToday(2).then(data => {
+    this.showListForSeveralDaysFromToday(7).then(data => {
       this.actualShowings = data;
       this.actualFilms = [];
       let actualFilm = '';
