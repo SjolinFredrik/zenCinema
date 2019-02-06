@@ -25,7 +25,7 @@ async function addSaloonsToDb() {
     schema: [8, 9, 10, 10, 10, 10, 12, 12]
   };
   let schemaTwo = {
-    name: 'Medium salong',
+    name: 'Medium Salong',
     schema: [6, 8, 9, 10, 10, 12]
   };
   let schemaThree = {
