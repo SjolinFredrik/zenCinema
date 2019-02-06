@@ -14,7 +14,7 @@ class Router {
     $(document).on('click', 'a', function(e){
       // assume all links starting with '/' are internal
       let link = $(this).attr('href');
-      if(link.indexOf('/') === 0){
+      if (link.indexOf('/') === 0){
         e.preventDefault(); // no hard reload of page
         history.pushState(null, null, link); // change url (no reload)
         that.setPath(link);
@@ -23,24 +23,39 @@ class Router {
     });
   }
 
-  listenToBackForward(){
+  listenToBackForward() {
     window.addEventListener("popstate", () => {
       this.setPath(location.pathname);
       this.mainInstance.render();
     });
   }
 
-  setPath(path){
-    Router.path = Router.routes.includes(path) ? path : '404';
+  setPath(path) {
+    const matchingRoute = Router.findRoute(path);
+    Router.path = matchingRoute ? matchingRoute : '404';
     setTimeout(() => this.setActiveLink(), 0);
   }
 
-  setActiveLink(){
+  setActiveLink() {
     $('a').removeClass('active');
     $(`a[href="${Router.path}"]`).addClass('active');
   }
 
-  static registerRoute(route){
+
+//search route in Router.routes array, if found route which is exactly the same, returns this route
+  static findRoute(path) {
+    const matchingRoute = Router.routes.find(route => route === path);
+    if (matchingRoute) {
+      return matchingRoute;
+    }
+
+  //Searching route, if found route which includes RegExp, 
+  //search first matching with route in Router.routes and returns this route
+    const regexpRoutes = Router.routes.filter(route => route instanceof RegExp);
+    return regexpRoutes.find(route => path.match(route));
+  }
+
+  static registerRoute(route) {
     Router.routes.push(route);
   }
   
