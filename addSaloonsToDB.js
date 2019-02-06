@@ -21,15 +21,15 @@ async function addSaloonsToDb() {
 
 
   let schemaOne = {
-    name: 'Stor Salong',
+    name: 'Zenmongouse',
     schema: [8, 9, 10, 10, 10, 10, 12, 12]
   };
   let schemaTwo = {
-    name: 'Medium Salong',
+    name: 'Zentermidiate',
     schema: [6, 8, 9, 10, 10, 12]
   };
   let schemaThree = {
-    name: 'Lille Salong',
+    name: 'Zenpetit',
     schema: [5, 7, 9, 9, 12]
   };
 
