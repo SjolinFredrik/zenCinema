@@ -2,15 +2,17 @@
         <div class="col-7 mx-auto message">
             <h3>${this.heading}</h3>
             <p>${this.text}</p>
+           ${this.type === 'newBooking' ? `
            <p>
-             Bokningsnummer: ${this.data.bookingNumber}<br/>
-             Salong: ${this.saloon}<br/>
-             Film: ${this.filmTitle}<br/>
-             Platser: ${this.data.seats.join(', ')}<br/>
-             Tid: ${this.time}<br/>
-             Datum: ${this.date}<br/>
-             Att betala: ${this.data.totalCost}
-           </p>
+                Bokningsnummer: ${this.data.bookingNumber}<br/>
+                Salong: ${this.saloon}<br/>
+                Film: ${this.filmTitle}<br/>
+                Platser: ${this.data.seats.join(', ')}<br/>
+                Tid: ${this.time}<br/>
+                Datum: ${this.date}<br/>
+                Att betala: ${this.data.totalCost}
+              </p>
+           ` : ''}
            <a role="button" href="/" class="btn btn-secondary close-message" >Stäng</a>
           </div>
     </div>
