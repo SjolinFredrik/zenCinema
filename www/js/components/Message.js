@@ -26,6 +26,10 @@ class Message extends Component {
       this.heading = 'User har skapat';
       this.text = 'Hitta på någon text, var snälla!'
     }
+    if(this.type === 'mustLogIn') {
+      this.heading = 'User utloggad!';
+      this.text = 'Du måste logga in innan bokning!';
+    }
   }
 
   async showInfo() {

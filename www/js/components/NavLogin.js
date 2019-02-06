@@ -12,10 +12,10 @@ class NavLogin extends Component {
 
   async checkLogin(){
     let result = await Login.find();
-    console.log(result.user);
     if (result.loggedIn) {
       this.loggedIn = true;
       this.loggedInUser = result.user;
+      window.localStorage.setItem('loggedInUser', this.loggedInUser._id);
       this.render();
     }
   }
@@ -35,8 +35,8 @@ class NavLogin extends Component {
 
     if (result.loggedIn) {
       this.loggedIn = true;
-      console.log(result.user);
       this.loggedInUser = result.user;
+      window.localStorage.setItem('loggedInUser', this.loggedInUser._id);
       this.render();
     }
   }
@@ -45,6 +45,7 @@ class NavLogin extends Component {
     let loginObj = new Login();
     await loginObj.delete();
     this.loggedIn = false;
+    window.localStorage.removeItem('loggedInUser');
     this.render();
   }
 
