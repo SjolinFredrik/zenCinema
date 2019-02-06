@@ -7,12 +7,7 @@ class RegisterPage extends Component {
       'click .saveNewUser-btn': 'saveUser'
     });
   }
-  saveUser() {
-    console.log('test 1');
-    
+  saveUser() {    
     User.createUser();
-
-    console.log('test 2');
-    
   };
 }
