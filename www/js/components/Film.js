@@ -23,8 +23,7 @@ class Film extends Component {
   }
 
   catchFilmId() {
-    App.filmId = this._id;
-    return App.filmId;
+    window.localStorage.setItem('filmId', this._id);
   }
 
 

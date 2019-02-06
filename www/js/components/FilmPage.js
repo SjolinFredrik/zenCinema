@@ -6,14 +6,9 @@ class FilmPage extends Component {
   }
 
   mount() {
-    if (App.filmId) {
-      this.filmId = App.filmId;
-      this.content = new FilmPageContent(this.filmId);
-      this.render();
-    }
-    else {
-      return;
-    }
+    let filmId = window.localStorage.getItem('filmId');
+    this.content = new FilmPageContent(filmId);
+    this.render();
   }
 
 }
