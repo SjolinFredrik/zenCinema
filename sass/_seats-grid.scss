@@ -7,6 +7,10 @@
   table-layout: fixed;
   border-spacing: 5px;
   margin: auto;
+  @include media-breakpoint-down(xs) {
+    table-layout: auto;
+    border-spacing: 2px;
+  }
   .seat {
     display: table-cell;
     background-color: $accent-light;
@@ -14,6 +18,10 @@
     padding: 7px 10px;
     white-space: nowrap;
     cursor: pointer;
+  @include media-breakpoint-down(xs) {
+    font-size: .75rem;
+    padding: 4px 6px;    
+  }
     &:hover {
       background-color: $accent-dark;
     }

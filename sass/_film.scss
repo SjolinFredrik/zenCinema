@@ -2,6 +2,9 @@
   color: $primary;
   img {
     max-width: 400px;
+    @include media-breakpoint-down(xs) {
+      max-width: 100%;
+    }
   }
 }
 
