@@ -37,7 +37,7 @@ module.exports = class LoginHandler {
   createCheckIfLoggedInRoute(){
     this.app.get('/json/login', (req, res) => {
       if(!req.session.user){
-        res.json({error: 'Not logged in!'});
+        res.json({error: 'Not logged in!', loggedIn: false});
         return;
       }
       res.json({user: req.session.user, loggedIn: true});

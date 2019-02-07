@@ -45,7 +45,7 @@ class NavLogin extends Component {
     let loginObj = new Login();
     await loginObj.delete();
     this.loggedIn = false;
-    window.localStorage.removeItem('loggedInUser');
+    window.location.href = 'http://localhost:3005/'
     this.render();
   }
 

@@ -7,7 +7,7 @@ class BookingSystem extends Component {
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
-        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
+        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', { weekday: 'short', month: 'long', day: 'numeric' });
         this.saloon = this.showing.saloon;
         this.film = this.showing.film;
         this.time = this.showing.time;
@@ -90,32 +90,35 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-    console.log(this.loggedInUser);
     if (this.loggedInUser) {
       let totalCost = await this.totalCost();
       let number = await this.generateBookingNumber();
 
+      let customer = await Login.find();
+      let customerId
+      if (!customer.loggedIn) {
+        customerId = '5c51a472fe47141770028de9'
+      }
+      else {
+        customerId = customer.user._id;
+      }
+
+
       this.newBooking = new Booking({
-        "customer": this.loggedInUser,
+        "customer": customerId,
         "show": this.showing._id,
         "seats": ['5-5', '5-6'],
         "bookingNumber": number,
         "totalCost": totalCost + " SEK"
       });
 
+      await this.newBooking.save();
 
-      console.log(this.loggedInUser);
-
-      console.log(await this.newBooking.save());
       this.message = new Message('newBooking', this.newBooking);
       this.render();
       this.newBooking = '';
     }
-    else {
-      this.message = new Message('mustLogIn');
-      this.render();
-      // window.alert('Du måste logga in först');
-    }
+
   }
 
 }
