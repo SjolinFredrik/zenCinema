@@ -18,7 +18,7 @@ class Showing extends Component {
   }
 
   get dateToString() {
-    return new Date(this.date).toString().slice(0,10);
+    return new Date(this.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
   }
 
   

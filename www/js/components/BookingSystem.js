@@ -3,10 +3,11 @@ class BookingSystem extends Component {
     super();
     this.showingId = showingId;
     this.ticketSelection = new TicketSelection();
+    this.loggedInUser = window.localStorage.getItem('loggedInUser');
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
-        this.showingDate = new Date(this.showing.date).toString().slice(0,10);
+        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
         this.saloon = this.showing.saloon;
         this.film = this.showing.film;
         this.time = this.showing.time;
@@ -24,16 +25,16 @@ class BookingSystem extends Component {
           this.render();
         });
       });
-      this.addEvents({
-        'click .save-booking': 'saveBooking'
-      }); 
+    this.addEvents({
+      'click .save-booking': 'saveBooking'
+    });
   }
 
   async showingData(showingId) {
     let showing = await Showing.find(showingId);
     return showing;
   }
- 
+
   async findSaloonSchema(saloonId) {
     return await Saloon.find(saloonId);
   }
@@ -65,7 +66,7 @@ class BookingSystem extends Component {
     }
     let number = 0;
     if (bookings.length === 0) {
-        number = salt + 1;
+      number = salt + 1;
     }
     if (bookings.length > 0) {
       lastBookingNumber = bookings[0].bookingNumber;
@@ -89,10 +90,19 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
+    console.log(this.loggedInUser);
+    if (this.loggedInUser) {
+      let totalCost = await this.totalCost();
+      let number = await this.generateBookingNumber();
 
-    let totalCost = await this.totalCost();
+      this.newBooking = new Booking({
+        "customer": this.loggedInUser,
+        "show": this.showing._id,
+        "seats": ['5-5', '5-6'],
+        "bookingNumber": number,
+        "totalCost": totalCost + " SEK"
+      });
 
-    let number = await this.generateBookingNumber();
 
     
 
@@ -120,4 +130,5 @@ class BookingSystem extends Component {
     this.render();
     this.newBooking = '';
   }
+
 }

@@ -13,11 +13,11 @@ class Message extends Component {
   get chooseHeadingAndText() {
     if (this.type === 'newBooking') {
       this.heading = 'Tack för din bokning!';
-      this.text = "Se info om sin bokning nedan:";
+      this.text = "Se info nedan för din bokning:";
       this.showInfo().then(data => {
         this.filmTitle = data[0].film.title;
         this.time = data[0].time;
-        this.date = new Date(data[0].date).toDateString();
+        this.date = new Date(data[0].date).toLocaleString('sv-SE', {month: 'long', day: 'numeric', year: 'numeric'});
         this.saloon = data[0].saloon.name;
         this.render();
       });
@@ -25,6 +25,10 @@ class Message extends Component {
     if (this.type === 'newUser') {
       this.heading = 'User har skapat';
       this.text = 'Hitta på någon text, var snälla!'
+    }
+    if(this.type === 'mustLogIn') {
+      this.heading = 'User utloggad!';
+      this.text = 'Du måste logga in innan bokning!';
     }
   }
 

@@ -1,8 +1,8 @@
-<div class="showing col-sm-6 mx-auto">
-    <div>${this.saloon.name}</div>
-    <div class="film-title">${this.film.title}</div>
-    <div>${this.dateToString}</div>
-    <div>${this.time}</div>
-    <div><a href="/booking" title="Boka ${this.film.title}" class="book-film">Boka Film</a></div>
-    <div>${this.prices}</div>
+<div class="showing col-sm-8 mx-auto">
+  <div><strong>Salong:</strong> <br> ${this.saloon.name}</div>
+  <div class="film-title">${this.film.title}</div>
+  <div><strong>Datum:</strong> <br> ${this.dateToString}</div>
+  <div><strong>Tid:</strong> <br> ${this.time}</div>
+  <div><a href="/booking" title="Boka ${this.film.title}" class="book-film">Boka</a></div>
+  <div><strong>Pris:</strong> <br> ${this.prices}</div>
 </div>

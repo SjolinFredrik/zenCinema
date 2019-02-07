@@ -2,18 +2,23 @@ class FilmPage extends Component {
 
   constructor() {
     super();
-    this.addRoute(`/film`);
+    this.addRoute(/^\/film\/[a-z0-9\-]+$/);
   }
 
   mount() {
-    if (App.filmId) {
-      this.filmId = App.filmId;
-      this.content = new FilmPageContent(this.filmId);
+    let path = location.pathname;
+    const film = path.split('/')[2].split('-').join(' ');
+    this.findFilm(film).then(data => {
+      this.film = data[0]._id;
+    }).then(() => {
+      this.content = new FilmPageContent(this.film);
       this.render();
-    }
-    else {
-      return;
-    }
+    });
   }
 
+
+  async findFilm(film) {
+    let filmId = await Film.find(`.find({title: /${film}/i})`);
+    return filmId;
+  }
 }

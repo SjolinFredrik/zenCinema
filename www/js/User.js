@@ -9,7 +9,7 @@ class User extends REST {
       "password": $('.password-input').val(),
     });
 
-    console.log(await user.save());
+    user.save();
   }
 
   

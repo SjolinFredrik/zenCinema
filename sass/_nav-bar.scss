@@ -5,5 +5,10 @@ nav {
   }
   .login-menu {
     min-width: 250px;
+    .logout-btn {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
