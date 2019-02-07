@@ -7,7 +7,7 @@ class BookingSystem extends Component {
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
-        this.showingDate = new Date(this.showing.date).toString().slice(0, 10);
+        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
         this.saloon = this.showing.saloon;
         this.film = this.showing.film;
         this.time = this.showing.time;
