@@ -89,8 +89,8 @@ class BookingSystem extends Component {
     let ticketsCost = 0;
     for (let i = 0; i < this.ticketSelection.tickets.length; i++) {
       ticketType = this.ticketSelection.tickets[i];
-      let ticketsQuantity = ticketType.baseEl.find('input').val();
-      ticketsCost = parseInt(ticketType.price) * ticketsQuantity;
+      let ticketsQuantity = ticketType.baseEl.find('.ticketQuantity').text();
+      ticketsCost = parseInt(ticketType.price) * parseInt(ticketsQuantity);
       totalCost = totalCost + ticketsCost;
     }
     return totalCost;

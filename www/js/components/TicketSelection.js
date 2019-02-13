@@ -4,8 +4,13 @@ class TicketSelection extends Component {
     this.tickets = [];
     this.maxTickets = 8;
     this.numOfTickets = 0;
-    this.setTickets().then(tickets => {
-      this.tickets = tickets;
+    this.setTickets().then(data => {
+      for (let i = 0; i < data.length; i++) {
+        let ticketData = data[i];
+        let ticket = new TicketPrice(ticketData, this);
+        this.tickets.push(ticket);
+        this.render();
+      }
     });
   }
 
