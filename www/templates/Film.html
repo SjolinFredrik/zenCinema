@@ -1,18 +1,32 @@
-<section class="film-card card col-sm-8 mb-5 mx-auto">
-    <a class="a-over" title="${this.title}" data-id="this._id" href="/film/${this.link}"></a>
-    <h2>${this.title}</h2>
-    <p>${this.directors.length > 0 ? this.directors.join(', ') : this.directors}</p>
-    <img class="img-fluid mx-auto" src="/images/movies/${this.images[0]}">
-    <dl class="about-film">
-        <dd>${this.description}</dd>
-        <dd>${this.productionCountries.join(', ')}</dd>
-        <dd>${this.productionYear}</dd>
-        <dd>${this.length}</dd>
-        <dd>${this.genre}</dd>
-        <dd>${this.distributor}</dd>
-        <dd>${this.language}</dd>
-        <dd>${this.subtitles}</dd>
-        <dd>${this.actors.join(', ')}</dd>
-        <dd>${this.description}</dd>
-    </dl>
+<section class="film-content col-sm-12 mb-5 mx-auto px-0">
+  <div class="img-fluid film-cover-img d-none d-md-block" style="background: url(/images/movies/${this.images[1]})">
+    <div class="inner-cover-img"></div>
+  </div>
+  <section class="container film-information">
+    <section class="row mb-5 pb-5">
+      <section class="class col-12 col-md-4">
+        <img class="img-fluid mx-auto film-poster-img" src="/images/movies/${this.images[0]}">
+      </section>
+      <section class="col-12 col-md-8">
+        <h2 class="mt-4">${this.title}</h2>
+        <a role="button" href="#film-shows" class="btn btn-primary mt-3 tickets-btn mt-4">Biljetter</a>
+      </section>
+    </section>
+    <section class="row mt-5 pt-5">
+      <section class="col-12">
+        <dl class="about-film">
+          <dd>${this.description}</dd>
+          <dd><strong>Regi:</strong> ${this.directors.length > 0 ? this.directors.join(', ') : this.directors}</dd>
+          <dd><strong>Land:</strong> ${this.productionCountries.join(', ')}</dd>
+          <dd><strong>År:</strong> ${this.productionYear}</dd>
+          <dd><strong>Längd:</strong> ${this.length}</dd>
+          <dd><strong>Genre:</strong> ${this.genre}</dd>
+          <dd><strong>Studio:</strong> ${this.distributor}</dd>
+          <dd><strong>Språk:</strong> ${this.language}</dd>
+          <dd><strong>Textning:</strong> ${this.subtitles}</dd>
+          <dd><strong>Skådespelare:</strong> ${this.actors.join(', ')}</dd>
+        </dl>
+      </section>
+    </section>
+  </section>
 </section>
