@@ -3,7 +3,14 @@ class BookingSystem extends Component {
     super();
     this.showingId = showingId;
     this.ticketSelection = new TicketSelection();
-    this.loggedInUser = window.localStorage.getItem('loggedInUser');
+    this.checkLogin().then(login => {
+      if(login.loggedIn) {
+        this.loggedInUser = login;
+      }
+      else {
+        return;
+      }
+    });
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
@@ -89,23 +96,17 @@ class BookingSystem extends Component {
     return totalCost;
   }
 
+  async checkLogin() {
+    return await Login.find();
+  }
+
   async saveBooking() {
     if (this.loggedInUser) {
       let totalCost = await this.totalCost();
       let number = await this.generateBookingNumber();
 
-      let customer = await Login.find();
-      let customerId
-      if (!customer.loggedIn) {
-        customerId = '5c51a472fe47141770028de9'
-      }
-      else {
-        customerId = customer.user._id;
-      }
-
-
       this.newBooking = new Booking({
-        "customer": customerId,
+        "customer": this.loggedInUser,
         "show": this.showing._id,
         "seats": ['5-5', '5-6'],
         "bookingNumber": number,
@@ -118,7 +119,10 @@ class BookingSystem extends Component {
       this.render();
       this.newBooking = '';
     }
-
+    else {
+      this.message = new Message('mustLogIn');
+      this.render();
+    }
   }
 
 }
