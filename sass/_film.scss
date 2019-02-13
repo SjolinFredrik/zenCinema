@@ -1,6 +1,6 @@
 .film-content {
   background: #000;
-  .film-cover-img {
+  .film-cover-img, .film-mobile-img {
     position: relative;
     background-size: cover !important;
     background-position: top center !important;
@@ -20,9 +20,10 @@
     position: relative;
     .film-poster-img {
       @include media-breakpoint-up(md){
-        margin-top: -15rem;
+        margin-top: -14rem;
         position: absolute;
       }
+      border: 1px solid rgba(254, 208, 187, 0.5);
       width: 250px;
       margin: 0 auto;
       display: block;

@@ -2,12 +2,16 @@
   <div class="img-fluid film-cover-img d-none d-md-block" style="background: url(/images/movies/${this.images[1]})">
     <div class="inner-cover-img"></div>
   </div>
+  <div class="img-fluid film-mobile-img d-block d-md-none" style="background: url(/images/movies/${this.images[0]})">
+    <div class="inner-cover-img"></div>
+  </div>
+
   <section class="container film-information">
     <section class="row mb-5 pb-5">
       <section class="class col-12 col-md-4">
-        <img class="img-fluid mx-auto film-poster-img" src="/images/movies/${this.images[0]}">
+        <img class="img-fluid mx-auto d-none d-md-block film-poster-img" src="/images/movies/${this.images[0]}">
       </section>
-      <section class="col-12 col-md-7 offset-md-1 offset-lg-0 col-lg-8">
+      <section class="col-12 col-md-7 offset-md-1 offset-lg-0 col-lg-8 text-center text-md-left">
         <h2 class="mt-2">${this.title}</h2>
         <p>${Math.floor(this.length/60)} tim ${this.length%60} min | ${this.genre}</p>
         <a role="button" href="#film-shows" class="btn btn-primary tickets-btn">Biljetter</a>
