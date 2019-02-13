@@ -7,24 +7,27 @@
       <section class="class col-12 col-md-4">
         <img class="img-fluid mx-auto film-poster-img" src="/images/movies/${this.images[0]}">
       </section>
-      <section class="col-12 col-md-8">
-        <h2 class="mt-4">${this.title}</h2>
-        <a role="button" href="#film-shows" class="btn btn-primary mt-3 tickets-btn mt-4">Biljetter</a>
+      <section class="col-12 col-md-7 offset-md-1 offset-lg-0 col-lg-8">
+        <h2 class="mt-2">${this.title}</h2>
+        <p>${Math.floor(this.length/60)} tim ${this.length%60} min | ${this.genre}</p>
+        <a role="button" href="#film-shows" class="btn btn-primary tickets-btn">Biljetter</a>
       </section>
     </section>
-    <section class="row mt-5 pt-5">
-      <section class="col-12">
-        <dl class="about-film">
+    <section class="row my-5">
+      <section class="col-12 col-md-6 pt-0">
+        <dl>
           <dd>${this.description}</dd>
-          <dd><strong>Regi:</strong> ${this.directors.length > 0 ? this.directors.join(', ') : this.directors}</dd>
-          <dd><strong>Land:</strong> ${this.productionCountries.join(', ')}</dd>
-          <dd><strong>År:</strong> ${this.productionYear}</dd>
-          <dd><strong>Längd:</strong> ${this.length}</dd>
-          <dd><strong>Genre:</strong> ${this.genre}</dd>
-          <dd><strong>Studio:</strong> ${this.distributor}</dd>
-          <dd><strong>Språk:</strong> ${this.language}</dd>
-          <dd><strong>Textning:</strong> ${this.subtitles}</dd>
-          <dd><strong>Skådespelare:</strong> ${this.actors.join(', ')}</dd>
+        </dl>
+      </section>
+      <section class="col-12 col-md-6 pt-0">
+        <dl class="about-film">
+          <dd><span>Regi:</span> ${this.directors.length > 0 ? this.directors.join(', ') : this.directors}</dd>
+          <dd><span>Land:</span> ${this.productionCountries.join(', ')}</dd>
+          <dd><span>År:</span> ${this.productionYear}</dd>
+          <dd><span>Studio:</span> ${this.distributor}</dd>
+          <dd><span>Språk:</span> ${this.language}</dd>
+          <dd><span>Textning:</span> ${this.subtitles ? this.subtitles : 'Ingen textning'}</dd>
+          <dd><span>Skådespelare:</span> ${this.actors.join(', ')}</dd>
         </dl>
       </section>
     </section>

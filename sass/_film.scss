@@ -12,10 +12,11 @@
       height: 100%;
       top: 0;
       left: 0;
-      background: linear-gradient(180deg,rgba(14,15,15,0) 50%,#000);
+      background: linear-gradient(180deg,rgba(15,15,15,0) 50%,#000);
     }
   }
   .film-information {
+    font-family: Helvetica, sans-serif;
     position: relative;
     .film-poster-img {
       @include media-breakpoint-up(md){
@@ -29,6 +30,19 @@
     .tickets-btn {
       min-width: 150px;
 
+    }
+    dd {
+      color: $secondary;
+    }
+    h2 {
+      color: white;
+      font-weight: 900;
+    }
+    span {
+      color: white;
+    }
+    .about-film {
+      font-size: 0.9rem;
     }
   }
 }
