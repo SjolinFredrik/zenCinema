@@ -1,5 +1,10 @@
-<div class="ticket-price">
-  ${this.price}
-  ${this.name}
-  <input type="number" value="1" class="ticketQuantity" min="0" name="ticketQuantity" maxlength="3" />
+<div class="col-4 ticket-price">
+  <div>
+    ${this.name} (${this.price}kr/st)
+  </div>
+  <div class="quantity">
+    <i class="fas fa-minus-circle ticket-minus"></i>
+    <span class="ticketQuantity mx-3">${this.ticketQuantity}</span>
+    <i class="fas fa-plus-circle ticket-plus"></i>
+  </div>
 </div>

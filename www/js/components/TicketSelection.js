@@ -2,6 +2,8 @@ class TicketSelection extends Component {
   constructor() {
     super();
     this.tickets = [];
+    this.maxTickets = 8;
+    this.numOfTickets = 0;
     this.setTickets().then(tickets => {
       this.tickets = tickets;
     });
@@ -11,4 +13,5 @@ class TicketSelection extends Component {
     let tickets = await TicketPrice.find();
     return tickets;
   }
+
 }
