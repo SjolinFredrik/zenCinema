@@ -3,8 +3,8 @@ class User extends REST {
   static async createUser() {
 
     let user = new User({
-      "firstName": $('.firstName-input').val(),
-      "lastName": $('.lastName-input').val(),
+      "firstName": $('.first-name-input').val(),
+      "lastName": $('.last-name-input').val(),
       "email": $('.email-input').val(),
       "password": $('.password-input').val(),
     });

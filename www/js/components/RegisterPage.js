@@ -15,9 +15,7 @@ class RegisterPage extends Component {
     let validEmail = await this.validateEmailInput();
     let validInput = await this.validateFormInput();
     if(validEmail && validInput){
-      console.log(validEmail, validInput);
-      // await User.createUser();
-      console.log(await User.createUser());
+      await User.createUser();
       setTimeout(() => {
         $('.welcome').prepend(`
       <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -68,7 +66,7 @@ class RegisterPage extends Component {
     if(firstName < 2 || lastName < 2 || !regEx.test(password) || password !== confirmPassword) {
       if (firstName.length < 2) {
         this.baseEl.find('.invalid-firstname').show();
-      
+        // $(e.currentTarget).val('');
       }
       if (lastName.length < 2) {
         this.baseEl.find('.invalid-lastname').show();
