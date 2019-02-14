@@ -1,5 +1,5 @@
 <section class="registerPage">
-  <section class="register-form p-4">
+  <section class="register-form welcome p-4">
     <h3 class="mb-4">Skapa användare</h3>
     <section class="login-wrapper">
       <p>Förnamn:</p>
@@ -14,12 +14,12 @@
       <p class="email-exists error-msg">Denna email existerar redan</p>
       <p>Lösenord:</p>
       <input class="password-input mb-3" type="password">
+      <p class="invalid-password">Ogiltligt lösenord, använd minst 4 tecken och en siffra</p>
       <p>Bekräfta lösenord:</p>
       <input class="passwordConfirm-input mb-3" type="password">
-      <p class="invalid-password">Lösenordet matchar ej</p>
+      <p class="password-mismatch">Lösenordet matchar ej</p>
       <br>
       <button class="btn btn-primary saveNewUser-btn mt-4">Bekräfta</button>
-
     </section>
   </section>
 </section>

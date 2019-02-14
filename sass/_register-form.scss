@@ -19,19 +19,7 @@ section.registerPage {
           font-weight: bold;
         }
       }
-      .error-msg {
-        display: none;
-        color: red;
-      }
-      .email-invalid, .email-exists {
-        display: none;
-        color: red;
-      }
-      .invalid-firstname, .invalid-lastname {
-        display: none;
-        color: red;
-      }
-      .invalid-password {
+      .error-msg, .email-invalid, .email-exists, .invalid-firstname, .invalid-lastname, .invalid-password, .password-mismatch {
         display: none;
         color: red;
       }
