@@ -15,8 +15,8 @@ class TicketPrice extends Component {
   removeTicket() {
     if (this.ticketQuantity > 0) {
       this.ticketSelection.numOfTickets--;
+      Store.numOfTickets--;
       this.ticketQuantity--;
-      console.log(this.ticketSelection.numOfTickets);
       this.render();
     }
   }
@@ -24,8 +24,8 @@ class TicketPrice extends Component {
   addTicket() {
     if (this.ticketSelection.numOfTickets < this.ticketSelection.maxTickets) {
       this.ticketSelection.numOfTickets++;
+      Store.numOfTickets++;
       this.ticketQuantity++;
-      console.log(this.ticketSelection.numOfTickets);
       this.render();
     }
   }
