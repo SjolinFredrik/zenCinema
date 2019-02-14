@@ -25,9 +25,38 @@ class SeatsGrid extends Component {
     return hall;
   }
 
-  chooseSeats(seat) {
+  hoverSeats(seat, numOfTickets) {
     let hoveredSeat = seat[0].name;
-    let x = this.baseEl.find(`#${hoveredSeat}`).addClass('hovered-seat');
+    let rowNr = parseInt(hoveredSeat.split('-')[0]);
+    let seatNr = parseInt(hoveredSeat.split('-')[1]);
+
+    if (numOfTickets > seatNr) {
+      for (let i = seatNr; i >= 1; i--) {
+        this.baseEl.find(`#${rowNr}-${i}`).addClass('invalid-seats');
+      }
+    } else {
+      for (let i = seatNr; i > seatNr - numOfTickets; i--) {
+        this.baseEl.find(`#${rowNr}-${i}`).addClass('hovered-seats');
+      }
+    }
+
+  }
+
+  unhoverSeats(seat, numOfTickets) {
+    let hoveredSeat = seat[0].name;
+    let rowNr = parseInt(hoveredSeat.split('-')[0]);
+    let seatNr = parseInt(hoveredSeat.split('-')[1]);
+
+    if (numOfTickets > seatNr) {
+      for (let i = seatNr; i >= 1; i--) {
+        this.baseEl.find(`#${rowNr}-${i}`).removeClass('invalid-seats');
+      }
+    }
+    else {
+      for (let i = seatNr; i > seatNr - numOfTickets; i--) {
+        this.baseEl.find(`#${rowNr}-${i}`).removeClass('hovered-seats');
+      }
+    }
   }
 
 }

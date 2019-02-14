@@ -23,8 +23,11 @@
       font-size: .75rem;
       padding: 4px 6px;    
     }
-    &.hovered-seat {
+    &.hovered-seats {
       background-color: $accent-dark;
+    }
+    &.invalid-seats {
+      background-color: red;
     }
     /* &:hover {
       background-color: $accent-dark;

@@ -11,11 +11,11 @@ class Seat extends Component {
   }
 
   hoverMe() {
-    this.seatsGrid.chooseSeats($(this));
+    this.seatsGrid.hoverSeats($(this), Store.numOfTickets);
   }
 
   unhoverMe() {
-    this.baseEl.removeClass('hovered-seat');
+    this.seatsGrid.unhoverSeats($(this), Store.numOfTickets);
   }
 
 }
