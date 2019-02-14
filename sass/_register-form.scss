@@ -19,6 +19,22 @@ section.registerPage {
           font-weight: bold;
         }
       }
+      .error-msg {
+        display: none;
+        color: red;
+      }
+      .email-invalid, .email-exists {
+        display: none;
+        color: red;
+      }
+      .invalid-firstname, .invalid-lastname {
+        display: none;
+        color: red;
+      }
+      .invalid-password {
+        display: none;
+        color: red;
+      }
     }
   }
 }
