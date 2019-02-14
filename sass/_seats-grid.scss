@@ -12,22 +12,34 @@
     border-spacing: 2px;
   }
   .seat {
+    position: relative;
     display: table-cell;
     background-color: $accent-light;
     border-radius: 3px;
     padding: 7px 10px;
     white-space: nowrap;
     cursor: pointer;
-  @include media-breakpoint-down(xs) {
-    font-size: .75rem;
-    padding: 4px 6px;    
-  }
-    &:hover {
+    @include media-breakpoint-down(xs) {
+      font-size: .75rem;
+      padding: 4px 6px;    
+    }
+    &.hovered-seat {
       background-color: $accent-dark;
     }
+    /* &:hover {
+      background-color: $accent-dark;
+    } */
     &.taken {
       cursor: default;
       background-color: $accent-dark;
+    }
+    .ghost-div {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
     }
   }
 }
