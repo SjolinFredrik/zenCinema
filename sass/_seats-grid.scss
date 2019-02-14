@@ -3,31 +3,60 @@
 }
 
 .seats-row {
-  display: table;
-  table-layout: fixed;
-  border-spacing: 5px;
-  margin: auto;
+  display: block;
+  text-align: center;
+  @include clearfix();
+
+  &:nth-child(6),
+    &:nth-child(5),{
+    margin-left: -70px;
+    @include media-breakpoint-down(xs) {
+      margin-left: 0px;
+    }
+  }
+  &:nth-child(7),
+    &:nth-child(8){
+    width: 100%;
+    @include media-breakpoint-down(xs) {
+      margin-left: 0px;
+    }
+  }
   @include media-breakpoint-down(xs) {
-    table-layout: auto;
-    border-spacing: 2px;
+    display: table;
+    table-layout: fixed;
+    border-spacing: 5px;
+    margin: auto;
   }
   .seat {
-    display: table-cell;
+    display: inline-block;
     background-color: $accent-light;
-    border-radius: 3px;
-    padding: 7px 10px;
+    border-radius: 3px 3px 12px 12px;
+    padding: 7px 0;
     white-space: nowrap;
+    font-size: .75rem;
+    width: 30px;
+    margin: 3px;
+    text-align: center;
     cursor: pointer;
   @include media-breakpoint-down(xs) {
-    font-size: .75rem;
-    padding: 4px 6px;    
+    display: table-cell;
+    font-size: 0px;
+    padding: 8px 10px;
+    width: auto;    
   }
     &:hover {
-      background-color: $accent-dark;
+      background-color: $primary;
     }
     &.taken {
       cursor: default;
-      background-color: $accent-dark;
+      background-color: $primary;
     }
+  }
+}
+
+
+.film-page-content {
+  .seat {
+    color: $secondary;
   }
 }

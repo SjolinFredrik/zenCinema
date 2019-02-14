@@ -1,13 +1,9 @@
 class Showing extends Component {
   constructor(data) {
     super(data);
-    this.getPrices().then(data =>{
-      this.prices = data;
-      this.render();
-    });
 
     this.addEvents({
-      'click .book-film': 'catchShowingId'
+      'click .book-film': 'launchModal'
     });
   }
 
@@ -15,14 +11,20 @@ class Showing extends Component {
     return new Date(this.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
   }
 
-  
-  catchShowingId() {
-    App.showingId = this._id;
-    return App.showingId;
+  setPrices(prices) {
+    this.prices = prices;
+    this.render();
   }
 
-  async getPrices() {
-    let prices = await TicketPrice.find();
-    return prices;
+  setBookingAction(actionFn) {
+    this.bookingAction = actionFn;
+  }
+  
+  launchModal() {
+    if (this.bookingAction !== undefined) {
+      this.bookingAction();
+    }
+    // await this.filmPage.bookingPage.createBookingSystem(this._id);
+    // this.render();
   }
 }

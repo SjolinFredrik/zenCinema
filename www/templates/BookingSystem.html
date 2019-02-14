@@ -1,8 +1,15 @@
 <section class="booking-system container">
   <h2>Boka biljetter</h2>
+  <div class="col-sm-8 mx-auto">${this.ticketSelection ? this.ticketSelection : 'I have no ticketSelection'}</div>
   <p>${this.showingDate ? this.showingDate : ''}</p>
-  <p>${this.film ? this.film : ''}</p>
-  <div>${this.ticketSelection ? this.ticketSelection : 'I have no ticketSelection'}</div>
+  ${this.film ? `<div class="col-sm-6 mx-auto">
+    <dl>
+      <dt>${this.film.title}</dt>
+      <dd>${this.film.length}</dd>
+    </dl>` : ''}
+
+  </div>
+  
   <div class="row">
     <div class="col-sm-7 mx-auto">
         ${this.seatsGrid ? this.seatsGrid : ''}
@@ -10,7 +17,7 @@
   </div>
   <div class="row">
     <div class="col-sm-7 mx-auto py-4">
-      <a role="button" href="/" class="btn btn-secondary" >Avbryt</a>
+      <button role="button" data-dismiss="modal" aria-label="Close" class="btn btn-secondary" >Avbryt</button>
       <button type="button" class="btn btn-secondary save-booking" >Boka</button>
 
     </div>
