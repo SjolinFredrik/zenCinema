@@ -4,14 +4,14 @@ class FilmPageContent extends Component {
     this.filmId = filmId;
     this.showFilmInfo(this.filmId).then(film => {
       this.film = film;
+      this.trailer = new Trailer(film);
       this.render();
     })
     .then(this.showingsPopulatedFilms(this.filmId).then((data) => {
       this.filmShowings = data;
       this.render();
     })
-    );
-    
+    );    
   }
 
   async showingsPopulatedFilms(filmId) {

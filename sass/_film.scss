@@ -15,6 +15,28 @@
       background: linear-gradient(180deg,rgba(15,15,15,0) 50%,#000);
     }
   }
+  .trailer-modal-dialog {
+    max-width: 1200px;
+    margin: 30px auto;
+  }
+  .trailer-modal-body {
+    position:relative;
+    padding:0px;
+  }
+  .trailer-close {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    z-index:999;
+    font-size:2rem;
+    font-weight: normal;
+    color:#fff;
+    opacity:1;
+    @include media-breakpoint-down(lg){
+      right: 0;
+      top: -30px;
+    }
+  }
   .film-information {
     font-family: Helvetica, sans-serif;
     position: relative;
@@ -28,14 +50,15 @@
       margin: 0 auto;
       display: block;
     }
-    @include media-breakpoint-only(xs){
-      .btn-block-xs-only {
+    @include media-breakpoint-down(sm){
+      .btn-block-sm-down {
       display: block;
       width: 100%;
       }
     }
-    .tickets-btn {
+    .tickets-btn, .trailer-btn {
       min-width: 150px;
+      // border-radius: 100px;
 
     }
     dd {
