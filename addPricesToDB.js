@@ -20,21 +20,20 @@ async function addPricesToDb() {
   }
 
 
-
+  let kid = {
+    name: 'Barn',
+    price: '65'
+  };
   let normal = {
-    name: 'Vuxna',
+    name: 'Ordinarie',
     price: '85'
   };
   let senior = {
     name: 'Pensionärer',
     price: '75'
   };
-  let kid = {
-    name: 'Barn',
-    price: '65'
-  };
 
-  let prices = [normal, senior, kid];
+  let prices = [kid, normal, senior];
 
   for (let i = 0; i < prices.length; i++) {
     let price = new TicketPrice({
