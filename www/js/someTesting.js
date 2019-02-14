@@ -36,6 +36,12 @@ async function showingsPopulatedFilms() {
   }
 
 }
+$(document).ready(function(){
+  let scroll = new SmoothScroll('a[href*="#"]', {
+    offset: 25,
+    updateURL: false
+  });
+});
 
 
   
