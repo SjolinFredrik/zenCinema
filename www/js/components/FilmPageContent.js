@@ -9,6 +9,7 @@ class FilmPageContent extends Component {
       this.getPrices(),
     ]).then(data => {
       this.film = data[0];
+      this.trailer = new Trailer(this.film);
       this.filmShowings = data[1];
       const prices = data[2];
 
