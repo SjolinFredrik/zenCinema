@@ -11,10 +11,10 @@ class RegisterPage extends Component {
     });
   }
   async saveUser() {
-    
+
     let validEmail = await this.validateEmailInput();
     let validInput = await this.validateFormInput();
-    if(validEmail && validInput){
+    if (validEmail && validInput) {
       await User.createUser();
       setTimeout(() => {
         $('.welcome').prepend(`
@@ -26,11 +26,11 @@ class RegisterPage extends Component {
       </div>`
         )
       }, 0);
+      this.render();
     }
-    //dummy stuff needs to be properly done later.
   }
 
-  //Regex, word, digits or _ allowed. w+ set no limit in length
+  //Regex, word, digits or _ allowed. w+ set no limit in string length
   async validateEmailInput() {
     this.baseEl.find('.email-exists').hide();
     this.baseEl.find('.email-invalid').hide();
@@ -50,7 +50,7 @@ class RegisterPage extends Component {
     return true;
   }
 
-  //Password must be between 4 and 15 digits long and include at least one numeric digit.
+  //RegEx, password must be between 4 and 15 digits long and include at least one numeric digit.
   validateFormInput() {
     this.baseEl.find('.invalid-firstname').hide();
     this.baseEl.find('.invalid-lastname').hide();
@@ -63,21 +63,18 @@ class RegisterPage extends Component {
     let lastName = this.baseEl.find('.last-name-input').val();
     let password = this.baseEl.find('.password-input').val();
     let confirmPassword = this.baseEl.find('.passwordConfirm-input').val();
-    if(firstName < 2 || lastName < 2 || !regEx.test(password) || password !== confirmPassword) {
+    if (firstName < 2 || lastName < 2 || !regEx.test(password) || password !== confirmPassword) {
       if (firstName.length < 2) {
         this.baseEl.find('.invalid-firstname').show();
-        // $(e.currentTarget).val('');
       }
       if (lastName.length < 2) {
         this.baseEl.find('.invalid-lastname').show();
-      
       }
       if (!regEx.test(password)) {
         this.baseEl.find('.invalid-password').show();
-            }
+      }
       if (password !== confirmPassword) {
         this.baseEl.find('.password-mismatch').show();
-       
       }
       return false;
     }
