@@ -24,7 +24,5 @@ class Showing extends Component {
     if (this.bookingAction !== undefined) {
       this.bookingAction();
     }
-    // await this.filmPage.bookingPage.createBookingSystem(this._id);
-    // this.render();
   }
 }

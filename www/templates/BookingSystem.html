@@ -1,20 +1,41 @@
-<section class="booking-system container">
-  <h2>Boka biljetter</h2>
-  <div class="col-sm-8 mx-auto">${this.ticketSelection ? this.ticketSelection : 'I have no ticketSelection'}</div>
-  <p>${this.showingDate ? this.showingDate : ''}</p>
-  ${this.film ? `<div class="col-sm-6 mx-auto">
-    <dl>
-      <dt>${this.film.title}</dt>
-      <dd>${this.film.length}</dd>
-    </dl>` : ''}
+<section class="booking-system container-fluid">
+
+  <div class="col-sm-8 mx-auto">${this.ticketSelection ? this.ticketSelection : ''}</div>
+
+    ${this.film ? `
+      <div class="row align-items-center justify-content-center no-gutters">
+        <div class="col-sm-6 show-info" style="background-image: url(/images/movies/${this.film.images[1]})">
+          <div class="drop"></div>
+
+          <dl class="col-sm-6 mx-auto animated slideInUp ">
+              <dt>${this.film.title}</dt>
+              <dd>${Math.floor(this.film.length/60)} tim ${this.film.length%60} min | ${this.film.genre}</dd>
+              <dd>Salong: ${this.saloonName}</dd>
+              <dd>tid: ${this.showingDate ? this.showingDate : ''}</dd>
+            </dl>` : ''}
+        </div>
+          
+      </div>
+
+
+
+
+  
+  
+
+  
+  <div class="seats-selection">
+    <div class="row seat-wrap">
+        <div class="screen-light left-angle"></div>
+
+        <div class="col-sm-8 mx-auto">
+            ${this.seatsGrid ? this.seatsGrid : ''}
+        </div>
+      <div class="screen-light right-angle"></div>
+    </div>
 
   </div>
-  
-  <div class="row">
-    <div class="col-sm-7 mx-auto">
-        ${this.seatsGrid ? this.seatsGrid : ''}
-    </div>
-  </div>
+
   <div class="row">
     <div class="col-sm-7 mx-auto py-4">
       <button role="button" data-dismiss="modal" aria-label="Close" class="btn btn-secondary" >Avbryt</button>
