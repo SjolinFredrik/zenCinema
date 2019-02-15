@@ -3,16 +3,13 @@ class StartPage extends Component {
   constructor(){
     super();
     this.addRoute('/', 'Start'); 
-    //this.today = new Date().toString().slice(0,10);
     this.today = new Date().toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'})
-
     this.getFilmsFromShowings();
   }
 
   async showListForSeveralDaysFromToday(days) {
     let diffTime = days * 24 * 60 * 60 * 1000;
     let lastDay = new Date().getTime() + diffTime;
-    //this.lastDay = new Date(lastDay).toString().slice(0,10);
     this.lastDay = new Date(lastDay).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'})
     let actualShowings = await Showing.find(`.find({date: {$lte: ${lastDay}} }).populate('saloon').populate('film').exec()`);
     return actualShowings;

@@ -40,6 +40,7 @@ class Message extends Component {
 
   removeMe() {
     this.baseEl.remove();
+    window.location.assign('/');
     this.render();
   }
 }

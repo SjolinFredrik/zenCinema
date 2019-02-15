@@ -1,17 +1,10 @@
-.ticketQuantity {
-  width: 50px;
-}
-
-.film-page-content {
-  .ticketQuantity {
-    display: none;
-  }
-}
-
 .booking-system {
   .ticket-price {
-    margin-bottom: 7px;
-    margin-right: 10px;
-    display: inline-block;
+    .quantity {
+      font-size: 25px;
+    }
+    .fas {
+      cursor: pointer;
+    }
   }
 }
