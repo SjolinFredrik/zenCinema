@@ -28,14 +28,15 @@
       margin: 0 auto;
       display: block;
     }
-    @include media-breakpoint-only(xs){
-      .btn-block-xs-only {
+    @include media-breakpoint-down(sm){
+      .btn-block-sm-down {
       display: block;
       width: 100%;
       }
     }
-    .tickets-btn {
+    .tickets-btn, .trailer-btn {
       min-width: 150px;
+      // border-radius: 100px;
 
     }
     dd {
