@@ -4,14 +4,14 @@
 
     ${this.film ? `
       <div class="row align-items-center justify-content-center no-gutters">
-        <div class="col-sm-6 show-info" style="background-image: url(/images/movies/${this.film.images[1]})">
+        <div class="col-lg-6 show-info" style="background-image: url(/images/movies/${this.film.images[1]})">
           <div class="drop"></div>
 
-          <dl class="col-sm-6 mx-auto animated slideInUp ">
+          <dl class="col-md-6 mx-auto animated slideInUp ">
               <dt>${this.film.title}</dt>
               <dd>${Math.floor(this.film.length/60)} tim ${this.film.length%60} min | ${this.film.genre}</dd>
               <dd>Salong: ${this.saloonName}</dd>
-              <dd>tid: ${this.showingDate ? this.showingDate : ''}</dd>
+              <dd>Tid: ${this.showingDate ? this.showingDate : ''} | ${this.time}</dd>
             </dl>` : ''}
         </div>
           

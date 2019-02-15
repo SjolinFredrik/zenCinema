@@ -38,7 +38,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: transparentize(#000000, .35);
+  background-color: transparentize(#000000, .2);
   z-index: 50;
 }
 
@@ -56,15 +56,29 @@
   border-style: solid;
   width: 0;
   height: 0;
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
   &.left-angle {
     left: -2.5%;
     border-width: 20rem 20rem 0 0;
     border-color:  $accent-dark transparent  $accent-dark transparent;
+    @include media-breakpoint-down(md) {
+      left: 0;
+    }
   }
   &.right-angle {
     right: -2.5%;
     border-width: 0 20rem 20rem 0;
-    border-color: transparent $accent-dark  transparent $accent-dark;    
+    border-color: transparent $accent-dark  transparent $accent-dark;
+    @include media-breakpoint-down(md) {
+      right: 0;
+    }  
   }
 }
 
+.film-page-content {
+    .a-over {
+    display: none;
+  }
+}
