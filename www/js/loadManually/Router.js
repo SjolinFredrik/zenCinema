@@ -58,6 +58,12 @@ class Router {
   static registerRoute(route) {
     Router.routes.push(route);
   }
+
+  static goto(path){
+    history.pushState(null, null, path);
+    this.instance.setPath(path);
+    this.instance.mainInstance.render();
+  }
   
 }
 

@@ -2,16 +2,25 @@ class FilmPageContent extends Component {
   constructor(filmId) {
     super();
     this.filmId = filmId;
-    this.showFilmInfo(this.filmId).then(film => {
-      this.film = film;
-      this.trailer = new Trailer(film);
+    this.bookingPage = new BookingPage();
+    Promise.all([
+      this.showFilmInfo(this.filmId),
+      this.showingsPopulatedFilms(this.filmId),
+      this.getPrices(),
+    ]).then(data => {
+      this.film = data[0];
+      this.trailer = new Trailer(this.film);
+      this.filmShowings = data[1];
+      const prices = data[2];
+
+      for (let i = 0; i < this.filmShowings.length; i++) {
+        let showing = this.filmShowings[i];
+        showing.setBookingAction(() => this.bookingPage.createBookingSystem(showing._id));
+        showing.setPrices(prices);
+      }
+
       this.render();
-    })
-    .then(this.showingsPopulatedFilms(this.filmId).then((data) => {
-      this.filmShowings = data;
-      this.render();
-    })
-    );    
+    });
   }
 
   async showingsPopulatedFilms(filmId) {
@@ -21,5 +30,10 @@ class FilmPageContent extends Component {
 
   async showFilmInfo(filmId) {
     return await Film.find(filmId);
+  }
+  
+  async getPrices() {
+    let prices = await TicketPrice.find();
+    return prices;
   }
 }

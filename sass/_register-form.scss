@@ -19,6 +19,10 @@ section.registerPage {
           font-weight: bold;
         }
       }
+      .error-msg, .email-invalid, .email-exists, .invalid-firstname, .invalid-lastname, .invalid-password, .password-mismatch {
+        display: none;
+        color: red;
+      }
     }
   }
 }
