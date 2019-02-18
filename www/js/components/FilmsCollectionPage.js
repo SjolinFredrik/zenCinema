@@ -7,6 +7,7 @@ class FilmsCollectionPage extends Component {
       this.filmPosters = filmPosters;
       this.render();
     });
+    this.filmCarousel = new FilmCarousel();
     
   }
   async loadInFilms(){
