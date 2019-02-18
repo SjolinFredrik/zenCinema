@@ -3,6 +3,7 @@ class SeatsGrid extends Component {
     super();
     this.schema = schema;
     this.takenSeats = takenSeats;
+    this.hoveredSeats = [];
     this.grid = this.createGrid();
   }
 
@@ -33,10 +34,16 @@ class SeatsGrid extends Component {
     if (numOfTickets > seatNr) {
       for (let i = seatNr; i >= 1; i--) {
         this.baseEl.find(`#${rowNr}-${i}`).addClass('invalid-seats');
+        this.hoveredSeats = [];
       }
     } else {
       for (let i = seatNr; i > seatNr - numOfTickets; i--) {
-        this.baseEl.find(`#${rowNr}-${i}`).addClass('hovered-seats');
+        let classes = this.baseEl.find(`#${rowNr}-${i}`).attr('class');
+        let alreadyChosen = classes.includes('chosen-seats');
+        if (!alreadyChosen) {
+          this.baseEl.find(`#${rowNr}-${i}`).addClass('hovered-seats');
+        }
+        this.hoveredSeats.push(rowNr + '-' + i);
       }
     }
 
@@ -50,12 +57,30 @@ class SeatsGrid extends Component {
     if (numOfTickets > seatNr) {
       for (let i = seatNr; i >= 1; i--) {
         this.baseEl.find(`#${rowNr}-${i}`).removeClass('invalid-seats');
+        this.hoveredSeats = [];
       }
     }
     else {
       for (let i = seatNr; i > seatNr - numOfTickets; i--) {
         this.baseEl.find(`#${rowNr}-${i}`).removeClass('hovered-seats');
+        this.hoveredSeats = [];
       }
+    }
+  }
+
+  chooseSeats() {
+    if (this.hoveredSeats.length === 0) {
+      alert('Fel placering!');
+    }
+    else {
+      this.baseEl.find('.seat').removeClass('chosen-seats');
+      this.chosenSeats = [];
+      this.chosenSeats = this.hoveredSeats;
+      for (let seat of this.chosenSeats) {
+        this.baseEl.find(`#${seat}`).addClass('chosen-seats').removeClass('hovered-seats');
+      }
+
+      console.log(this.chosenSeats);
     }
   }
 

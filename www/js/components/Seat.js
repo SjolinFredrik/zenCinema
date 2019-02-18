@@ -3,7 +3,8 @@ class Seat extends Component {
     super();
     this.addEvents({
       'mouseenter .ghost-div': 'hoverMe',
-      'mouseleave .ghost-div': 'unhoverMe'
+      'mouseleave .ghost-div': 'unhoverMe',
+      'click .ghost-div': 'clickMe'
     });
     this.name = name;
     this.seatsGrid = seatsGrid;
@@ -16,6 +17,10 @@ class Seat extends Component {
 
   unhoverMe() {
     this.seatsGrid.unhoverSeats($(this), Store.numOfTickets);
+  }
+
+  clickMe() {
+    this.seatsGrid.chooseSeats();
   }
 
 }
