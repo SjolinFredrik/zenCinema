@@ -36,8 +36,7 @@
     }
     .tickets-btn, .trailer-btn {
       min-width: 150px;
-      // border-radius: 100px;
-
+      z-index: 320;
     }
     dd {
       color: $secondary;
@@ -52,5 +51,14 @@
     .about-film {
       font-size: 0.9rem;
     }
+  }
+}
+
+.film-page-content {
+  .film-page-btns {
+    display: block;
+  }
+  .start-page-btns {
+    display: none;
   }
 }
