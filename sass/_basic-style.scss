@@ -1,4 +1,4 @@
-body {
+body > div{
     font-family: 'Roboto', sans-serif;
     background-color: $primary;
     color: $secondary;
@@ -36,6 +36,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
+    z-index: 1000;
     &:hover {
         background-color: transparentize($primary, .7);
     }

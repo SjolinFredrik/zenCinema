@@ -5,15 +5,15 @@ class Trailer extends Component {
     this.addEvents({
       'click .trailer-close': 'trailerClose'
     });
-  }  
+  }
 
   trailerClose() {
     //Stop Video
     $('#trailerModal').on('hidden.bs.modal', function (e) {
-    // do something...
-    $('#trailerModal iframe').attr("src", $('#trailerModal iframe').attr("src"));
+      // do something...
+      $('#trailerModal iframe').attr("src", $('#trailerModal iframe').attr("src"));
 
-  });
+    });
   }
 }
  

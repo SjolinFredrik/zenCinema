@@ -5,7 +5,7 @@ class BookingSystem extends Component {
     this.ticketSelection = new TicketSelection();
     this.checkLogin().then(login => {
       if(login.loggedIn) {
-        this.loggedInUser = login;
+        this.loggedInUser = login.user;
       }
       else {
         return;
@@ -26,6 +26,7 @@ class BookingSystem extends Component {
           const takenSeats = data[2];
 
           this.saloonSchema = saloonSchemaData.seatsPerRow;
+          this.saloonName = saloonSchemaData.name;
           this.film = filmData;
           this.takenSeats = takenSeats;
           this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats);
@@ -106,7 +107,7 @@ class BookingSystem extends Component {
       let number = await this.generateBookingNumber();
 
       this.newBooking = new Booking({
-        "customer": this.loggedInUser,
+        "customer": this.loggedInUser._id,
         "show": this.showing._id,
         "seats": ['5-5', '5-6'],
         "bookingNumber": number,

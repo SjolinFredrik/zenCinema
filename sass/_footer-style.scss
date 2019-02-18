@@ -1,0 +1,12 @@
+footer {
+  .container-fluid {
+    background-color: $primary;
+    .footer-heading {
+      font-size: 1.3em;
+    }
+    a {
+      color: $secondary;
+      text-decoration: none;
+    }
+  }
+}
