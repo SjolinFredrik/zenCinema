@@ -1,6 +1,6 @@
 .film-collection {
-  background-color: #2d3436;
-  background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+  background: #000;
+  box-shadow: $main-shadow;
   .film-carousel{
     .carousel-item h5 {
       letter-spacing: .15rem;
