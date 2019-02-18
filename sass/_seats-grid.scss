@@ -30,6 +30,7 @@
   }
   .seat {
     display: inline-block;
+    position: relative;
     background-color: $accent-light;
     border-radius: 3px 3px 12px 12px;
     padding: 7px 0;
@@ -45,12 +46,34 @@
     padding: 8px 10px;
     width: auto;    
   }
-    &:hover {
-      background-color: $primary;
+    &.hovered-seats {
+      background-color: #fff;
     }
+    &.invalid-seats {
+      background-color: red;
+    }
+    &.chosen-seats {
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {
+      0% { opacity: 1; }
+      50% { background-color: #fff; }
+      100% { opacity: 1; }
+    }
+    /* &:hover {
+      background-color: $accent-dark;
+    } */
     &.taken {
       cursor: default;
       background-color: $primary;
+    }
+    .ghost-div {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
     }
   }
 }
