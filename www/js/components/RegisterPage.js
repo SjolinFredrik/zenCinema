@@ -44,7 +44,7 @@ class RegisterPage extends Component {
       return false;
     }
     let regEx = /\w\w+@\w\w+\.\w\w+/;
-    if (!regEx.test(email) && email === '') {
+    if (!regEx.test(email)) {
       this.baseEl.find('.email-invalid').show();
       return false;
     }
