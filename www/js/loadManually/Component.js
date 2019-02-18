@@ -2,6 +2,7 @@ class Component extends REST {
 
   constructor(props){
     super(props);
+    this._props = props;
     this.addUniqueId();
     this.addRenderMethodToArrays();
     // Replace render method
