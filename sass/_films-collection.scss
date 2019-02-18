@@ -1,0 +1,11 @@
+.film-collection {
+  .film-poster{
+
+    .film-poster-content{
+      border-radius: 8px;
+      &:hover{
+        background-color: transparentize($primary, .3)
+      }
+    }
+  }
+}
