@@ -25,6 +25,7 @@ class TicketPrice extends Component {
       Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
       this.ticketSelection.grid.unhover();
       this.ticketSelection.grid.render();
+      Store.chosenSeats.length = 0;
       this.ticketSelection.bookingSummary.render();
       this.render();
     }
@@ -38,6 +39,7 @@ class TicketPrice extends Component {
       Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
       this.ticketSelection.grid.unhover();
       this.ticketSelection.grid.render();
+      Store.chosenSeats.length = 0;
       this.ticketSelection.bookingSummary.render();
       this.render();
     }

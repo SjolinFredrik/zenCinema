@@ -80,8 +80,7 @@ class SeatsGrid extends Component {
         this.baseEl.find(`#${seat}`).removeClass('hovered-seats');
       }
       this.chosenSeats.length = 0;
-      Store.chosenSeats = this.chosenSeats;
-      this.bookingSum.render();
+      Store.chosenSeats.length = 0;
     }
     this.render();
   }
