@@ -2,8 +2,7 @@ class BookingSystem extends Component {
   constructor(showingId) {
     super();
     this.showingId = showingId;
-    this.ticketSelection = new TicketSelection();
-    this.ticketSelection.totalCost();
+    
     this.reservedSeats = ['3-5', '3-6'];
     this.checkLogin().then(login => {
       if(login.loggedIn) {
@@ -33,7 +32,13 @@ class BookingSystem extends Component {
           this.takenSeats = takenSeats;
           this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats);
           this.bookingSummary = new BookingSummary(this);
+          this.ticketSelection = new TicketSelection(this.bookingSummary);
+
+          // setInterval(() => {
+          //   this.bookingSummary.render();
+          // }, 1000);
           console.log(this.bookingSummary, 'my booking Summary');
+
           this.render();
         });
       });
@@ -88,7 +93,7 @@ class BookingSystem extends Component {
     return number;
   }
 
-  // totalCost() {
+  // static totalCost() {
   //   let totalCost = 0;
   //   let ticketType = '';
   //   let ticketsCost = 0;
@@ -98,7 +103,7 @@ class BookingSystem extends Component {
   //     ticketsCost = parseInt(ticketType.price) * parseInt(ticketsQuantity);
   //     totalCost = totalCost + ticketsCost;
   //   }
-  //   this.totalCost = totalCost;
+  //   return totalCost;
   // }
 
   async checkLogin() {
@@ -107,7 +112,6 @@ class BookingSystem extends Component {
 
   async saveBooking() {
     if (this.loggedInUser) {
-      let totalCost = this.ticketSelection.totalCost();
       let number = await this.generateBookingNumber();
 
       this.newBooking = new Booking({
@@ -115,7 +119,7 @@ class BookingSystem extends Component {
         "show": this.showing._id,
         "seats": Store.chosenSeats,
         "bookingNumber": number,
-        "totalCost": totalCost + " SEK"
+        "totalCost": Store.reservedTickets + " SEK"
       });
 
       await this.newBooking.save();

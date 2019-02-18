@@ -6,6 +6,6 @@
       <dd>Salong: ${this.saloonName}</dd>
       <dd>Tid: ${this.showingDate ? this.showingDate : ''} | ${this.time}</dd>
       <dd>Bokat platser: ${this.reservedSeats.join(', ')}</dd>
-      <dd>Totalt priset: </dd>
+      <dd>Totalt priset: ${Store.reservedTickets ? Store.reservedTickets : 'Välj biljetter'}</dd>
   </dl>
 </div>
