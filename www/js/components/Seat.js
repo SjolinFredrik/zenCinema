@@ -21,6 +21,7 @@ class Seat extends Component {
 
   clickMe() {
     this.seatsGrid.chooseSeats();
+    this.chosen = true;
   }
 
 }

@@ -1,10 +1,11 @@
 class TicketSelection extends Component {
-  constructor(bookingSum) {
+  constructor(bookingSum,grid) {
     super();
     this.tickets = [];
     this.maxTickets = 8;
     this.numOfTickets = 2;
     this.bookingSummary = bookingSum;
+    this.grid = grid;
     Store.numOfTickets = this.numOfTickets;
     this.setTickets().then(data => {
       for (let i = 0; i < data.length; i++) {

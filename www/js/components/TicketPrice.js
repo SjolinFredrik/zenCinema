@@ -22,12 +22,10 @@ class TicketPrice extends Component {
       this.ticketSelection.numOfTickets--;
       Store.numOfTickets--;
       this.ticketQuantity--;
-      console.log(Store.numOfTickets);
       Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
-      console.log(Store.chosenSeats, 'seats');
-
+      this.ticketSelection.grid.unhover();
+      this.ticketSelection.grid.render();
       this.ticketSelection.bookingSummary.render();
-
       this.render();
     }
   }
@@ -37,10 +35,9 @@ class TicketPrice extends Component {
       this.ticketSelection.numOfTickets++;
       Store.numOfTickets++;
       this.ticketQuantity++;
-      console.log(Store.numOfTickets);
-
       Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
-      console.log(Store.chosenSeats, 'seats');
+      this.ticketSelection.grid.unhover();
+      this.ticketSelection.grid.render();
       this.ticketSelection.bookingSummary.render();
       this.render();
     }

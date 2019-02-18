@@ -2,8 +2,6 @@ class BookingSystem extends Component {
   constructor(showingId) {
     super();
     this.showingId = showingId;
-    
-    this.reservedSeats = ['3-5', '3-6'];
     this.checkLogin().then(login => {
       if(login.loggedIn) {
         this.loggedInUser = login.user;
@@ -32,7 +30,7 @@ class BookingSystem extends Component {
           this.takenSeats = takenSeats;
           this.bookingSummary = new BookingSummary(this);
           this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats, this.bookingSummary);
-          this.ticketSelection = new TicketSelection(this.bookingSummary);
+          this.ticketSelection = new TicketSelection(this.bookingSummary, this.seatsGrid);
           this.render();
         });
       });
@@ -108,12 +106,17 @@ class BookingSystem extends Component {
       this.message = new Message('newBooking', this.newBooking);
       this.render();
       this.newBooking = '';
+      Store.chosenSeats.length = 0;
+          
+
     }
     else if (Store.chosenSeats === undefined) {
-      window.alert('Choose seats!');
+      this.message = new Message('chooseSeats');
+      this.render();
     }
-    else if (Store.reservedTickets === undefined || Store.reservedTickets === 0 || Store.chosenSeats.length !== Store.numOfTickets) {
-      window.alert('Choose tickets');
+    else if (Store.reservedTickets === undefined || Store.reservedTickets === 0) {
+      this.message = new Message('chooseTickets');
+      this.render();
     }
     else if(!this.loggedInUser) {
       this.message = new Message('mustLogIn');
