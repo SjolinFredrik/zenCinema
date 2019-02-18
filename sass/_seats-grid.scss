@@ -24,10 +24,18 @@
       padding: 4px 6px;    
     }
     &.hovered-seats {
-      background-color: $accent-dark;
+      background-color: #fff;
     }
     &.invalid-seats {
       background-color: red;
+    }
+    &.chosen-seats {
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {
+      0% { opacity: 1; }
+      50% { background-color: #fff; }
+      100% { opacity: 1; }
     }
     /* &:hover {
       background-color: $accent-dark;
