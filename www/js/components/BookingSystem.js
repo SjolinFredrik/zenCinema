@@ -3,6 +3,8 @@ class BookingSystem extends Component {
     super();
     this.showingId = showingId;
     this.ticketSelection = new TicketSelection();
+    this.ticketSelection.totalCost();
+    this.reservedSeats = ['3-5', '3-6'];
     this.checkLogin().then(login => {
       if(login.loggedIn) {
         this.loggedInUser = login.user;
@@ -14,7 +16,7 @@ class BookingSystem extends Component {
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
-        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', { weekday: 'short', month: 'long', day: 'numeric' });
+        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', { weekday: 'long', month: 'long', day: 'numeric' });
         this.saloon = this.showing.saloon;
         this.film = this.showing.film;
         this.time = this.showing.time;
@@ -30,6 +32,8 @@ class BookingSystem extends Component {
           this.film = filmData;
           this.takenSeats = takenSeats;
           this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats);
+          this.bookingSummary = new BookingSummary(this);
+          console.log(this.bookingSummary, 'my booking Summary');
           this.render();
         });
       });
@@ -84,18 +88,18 @@ class BookingSystem extends Component {
     return number;
   }
 
-  async totalCost() {
-    let totalCost = 0;
-    let ticketType = '';
-    let ticketsCost = 0;
-    for (let i = 0; i < this.ticketSelection.tickets.length; i++) {
-      ticketType = this.ticketSelection.tickets[i];
-      let ticketsQuantity = ticketType.baseEl.find('.ticketQuantity').text();
-      ticketsCost = parseInt(ticketType.price) * parseInt(ticketsQuantity);
-      totalCost = totalCost + ticketsCost;
-    }
-    return totalCost;
-  }
+  // totalCost() {
+  //   let totalCost = 0;
+  //   let ticketType = '';
+  //   let ticketsCost = 0;
+  //   for (let i = 0; i < this.ticketSelection.tickets.length; i++) {
+  //     ticketType = this.ticketSelection.tickets[i];
+  //     let ticketsQuantity = ticketType.baseEl.find('.ticketQuantity').text();
+  //     ticketsCost = parseInt(ticketType.price) * parseInt(ticketsQuantity);
+  //     totalCost = totalCost + ticketsCost;
+  //   }
+  //   this.totalCost = totalCost;
+  // }
 
   async checkLogin() {
     return await Login.find();
@@ -103,13 +107,13 @@ class BookingSystem extends Component {
 
   async saveBooking() {
     if (this.loggedInUser) {
-      let totalCost = await this.totalCost();
+      let totalCost = this.ticketSelection.totalCost();
       let number = await this.generateBookingNumber();
 
       this.newBooking = new Booking({
         "customer": this.loggedInUser._id,
         "show": this.showing._id,
-        "seats": ['5-5', '5-6'],
+        "seats": this.reservedSeats,
         "bookingNumber": number,
         "totalCost": totalCost + " SEK"
       });
@@ -125,5 +129,4 @@ class BookingSystem extends Component {
       this.render();
     }
   }
-
 }

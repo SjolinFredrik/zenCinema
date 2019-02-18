@@ -8,6 +8,9 @@ class TicketSelection extends Component {
       for (let i = 0; i < data.length; i++) {
         let ticketData = data[i];
         let ticket = new TicketPrice(ticketData, this);
+        if (ticket.name === 'Ordinarie') {
+          ticket.ticketQuantity = 2;
+        }
         this.tickets.push(ticket);
         this.render();
       }
