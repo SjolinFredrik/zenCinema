@@ -13,6 +13,10 @@ section.registerPage {
           font-size: 36px;
         }
     .login-wrapper {
+      .invalid-input {
+        visibility: hidden;
+        &.on{visibility: visible;}
+      }
       p {
         margin: 0;
       }
@@ -24,13 +28,23 @@ section.registerPage {
           font-weight: bold;
         }
       }
-      .error-msg, .email-invalid, .email-exists, .invalid-firstname, .invalid-lastname, .invalid-password, .password-mismatch {
-        display: none;
-        color: red;
-      }
       .btn {
         font-family: $courgette-cursive, sans-serif;
         font-size: 20px;
+      }
+    }
+    .form-group {
+      position: relative;
+      text-align: center;
+      margin: 3px 0px 3px 0px;
+
+      .invalid-input {
+        position: absolute;
+        bottom: -5px;
+        width: 100%;
+        text-align: center;
+        color: red;
+        font-size: .75rem;
       }
     }
   }
