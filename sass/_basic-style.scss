@@ -5,7 +5,9 @@ body > div{
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: #000;
+    //background-color: #000;
+    background: #000 url(/images/movie-curtain.png) fixed;
+    background-size: cover;
     main {
         flex: 1;
     }
@@ -17,16 +19,9 @@ body > div{
 // }
 
 .welcome{
-    text-align: center;
-    h1 {
-        background:  url('/images/tickets.png') 22% no-repeat;
-        background-size: 80px;
-        color: $secondary;
-        font-size: 5rem;
-        line-height: 80vh;
-        font-family: $courgette-cursive;
-        @include flight-in(1s);
-    }
+  text-align: center;
+  background-color: black;
+  box-shadow: 0 0 400px 150px black;
 }
 
 .a-over {
