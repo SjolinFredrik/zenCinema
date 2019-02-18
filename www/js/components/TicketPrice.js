@@ -9,14 +9,19 @@ class TicketPrice extends Component {
     this.ticketSelection = ticketSelection;
     this.name = data.name;
     this.price = data.price;
-    this.ticketQuantity = 0;
+    if (this.name === 'Ordinarie') {
+      this.ticketQuantity = 2;
+    }
+    else {
+      this.ticketQuantity = 0;
+    }
   }
 
   removeTicket() {
     if (this.ticketQuantity > 0) {
       this.ticketSelection.numOfTickets--;
+      Store.numOfTickets--;
       this.ticketQuantity--;
-      console.log(this.ticketSelection.numOfTickets);
       this.render();
     }
   }
@@ -24,8 +29,8 @@ class TicketPrice extends Component {
   addTicket() {
     if (this.ticketSelection.numOfTickets < this.ticketSelection.maxTickets) {
       this.ticketSelection.numOfTickets++;
+      Store.numOfTickets++;
       this.ticketQuantity++;
-      console.log(this.ticketSelection.numOfTickets);
       this.render();
     }
   }

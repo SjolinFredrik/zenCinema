@@ -3,7 +3,8 @@ class TicketSelection extends Component {
     super();
     this.tickets = [];
     this.maxTickets = 8;
-    this.numOfTickets = 0;
+    this.numOfTickets = 2;
+    Store.numOfTickets = this.numOfTickets;
     this.setTickets().then(data => {
       for (let i = 0; i < data.length; i++) {
         let ticketData = data[i];

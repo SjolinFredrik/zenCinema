@@ -113,7 +113,7 @@ class BookingSystem extends Component {
       this.newBooking = new Booking({
         "customer": this.loggedInUser._id,
         "show": this.showing._id,
-        "seats": this.reservedSeats,
+        "seats": Store.chosenSeats,
         "bookingNumber": number,
         "totalCost": totalCost + " SEK"
       });
