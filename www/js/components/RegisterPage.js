@@ -7,9 +7,10 @@ class RegisterPage extends Component {
     this.addRoute('/register', 'Register');
     this.addEvents({
       'click .saveNewUser-btn': 'saveUser'
-
     });
+    
   }
+
   async saveUser() {
 
     let validEmail = await this.validateEmailInput();
