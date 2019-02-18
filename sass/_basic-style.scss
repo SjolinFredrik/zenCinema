@@ -1,20 +1,20 @@
-body {
+body > div{
     font-family: 'Roboto', sans-serif;
     background-color: $primary;
     color: $secondary;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-
+    background-color: #000;
     main {
         flex: 1;
     }
 }
 
-::selection {
-    background-color: transparent;
-    color: $secondary;
-}
+// ::selection {
+//     background-color: transparent;
+//     color: $secondary;
+// }
 
 .welcome{
     text-align: center;
@@ -36,6 +36,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
+    z-index: 300;
     &:hover {
         background-color: transparentize($primary, .7);
     }

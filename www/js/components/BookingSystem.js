@@ -3,7 +3,14 @@ class BookingSystem extends Component {
     super();
     this.showingId = showingId;
     this.ticketSelection = new TicketSelection();
-    this.loggedInUser = window.localStorage.getItem('loggedInUser');
+    this.checkLogin().then(login => {
+      if(login.loggedIn) {
+        this.loggedInUser = login.user;
+      }
+      else {
+        return;
+      }
+    });
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
@@ -19,6 +26,7 @@ class BookingSystem extends Component {
           const takenSeats = data[2];
 
           this.saloonSchema = saloonSchemaData.seatsPerRow;
+          this.saloonName = saloonSchemaData.name;
           this.film = filmData;
           this.takenSeats = takenSeats;
           this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats);
@@ -82,11 +90,15 @@ class BookingSystem extends Component {
     let ticketsCost = 0;
     for (let i = 0; i < this.ticketSelection.tickets.length; i++) {
       ticketType = this.ticketSelection.tickets[i];
-      let ticketsQuantity = ticketType.baseEl.find('input').val();
-      ticketsCost = parseInt(ticketType.price) * ticketsQuantity;
+      let ticketsQuantity = ticketType.baseEl.find('.ticketQuantity').text();
+      ticketsCost = parseInt(ticketType.price) * parseInt(ticketsQuantity);
       totalCost = totalCost + ticketsCost;
     }
     return totalCost;
+  }
+
+  async checkLogin() {
+    return await Login.find();
   }
 
   async saveBooking() {
@@ -94,18 +106,8 @@ class BookingSystem extends Component {
       let totalCost = await this.totalCost();
       let number = await this.generateBookingNumber();
 
-      let customer = await Login.find();
-      let customerId
-      if (!customer.loggedIn) {
-        customerId = '5c51a472fe47141770028de9'
-      }
-      else {
-        customerId = customer.user._id;
-      }
-
-
       this.newBooking = new Booking({
-        "customer": customerId,
+        "customer": this.loggedInUser._id,
         "show": this.showing._id,
         "seats": Store.chosenSeats,
         "bookingNumber": number,
@@ -118,7 +120,10 @@ class BookingSystem extends Component {
       this.render();
       this.newBooking = '';
     }
-
+    else {
+      this.message = new Message('mustLogIn');
+      this.render();
+    }
   }
 
 }

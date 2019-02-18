@@ -15,7 +15,6 @@ class NavLogin extends Component {
     if (result.loggedIn) {
       this.loggedIn = true;
       this.loggedInUser = result.user;
-      window.localStorage.setItem('loggedInUser', this.loggedInUser._id);
       this.render();
     }
   }
@@ -36,7 +35,6 @@ class NavLogin extends Component {
     if (result.loggedIn) {
       this.loggedIn = true;
       this.loggedInUser = result.user;
-      window.localStorage.setItem('loggedInUser', this.loggedInUser._id);
       this.render();
     }
   }

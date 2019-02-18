@@ -1,19 +1,9 @@
 class Showing extends Component {
   constructor(data) {
-    super();
-    this.getMyData;
-    this._id = data._id;
-    this.film = data.film;
-    this.time = data.time;
-    this.date = data.date;
-    this.saloon = data.saloon;
-    this.getPrices().then(data =>{
-      this.prices = data;
-      this.render();
-    });
+    super(data);
 
     this.addEvents({
-      'click .book-film': 'catchShowingId'
+      'click .book-film': 'launchModal'
     });
   }
 
@@ -21,14 +11,18 @@ class Showing extends Component {
     return new Date(this.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
   }
 
-  
-  catchShowingId() {
-    App.showingId = this._id;
-    return App.showingId;
+  setPrices(prices) {
+    this.prices = prices;
+    this.render();
   }
 
-  async getPrices() {
-    let prices = await TicketPrice.find();
-    return prices;
+  setBookingAction(actionFn) {
+    this.bookingAction = actionFn;
+  }
+  
+  launchModal() {
+    if (this.bookingAction !== undefined) {
+      this.bookingAction();
+    }
   }
 }
