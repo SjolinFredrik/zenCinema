@@ -8,6 +8,10 @@ section.registerPage {
       border-radius: 3px;
       background-color: black;
       box-shadow: 0 0 400px 150px black;
+        h3 {
+          font-family: $courgette-cursive, sans-serif;
+          font-size: 36px;
+        }
     .login-wrapper {
       p {
         margin: 0;
@@ -23,6 +27,10 @@ section.registerPage {
       .error-msg, .email-invalid, .email-exists, .invalid-firstname, .invalid-lastname, .invalid-password, .password-mismatch {
         display: none;
         color: red;
+      }
+      .btn {
+        font-family: $courgette-cursive, sans-serif;
+        font-size: 20px;
       }
     }
   }
