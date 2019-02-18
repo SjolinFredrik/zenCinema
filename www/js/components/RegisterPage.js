@@ -7,9 +7,10 @@ class RegisterPage extends Component {
     this.addRoute('/register', 'Register');
     this.addEvents({
       'click .saveNewUser-btn': 'saveUser'
-
     });
+    
   }
+
   async saveUser() {
 
     let validEmail = await this.validateEmailInput();
@@ -43,7 +44,7 @@ class RegisterPage extends Component {
       return false;
     }
     let regEx = /\w\w+@\w\w+\.\w\w+/;
-    if (!regEx.test(email) && email === '') {
+    if (!regEx.test(email)) {
       this.baseEl.find('.email-invalid').show();
       return false;
     }

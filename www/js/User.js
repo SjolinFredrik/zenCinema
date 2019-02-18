@@ -10,7 +10,6 @@ class User extends REST {
     });
 
     await user.save();
-    console.log(await user.save());
   }
 
   
