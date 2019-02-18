@@ -13,11 +13,8 @@ class TicketSelection extends Component {
         this.tickets.push(ticket);
         this.render();
       }
-      console.log(this.tickets);
-
       Store.reservedTickets = this.totalCost(this.tickets);
       this.bookingSummary.render();
-      console.log(Store.reservedTickets, 'default');
       this.render();
 
     });
@@ -36,9 +33,7 @@ class TicketSelection extends Component {
         ticketType = tickets[i];
         let ticketQuantity = ticketType.ticketQuantity;
         ticketsCost = parseInt(ticketType.price) * ticketQuantity;
-        console.log(ticketsCost);
         totalCost = totalCost + ticketsCost;
-        console.log(totalCost);
       }
       return totalCost;
     }

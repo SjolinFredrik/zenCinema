@@ -1,9 +1,10 @@
 class SeatsGrid extends Component {
-  constructor(schema, takenSeats) {
+  constructor(schema, takenSeats, bookingSum) {
     super();
     this.schema = schema;
     this.takenSeats = takenSeats;
     this.hoveredSeats = [];
+    this.bookingSum = bookingSum;
     this.grid = this.createGrid();
   }
 
@@ -80,6 +81,7 @@ class SeatsGrid extends Component {
       for (let seat of this.chosenSeats) {
         this.baseEl.find(`#${seat}`).addClass('chosen-seats').removeClass('hovered-seats');
       }
+      this.bookingSum.render();
     }
   }
 

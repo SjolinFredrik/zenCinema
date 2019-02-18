@@ -30,15 +30,9 @@ class BookingSystem extends Component {
           this.saloonName = saloonSchemaData.name;
           this.film = filmData;
           this.takenSeats = takenSeats;
-          this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats);
           this.bookingSummary = new BookingSummary(this);
+          this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats, this.bookingSummary);
           this.ticketSelection = new TicketSelection(this.bookingSummary);
-
-          // setInterval(() => {
-          //   this.bookingSummary.render();
-          // }, 1000);
-          console.log(this.bookingSummary, 'my booking Summary');
-
           this.render();
         });
       });
@@ -93,25 +87,12 @@ class BookingSystem extends Component {
     return number;
   }
 
-  // static totalCost() {
-  //   let totalCost = 0;
-  //   let ticketType = '';
-  //   let ticketsCost = 0;
-  //   for (let i = 0; i < this.ticketSelection.tickets.length; i++) {
-  //     ticketType = this.ticketSelection.tickets[i];
-  //     let ticketsQuantity = ticketType.baseEl.find('.ticketQuantity').text();
-  //     ticketsCost = parseInt(ticketType.price) * parseInt(ticketsQuantity);
-  //     totalCost = totalCost + ticketsCost;
-  //   }
-  //   return totalCost;
-  // }
-
   async checkLogin() {
     return await Login.find();
   }
 
   async saveBooking() {
-    if (this.loggedInUser) {
+    if (this.loggedInUser && Store.chosenSeats !== undefined && Store.reservedTickets !== undefined && Store.reservedTickets !== 0 && Store.chosenSeats.length === Store.numOfTickets) {
       let number = await this.generateBookingNumber();
 
       this.newBooking = new Booking({
@@ -128,7 +109,13 @@ class BookingSystem extends Component {
       this.render();
       this.newBooking = '';
     }
-    else {
+    else if (Store.chosenSeats === undefined) {
+      window.alert('Choose seats!');
+    }
+    else if (Store.reservedTickets === undefined || Store.reservedTickets === 0 || Store.chosenSeats.length !== Store.numOfTickets) {
+      window.alert('Choose tickets');
+    }
+    else if(!this.loggedInUser) {
       this.message = new Message('mustLogIn');
       this.render();
     }
