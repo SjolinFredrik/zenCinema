@@ -9,7 +9,7 @@
   @include clearfix();
 
   &:nth-child(6),
-    &:nth-child(5),{
+    &:nth-child(5){
     margin-left: -70px;
     @include media-breakpoint-down(xs) {
       margin-left: 0px;
@@ -40,12 +40,12 @@
     margin: 3px;
     text-align: center;
     cursor: pointer;
-  @include media-breakpoint-down(xs) {
+    @include media-breakpoint-down(xs) {
     display: table-cell;
     font-size: 0px;
     padding: 8px 10px;
     width: auto;    
-  }
+    }
     &.hovered-seats {
       background-color: #fff;
     }
