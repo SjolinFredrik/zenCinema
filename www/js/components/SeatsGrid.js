@@ -70,17 +70,16 @@ class SeatsGrid extends Component {
 
   chooseSeats() {
     if (this.hoveredSeats.length === 0) {
-      alert('Fel placering!');
+      return;
     }
     else {
       this.baseEl.find('.seat').removeClass('chosen-seats');
       this.chosenSeats = [];
       this.chosenSeats = this.hoveredSeats;
+      Store.chosenSeats = this.chosenSeats;
       for (let seat of this.chosenSeats) {
         this.baseEl.find(`#${seat}`).addClass('chosen-seats').removeClass('hovered-seats');
       }
-
-      console.log(this.chosenSeats);
     }
   }
 
