@@ -33,19 +33,19 @@ class RegisterPage extends Component {
 
   //Regex, word, digits or _ allowed. w+ set no limit in string length
   async validateEmailInput() {
-    this.baseEl.find('.email-exists').hide();
-    this.baseEl.find('.email-invalid').hide();
+    this.baseEl.find('.email-exists').removeClass('on');
+    this.baseEl.find('.email-invalid').removeClass('on');
 
     let email = this.baseEl.find('.email-input').val();
 
     let result = await User.find(`.findOne({email: '${email}'})`);
     if (result) {
-      this.baseEl.find('.email-exists').show();
+      this.baseEl.find('.email-exists').addClass('on');
       return false;
     }
     let regEx = /\w\w+@\w\w+\.\w\w+/;
     if (!regEx.test(email)) {
-      this.baseEl.find('.email-invalid').show();
+      this.baseEl.find('.email-invalid').addClass('on');
       return false;
     }
     return true;
@@ -53,10 +53,10 @@ class RegisterPage extends Component {
 
   //RegEx, password must be between 4 and 15 digits long and include at least one numeric digit.
   validateFormInput() {
-    this.baseEl.find('.invalid-firstname').hide();
-    this.baseEl.find('.invalid-lastname').hide();
-    this.baseEl.find('.invalid-password').hide();
-    this.baseEl.find('.password-mismatch').hide();
+    this.baseEl.find('.invalid-firstname').removeClass('on');
+    this.baseEl.find('.invalid-lastname').removeClass('on');
+    this.baseEl.find('.invalid-password').removeClass('on');
+    this.baseEl.find('.password-mismatch').removeClass('on');
 
     let regEx = /^(?=.*\d).{4,15}$/;
 
@@ -66,16 +66,16 @@ class RegisterPage extends Component {
     let confirmPassword = this.baseEl.find('.passwordConfirm-input').val();
     if (firstName < 2 || lastName < 2 || !regEx.test(password) || password !== confirmPassword) {
       if (firstName.length < 2) {
-        this.baseEl.find('.invalid-firstname').show();
+        this.baseEl.find('.invalid-firstname').addClass('on');
       }
       if (lastName.length < 2) {
-        this.baseEl.find('.invalid-lastname').show();
+        this.baseEl.find('.invalid-lastname').addClass('on');
       }
       if (!regEx.test(password)) {
-        this.baseEl.find('.invalid-password').show();
+        this.baseEl.find('.invalid-password').addClass('on');
       }
       if (password !== confirmPassword) {
-        this.baseEl.find('.password-mismatch').show();
+        this.baseEl.find('.password-mismatch').addClass('on');
       }
       return false;
     }
