@@ -9,7 +9,12 @@ class TicketPrice extends Component {
     this.ticketSelection = ticketSelection;
     this.name = data.name;
     this.price = data.price;
-    this.ticketQuantity = 0;
+    if (this.name === 'Ordinarie') {
+      this.ticketQuantity = 2;
+    }
+    else {
+      this.ticketQuantity = 0;
+    }
   }
 
   removeTicket() {
