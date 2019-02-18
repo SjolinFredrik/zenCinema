@@ -17,10 +17,12 @@ class Seat extends Component {
 
   unhoverMe() {
     this.seatsGrid.unhoverSeats($(this), Store.numOfTickets);
+    
   }
 
   clickMe() {
     this.seatsGrid.chooseSeats();
+    this.chosen = true;
   }
 
 }

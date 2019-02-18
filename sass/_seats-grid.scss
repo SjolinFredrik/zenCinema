@@ -46,6 +46,10 @@
     padding: 8px 10px;
     width: auto;    
     }
+    &.taken {
+      cursor: default;
+      background-color: $primary;
+    }
     &.hovered-seats {
       background-color: #fff;
     }
@@ -59,13 +63,6 @@
       0% { opacity: 1; }
       50% { background-color: #fff; }
       100% { opacity: 1; }
-    }
-    /* &:hover {
-      background-color: $accent-dark;
-    } */
-    &.taken {
-      cursor: default;
-      background-color: $primary;
     }
     .ghost-div {
       position: absolute;

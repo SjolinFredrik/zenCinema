@@ -13,10 +13,10 @@ body > div{
     }
 }
 
-// ::selection {
-//     background-color: transparent;
-//     color: $secondary;
-// }
+::selection {
+    background-color: darken($accent-dark, .5);
+    color: $secondary;
+}
 
 .welcome{
   text-align: center;

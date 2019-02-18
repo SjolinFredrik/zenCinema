@@ -1,9 +1,10 @@
 class SeatsGrid extends Component {
-  constructor(schema, takenSeats) {
+  constructor(schema, takenSeats, bookingSum) {
     super();
     this.schema = schema;
     this.takenSeats = takenSeats;
     this.hoveredSeats = [];
+    this.bookingSum = bookingSum;
     this.grid = this.createGrid();
   }
 
@@ -36,36 +37,52 @@ class SeatsGrid extends Component {
         this.baseEl.find(`#${rowNr}-${i}`).addClass('invalid-seats');
         this.hoveredSeats = [];
       }
-    } else {
+    }
+    else {
       for (let i = seatNr; i > seatNr - numOfTickets; i--) {
         let classes = this.baseEl.find(`#${rowNr}-${i}`).attr('class');
-        let alreadyChosen = classes.includes('chosen-seats');
-        if (!alreadyChosen) {
-          this.baseEl.find(`#${rowNr}-${i}`).addClass('hovered-seats');
+        let alreadyTaken = classes.includes('taken');
+        if (alreadyTaken) {
+          this.baseEl.find(`#${rowNr}-${i}`).addClass('invalid-seats');
         }
-        this.hoveredSeats.push(rowNr + '-' + i);
+        if (!alreadyTaken) {
+          this.baseEl.find(`#${rowNr}-${i}`).addClass('hovered-seats');
+          this.hoveredSeats.push(rowNr + '-' + i);
+        }
+        else if (this.hoveredSeats.length <= numOfTickets) {
+          this.hoveredSeats.length = 0;
+          return;
+        }
       }
     }
-
   }
 
   unhoverSeats(seat, numOfTickets) {
     let hoveredSeat = seat[0].name;
     let rowNr = parseInt(hoveredSeat.split('-')[0]);
     let seatNr = parseInt(hoveredSeat.split('-')[1]);
+    this.baseEl.find('.seat').removeClass('invalid-seats');
+    for (let i = seatNr; i > seatNr - numOfTickets; i--) {
+      this.baseEl.find(`#${rowNr}-${i}`).removeClass('hovered-seats');
+      this.hoveredSeats = [];
+    }
+  }
 
-    if (numOfTickets > seatNr) {
-      for (let i = seatNr; i >= 1; i--) {
-        this.baseEl.find(`#${rowNr}-${i}`).removeClass('invalid-seats');
-        this.hoveredSeats = [];
-      }
+  unhover() {
+    if (this.hoveredSeats.length === 0) {
+      this.baseEl.find('.seat').removeClass('invalid-seats');
+      return;
     }
     else {
-      for (let i = seatNr; i > seatNr - numOfTickets; i--) {
-        this.baseEl.find(`#${rowNr}-${i}`).removeClass('hovered-seats');
-        this.hoveredSeats = [];
+      this.baseEl.find('.seat').removeClass('chosen-seats');
+      this.chosenSeats = this.hoveredSeats;
+      for (let seat of this.chosenSeats) {
+        this.baseEl.find(`#${seat}`).removeClass('hovered-seats');
       }
+      this.chosenSeats.length = 0;
+      Store.chosenSeats.length = 0;
     }
+    this.render();
   }
 
   chooseSeats() {
@@ -74,12 +91,17 @@ class SeatsGrid extends Component {
     }
     else {
       this.baseEl.find('.seat').removeClass('chosen-seats');
+      for (let seat of this.grid) {
+        seat.chosen = false;
+      }
       this.chosenSeats = [];
       this.chosenSeats = this.hoveredSeats;
       Store.chosenSeats = this.chosenSeats;
       for (let seat of this.chosenSeats) {
+        
         this.baseEl.find(`#${seat}`).addClass('chosen-seats').removeClass('hovered-seats');
       }
+      this.bookingSum.render();
     }
   }
 
