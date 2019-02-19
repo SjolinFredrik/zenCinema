@@ -28,7 +28,6 @@ class TicketPrice extends Component {
       if (Store.chosenSeats !== undefined) {
         Store.chosenSeats.length = 0;
       }
-      this.ticketSelection.bookingSummary.render();
       this.render();
     }
   }
@@ -44,7 +43,6 @@ class TicketPrice extends Component {
       if (Store.chosenSeats !== undefined) {
         Store.chosenSeats.length = 0;
       }
-      this.ticketSelection.bookingSummary.render();
       this.render();
     }
   }

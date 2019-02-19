@@ -40,6 +40,7 @@ class BookingSystem extends Component {
     });
   }
 
+
   async showingData(showingId) {
     let showing = await Showing.find(showingId);
     return showing;

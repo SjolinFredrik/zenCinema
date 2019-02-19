@@ -52,15 +52,8 @@ class SeatsGrid extends Component {
           }
           else {
             continue;
-          }
-          
+          }   
         }
-      }
-    }
-
-    if (this.chosenSeats && this.chosenSeats.length > 0) {
-      for (let seat of this.chosenSeats) {
-        seat.chosen = true;
       }
     }
     return hall;
@@ -94,11 +87,13 @@ class SeatsGrid extends Component {
     this.baseEl.find('.seat').removeClass('invalid-seats');
     this.baseEl.find('.seat').removeClass('valid-seats');
     this.hoveredSeats = [];
-    for (let seat of this.chosenSeats){
-      seat.chosen = false;
+
+    for (let row of this.grid) {
+      for (let seat of row.seats) {
+        seat.best = false;
+      }
     }
     this.chosenSeats = [];
-    this.render();
     this.bookingSum.render();
   }
 
@@ -107,8 +102,10 @@ class SeatsGrid extends Component {
       return;
     } else {
       this.baseEl.find('.seat').removeClass('chosen-seats');
-      for (let seat of this.grid) {
-        seat.chosen = false;
+      for (let row of this.grid) {
+        for (let seat of row.seats) {
+          seat.best = false;
+        }
       }
       this.chosenSeats = [];
       this.chosenSeats = this.hoveredSeats;
