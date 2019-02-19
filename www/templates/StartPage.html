@@ -1,18 +1,55 @@
-<section class="company-name container main-container-fade">
+<section class="container main-container-fade">
   <div class="row">
     <div class="col-12 text-center">
       <h1>ZenCinema</h1>
     </div>
-    <section class="col-8">
-      NYHETER/ARTIKLAR
+    <section class="col-12 border border-secondary col-md-6">
+      <h2>Nyheter / artiklar</h2>
+      <section class="row calendar-item">
+        <div class="col-3">
+          Zenpetit
+        </div>
+        <div class="col-3">
+          Yadidada
+        </div>
+        <div class="col-3">
+          1749  
+        </div>
+        <div class="col-3">
+          Boka
+        </div>
+
+        
+      </section>
+      <section class="row calendar-item">
+          <div class="col-3">
+            Zenmongouse
+          </div>
+          <div class="col-3">
+            Yadidada
+          </div>
+          <div class="col-3">
+            1749  
+          </div>
+          <div class="col-3">
+            Boka
+          </div>
+  
+          
+        </section>
     </section>
-    <section class="col-4">
-      KALENDARIUM
+    <section class="col-12 border border-secondary col-md-6 text-left">
+      <h2>Kommande visningar</h2>
+        <section class="row">
+          <!-- ${FilmPageContent.filmShowings} -->
+          ${this.calendarShowing ? this.calendarShowing : ''}
+
+        </section>
+
     </section>
   </div>
 
 
   <!-- <h2 class="my-3">Följande filmer visas från ${this.today} till ${this.lastDay}</h2>
-  <p>Klicka på den film du vill se för att se alla dess kommande visningar</p>
-  ${this.actualFilms ? this.actualFilms : ''} -->
+  <p>Klicka på den film du vill se för att se alla dess kommande visningar</p> -->
 </section>
