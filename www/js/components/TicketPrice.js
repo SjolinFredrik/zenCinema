@@ -23,7 +23,7 @@ class TicketPrice extends Component {
       Store.numOfTickets--;
       this.ticketQuantity--;
       Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
-      this.ticketSelection.grid.unhover();
+      this.ticketSelection.grid.unhoverSeats();
       this.ticketSelection.grid.render();
       if (Store.chosenSeats !== undefined) {
         Store.chosenSeats.length = 0;
@@ -39,7 +39,7 @@ class TicketPrice extends Component {
       Store.numOfTickets++;
       this.ticketQuantity++;
       Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
-      this.ticketSelection.grid.unhover();
+      this.ticketSelection.grid.unhoverSeats();
       this.ticketSelection.grid.render();
       if (Store.chosenSeats !== undefined) {
         Store.chosenSeats.length = 0;

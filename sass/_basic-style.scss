@@ -37,8 +37,10 @@ body > div{
     top: 0;
     left: 0;
     z-index: 300;
-    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    // &:hover {
-    //     background-color: transparentize(#000, .7);
-    // }
+    @include transition(.5s);
+}
+
+.dark-bg-content {
+    background: #000;
+    box-shadow: $main-shadow;
 }
