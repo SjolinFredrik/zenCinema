@@ -90,7 +90,11 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-    if (this.loggedInUser && Store.chosenSeats !== undefined && Store.reservedTickets !== undefined && Store.reservedTickets !== 0 && Store.chosenSeats.length === Store.numOfTickets) {
+    if (this.loggedInUser && 
+      Store.chosenSeats !== undefined && 
+      Store.reservedTickets !== undefined && 
+      Store.reservedTickets !== 0 && 
+      Store.chosenSeats.length === Store.numOfTickets) {
       let number = await this.generateBookingNumber();
 
       this.newBooking = new Booking({
