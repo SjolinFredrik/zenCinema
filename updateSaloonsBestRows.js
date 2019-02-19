@@ -26,6 +26,7 @@ async function updateSaloonsToDb() {
       saloon.bestRows = [4,5];
     }
     if (saloon.name === 'Zenpetit') {
+      saloon.name = 'Zenpetite';
       saloon.bestRows = [3,4];
     }
     await saloon.save();
