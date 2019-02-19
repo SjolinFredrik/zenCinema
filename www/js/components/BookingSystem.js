@@ -110,7 +110,7 @@ class BookingSystem extends Component {
           
 
     }
-    else if (Store.chosenSeats === undefined) {
+    else if (Store.chosenSeats === undefined || Store.chosenSeats.length === 0) {
       this.message = new Message('chooseSeats');
       this.render();
     }
