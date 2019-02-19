@@ -21,7 +21,7 @@ body > div{
 .welcome{
   text-align: center;
   background-color: black;
-  box-shadow: 0 0 400px 150px black;
+  box-shadow: $main-shadow;
   .film-page-btns {
       display: none;
   }
