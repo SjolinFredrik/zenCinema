@@ -1,20 +1,24 @@
 <section class="container main-container-fade">
-  <div class="row">
-    <div class="col-12 text-center">
-      <h1>ZenCinema</h1>
-    </div>
-    <section class="col-12 border border-secondary col-md-6">
+  <div class="row pb-5 pt-3">
+    <section class="col-12 col-md-6">
       <h2>Nyheter / artiklar</h2>
-      
-          
-    </section>
-    <section class="col-12 border border-secondary col-md-6 text-left">
-      <h2>Kommande visningar</h2>
-        <section class="row">
-          <!-- ${FilmPageContent.filmShowings} -->
-          ${this.calendarShowing ? this.calendarShowing : ''}
 
+
+    </section>
+    <section class="col-12 col-md-6">
+      <section class="container-fluid">
+        <section class="row">
+          <section class="col-12 my-5 rounded border border-secondary px-0">
+            <img class="img-fluid" src="/images/zenCoin.jpg" alt="zencoin">
+            <div class="bg-light border-top border-dark text-dark p-3">
+              <h3>ZenCoins!</h3>
+              <p>Snart lanserar vi vår senaste nyhet, ZenCoins! Ni kommer att tjäna ZenCoins genom de bokningar ni gör hos oss. </p>
+            </div>
+          </section>
+          ${this.calendarShowing ? this.calendarShowing : ''}
         </section>
+      </section>
+
 
     </section>
   </div>

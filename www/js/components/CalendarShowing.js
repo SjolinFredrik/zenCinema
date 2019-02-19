@@ -6,7 +6,7 @@ class CalendarShowing extends Component {
   }
 
   async loadShowingData() {
-    this.showingData = await Showing.find(`.find().populate('film').exec()`);
+    this.showingData = await Showing.find(`.find().limit(9).sort({$natural: 1}).populate('film').exec()`);
     this.render();
   }
 }
