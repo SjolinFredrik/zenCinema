@@ -5,7 +5,8 @@ class Message extends Component {
     this.data = data;
     this.chooseHeadingAndText;
     this.addEvents( {
-      'click .close-message': 'removeMe'
+      'click .close-message': 'removeMe',
+      'click .close-and-goto': 'goToIndex'
     });
     
   }
@@ -48,7 +49,11 @@ class Message extends Component {
 
   removeMe() {
     this.baseEl.remove();
-    // window.location.assign('/');
+    this.render();
+  }
+  goToIndex() {
+    this.baseEl.remove();
+    window.location.assign('/');
     this.render();
   }
 }

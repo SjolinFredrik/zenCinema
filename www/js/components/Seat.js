@@ -9,6 +9,7 @@ class Seat extends Component {
     this.name = name;
     this.seatsGrid = seatsGrid;
     this.taken = false;
+    this.best = false;
   }
 
   hoverMe() {

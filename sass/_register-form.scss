@@ -14,24 +14,32 @@ section.registerPage {
     .login-wrapper {
       .invalid-input {
         visibility: hidden;
-        &.on{visibility: visible;}
+
+        &.on {
+          visibility: visible;
+        }
       }
+
       p {
         margin: 0;
       }
+
       .register-link {
-        color: $secondary;      
-        display: inline-block;  
+        color: $secondary;
+        display: inline-block;
+
         &:hover {
           cursor: pointer;
           font-weight: bold;
         }
       }
+
       .btn {
         font-family: $courgette-cursive, sans-serif;
         font-size: 20px;
       }
     }
+
     .form-group {
       position: relative;
       text-align: center;
