@@ -31,41 +31,31 @@ class SeatsGrid extends Component {
     let rowNr = parseInt(hoveredSeat.split('-')[0]);
     let seatNr = parseInt(hoveredSeat.split('-')[1]);
 
-    if (numOfTickets > seatNr) {
-      for (let i = seatNr; i >= 1; i--) {
-        this.baseEl.find(`#${rowNr}-${i}`).addClass('invalid-seats');
-        this.hoveredSeats = [];
-      }
-    } else {
-      for (let i = seatNr; i > seatNr - numOfTickets; i--) {
-        let classes = this.baseEl.find(`#${rowNr}-${i}`).attr('class');
-        let alreadyChosen = classes.includes('chosen-seats');
-        if (!alreadyChosen) {
-          this.baseEl.find(`#${rowNr}-${i}`).addClass('hovered-seats');
-        }
+    for (let i = seatNr; i > seatNr - numOfTickets; i--) {
+      if (i > 0 && !this.takenSeats.includes(rowNr + '-' + i)) {
         this.hoveredSeats.push(rowNr + '-' + i);
+      }
+      else {
+        for (let seat of this.hoveredSeats) {
+          this.baseEl.find(`#${seat}`).addClass('invalid-seats');
+        }
+        this.hoveredSeats = [];
+        break;
+      }
+    }
+
+    if (this.hoveredSeats.length !== 0) {
+      for (let seat of this.hoveredSeats) {
+        this.baseEl.find(`#${seat}`).addClass('valid-seats');
       }
     }
 
   }
 
-  unhoverSeats(seat, numOfTickets) {
-    let hoveredSeat = seat[0].name;
-    let rowNr = parseInt(hoveredSeat.split('-')[0]);
-    let seatNr = parseInt(hoveredSeat.split('-')[1]);
-
-    if (numOfTickets > seatNr) {
-      for (let i = seatNr; i >= 1; i--) {
-        this.baseEl.find(`#${rowNr}-${i}`).removeClass('invalid-seats');
-        this.hoveredSeats = [];
-      }
-    }
-    else {
-      for (let i = seatNr; i > seatNr - numOfTickets; i--) {
-        this.baseEl.find(`#${rowNr}-${i}`).removeClass('hovered-seats');
-        this.hoveredSeats = [];
-      }
-    }
+  unhoverSeats() {
+    this.baseEl.find('.seat').removeClass('invalid-seats');
+    this.baseEl.find('.seat').removeClass('valid-seats');
+    this.hoveredSeats = [];
   }
 
   chooseSeats() {
@@ -78,7 +68,7 @@ class SeatsGrid extends Component {
       this.chosenSeats = this.hoveredSeats;
       Store.chosenSeats = this.chosenSeats;
       for (let seat of this.chosenSeats) {
-        this.baseEl.find(`#${seat}`).addClass('chosen-seats').removeClass('hovered-seats');
+        this.baseEl.find(`#${seat}`).addClass('chosen-seats').removeClass('valid-seats');
       }
     }
   }

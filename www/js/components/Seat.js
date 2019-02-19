@@ -16,7 +16,7 @@ class Seat extends Component {
   }
 
   unhoverMe() {
-    this.seatsGrid.unhoverSeats($(this), Store.numOfTickets);
+    this.seatsGrid.unhoverSeats();
   }
 
   clickMe() {
