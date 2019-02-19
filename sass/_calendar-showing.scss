@@ -1,0 +1,9 @@
+.calendar-item {
+  border-radius: 3px;
+
+  & > div { 
+    & > p {
+      margin-bottom: 0;
+    }
+  }
+}
