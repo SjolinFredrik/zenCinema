@@ -1,9 +1,12 @@
 .calendar-item {
   border-radius: 3px;
-
   & > div { 
+    margin: auto 0;
     & > p {
       margin-bottom: 0;
     }
+  }
+  .showings-day {
+    text-transform: capitalize;
   }
 }

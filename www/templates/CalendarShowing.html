@@ -1,7 +1,7 @@
-<section class="col-12 bg-primary pt-2">
-  <section class="row px-0 mb-2 mx-auto calendar-item bg-secondary text-dark">
+<section class="col-12 bg-primary">
+  <section class="row px-0 my-2 mx-auto calendar-item bg-secondary text-dark">
     <div class="col-3 d-block d-md-none d-lg-block">
-      <strong>Salong:</strong>
+      <strong>Datum:</strong>
     </div>
     <div class="col-5 col-md-6 col-lg-5">
       <strong>Film:</strong>
@@ -13,15 +13,11 @@
       <strong>Länk:</strong>
     </div>
   </section>
-  <section class="row px-1 mb-2 mx-auto calendar-item bg-secondary text-center text-dark">
-    <div class="col-12">
-      <strong>Idag</strong>
-    </div>
-  </section>
   ${this.showingData.map((f, i) => `
   <section class="row px-1 mb-2 mx-auto calendar-item bg-secondary text-dark">
     <div class="col-3 d-block d-md-none d-lg-block">
-      <p>${f.saloon.name}</p>
+      <p>${new Date(f.date).toLocaleDateString('sv-SE', {month: 'numeric',
+          day: 'numeric'})}</p>
     </div>
     <div class="col-5 col-md-6 col-lg-5">
       <p>${f.film.title}</p>
