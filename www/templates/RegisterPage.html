@@ -1,25 +1,34 @@
-<section class="registerPage">
-  <section class="register-form welcome p-4">
-    <h3 class="mb-4">Skapa användare</h3>
+<section class="container registerPage">
+  <section class="register-form welcome pt-5">
+    <h3 class="mb-4 pt-4">Skapa användare</h3>
     <section class="login-wrapper">
-      <p>Förnamn:</p>
-      <input class="first-name-input mb-3" type="text">
-      <p class="invalid-firstname">Felaktigt namn</p>
-      <p>Efternamn:</p>
-      <input class="last-name-input mb-3" type="text">
-      <p class="invalid-lastname">Felaktigt efternamn</p>
-      <p>Email:</p>
-      <input class="email-input mb-3" type="text">
-      <p class="email-invalid error-msg">Felaktigt emailformat</p>
-      <p class="email-exists error-msg">Denna email existerar redan</p>
-      <p>Lösenord:</p>
-      <input class="password-input mb-3" type="password">
-      <p class="invalid-password">Ogiltligt lösenord, använd minst 4 tecken och en siffra</p>
-      <p>Bekräfta lösenord:</p>
-      <input class="passwordConfirm-input mb-3" type="password">
-      <p class="password-mismatch">Lösenordet matchar ej</p>
-      <br>
-      <button class="btn btn-primary saveNewUser-btn mt-4">Bekräfta</button>
+      <div class="form-group">
+        <p>Förnamn:</p>
+        <input class="first-name-input mb-3" type="text">
+        <p class="invalid-firstname invalid-input">Felaktigt namn</p>
+      </div>
+      <div class="form-group">
+        <p>Efternamn:</p>
+        <input class="last-name-input mb-3" type="text">
+        <p class="invalid-lastname invalid-input">Felaktigt efternamn</p>
+      </div>
+      <div class="form-group">
+          <p>Email:</p>
+          <input class="email-input mb-3" type="text">
+          <p class="email-invalid error-msg invalid-input">Felaktigt emailformat</p>
+          <p class="email-exists error-msg invalid-input">Denna email existerar redan</p>
+      </div>
+      <div class="form-group">
+        <p>Lösenord:</p>
+        <input class="password-input mb-3" type="password">
+        <p class="invalid-password invalid-input">Ogiltligt lösenord, använd minst 4 tecken och en siffra</p>
+      </div>
+      <div class="form-group">
+        <p>Bekräfta lösenord:</p>
+        <input class="passwordConfirm-input mb-3" type="password">
+        <p class="password-mismatch invalid-input">Lösenordet matchar ej</p>
+      </div>
+      <button class="btn btn-primary saveNewUser-btn mt-1 mb-4">Bekräfta</button>
     </section>
   </section>
 </section>

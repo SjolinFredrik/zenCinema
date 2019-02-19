@@ -2,7 +2,6 @@ class BookingSystem extends Component {
   constructor(showingId) {
     super();
     this.showingId = showingId;
-    this.ticketSelection = new TicketSelection();
     this.checkLogin().then(login => {
       if(login.loggedIn) {
         this.loggedInUser = login.user;
@@ -14,7 +13,7 @@ class BookingSystem extends Component {
     this.showingData(this.showingId)
       .then(data => {
         this.showing = data;
-        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', { weekday: 'short', month: 'long', day: 'numeric' });
+        this.showingDate = new Date(this.showing.date).toLocaleString('sv-SE', { weekday: 'long', month: 'long', day: 'numeric' });
         this.saloon = this.showing.saloon;
         this.film = this.showing.film;
         this.time = this.showing.time;
@@ -29,7 +28,9 @@ class BookingSystem extends Component {
           this.saloonName = saloonSchemaData.name;
           this.film = filmData;
           this.takenSeats = takenSeats;
-          this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats);
+          this.bookingSummary = new BookingSummary(this);
+          this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats, this.bookingSummary);
+          this.ticketSelection = new TicketSelection(this.bookingSummary, this.seatsGrid);
           this.render();
         });
       });
@@ -84,34 +85,24 @@ class BookingSystem extends Component {
     return number;
   }
 
-  async totalCost() {
-    let totalCost = 0;
-    let ticketType = '';
-    let ticketsCost = 0;
-    for (let i = 0; i < this.ticketSelection.tickets.length; i++) {
-      ticketType = this.ticketSelection.tickets[i];
-      let ticketsQuantity = ticketType.baseEl.find('.ticketQuantity').text();
-      ticketsCost = parseInt(ticketType.price) * parseInt(ticketsQuantity);
-      totalCost = totalCost + ticketsCost;
-    }
-    return totalCost;
-  }
-
   async checkLogin() {
     return await Login.find();
   }
 
   async saveBooking() {
-    if (this.loggedInUser) {
-      let totalCost = await this.totalCost();
+    if (this.loggedInUser && 
+      Store.chosenSeats !== undefined && 
+      Store.reservedTickets !== undefined && 
+      Store.reservedTickets !== 0 && 
+      Store.chosenSeats.length === Store.numOfTickets) {
       let number = await this.generateBookingNumber();
 
       this.newBooking = new Booking({
         "customer": this.loggedInUser._id,
         "show": this.showing._id,
-        "seats": ['5-5', '5-6'],
+        "seats": Store.chosenSeats,
         "bookingNumber": number,
-        "totalCost": totalCost + " SEK"
+        "totalCost": Store.reservedTickets + " SEK"
       });
 
       await this.newBooking.save();
@@ -119,11 +110,21 @@ class BookingSystem extends Component {
       this.message = new Message('newBooking', this.newBooking);
       this.render();
       this.newBooking = '';
+      Store.chosenSeats.length = 0;
+          
+
     }
-    else {
+    else if (Store.chosenSeats === undefined || Store.chosenSeats.length === 0) {
+      this.message = new Message('chooseSeats');
+      this.render();
+    }
+    else if (Store.reservedTickets === undefined || Store.reservedTickets === 0) {
+      this.message = new Message('chooseTickets');
+      this.render();
+    }
+    else if(!this.loggedInUser) {
       this.message = new Message('mustLogIn');
       this.render();
     }
   }
-
 }

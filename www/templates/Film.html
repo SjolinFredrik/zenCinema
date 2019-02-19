@@ -1,5 +1,5 @@
-<section class="film-content col-sm-12 mb-5 mx-auto px-0">
-    <a class="a-over" href="/film/${this.link}"></a>
+<section class="film-content col-sm-12 pb-5 mx-auto px-0">
+  <a class="a-over" href="/film/${this.link}"></a>
   <div class="img-fluid film-cover-img d-none d-md-block" style="background: url(/images/movies/${this.images[1]})">
     <div class="inner-cover-img"></div>
   </div>
@@ -15,8 +15,14 @@
       <section class="col-12 col-md-7 offset-md-1 offset-lg-0 col-lg-8 text-center text-md-left">
         <h2 class="mt-2">${this.title}</h2>
         <p>${Math.floor(this.length/60)} tim ${this.length%60} min | ${this.genre}</p>
-        <a data-scroll role="button" href="#film-shows" class="btn btn-primary btn-block-sm-down tickets-btn"><i class="fa fa-ticket"></i> Biljetter</a>
-        <button role="button" data-toggle="modal" data-target="#trailerModal" class="btn btn-secondary btn-block-sm-down mt-3 mt-md-0 ml-md-4 trailer-btn"><i class="fa fa-film"></i> Se Trailer</button>
+        <div class="film-page-btns">
+            <a data-scroll role="button" href="#film-shows" class="btn btn-primary btn-block-sm-down tickets-btn"><i class="fa fa-ticket"></i> Biljetter</a>
+            <button role="button" data-toggle="modal" data-target="#trailerModal" class="btn btn-secondary btn-block-sm-down mt-3 mt-md-0 ml-md-4 trailer-btn"><i class="fa fa-film"></i> Se Trailer</button>
+        </div>
+        <div class="start-page-btns">
+            <a data-scroll role="button" href="/film/${this.link}" class="btn btn-primary btn-block-sm-down tickets-btn"><i class="fa fa-ticket"></i> Biljetter</a>
+            <button role="button" data-toggle="modal" data-target="#trailerModal" class="btn btn-secondary btn-block-sm-down mt-3 mt-md-0 ml-md-4 trailer-btn"><i class="fa fa-film"></i> Se Trailer</button>
+        </div>
       </section>
     </section>
     <section class="row my-5">

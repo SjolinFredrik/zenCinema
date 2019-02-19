@@ -5,6 +5,14 @@
   left: 0;
   z-index: 1000;
   height: 100%;
-  background-color: transparentize($primary, .05);
-  padding: 20%;
+  background-color: transparent;
+  padding: 15%;
+  @include media-breakpoint-down(xs) {
+    top: 20%;
+    padding: 0;
+  }
+  .message {
+    padding: 50px;
+    background-color: $primary;
+  }
 }

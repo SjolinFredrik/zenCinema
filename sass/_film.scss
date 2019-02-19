@@ -1,5 +1,7 @@
 .film-content {
-  background: #000;
+  background: linear-gradient(rgba(0,0,0,1) 98%,rgba(0,0,0,0));
+
+  
   .film-cover-img, .film-mobile-img {
     position: relative;
     background-size: cover !important;
@@ -36,8 +38,7 @@
     }
     .tickets-btn, .trailer-btn {
       min-width: 150px;
-      // border-radius: 100px;
-
+      z-index: 320;
     }
     dd {
       color: $secondary;
@@ -52,5 +53,19 @@
     .about-film {
       font-size: 0.9rem;
     }
+  }
+}
+.film-page-shows {
+  background: #000;
+  box-shadow: $main-shadow;
+}
+.film-page-content {
+  // background: #000;
+  // box-shadow: $main-shadow;
+  .film-page-btns {
+    display: block;
+  }
+  .start-page-btns {
+    display: none;
   }
 }

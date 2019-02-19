@@ -9,14 +9,26 @@ class TicketPrice extends Component {
     this.ticketSelection = ticketSelection;
     this.name = data.name;
     this.price = data.price;
-    this.ticketQuantity = 0;
+    if (this.name === 'Ordinarie') {
+      this.ticketQuantity = 2;
+    }
+    else {
+      this.ticketQuantity = 0;
+    }
   }
 
   removeTicket() {
     if (this.ticketQuantity > 0) {
       this.ticketSelection.numOfTickets--;
+      Store.numOfTickets--;
       this.ticketQuantity--;
-      console.log(this.ticketSelection.numOfTickets);
+      Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
+      this.ticketSelection.grid.unhoverSeats();
+      this.ticketSelection.grid.render();
+      if (Store.chosenSeats !== undefined) {
+        Store.chosenSeats.length = 0;
+      }
+      this.ticketSelection.bookingSummary.render();
       this.render();
     }
   }
@@ -24,10 +36,19 @@ class TicketPrice extends Component {
   addTicket() {
     if (this.ticketSelection.numOfTickets < this.ticketSelection.maxTickets) {
       this.ticketSelection.numOfTickets++;
+      Store.numOfTickets++;
       this.ticketQuantity++;
-      console.log(this.ticketSelection.numOfTickets);
+      Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
+      this.ticketSelection.grid.unhoverSeats();
+      this.ticketSelection.grid.render();
+      if (Store.chosenSeats !== undefined) {
+        Store.chosenSeats.length = 0;
+      }
+      this.ticketSelection.bookingSummary.render();
       this.render();
     }
   }
+
+  
 
 }
