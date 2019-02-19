@@ -4,5 +4,6 @@ class StartPage extends Component {
     super();
     this.addRoute('/', 'Start');
     this.calendarShowing = new CalendarShowing();
+    this.filmCarousel = new FilmCarousel();
   }
 }
