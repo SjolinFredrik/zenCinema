@@ -2,11 +2,13 @@ class CalendarShowing extends Component {
   constructor() {
     super();
     this.showingData = [];
+
     this.loadShowingData();
   }
 
   async loadShowingData() {
-    this.showingData = await Showing.find(`.find().limit(9).sort({$natural: 1}).populate('film').exec()`);
+    let today = new Date().getTime();
+    this.showingData = await Showing.find(`.find({date: {$gte: ${today}}}).limit(9).sort({$natural: 1}).populate('film').exec()`);    
     this.render();
   }
 }

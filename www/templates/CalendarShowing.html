@@ -2,7 +2,7 @@
     <div class="bg-secondary text-center">
     <h2 class="my-auto py-1">Kalendarium</h2>
   </div>
-  <section class="row px-0 mx-auto calendar-item rounded">
+  <section class="row pl-0 pr-2 mx-auto calendar-item rounded">
     <div class="col-2 col-md-3 col-lg-2">
       <strong>Datum:</strong>
     </div>
@@ -14,7 +14,7 @@
     </div>
   </section>
   ${this.showingData.map((f, i) => `
-  <section class="row px-0 mx-auto calendar-item rounded">
+  <section class="row pl-0 pr-2 mx-auto calendar-item rounded">
     <div class="col-2 col-md-3 col-lg-2">
       <p>${new Date(f.date).toLocaleDateString('sv-SE', {month: 'numeric', day: 'numeric'})}</p>
     </div>
