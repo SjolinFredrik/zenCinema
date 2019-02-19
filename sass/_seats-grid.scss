@@ -46,11 +46,12 @@
     padding: 8px 10px;
     width: auto;    
     }
-    &.hovered-seats {
+    &.valid-seats {
       background-color: #fff;
     }
     &.invalid-seats {
-      background-color: red;
+      cursor: default;
+      background-color: $primary;
     }
     &.chosen-seats {
       animation: blinker 1s linear infinite;
