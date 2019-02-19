@@ -30,6 +30,14 @@ class Message extends Component {
       this.heading = 'User utloggad!';
       this.text = 'Du måste logga in innan bokning!';
     }
+    if(this.type === 'chooseSeats') {
+      this.heading = 'Fel';
+      this.text = 'Vänligen välj platser.';
+    }
+    if(this.type === 'chooseTickets') {
+      this.heading = 'Fel';
+      this.text = 'Vänligen välj biljetter.';
+    }
   }
 
   async showInfo() {
@@ -40,7 +48,7 @@ class Message extends Component {
 
   removeMe() {
     this.baseEl.remove();
-    window.location.assign('/');
+    // window.location.assign('/');
     this.render();
   }
 }

@@ -1,9 +1,10 @@
 class SeatsGrid extends Component {
-  constructor(schema, takenSeats) {
+  constructor(schema, takenSeats, bookingSum) {
     super();
     this.schema = schema;
     this.takenSeats = takenSeats;
     this.hoveredSeats = [];
+    this.bookingSum = bookingSum;
     this.grid = this.createGrid();
   }
 
@@ -64,12 +65,16 @@ class SeatsGrid extends Component {
     }
     else {
       this.baseEl.find('.seat').removeClass('chosen-seats');
+      for (let seat of this.grid) {
+        seat.chosen = false;
+      }
       this.chosenSeats = [];
       this.chosenSeats = this.hoveredSeats;
       Store.chosenSeats = this.chosenSeats;
       for (let seat of this.chosenSeats) {
         this.baseEl.find(`#${seat}`).addClass('chosen-seats').removeClass('valid-seats');
       }
+      this.bookingSum.render();
     }
   }
 
