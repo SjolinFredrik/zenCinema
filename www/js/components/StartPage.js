@@ -3,7 +3,7 @@ class StartPage extends Component {
   constructor(){
     super();
     this.addRoute('/', 'Start'); 
-    this.today = new Date().toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'})
+    this.today = new Date().toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
     this.getFilmsFromShowings();
   }
 
