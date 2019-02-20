@@ -5,11 +5,13 @@ section.registerPage {
       margin: 0 auto;
       text-align: center;
       border-radius: 3px;
-      // background-color: black;
-      // box-shadow: $main-shadow;
-        h3 {
+        h2 {
           font-family: $courgette-cursive, sans-serif;
           font-size: 36px;
+        }
+        h5 {
+          font-family: $courgette-cursive, sans-serif;
+          max-width: 600px;
         }
     .login-wrapper {
       .invalid-input {

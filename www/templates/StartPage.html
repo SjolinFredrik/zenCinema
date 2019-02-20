@@ -12,8 +12,14 @@
                 hos oss.</p>
             </div>
           </section>
-          <section class="col-12 mb-5 px-0 border border-secondary rounded d-none d-md-block">
-            ${this.filmCarousel}
+          <section class="col-12 mb-5 rounded border cinema-link border-secondary px-0">
+            <a href="/om-oss/salonger">
+              <img class="img-fluid rounded-top" src="/images/cinema.jpg" alt="Bild på salong">
+            </a>
+            <div class="bg-light border-top border-dark p-3">
+              <h3>Våra salonger</h3>
+              <p>Spana in lite information om våra utomordentligt mysiga salonger.</p>
+            </div>
           </section>
         </section>
       </section>
@@ -21,11 +27,8 @@
     <section class="col-12 col-md-6">
       <section class="container-fluid">
         <section class="row">
-          <section class="col-12 mb-5 p-3 rounded border border-secondary bg-light">
-            <h2>Hmm</h2>
-            <p>Vet inte riktigt vad som kan vara här</p>
-            <p>Gärna något som är skrivit i ren html</p>
-            <p>Kanske lite clickbates till informationen om våra grymma salonger?</p>
+          <section class="col-12 mb-5 px-0 border border-secondary rounded d-none d-md-block">
+            ${this.filmCarousel}
           </section>
           <section class="col-12 border px-0 border-secondary rounded">
             ${this.calendarShowing ? this.calendarShowing : ''}

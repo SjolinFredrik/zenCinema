@@ -9,6 +9,8 @@ class PageContent extends Component {
     this.customerBookingsPage = new CustomerBookingsPage();
     this.saloonTechInfoPage = new SaloonTechInfoPage();
     this.filmsCollectionPage = new FilmsCollectionPage();
+    this.kioskPage = new KioskPage();
+    this.rulePage = new RulePage();
   }
 
 }
