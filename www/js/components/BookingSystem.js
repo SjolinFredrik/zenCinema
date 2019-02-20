@@ -25,11 +25,12 @@ class BookingSystem extends Component {
           const takenSeats = data[2];
 
           this.saloonSchema = saloonSchemaData.seatsPerRow;
+          this.bestRows = saloonSchemaData.bestRows;
           this.saloonName = saloonSchemaData.name;
           this.film = filmData;
           this.takenSeats = takenSeats;
           this.bookingSummary = new BookingSummary(this);
-          this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats, this.bookingSummary);
+          this.seatsGrid = new SeatsGrid(this.saloonSchema, this.takenSeats, this.bookingSummary, this.bestRows);
           this.ticketSelection = new TicketSelection(this.bookingSummary, this.seatsGrid);
           this.render();
         });
@@ -38,6 +39,7 @@ class BookingSystem extends Component {
       'click .save-booking': 'saveBooking'
     });
   }
+
 
   async showingData(showingId) {
     let showing = await Showing.find(showingId);

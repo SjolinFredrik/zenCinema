@@ -1,11 +1,13 @@
 class SeatsGrid extends Component {
-  constructor(schema, takenSeats, bookingSum) {
+  constructor(schema, takenSeats, bookingSum, bestRows) {
     super();
     this.schema = schema;
     this.takenSeats = takenSeats;
     this.hoveredSeats = [];
     this.bookingSum = bookingSum;
+    this.bestRows = bestRows;
     this.grid = this.createGrid();
+    this.bookingSum.render();
   }
 
   createGrid() {
@@ -23,6 +25,36 @@ class SeatsGrid extends Component {
         row.seats.push(seat);
       }
       hall.push(row);
+      for (let i = 0; i < hall.length; i++) {
+        let row = hall[i];
+        let rowIndex = hall.indexOf(row);
+        for (let best = 0; best < this.bestRows.length; best++) {
+          if (rowIndex === this.bestRows[best] - 1) {
+            row.best = true;
+            let bestSeatIndex = Math.floor((row.seats.length + 1) / 2);
+            let bestRowSeats = row.seats;
+            for (let s = 0; s < bestRowSeats.length; s++) {
+              let seat = bestRowSeats[s];
+              let seatFriend = bestRowSeats[s-1];
+              let seatIndex = bestRowSeats.indexOf(seat);
+              if (!seat.taken && seatIndex === bestSeatIndex) {
+                seat.best = true;
+                seatFriend.best = true;
+                this.chosenSeats = [];
+                Store.chosenSeats = [];
+                this.chosenSeats.push(seat, seatFriend);
+                Store.chosenSeats.push(seat.name, seatFriend.name);
+              }
+            }
+          }
+          else if (Store.chosenSeats !== undefined) {
+            break;
+          }
+          else {
+            continue;
+          }   
+        }
+      }
     }
     return hall;
   }
@@ -35,8 +67,7 @@ class SeatsGrid extends Component {
     for (let i = seatNr; i > seatNr - numOfTickets; i--) {
       if (i > 0 && !this.takenSeats.includes(rowNr + '-' + i)) {
         this.hoveredSeats.push(rowNr + '-' + i);
-      }
-      else {
+      } else {
         for (let seat of this.hoveredSeats) {
           this.baseEl.find(`#${seat}`).addClass('invalid-seats');
         }
@@ -50,23 +81,31 @@ class SeatsGrid extends Component {
         this.baseEl.find(`#${seat}`).addClass('valid-seats');
       }
     }
-
   }
 
   unhoverSeats() {
     this.baseEl.find('.seat').removeClass('invalid-seats');
     this.baseEl.find('.seat').removeClass('valid-seats');
     this.hoveredSeats = [];
+
+    for (let row of this.grid) {
+      for (let seat of row.seats) {
+        seat.best = false;
+      }
+    }
+    this.chosenSeats = [];
+    this.bookingSum.render();
   }
 
   chooseSeats() {
     if (this.hoveredSeats.length === 0) {
       return;
-    }
-    else {
+    } else {
       this.baseEl.find('.seat').removeClass('chosen-seats');
-      for (let seat of this.grid) {
-        seat.chosen = false;
+      for (let row of this.grid) {
+        for (let seat of row.seats) {
+          seat.best = false;
+        }
       }
       this.chosenSeats = [];
       this.chosenSeats = this.hoveredSeats;
