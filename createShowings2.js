@@ -14,17 +14,6 @@ let Saloon = require('./models/Saloon');
 let Film = require('./models/Film');
 let Showing = require('./models/Showing');
 
-
-let shuffleArr = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
-
 function randomItem(arr){
   return arr[Math.floor(Math.random()*arr.length)];
 }
@@ -41,23 +30,23 @@ async function createAndAddShowingsTo() {
   let movies = await Film.find();
   let saloons = await Saloon.find();
 
-  for (let i = 0; i < 84; i++) {
+  for (let i = 0; i < saloons.length; i++) {
+    let saloon = saloons[i];
+    for (let j = 0; j < 28; j++) {
+      if (i % 3 == 0) {
+        date.setDate(date.getDate() + 1);
+      }
+        let film = randomItem(movies);
+        let showtime = new Showing({
+          "saloon": saloon,
+          "film": film,
+          "date": date.getTime(),
+          "time": 17 + Math.floor(Math.random() * 4) + ':' + (Math.round(Math.random() < 0.5 ? 15 : 45))
+        });
+        await showtime.save();
 
-    if (i % 3 == 0) {
-      date.setDate(date.getDate() + 1);
+      }
     }
-
-    let film = randomItem(movies);
-    let saloon = randomItem(saloons);
-
-    let showtime = new Showing({
-      "saloon": saloon,
-      "film": film,
-      "date": date.getTime(),
-      "time": 17 + Math.floor(Math.random() * 4) + ':' + (Math.round(Math.random() < 0.5 ? 30 : 45))
-    });
-    await showtime.save();
-  }
 
   showingsCount = await Showing.count();
 
