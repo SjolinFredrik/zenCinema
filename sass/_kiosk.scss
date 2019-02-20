@@ -1,12 +1,18 @@
 .kiosk-content {
-  background: #000;
+  // background: #000;
   .popcorn-img {
     position: relative;
     background-size: cover !important;
     background-position: top center !important;
     width: 100%;
-    height: 70vh;
-    overflow: hidden;
+    @media screen and (min-width: 992px){
+      position: relative;
+      background-size: cover !important;
+      background-position: top center !important;
+      width: 100%;
+      height: 70vh;
+      overflow: hidden;
+    }
     .gradient-cover {
       position: absolute;
       width: 100%;
@@ -16,7 +22,26 @@
       background: linear-gradient(180deg,rgba(15,15,15,0) 50%,#000);
     }
   }
+
+    .drink-header {
+      font-weight: bold;
+    }
   .kiosk-headline {
     text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .candy-bear-img {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+  }
+  .jumbo-img {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+  }
+  .jumbo-header {
+    font-weight: bold;
   }
 }
