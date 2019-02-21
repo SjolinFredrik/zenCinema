@@ -1,6 +1,7 @@
 footer {
+  // background: linear-gradient(to bottom, rgba(20, 2, 10, 0.8) 1%,rgba(59, 2, 2, 1) 6%,rgba(59, 2, 2,1) 21%,$primary 49%,rgb(59, 2, 2) 83%,rgba(20, 2, 10, 0.8) 98%);
+  background-image: linear-gradient(to top, #6e0e1e, rgba(20, 2, 10, 0.8));
   .container-fluid {
-    background-color: $primary;
     .footer-heading {
       font-size: 1.3em;
     }
