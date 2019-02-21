@@ -5,7 +5,9 @@
       @include media-breakpoint-down(xs){
         display: table;
         table-layout: fixed;
+        font-size: 1.1rem;
       }
+
     }
     ::selection {
       background-color: transparent;
