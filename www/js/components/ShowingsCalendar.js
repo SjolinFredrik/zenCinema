@@ -2,6 +2,7 @@ class ShowingsCalendar extends Component {
   
     constructor() {
       super();
+      this.addRoute('/all-showings', 'Showings');
       this.showList().then(data => {
         this.showings = data;
         this.render();
@@ -10,7 +11,7 @@ class ShowingsCalendar extends Component {
 
 
   async showList() {
-    return await Showing.find(`.find().populate('saloon').populate('film').exec()`);
+    return await Showing.find(`.find().sort({date: 1, time: 1}).populate('saloon').populate('film').exec()`);
   }
 
 }
