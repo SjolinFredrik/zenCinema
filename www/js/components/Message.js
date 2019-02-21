@@ -23,12 +23,12 @@ class Message extends Component {
         this.render();
       });
     }
-    if (this.type === 'newUser') {
-      this.heading = 'User har skapat';
-      this.text = 'Hitta på någon text, var snälla!'
-    }
+    // if (this.type === 'newUser') {
+    //   this.heading = 'User har skapat';
+    //   this.text = 'Hitta på någon text, var snälla!'
+    // }
     if(this.type === 'mustLogIn') {
-      this.heading = 'User utloggad!';
+      this.heading = 'Ej inloggad!';
       this.text = 'Du måste logga in innan bokning!';
     }
     if(this.type === 'chooseSeats') {
