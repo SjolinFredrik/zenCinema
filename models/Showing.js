@@ -8,7 +8,4 @@ let showingSchema = new Schema({
 "time": String
 });
 
-// [{ type: Schema.Types.ObjectId, ref: 'Salon' }],
-// [{ type: Schema.Type.ObjectId, ref: 'Film'}]
-
 module.exports = db.model('Showing', showingSchema);

@@ -8,12 +8,9 @@ class Trailer extends Component {
   }
 
   trailerClose() {
-    //Stop Video
     $('#trailerModal').on('hidden.bs.modal', function (e) {
-      // do something...
       $('#trailerModal iframe').attr("src", $('#trailerModal iframe').attr("src"));
-
     });
   }
 }
- 
+

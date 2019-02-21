@@ -39,21 +39,13 @@ async function createAndAddShowingsTo() {
   let movies = await Film.find();
   let saloons = await Saloon.find();
   let times = ['17:00', '19:30', '22:00'];
-  // let film = randomItem(movies);
-  // let time = randomItem(times);
-  // let saloon = randomItem(saloons);
   for (let i = 0; i < 84; i++) {
     if (i % 3 == 0) {
       date.setDate(date.getDate() + 1);
     }
 
     let showtime = new Showing({
-      // "saloon": saloon,
-      // "film": film,
       "date": date.getTime(),
-      // "date": date,
-      // "time": 17 + Math.floor(Math.random() * 4) + ':' + (Math.round(Math.random() < 0.5 ? 15 : 45));
-      // "time": time
     });
     await showtime.save();
 
@@ -105,59 +97,6 @@ async function createAndAddShowingsTo() {
 
     await showing.save();
   }
-
-  // let showings = await Showing.find();
-  // for (let i = 0; i < showings.length; i++) {
-  //   let showing = showings[i];
-  //   let saloon;
-  //   let time;
-  //   if (i % 4 === 0) {
-  //     saloon = saloons[1];
-  //     time = saloons[1];
-  //     showing.saloon = saloon;
-
-  //   } else
-  //   if (i % 2 === 0 || i % 7 === 0) {
-  //     saloon = saloons[2];
-  //     showing.saloon = saloon;
-
-  //   } else if (i % 3 === 0 || i % 13 === 0) {
-  //     saloon = saloons[0];
-  //     showing.saloon = saloon;
-
-  //   } else
-  //   saloon = randomItem(saloons);
-
-      // if(i % 4 === 0 || i % 13 === 0) {
-      //   time = times[2];
-      //   saloon = saloons[1];
-      // }
-      // if(i % 5 === 0) {
-      //   time = times[0];
-      //   saloon = saloons[0];
-      // }
-      // if(i % 7 === 0) {
-      //   time = times[1];
-      //   saloon = saloons[2];
-      // }
-      // if(i % 17 === 0) {
-      //   time = times[0];
-      //   saloon = saloons[1];
-      // }
-
-  //     showing.saloon = saloon;
-
-  //   await showing.save();
-  // }
-
-  // showings = await Showing.find();
-  // for (let i = 0; i < showings.length; i++) {
-  //   let showing = showings[i];
-  //   let film = randomItem(movies);
-  //   showing.film = film;
-  //   await showing.save();
-  // }
-
 
 
   showingsCount = await Showing.count();

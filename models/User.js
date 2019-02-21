@@ -7,7 +7,6 @@ let userSchema = new Schema ({
   "lastName": {type: String, required: true},
   "email": {type: String, required: true, unique: true},
   "password": {type: String, required: true},
-  //"bookings": [{type: Schema.Types.ObjectId, ref:"Booking", required: true}],
   "admin": {type: Boolean, default: "false"}
 }, { toJSON: { virtuals: true } });
 
@@ -18,12 +17,8 @@ userSchema.virtual('bookings',  {
   justOne: false
 });
 
-
-// UNCOMMENT once bcrypt up n running
 userSchema.pre('save', async function(){
-  console.log("yo");
   this.password = await bcrypt.hash(this.password + passwordSalt, 10);
-  console.log("yo2");
 });
 
 module.exports = db.model('User', userSchema);

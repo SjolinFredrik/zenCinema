@@ -10,7 +10,6 @@
       background-size: cover !important;
       background-position: top center !important;
       width: 100%;
-      height: 70vh;
       overflow: hidden;
     }
     .gradient-cover-img {
@@ -36,10 +35,9 @@
   }
 }
 .tech-headline {
-  text-align: center;
-}
-.saloon-headline {
-  text-align: center;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .info-right {
   text-align: right;
