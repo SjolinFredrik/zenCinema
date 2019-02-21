@@ -8,7 +8,9 @@
   background-color: $secondary;
   border-radius: 6px;
   color: $accent-dark;
-
+  @include media-breakpoint-down(xs) {
+    font-size: .85rem;
+  }
   .book-film {
     display: block;
     padding: 5px 7px;
