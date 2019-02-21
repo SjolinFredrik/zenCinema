@@ -7,7 +7,7 @@
                 Bokningsnummer: ${this.data.bookingNumber}<br/>
                 Salong: ${this.saloon}<br/>
                 Film: ${this.filmTitle}<br/>
-                Platser: ${this.data.seats.join(', ')}<br/>
+                Platser: ${this.data.seats.sort().join(', ')}<br/>
                 Tid: ${this.time}<br/>
                 Datum: ${this.date}<br/>
                 Att betala: ${this.data.totalCost}
