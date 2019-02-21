@@ -16,11 +16,7 @@ class FilmsCollectionPage extends Component {
     for(let i = 0; i < allFilms.length; i++){
       let film = allFilms[i];
       let filmPoster = new FilmPoster(film._props);
-      // Object.assign({}, film);
-
       allFilmPosters.push(filmPoster);
-      // console.log(allFilmPosters, 'filmposter');
-      
     }
     return allFilmPosters;
   }

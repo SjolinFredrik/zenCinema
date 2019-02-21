@@ -6,8 +6,6 @@ class NavBar extends Component {
       new NavItem('Start', '/'),
       new NavItem('Filmer', '/films'),
       new NavItemDropdown()
-      //new NavItem('Boka', '/booking'),
-      //new NavItem('Registrera Användare', '/register')
     ];
     this.navLogins = new NavLogin();
   }

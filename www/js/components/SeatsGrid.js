@@ -31,6 +31,11 @@ class SeatsGrid extends Component {
         for (let best = 0; best < this.bestRows.length; best++) {
           if (rowIndex === this.bestRows[best] - 1) {
             row.best = true;
+          }
+        }
+        for (let best = 0; best < this.bestRows.length; best++) {
+          if (rowIndex === this.bestRows[best] - 1) {
+            row.best = true;
             let bestSeatIndex = Math.floor((row.seats.length + 1) / 2);
             let bestRowSeats = row.seats;
             for (let s = 0; s < bestRowSeats.length; s++) {

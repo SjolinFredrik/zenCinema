@@ -11,6 +11,8 @@ class PageContent extends Component {
     this.filmsCollectionPage = new FilmsCollectionPage();
     this.kioskPage = new KioskPage();
     this.rulePage = new RulePage();
+    this.allShowings = new ShowingsCalendar();
+
   }
 
 }
