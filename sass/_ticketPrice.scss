@@ -7,8 +7,11 @@
         table-layout: fixed;
       }
     }
+    ::selection {
+      background-color: transparent;
+    }
     .fas {
-      cursor: pointer;
+      cursor: pointer; 
     }
   }
 }
