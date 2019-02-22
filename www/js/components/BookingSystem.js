@@ -7,7 +7,8 @@ class BookingSystem extends Component {
         this.loggedInUser = login.user;
       }
       else {
-        return;
+        this.loginForm = new NavLogin(this);
+        this.registerForm = '';
       }
     });
     this.showingData(this.showingId)
@@ -138,11 +139,11 @@ class BookingSystem extends Component {
         Store.chosenSeats.length = 0;      
       }
      
-      else {
-        this.loginForm = new NavLogin(this);
-        this.registerForm = '';
-        this.render();
-      }
+      // else {
+      //   this.loginForm = new NavLogin(this);
+      //   this.registerForm = '';
+      //   this.render();
+      // }
 
       
           

@@ -40,11 +40,13 @@
     <div class="col-sm-7 mx-auto py-4">
       ${this.bookingSummary ? this.bookingSummary : ''}
       <button role="button" data-dismiss="modal" aria-label="Close" class="btn btn-secondary" >Avbryt</button>
-      <button type="button" class="btn btn-secondary save-booking" >Boka</button>
+      ${this.loggedInUser || Store.loggedInUser ? `
+      <button type="button" class="btn btn-secondary save-booking" >Boka</button> ` : 
+      this.loginForm
+        }
 
     </div>
     ${this.message ? this.message : ''}
-    ${this.loginForm ? this.loginForm : ''}
     ${this.registerForm ? this.registerForm : ''}
   </div>
 </section>

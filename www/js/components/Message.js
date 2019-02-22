@@ -53,6 +53,8 @@ class Message extends Component {
   }
   goToIndex() {
     this.baseEl.remove();
+    const greatLogin = Store.navBar.navLogins;
+    greatLogin.checkLogin();
     // window.location.assign('/');
     this.render();
   }

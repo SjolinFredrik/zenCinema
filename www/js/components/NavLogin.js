@@ -47,6 +47,8 @@ this.parent.render();
       this.loggedInUser = result.user;
       Store.loggedInUser = this.loggedInUser;
       console.log(Store.loggedInUser);
+      this.parent.render();
+      
       this.render();
     }
   }
