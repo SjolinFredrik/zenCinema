@@ -14,24 +14,40 @@ class RegisterForm extends Component {
     let validEmail = await this.validateEmailInput();
     let validInput = await this.validateFormInput();
     if (validEmail && validInput) {
-      await User.createUser();
-      // console.log(await User.createUser());
-      setTimeout(() => {
+      // Store.newUser = await User.createUser();
+      // // console.log(await User.createUser());
+      // setTimeout(() => {
+      //   $('.welcome').prepend(`
+      // <div class="alert alert-success alert-dismissible fade show" role="alert">
+      //   <strong>Användare skapad!</strong> Du kan nu logga in.
+      //   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      //     <span aria-hidden="true">&times;</span>
+      //   </button>
+      // </div>`
+      //   )
+      // }, 1000);
+
+        User.createUser().then(user =>{
+          console.log(user, 'new user');
+        Store.newUser = user.email;
         $('.welcome').prepend(`
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Användare skapad!</strong> Du kan nu logga in.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>`
-        )
-      }, 1000);
-      if (this.parent instanceof BookingSystem) {
-        this.creator.login();
-        console.log(this.creator);
-        this.creator.render();
-        this.baseEl.remove();
-      }
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Användare skapad!</strong> Du kan nu logga in.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>`);
+        if (this.parent instanceof BookingSystem) {
+          this.creator.render();
+          this.creator.baseEl.find('#emailf').val(user.email);
+          this.creator.baseEl.find('h2').text('Logga in');
+          this.creator.baseEl.find('.new-account-btn').hide();
+          this.baseEl.remove();
+          this.render();
+        }
+      });
+
+      
       this.render();
     }
   }

@@ -42,11 +42,13 @@
       
       ${this.loggedInUser || Store.loggedInUser ? `
       <button type="button" class="btn btn-secondary save-booking" >Boka</button> ` : `
-      <p>Vänligen logga in eller skapa nytt konto för att boka biljetter</p> ${this.loginForm}
+      <p>Vänligen logga in eller skapa nytt konto för att boka biljetter</p>
+      <button type="button" class="btn btn-secondary open-login-form" >Logga in</button> 
       `}
         <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-secondary" >Avbryt</button>
     </div>
     ${this.message ? this.message : ''}
-    ${this.registerForm ? this.registerForm : ''}
+    ${this.loginForm && !this.loginForm.used ? this.loginForm : ''}
+    ${this.registerForm && this.registerForm !== 0 ? this.registerForm : ''}
   </div>
 </section>

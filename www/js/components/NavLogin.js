@@ -3,7 +3,7 @@ class NavLogin extends Component {
   constructor(parent) {
     super();
     this.addEvents({
-      'click .login-btn': 'login',
+      'click .login-btn': 'clickLoginBtn',
       'click .logout-btn': 'logout',
       'click .new-account-btn': 'createRegisterForm'
     });
@@ -13,11 +13,8 @@ class NavLogin extends Component {
     console.log(this.parent);
   }
   createRegisterForm() {
-this.parent.registerForm = new RegisterForm(this.parent, this);
-this.render();
-this.parent.render();
-
-
+    this.parent.registerForm = new RegisterForm(this.parent, this);
+    this.parent.render();
   }
   async checkLogin() {
     let result = await Login.find();
@@ -29,9 +26,7 @@ this.parent.render();
     }
   }
 
-  async login(e) {
-    e.preventDefault();
-
+  async login() {
     let email = this.baseEl.find('.email-login-input').val();
     let password = this.baseEl.find('.password-login-input').val();
 
@@ -46,11 +41,26 @@ this.parent.render();
       this.loggedIn = true;
       this.loggedInUser = result.user;
       Store.loggedInUser = this.loggedInUser;
-      console.log(Store.loggedInUser);
+      if (this.parent instanceof BookingSystem){
       this.parent.render();
-      
+      console.log(Store.navBar, 'navbar');
+      Store.navBar.render();
+      this.parent.registerForm = 0;
+      this.baseEl.remove();
+      this.used = true;
+      this.parent.render();
+      }
       this.render();
     }
+    else {
+      window.alert('error while login');
+    }
+  }
+
+
+  clickLoginBtn(e) {
+    e.preventDefault();
+    this.login();
   }
 
   async logout() {

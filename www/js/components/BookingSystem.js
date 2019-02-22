@@ -6,10 +6,6 @@ class BookingSystem extends Component {
       if(login.loggedIn) {
         this.loggedInUser = login.user;
       }
-      else {
-        this.loginForm = new NavLogin(this);
-        this.registerForm = '';
-      }
     });
     this.showingData(this.showingId)
       .then(data => {
@@ -37,7 +33,8 @@ class BookingSystem extends Component {
         });
       });
     this.addEvents({
-      'click .save-booking': 'saveBooking'
+      'click .save-booking': 'saveBooking',
+      'click .open-login-form': 'openLoginForm'
     });
   }
 
@@ -91,6 +88,12 @@ class BookingSystem extends Component {
     return await Login.find();
   }
 
+  openLoginForm() {
+    this.loginForm = new NavLogin(this);
+          this.registerForm = '';
+          this.render();
+  }
+
   async checkUnvailableSeats() {
     let takenSeats = await this.findTakenSeats();
     for (let i = 0; i < Store.chosenSeats.length; i++) {
@@ -133,10 +136,14 @@ class BookingSystem extends Component {
           this.newBooking.customer = Store.loggedInUser._id;
           await this.newBooking.save();          
         }
+        else {
+          this.openLoginForm();
+        }
         this.message = new Message('newBooking', this.newBooking);
         this.render();
         this.newBooking = '';
-        Store.chosenSeats.length = 0;      
+        Store.chosenSeats.length = 0;    
+        this.loginForm = 0;  
       }
     }
     else if (Store.chosenSeats === undefined || Store.chosenSeats.length === 0) {
