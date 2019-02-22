@@ -1,8 +1,9 @@
 class RegisterForm extends Component {
 
-  constructor(){
+  constructor(parent, creator){
     super();
-
+    this.parent = parent;
+    this.creator = creator;
     this.addEvents({
       'click .saveNewUser-btn': 'saveUser'
     });
@@ -10,12 +11,11 @@ class RegisterForm extends Component {
   }
 
   async saveUser() {
-console.log('hej validerar')
     let validEmail = await this.validateEmailInput();
     let validInput = await this.validateFormInput();
     if (validEmail && validInput) {
-      // await User.createUser();
-      console.log(await User.createUser());
+      await User.createUser();
+      // console.log(await User.createUser());
       setTimeout(() => {
         $('.welcome').prepend(`
       <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -26,6 +26,12 @@ console.log('hej validerar')
       </div>`
         )
       }, 1000);
+      if (this.parent instanceof BookingSystem) {
+        this.creator.login();
+        console.log(this.creator);
+        this.creator.render();
+        this.baseEl.remove();
+      }
       this.render();
     }
   }

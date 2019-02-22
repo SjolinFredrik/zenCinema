@@ -13,7 +13,7 @@ class NavLogin extends Component {
     console.log(this.parent);
   }
   createRegisterForm() {
-this.parent.registerForm = new RegisterForm();
+this.parent.registerForm = new RegisterForm(this.parent, this);
 this.render();
 this.parent.render();
 

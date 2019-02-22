@@ -138,16 +138,6 @@ class BookingSystem extends Component {
         this.newBooking = '';
         Store.chosenSeats.length = 0;      
       }
-     
-      // else {
-      //   this.loginForm = new NavLogin(this);
-      //   this.registerForm = '';
-      //   this.render();
-      // }
-
-      
-          
-
     }
     else if (Store.chosenSeats === undefined || Store.chosenSeats.length === 0) {
       this.message = new Message('chooseSeats');

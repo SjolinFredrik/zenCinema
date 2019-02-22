@@ -49,6 +49,7 @@ class Message extends Component {
 
   removeMe() {
     this.baseEl.remove();
+    greatLogin.checkLogin();
     this.render();
   }
   goToIndex() {
