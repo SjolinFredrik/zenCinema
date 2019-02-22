@@ -1,22 +1,30 @@
 class NavLogin extends Component {
 
-  constructor() {
+  constructor(parent) {
     super();
     this.addEvents({
       'click .login-btn': 'login',
-      'click .logout-btn': 'logout'
+      'click .logout-btn': 'logout',
+      'click .new-account-btn': 'createRegisterForm'
     });
     this.loggedIn = false;
     this.checkLogin();
+    this.parent = parent;
+    console.log(this.parent);
   }
+  createRegisterForm() {
+this.parent.registerForm = new RegisterForm();
+this.render();
+this.parent.render();
 
-  async checkLogin(){
+
+  }
+  async checkLogin() {
     let result = await Login.find();
     if (result.loggedIn) {
       this.loggedIn = true;
       this.loggedInUser = result.user;
       Store.loggedInUser = this.loggedInUser;
-      console.log(Store.loggedInUser);
       this.render();
     }
   }
@@ -43,7 +51,7 @@ class NavLogin extends Component {
     }
   }
 
-  async logout(){
+  async logout() {
     let loginObj = new Login();
     await loginObj.delete();
     this.loggedIn = false;

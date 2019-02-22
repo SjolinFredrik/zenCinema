@@ -122,13 +122,15 @@ class BookingSystem extends Component {
         "totalCost": Store.reservedTickets + " SEK"
       });
       console.log(this.newBooking);
-
+      // User has already logged in before booking
       if(this.loggedInUser || Store.loggedInUser) {
         if (this.loggedInUser) {
           await this.newBooking.save();
         }
-        else if (Store.loggedInUser) {
+        // Login while start to commit booking
+        if (Store.loggedInUser) {
           this.newBooking.customer = Store.loggedInUser._id;
+          await this.newBooking.save();          
         }
         this.message = new Message('newBooking', this.newBooking);
         this.render();
@@ -137,7 +139,8 @@ class BookingSystem extends Component {
       }
      
       else {
-        this.loginForm = new NavLogin();
+        this.loginForm = new NavLogin(this);
+        this.registerForm = '';
         this.render();
       }
 
