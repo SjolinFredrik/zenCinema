@@ -70,11 +70,11 @@ class CustomerBookingsPage extends Component {
       return formatString.replace("#hhhh#",hhhh).replace("#hhh#",hhh).replace("#hh#",hh).replace("#h#",h).replace("#mm#",mm).replace("#m#",m).replace("#ss#",ss).replace("#s#",s).replace("#ampm#",ampm).replace("#AMPM#",AMPM);
     };
 
-    let today = new Date().getTime();
+    let today = new Date();
 
     for(let booking of this.bookings) {
       let bookingDate = new Date(booking.date);
-      if (booking.date >= today) {
+      if (bookingDate.getDate() >= today.getDate()) {
         let convertedDate = bookingDate.customFormat('#DDDD# #DD# #MMMM# #YYYY#');
         this.customerActualBookings.push(new CustomerBooking(booking.film, convertedDate, booking.time, booking.bookingNr));
       }

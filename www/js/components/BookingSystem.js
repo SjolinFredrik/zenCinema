@@ -104,8 +104,10 @@ class BookingSystem extends Component {
     if(unavailable) {
       alert('Seats have been booked just now!');
     }
+
+
     
-    else if (this.loggedInUser && 
+    else if (
       Store.chosenSeats !== undefined && 
       Store.reservedTickets !== undefined && 
       Store.reservedTickets !== 0 && 
@@ -113,19 +115,33 @@ class BookingSystem extends Component {
       let number = await this.generateBookingNumber();
 
       this.newBooking = new Booking({
-        "customer": this.loggedInUser._id,
+        "customer": this.loggedInUser ? this.loggedInUser._id : "Here will userId",
         "show": this.showing._id,
         "seats": Store.chosenSeats,
         "bookingNumber": number,
         "totalCost": Store.reservedTickets + " SEK"
       });
+      console.log(this.newBooking);
 
-      await this.newBooking.save();
+      if(this.loggedInUser || Store.loggedInUser) {
+        if (this.loggedInUser) {
+          await this.newBooking.save();
+        }
+        else if (Store.loggedInUser) {
+          this.newBooking.customer = Store.loggedInUser._id;
+        }
+        this.message = new Message('newBooking', this.newBooking);
+        this.render();
+        this.newBooking = '';
+        Store.chosenSeats.length = 0;      
+      }
+     
+      else {
+        this.loginForm = new NavLogin();
+        this.render();
+      }
 
-      this.message = new Message('newBooking', this.newBooking);
-      this.render();
-      this.newBooking = '';
-      Store.chosenSeats.length = 0;
+      
           
 
     }
@@ -137,9 +153,6 @@ class BookingSystem extends Component {
       this.message = new Message('chooseTickets');
       this.render();
     }
-    else if(!this.loggedInUser) {
-      this.message = new Message('mustLogIn');
-      this.render();
-    }
+    
   }
 }
