@@ -15,6 +15,8 @@ class NavLogin extends Component {
     if (result.loggedIn) {
       this.loggedIn = true;
       this.loggedInUser = result.user;
+      Store.loggedInUser = this.loggedInUser;
+      console.log(Store.loggedInUser);
       this.render();
     }
   }
@@ -35,6 +37,8 @@ class NavLogin extends Component {
     if (result.loggedIn) {
       this.loggedIn = true;
       this.loggedInUser = result.user;
+      Store.loggedInUser = this.loggedInUser;
+      console.log(Store.loggedInUser);
       this.render();
     }
   }
@@ -43,7 +47,8 @@ class NavLogin extends Component {
     let loginObj = new Login();
     await loginObj.delete();
     this.loggedIn = false;
-    window.location.href = 'http://localhost:3005/'
+    window.location.href = 'http://localhost:3005/';
+    Store.loggedInUser = undefined;
     this.render();
   }
 
