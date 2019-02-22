@@ -90,8 +90,22 @@ class BookingSystem extends Component {
     return await Login.find();
   }
 
+  async checkUnvailableSeats() {
+    let takenSeats = await this.findTakenSeats();
+    for (let i = 0; i < Store.chosenSeats.length; i++) {
+      if (takenSeats.includes(Store.chosenSeats[i])){
+        return true;
+      }
+    }
+  }
+
   async saveBooking() {
-    if (this.loggedInUser && 
+    let unavailable = await this.checkUnvailableSeats();
+    if(unavailable) {
+      alert('Seats have been booked just now!');
+    }
+    
+    else if (this.loggedInUser && 
       Store.chosenSeats !== undefined && 
       Store.reservedTickets !== undefined && 
       Store.reservedTickets !== 0 && 

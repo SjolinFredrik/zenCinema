@@ -53,7 +53,7 @@ class Message extends Component {
   }
   goToIndex() {
     this.baseEl.remove();
-    window.location.assign('/');
+    // window.location.assign('/');
     this.render();
   }
 }

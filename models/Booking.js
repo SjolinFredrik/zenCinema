@@ -2,13 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let bookingSchema = new Schema({
-  "customer": {type: Schema.Types.ObjectId, ref: 'User'},
-  "show": {type: Schema.Types.ObjectId, ref: 'Showing'},
+  "customer": {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  "show": {
+    type: Schema.Types.ObjectId,
+    ref: 'Showing'
+  },
   "seats": [],
   "bookingNumber": String,
   "totalCost": String
 
 });
+
 
 
 module.exports = db.model('Booking', bookingSchema);
