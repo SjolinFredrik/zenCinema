@@ -6,9 +6,6 @@ class BookingSystem extends Component {
       if(login.loggedIn) {
         this.loggedInUser = login.user;
       }
-      else {
-        return;
-      }
     });
     this.showingData(this.showingId)
       .then(data => {
@@ -36,7 +33,8 @@ class BookingSystem extends Component {
         });
       });
     this.addEvents({
-      'click .save-booking': 'saveBooking'
+      'click .save-booking': 'saveBooking',
+      'click .open-login-form': 'openLoginForm'
     });
   }
 
@@ -90,6 +88,12 @@ class BookingSystem extends Component {
     return await Login.find();
   }
 
+  openLoginForm() {
+    this.loginForm = new NavLogin(this);
+          this.registerForm = '';
+          this.render();
+  }
+
   async checkUnvailableSeats() {
     let takenSeats = await this.findTakenSeats();
     for (let i = 0; i < Store.chosenSeats.length; i++) {
@@ -100,27 +104,43 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-    let unavailable = await this.checkUnvailableSeats();
-    if(unavailable) {
-      alert('Seats have been booked just now!');
-    }
-    
-    else if (this.loggedInUser && 
+    if (this.loggedInUser && 
       Store.chosenSeats !== undefined && 
       Store.reservedTickets !== undefined && 
       Store.reservedTickets !== 0 && 
       Store.chosenSeats.length === Store.numOfTickets) {
       let number = await this.generateBookingNumber();
-
       this.newBooking = new Booking({
-        "customer": this.loggedInUser._id,
+        "customer": this.loggedInUser ? this.loggedInUser._id : "Here will userId",
         "show": this.showing._id,
         "seats": Store.chosenSeats,
         "bookingNumber": number,
         "totalCost": Store.reservedTickets + " SEK"
       });
 
-      await this.newBooking.save();
+      //try to save and catch an error if chosen seats have been taken before this booking finished
+      try {
+        await this.newBooking.save();
+      } catch (error) {
+        if (error.status === 409) {
+      let takenSeats = await this.findTakenSeats();
+      for (let i = 0; i < takenSeats.length; i++) {
+        for (let j = 0; j < this.seatsGrid.grid.length; j++) {
+          let row = this.seatsGrid.grid[j];
+          for (let seat = 0; seat < row.seats.length; seat++) {
+            if (row.seats[seat].name === takenSeats[i]) {
+              row.seats[seat].taken = true;
+              row.seats[seat].render();
+            }
+          }
+        }
+      }    
+      this.message = new Message('alreadyBooked');
+      this.render();
+          return;
+        }
+        throw error;
+      }
 
       this.message = new Message('newBooking', this.newBooking);
       this.render();
@@ -137,9 +157,6 @@ class BookingSystem extends Component {
       this.message = new Message('chooseTickets');
       this.render();
     }
-    else if(!this.loggedInUser) {
-      this.message = new Message('mustLogIn');
-      this.render();
-    }
+    
   }
 }

@@ -39,6 +39,10 @@ class Message extends Component {
       this.heading = 'Fel';
       this.text = 'Vänligen välj biljetter.';
     }
+    if (this.type === 'alreadyBooked') {
+      this.heading = 'Oops';
+      this.text = "Dessa platser har blivit upptagna för en sekund sedan. Vänligen välj andra platser";
+    }
   }
 
   async showInfo() {
@@ -49,10 +53,14 @@ class Message extends Component {
 
   removeMe() {
     this.baseEl.remove();
+    let greatLogin = Store.navBar.navLogins;
+    greatLogin.checkLogin();
     this.render();
   }
   goToIndex() {
     this.baseEl.remove();
+    let greatLogin = Store.navBar.navLogins;
+    greatLogin.checkLogin();
     // window.location.assign('/');
     this.render();
   }
