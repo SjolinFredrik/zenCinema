@@ -42,7 +42,7 @@ class SeatsGrid extends Component {
               let seat = bestRowSeats[s];
               let seatFriend = bestRowSeats[s-1];
               let seatIndex = bestRowSeats.indexOf(seat);
-              if (!seat.taken && seatIndex === bestSeatIndex) {
+              if (!seat.taken && seatIndex === bestSeatIndex && !seatFriend.taken) {
                 seat.best = true;
                 seatFriend.best = true;
                 this.chosenSeats = [];
