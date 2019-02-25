@@ -19,7 +19,13 @@ module.exports = class CreateRestRoutes {
         let result = await instance.save().catch(
           error => err = error
         )
-        res.json(err || result);
+        if(err) {
+          res.status(409).send();
+        }
+        else {
+          res.json(result);
+        }
+        
       });
    
       // read all instances

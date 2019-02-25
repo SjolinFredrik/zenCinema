@@ -20,7 +20,7 @@ class REST {
         contentType: 'application/json',
         processData: false,
         data: JSON.stringify(this)
-      }).catch(err => console.error(err));
+      });
       Object.assign(this, saved);
       return this;
     }

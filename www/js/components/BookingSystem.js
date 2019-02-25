@@ -100,12 +100,8 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-    let unavailable = await this.checkUnvailableSeats();
-    if(unavailable) {
-      alert('Seats have been booked just now!');
-    }
     
-    else if (this.loggedInUser && 
+    if (this.loggedInUser && 
       Store.chosenSeats !== undefined && 
       Store.reservedTickets !== undefined && 
       Store.reservedTickets !== 0 && 
@@ -120,7 +116,29 @@ class BookingSystem extends Component {
         "totalCost": Store.reservedTickets + " SEK"
       });
 
-      await this.newBooking.save();
+
+      try {
+        await this.newBooking.save();
+      } catch (error) {
+        if (error.status === 409) {
+      let takenSeats = await this.findTakenSeats();
+      for (let i = 0; i < takenSeats.length; i++) {
+        for (let j = 0; j < this.seatsGrid.grid.length; j++) {
+          let row = this.seatsGrid.grid[j];
+          for (let seat = 0; seat < row.seats.length; seat++) {
+            if (row.seats[seat].name === takenSeats[i]) {
+              row.seats[seat].taken = true;
+              row.seats[seat].render();
+            }
+          }
+        }
+      }    
+      this.message = new Message('alreadyBooked');
+      this.render();
+          return;
+        }
+        throw error;
+      }
 
       this.message = new Message('newBooking', this.newBooking);
       this.render();
