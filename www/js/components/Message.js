@@ -39,6 +39,10 @@ class Message extends Component {
       this.heading = 'Fel';
       this.text = 'Vänligen välj biljetter.';
     }
+    if (this.type === 'alreadyBooked') {
+      this.heading = 'Oops';
+      this.text = "Dessa platser har blivit upptagna för en sekund sedan. Vänligen välj andra platser";
+    }
   }
 
   async showInfo() {
