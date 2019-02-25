@@ -1,7 +1,10 @@
 .film-content {
   background: linear-gradient(rgba(0,0,0,1) 98%,rgba(0,0,0,0));
 
-  
+  h2 {
+    text-transform: capitalize;
+
+  }
   .film-cover-img, .film-mobile-img {
     position: relative;
     background-size: cover !important;
