@@ -104,14 +104,12 @@ class BookingSystem extends Component {
   }
 
   async saveBooking() {
-    
     if (this.loggedInUser && 
       Store.chosenSeats !== undefined && 
       Store.reservedTickets !== undefined && 
       Store.reservedTickets !== 0 && 
       Store.chosenSeats.length === Store.numOfTickets) {
       let number = await this.generateBookingNumber();
-
       this.newBooking = new Booking({
         "customer": this.loggedInUser ? this.loggedInUser._id : "Here will userId",
         "show": this.showing._id,
@@ -120,7 +118,7 @@ class BookingSystem extends Component {
         "totalCost": Store.reservedTickets + " SEK"
       });
 
-
+      //try to save and catch an error if chosen seats have been taken before this booking finished
       try {
         await this.newBooking.save();
       } catch (error) {

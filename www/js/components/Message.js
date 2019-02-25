@@ -53,12 +53,13 @@ class Message extends Component {
 
   removeMe() {
     this.baseEl.remove();
+    let greatLogin = Store.navBar.navLogins;
     greatLogin.checkLogin();
     this.render();
   }
   goToIndex() {
     this.baseEl.remove();
-    const greatLogin = Store.navBar.navLogins;
+    let greatLogin = Store.navBar.navLogins;
     greatLogin.checkLogin();
     // window.location.assign('/');
     this.render();

@@ -10,7 +10,6 @@ class NavLogin extends Component {
     this.loggedIn = false;
     this.checkLogin();
     this.parent = parent;
-    console.log(this.parent);
   }
   createRegisterForm() {
     this.parent.registerForm = new RegisterForm(this.parent, this);
@@ -42,9 +41,8 @@ class NavLogin extends Component {
       this.loggedInUser = result.user;
       Store.loggedInUser = this.loggedInUser;
       if (this.parent instanceof BookingSystem){
-      this.parent.render();
-      console.log(Store.navBar, 'navbar');
-      Store.navBar.render();
+      this.parent.loggedInUser = result.loggedIn;
+      // Store.navBar.render();
       this.parent.registerForm = 0;
       this.baseEl.remove();
       this.used = true;
