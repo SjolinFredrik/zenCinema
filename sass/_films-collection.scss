@@ -15,4 +15,11 @@
     letter-spacing: .15rem;
     text-shadow: 0 0 5px #000;
   }
+  .a-over {
+    height: 100%;
+  }
+  .carousel-control-prev,
+  .carousel-control-next {
+    z-index: 301;
+  }
 }
