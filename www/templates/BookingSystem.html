@@ -42,8 +42,8 @@
       <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-secondary" >Avbryt</button>      
       ${this.loggedInUser || Store.loggedInUser ? `
       <button type="button" class="btn btn-secondary save-booking" >Boka</button> ` : `
-      <p>Vänligen logga in eller skapa nytt konto för att boka biljetter</p>
       <button type="button" class="btn btn-secondary open-login-form" >Logga in</button> 
+      <p class="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p>
       `}
     </div>
     ${this.message ? this.message : ''}
