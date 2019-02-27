@@ -57,6 +57,7 @@ class Message extends Component {
     this.baseEl.remove();
     let greatLogin = Store.navBar.navLogins;
     greatLogin.checkLogin();
+    window.location.assign('/');
     this.render();
   }
 }

@@ -111,7 +111,7 @@ class BookingSystem extends Component {
       Store.chosenSeats.length === Store.numOfTickets) {
       let number = await this.generateBookingNumber();
       this.newBooking = new Booking({
-        "customer": this.loggedInUser ? this.loggedInUser._id : "Here will userId",
+        "customer": this.loggedInUser ? this.loggedInUser._id : "Here will be userId",
         "show": this.showing._id,
         "seats": Store.chosenSeats,
         "bookingNumber": number,
