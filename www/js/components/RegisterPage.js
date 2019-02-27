@@ -4,7 +4,6 @@ class RegisterPage extends Component {
     super();
     this.addRoute('/register', 'Register');
     this.registerForm = new RegisterForm(this, undefined);
-
   }
   
 }

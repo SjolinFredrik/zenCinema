@@ -3,7 +3,6 @@ class CustomerBookingsPage extends Component {
   constructor() {
     super();
     this.addRoute('/mina-bokningar', 'Mina bokningar');
-    this.bookings = [];
   }
 
   mount() {
@@ -14,19 +13,19 @@ class CustomerBookingsPage extends Component {
 
 
   async findBookings() {
+    this.bookings = [];
     let user = await Login.find();
     if (!user.loggedIn) {
+      return;
     }
     else {
       let userId = user.user._id;
-
       let customer = await User.find(`.findOne({_id: '${userId}'}).populate('bookings').exec()`);
       let customerBookings = customer.bookings;
 
       for (let booking of customerBookings) {
         let showId = booking.show;
         let showing = await Showing.find(`.findOne({_id: '${showId}'}).populate('film').exec()`);
-
         this.bookings.push({film: showing.film.title, date: showing.date, time: showing.time, bookingNr: booking.bookingNumber});
 
         function compare(a, b) {
@@ -45,6 +44,7 @@ class CustomerBookingsPage extends Component {
         this.bookings.sort(compare);
       }
       this.appendBookings();
+      this.render();
     }
     
   }
@@ -81,9 +81,7 @@ class CustomerBookingsPage extends Component {
         let convertedDate = bookingDate.customFormat('#DDDD# #DD# #MMMM# #YYYY#');
         this.customerArchiveBookings.push(new CustomerBooking(booking.film, convertedDate, booking.time, booking.bookingNr));
       }
-      
     }
-    this.render();
   }
 
 

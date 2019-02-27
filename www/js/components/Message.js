@@ -6,7 +6,7 @@ class Message extends Component {
     this.chooseHeadingAndText;
     this.addEvents( {
       'click .close-message': 'removeMe',
-      'click .close-and-goto': 'goToIndex'
+      'click .close-and-goto': 'removeMe'
     });
   }
 
@@ -51,13 +51,6 @@ class Message extends Component {
     this.baseEl.remove();
     let greatLogin = Store.navBar.navLogins;
     greatLogin.checkLogin();
-    this.render();
-  }
-  goToIndex() {
-    this.baseEl.remove();
-    let greatLogin = Store.navBar.navLogins;
-    greatLogin.checkLogin();
-    window.location.assign('/');
     this.render();
   }
 }
