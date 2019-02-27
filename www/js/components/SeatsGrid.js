@@ -10,6 +10,8 @@ class SeatsGrid extends Component {
     this.bookingSum.render();
   }
 
+
+
   createGrid() {
     let hall = [];
     for (let i = 0; i < this.schema.length; i++) {
@@ -25,42 +27,44 @@ class SeatsGrid extends Component {
         row.seats.push(seat);
       }
       hall.push(row);
-      for (let i = 0; i < hall.length; i++) {
-        let row = hall[i];
-        let rowIndex = hall.indexOf(row);
-        for (let best = 0; best < this.bestRows.length; best++) {
-          if (rowIndex === this.bestRows[best] - 1) {
-            row.best = true;
-          }
-        }
-        for (let best = 0; best < this.bestRows.length; best++) {
-          if (rowIndex === this.bestRows[best] - 1) {
-            row.best = true;
-            let bestSeatIndex = Math.floor((row.seats.length + 1) / 2);
-            let bestRowSeats = row.seats;
-            for (let s = 0; s < bestRowSeats.length; s++) {
-              let seat = bestRowSeats[s];
-              let seatFriend = bestRowSeats[s-1];
-              let seatIndex = bestRowSeats.indexOf(seat);
-              if (!seat.taken && seatIndex === bestSeatIndex && !seatFriend.taken) {
-                seat.best = true;
-                seatFriend.best = true;
-                this.chosenSeats = [];
-                Store.chosenSeats = [];
-                this.chosenSeats.push(seat, seatFriend);
-                Store.chosenSeats.push(seat.name, seatFriend.name);
-              }
-            }
-          }
-          else if (Store.chosenSeats !== undefined) {
-            break;
-          }
-          else {
-            continue;
-          }   
+    }
+
+    for (let i = 0; i < hall.length; i++) {
+      let row = hall[i];
+      let rowIndex = hall.indexOf(row);
+      for (let best = 0; best < this.bestRows.length; best++) {
+        if (rowIndex === this.bestRows[best] - 1) {
+          row.best = true;
         }
       }
     }
+
+    delete this.chosenSeats;
+    delete Store.chosenSeats;
+
+    for (let row of hall.filter(row => row.best)) {
+      let bestSeatIndex = Math.floor((row.seats.length + 1) / 2);
+      let bestRowSeats = row.seats;
+      
+      for (let s = 0; s < bestRowSeats.length; s++) {
+        let seat = bestRowSeats[s];
+        let seatFriend = bestRowSeats[s-1];
+        let seatIndex = bestRowSeats.indexOf(seat);
+        
+        if (!seat.taken && seatIndex === bestSeatIndex && !seatFriend.taken) {
+          seat.best = true;
+          seatFriend.best = true;
+          this.chosenSeats = [seat, seatFriend];
+          Store.chosenSeats = [seat.name, seatFriend.name];
+          break;
+        }
+      }
+
+      if (this.chosenSeats) {
+        break;
+      }
+    }
+    
     return hall;
   }
 
