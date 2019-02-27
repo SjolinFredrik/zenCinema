@@ -38,6 +38,11 @@ class BookingSystem extends Component {
     });
   }
 
+  unmount() {
+    Store.chosenSeats = [];
+    console.log(Store.chosenSeats);
+
+  }
   async showingData(showingId) {
     let showing = await Showing.find(showingId);
     return showing;
@@ -145,9 +150,7 @@ class BookingSystem extends Component {
       this.message = new Message('newBooking', this.newBooking);
       this.render();
       this.newBooking = '';
-      Store.chosenSeats.length = 0;
-          
-
+      delete Store.chosenSeats;
     }
     else if (Store.chosenSeats === undefined || Store.chosenSeats.length === 0) {
       this.message = new Message('chooseSeats');

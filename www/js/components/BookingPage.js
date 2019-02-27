@@ -8,4 +8,8 @@ class BookingPage extends Component {
     this.render();
     this.baseEl.modal('show');
   }
+
+  unmount() {
+    Store.chosenSeats = [];
+  }
 }
