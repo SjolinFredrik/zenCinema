@@ -42,7 +42,6 @@ class NavLogin extends Component {
       Store.loggedInUser = this.loggedInUser;
       if (this.parent instanceof BookingSystem){
       this.parent.loggedInUser = result.loggedIn;
-      // Store.navBar.render();
       this.parent.registerForm = 0;
       this.baseEl.remove();
       this.used = true;

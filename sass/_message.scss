@@ -8,7 +8,7 @@
   background-color: transparent;
   padding: 15%;
   @include media-breakpoint-down(xs) {
-    top: 20%;
+    top: 50%;
     padding: 0;
   }
   .message {
