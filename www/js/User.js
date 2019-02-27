@@ -9,7 +9,8 @@ class User extends REST {
       "password": $('.password-input').val(),
     });
 
-    await user.save();
+    // await user.save();
+    return await user.save();
   }
 
   

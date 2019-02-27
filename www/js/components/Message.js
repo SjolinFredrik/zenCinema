@@ -6,9 +6,8 @@ class Message extends Component {
     this.chooseHeadingAndText;
     this.addEvents( {
       'click .close-message': 'removeMe',
-      'click .close-and-goto': 'goToIndex'
+      'click .close-and-goto': 'removeMe'
     });
-    
   }
 
   get chooseHeadingAndText() {
@@ -23,10 +22,7 @@ class Message extends Component {
         this.render();
       });
     }
-    // if (this.type === 'newUser') {
-    //   this.heading = 'User har skapat';
-    //   this.text = 'Hitta på någon text, var snälla!'
-    // }
+
     if(this.type === 'mustLogIn') {
       this.heading = 'Ej inloggad!';
       this.text = 'Du måste logga in innan bokning!';
@@ -39,6 +35,10 @@ class Message extends Component {
       this.heading = 'Fel';
       this.text = 'Vänligen välj biljetter.';
     }
+    if (this.type === 'alreadyBooked') {
+      this.heading = 'Oops';
+      this.text = "Dessa platser har blivit upptagna för en sekund sedan. Vänligen välj andra platser";
+    }
   }
 
   async showInfo() {
@@ -49,11 +49,8 @@ class Message extends Component {
 
   removeMe() {
     this.baseEl.remove();
-    this.render();
-  }
-  goToIndex() {
-    this.baseEl.remove();
-    window.location.assign('/');
+    let greatLogin = Store.navBar.navLogins;
+    greatLogin.checkLogin();
     this.render();
   }
 }

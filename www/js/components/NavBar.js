@@ -7,7 +7,7 @@ class NavBar extends Component {
       new NavItem('Filmer', '/films'),
       new NavItemDropdown()
     ];
-    this.navLogins = new NavLogin();
+    this.navLogins = new NavLogin(this);
   }
 
 }
