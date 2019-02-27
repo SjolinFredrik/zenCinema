@@ -8,7 +8,6 @@ class Message extends Component {
       'click .close-message': 'removeMe',
       'click .close-and-goto': 'goToIndex'
     });
-    
   }
 
   get chooseHeadingAndText() {
@@ -23,10 +22,7 @@ class Message extends Component {
         this.render();
       });
     }
-    // if (this.type === 'newUser') {
-    //   this.heading = 'User har skapat';
-    //   this.text = 'Hitta på någon text, var snälla!'
-    // }
+
     if(this.type === 'mustLogIn') {
       this.heading = 'Ej inloggad!';
       this.text = 'Du måste logga in innan bokning!';
@@ -61,7 +57,6 @@ class Message extends Component {
     this.baseEl.remove();
     let greatLogin = Store.navBar.navLogins;
     greatLogin.checkLogin();
-    // window.location.assign('/');
     this.render();
   }
 }
