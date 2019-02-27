@@ -68,5 +68,4 @@ class NavLogin extends Component {
     Store.loggedInUser = undefined;
     this.render();
   }
-
 }

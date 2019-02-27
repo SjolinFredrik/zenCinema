@@ -19,11 +19,18 @@ class RegisterForm extends Component {
         Store.newUser = user.email;
         $('.welcome').prepend(`
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Användare skapad!</strong> Du kan nu logga in.
+          <strong>Användare skapad!</strong> Du kan nu logga efter .
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>`);
+        let alert = this.baseEl.find('.alert');
+        alert.siblings().remove();
+        if(this.parent instanceof RegisterPage) {
+          setTimeout(() => {
+            window.location.assign('/films');
+            }, 1000);
+        }
         if (this.parent instanceof BookingSystem) {
           this.creator.render();
           this.creator.baseEl.find('#emailf').val(user.email);
