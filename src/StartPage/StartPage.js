@@ -4,6 +4,7 @@ import {
   Row,
   Col
 } from 'reactstrap';
+import ZenCoin from '../StartPage/ZenCoin'
 
 export default class StartPage extends React.Component {
   render() {
@@ -23,7 +24,7 @@ export default class StartPage extends React.Component {
               <Container className="fluid">
                 <Row>
                   <Col xs="12" className="mb-5 rounded border border-secondary px-0">
-                    Här kommer ZenCoin
+                    <ZenCoin />
                     <div className="bg-light border-top border-dark p-3">
                       <h3>ZenCoins</h3>
                       <p>Snart lanserar vi vår senaste nyhet, ZenCoins! Dessa kommer att intjänas genom de bokningar ni gör hos oss.</p>
