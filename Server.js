@@ -22,6 +22,7 @@ const flexjson = require('jsonflex')({
   loadUrlPrefix: '/json/' // prefix to add to clientside load url
 });
 
+
 module.exports = class Server {
 
   constructor() {
