@@ -9,7 +9,7 @@ Continue with following steps:
 4. execute ```node addSaloonsToDB```
 5. execute ```node updateSaloonsBestRows```
 6. execute ```node createShowings```
-7. start application with ```nodemon``` or ```node index```
+7. start application with ```npm start```
 
 
 
