@@ -44,7 +44,7 @@ class NavBar extends Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
                 </ul>
-
+              Plats för Logga In 
               </div>
             </Navbar>
     )
