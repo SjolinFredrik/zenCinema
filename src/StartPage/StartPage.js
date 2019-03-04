@@ -5,6 +5,8 @@ import {
   Col
 } from 'reactstrap';
 
+import CalendarShowing from '../StartPage/CalendarShowing';
+
 export default class StartPage extends React.Component {
   render() {
     return (
@@ -54,7 +56,7 @@ export default class StartPage extends React.Component {
                     </div>
                   </Col>
                   <Col xs="12" className="border px-0 border-secondary rounded mb-5">
-                    här kommer zonkydarioum
+                    <CalendarShowing />
                   </Col>
                 </Row>
               </Container>
