@@ -16,7 +16,6 @@ export default class CalendarShowing extends React.Component {
     let today = new Date().getTime();
     //this.showingData = await Showing.find(`.find({date: {$gte: ${today}}}).limit(9).sort({$natural: 1}).populate('film').exec()`);
     //console.log(this.showingData)    
-    //this.render();
     this.showingData = [
       { name: "Knatte" },
       { name: "Tjatte" },
