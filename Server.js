@@ -51,9 +51,9 @@ module.exports = class Server {
     // Add body-parser to our requests
     app.use(bodyParser.json());
 
-    app.all('/json/*', (req,res) => {
+    /* app.all('/json/*', (req,res) => {
       res.json({url: req.url, ok: true});
-    });
+    }); */
 
     // Add session (and cookie) handling to Express
     app.use(session({
