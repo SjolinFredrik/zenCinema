@@ -1,5 +1,8 @@
 .techinfo-content {
   background: #000;
+  .table {
+    color: $secondary;
+  }
   .speakers-img {
     position: relative;
     background-size: cover !important;
