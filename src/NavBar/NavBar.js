@@ -31,7 +31,7 @@ class NavBar extends Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem >
-                  <NavLink className="dropdown-item" to="/om-oss/salonger">Våra salonger</NavLink>
+                  <NavLink className="dropdown-item" to="/om-oss/våra-salonger">Våra salonger</NavLink>
                   </DropdownItem>
                   <DropdownItem >
                   <NavLink className="dropdown-item" to="/om-oss/regler">Regler</NavLink>
