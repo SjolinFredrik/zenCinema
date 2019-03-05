@@ -30,7 +30,7 @@ export default class SaloonPage extends React.Component {
                     auditoriumvärlden där inget av de tekniska moderniteter och bekvämligheter har tummats på.
                     Till ZenMongouse går man inte för att "titta" på film utan man är där för att uppleva
                     och verkligen känna atmosfären av verklig filmmagi. Varmt välkommen!
-              </p>
+                  </p>
                 </Col>
                 <Col sm="6">
                   <table className="table mt-2">
@@ -70,7 +70,7 @@ export default class SaloonPage extends React.Component {
                 3D utan glasögon och besökare som lider av lindrigare ögonproblem har nu chansen
                 att uppleva bländande 3D. Detta tackvare ett samarbete mellan topmeriterade
                 ögonläkare och 3D-teknikens absoluta bästa ingenjörer. Välkommen!
-          </p>
+              </p>
               <div className="mt-5">
                 <table className="table">
                   <tbody>
@@ -97,7 +97,7 @@ export default class SaloonPage extends React.Component {
                 "som en bikram-yogans Ferrari bland biografsalonger". Den senaste ljudtekniken ger en
                 fantastisk upplevelse som sent ska glömmas. Efter besöket bjuder vi alla på perfekt
                 tempererat ingefära-te och härligt nybakade skorpor. Hoppas vi ses!
-          </p>
+              </p>
               <div className="mt-5">
                 <table className="table">
                   <tbody>
