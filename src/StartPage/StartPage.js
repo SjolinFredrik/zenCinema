@@ -33,7 +33,7 @@ export default class StartPage extends React.Component {
                     </div>
                   </Col>
                   <Col xs="12" className="mb-5 rounded border border-secondary px-0">
-                    <a href="/om-oss/salonger">
+                    <a href="/om-oss/våra-salonger">
                       <img className="img-fluid rounded-top" src="/images/cinema.jpg" alt="Bild på salong" />
                     </a>
                     <div className="bg-light border-top border-dark p-3">

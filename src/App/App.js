@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavBar from '../NavBar/NavBar';
 import StartPage from '../StartPage/StartPage';
 import KioskPage from '../About-us/KioskPage';
+import SaloonPage from '../About-us/SaloonPage';
 import Footer from '../Footer/Footer';
 
 
@@ -17,6 +18,7 @@ class App extends Component {
           <header><NavBar /></header>
           <Route exact path="/" component={StartPage} />
           <Route path ="/om-oss/kiosken" component={KioskPage}/>
+          <Route path ="/om-oss/våra-salonger" component={SaloonPage}/>
           <footer><Footer /></footer>
         </div>
       </Router>
