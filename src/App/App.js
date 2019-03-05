@@ -18,10 +18,12 @@ class App extends Component {
       <Router>
         <div className="App">
           <header><NavBar /></header>
-          <Route exact path="/" component={StartPage} />
-          <Route path="/om-oss/kiosken" component={KioskPage} />
-          <Route path="/om-oss/regler" component={RulePage} />
-          <Route path="/om-oss/våra-salonger" component={SaloonPage} />
+          <main>
+            <Route exact path="/" component={StartPage} />
+            <Route path="/om-oss/kiosken" component={KioskPage} />
+            <Route path="/om-oss/regler" component={RulePage} />
+            <Route path="/om-oss/våra-salonger" component={SaloonPage} />
+          </main>
           <footer><Footer /></footer>
         </div>
       </Router>
