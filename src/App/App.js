@@ -7,8 +7,11 @@ import NavBar from '../NavBar/NavBar';
 
 
 class App extends Component {
+
+
   render() {
     return (
+
       <Router>
         <div className="App">
           <header><NavBar /></header>
