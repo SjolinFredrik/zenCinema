@@ -7,6 +7,7 @@ import StartPage from '../StartPage/StartPage';
 import KioskPage from '../About-us/KioskPage';
 import SaloonPage from '../About-us/SaloonPage';
 import Footer from '../Footer/Footer';
+import RegisterPage from '../User/RegisterPage';
 
 
 
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/" component={StartPage} />
           <Route path ="/om-oss/kiosken" component={KioskPage}/>
           <Route path ="/om-oss/våra-salonger" component={SaloonPage}/>
+          <Route path="/registrera" component={RegisterPage} />
           <footer><Footer /></footer>
         </div>
       </Router>
