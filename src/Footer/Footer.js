@@ -4,14 +4,14 @@ import {Container} from 'reactstrap';
 export default class Footer extends React.Component {
   render() {
     return (
-      <div class="text-center py-3 bg-primary">
+      <div className="text-center py-3 bg-primary">
         <Container fluid>
-          <p class="footer-heading">ZenCinema &copy; 2019</p>
+          <p className="footer-heading">ZenCinema &copy; 2019</p>
           <div>
-            <a href="https://www.facebook.com/Zen-Cinema-927900333936011/" title="Hitta oss på Facebook" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook-square fa-2x"></i>&nbsp;</a>
-            <a href="https://www.twitter.com" title="Hitta oss på Twitter" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>&nbsp;</a>
-            <a href="https://www.instagram.com" title="Hitta oss på Instagram" target="_blank" rel="noopener noreferrer"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i>&nbsp;</a>
-            <a href="https://www.google.com/maps/place/2617+Los+Arcos+Cir,+Thousand+Oaks,+CA+91360,+USA/@34.2147131,-118.8679543,18.66z/data=!4m5!3m4!1s0x80e83018e100ba8d:0xd35e7451ec27c025!8m2!3d34.21447!4d-118.867164" title="Hitta oss på Google Maps" target="_blank" rel="noopener noreferrer"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></i>&nbsp;</a>
+            <a href="https://www.facebook.com/Zen-Cinema-927900333936011/" title="Hitta oss på Facebook" target="_blank" rel="noopener noreferrer"><i className="fa fa-facebook-square fa-2x"></i>&nbsp;</a>
+            <a href="https://www.twitter.com" title="Hitta oss på Twitter" target="_blank" rel="noopener noreferrer"><i className="fa fa-twitter-square fa-2x" aria-hidden="true"></i>&nbsp;</a>
+            <a href="https://www.instagram.com" title="Hitta oss på Instagram" target="_blank" rel="noopener noreferrer"><i className="fa fa-instagram fa-2x" aria-hidden="true"></i>&nbsp;</a>
+            <a href="https://www.google.com/maps/place/2617+Los+Arcos+Cir,+Thousand+Oaks,+CA+91360,+USA/@34.2147131,-118.8679543,18.66z/data=!4m5!3m4!1s0x80e83018e100ba8d:0xd35e7451ec27c025!8m2!3d34.21447!4d-118.867164" title="Hitta oss på Google Maps" target="_blank" rel="noopener noreferrer"><i className="fa fa-map-marker fa-2x" aria-hidden="true"></i>&nbsp;</a>
           </div>
         </Container>
       </div>
