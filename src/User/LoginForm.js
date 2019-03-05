@@ -1,6 +1,15 @@
 import React from 'react';
 import {
-  ButtonGroup
+  ButtonGroup,
+  Form,
+  FormGroup,
+  DropdownMenu,
+  Label,
+  Button,
+  Input,
+  DropdownItem,
+  UncontrolledDropdown,
+  DropdownToggle
 } from 'reactstrap';
 import REST from '../REST';
 import Login from '../Login';
@@ -11,6 +20,9 @@ export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.parent = props.myParent;
+    this.state = {
+      dropdownOpen: false
+    };
     this.checkLogin().then(response => {return response.json()}).then(data => {
       console.log(data);
       if(data.loggedIn) {
@@ -20,13 +32,19 @@ export default class LoginForm extends React.Component {
         this.state = {loggedIn: false};
       }
     console.log(this.state);
+    this.toggle = this.toggle.bind(this);
+    
 
     });
     // console.log(this.parent.props, 'from constructor');
     // this.state = {loggedIn: false};
   }
 
-  
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
 
   async checkLogin() {
     let login = await fetch('/json/login');
@@ -51,10 +69,27 @@ export default class LoginForm extends React.Component {
         </button>
       }
       else {
-        result = <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="LoginToggle" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Logga in
-        </button>
+        result = <UncontrolledDropdown >
+          <DropdownToggle tag="button" type="button" className="btn btn-outline-secondary" caret>
+          Logga in
+        </DropdownToggle>
+        <DropdownMenu className="dropdown-menu-lg-right login-menu">
+          <Form>
+            <FormGroup >
+                <Label for="exampleDropdownFormEmail1">Epost</Label>
+                <Input type="email" className="form-control email-login-input" id="exampleDropdownFormEmail1" placeholder="email@example.com" />
+            </FormGroup>
+            <FormGroup className="form-group">
+              <Label for="exampleDropdownFormPassword1">Lösenord</Label>
+              <Input type="password" className="form-control password-login-input" id="exampleDropdownFormPassword1" placeholder="Password" />
+            </FormGroup>
+            <Button className="btn btn-primary login-btn mt-2">Logga in</Button>
+          </Form>
+          <DropdownItem divider />
+                  
+          <DropdownItem className="dropdown-item" href="/register">Registrera ny användare</DropdownItem>
+        </DropdownMenu>
+        </UncontrolledDropdown>
       }
     }
       console.log(result);
