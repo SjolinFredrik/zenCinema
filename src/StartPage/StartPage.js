@@ -11,7 +11,7 @@ import CalendarShowing from '../StartPage/CalendarShowing';
 export default class StartPage extends React.Component {
   render() {
     return (
-      <Container className="fluid">
+      <Container fluid>
         <Row>
           <Col xs="12" className="px-0">
             <div className="startpage-carousel">
@@ -23,7 +23,7 @@ export default class StartPage extends React.Component {
         <Container className="main-container-fade text-dark">
           <Row className="py-5">
             <Col xs="12" md="6">
-              <Container className="fluid">
+              <Container fluid>
                 <Row>
                   <Col xs="12" className="mb-5 rounded border border-secondary px-0">
                     <ZenCoin />
@@ -45,7 +45,7 @@ export default class StartPage extends React.Component {
               </Container>
             </Col>
             <Col xs="12" md="6">
-              <Container className="fluid">
+              <Container fluid>
                 <Row>
                   <Col xs="12" className="mb-5 rounded border cinema-link border-secondary px-0">
                     <a href="/om-oss/kiosken">
