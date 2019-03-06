@@ -2,18 +2,21 @@ html {
   background: #000;
 }
 
-body > div{
+#root{
     font-family: 'Roboto', sans-serif;
     background-color: $primary;
     color: $secondary;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
     background: #000 url(/images/movie-curtain.png) fixed;
     background-size: cover;
-    main {
-        flex: 1;
-    }
+}
+
+body > div > div{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  main {
+    flex: 1;
+  }
 }
 
 ::selection {
