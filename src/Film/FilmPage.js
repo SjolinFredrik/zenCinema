@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-// Här ska FilmPageContent importeras
+import FilmPageContent from './FilmPageContent';
 
 export default class FilmPage extends React.Component {
 
@@ -13,19 +13,26 @@ export default class FilmPage extends React.Component {
 
   componentDidMount() {
     let path = window.location.pathname;
-    const film = path.split('/')[2].split('-').join(' ');
-    this.findFilm(film)
+    const filmLink = path.split('/')[2];
+    this.findFilm(filmLink)
       .then(data => {
-        this.film = data[0]._id;
+        if (data) {
+          this.setState({ content: <FilmPageContent props={data} /> });
+        }
+        else {
+          this.setState({ content: 'FEEEEEEL!' });
+        }
       })
-      .then(() => {
-        this.setState({ content: <FilmPageContent film={this.film} /> });
-      });
+      
   }
 
-  async findFilm(film) {
-    let filmId; // Här ska det hämtas film med rätt ID
-    return filmId;
+  findFilm(filmLink) {
+    return fetch('/json/films/')
+    .then(response => {return response.json()})
+    .then(data => {
+      const found = data.find(element => { return element.link === filmLink });
+      return found;
+    })
   }
 
   render() {
