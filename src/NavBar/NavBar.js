@@ -7,32 +7,43 @@ import {
   DropdownToggle,
   DropdownItem,
   DropdownMenu,
-  UncontrolledDropdown
+  UncontrolledDropdown,
+  NavbarToggler,
+  Nav,
+  Collapse
 } from 'reactstrap';
 import LoginForm from '../User/LoginForm';
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
+    this.toggleNavbar = this.toggleNavbar.bind(this);
+    this.state = {
+      collapsed: true
+    };
     this.name = 'NavBar'
+  }
+
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
   }
   render () {
     return (
       <Navbar className="navbar-expand-lg navbar-dark bg-primary">
-        <Link to="/"><img src="/images/zc-logo.png" alt="ZenCinema Logo" /></Link>
-        <Button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </Button>
+              <Link to="/"><img src="/images/zc-logo.png" alt="ZenCinema Logo"/></Link>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
-            <NavItem>
-              <NavLink className="nav-link" to="/">Start</NavLink>
-            </NavItem>
-            <NavItem><NavLink className="nav-link" to="/filmer">Filmer</NavLink></NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle className="about-us" nav caret>
-                Om Oss
+              <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+              <Collapse isOpen={!this.state.collapsed} navbar>
+                <Nav navbar className="mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
+                <NavItem>
+                <NavLink className="nav-link" to="/">Start</NavLink>
+                </NavItem>
+                <NavItem><NavLink className="nav-link" to="/films">Filmer</NavLink></NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle className="about-us" nav caret>
+                  Om Oss
                 </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem >
@@ -48,27 +59,12 @@ class NavBar extends Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-                </ul>
-              Plats för Logga In 
-              </div>
-      </Navbar>
+                </Nav>
+                <LoginForm myParent={this.name}  />
+              </Collapse>
+            </Navbar>
     )
   }
 }
 
 export default withRouter(NavBar);
-
-
-// <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-//   <a href="/"><img src="/images/zc-logo.png" alt="ZenCinema Logo"></a>
-//   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-//     <span class="navbar-toggler-icon"></span>
-//   </button>
-
-//   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-//     <ul class="navbar-nav mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
-//       ${this.navItems}
-//     </ul>
-//     ${this.navLogins}
-//   </div>
-// </nav>
