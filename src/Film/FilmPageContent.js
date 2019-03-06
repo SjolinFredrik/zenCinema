@@ -5,6 +5,7 @@ import {
   Col
 } from 'reactstrap';
 import Film from './Film';
+import Showings from './Showings';
 
 export default class FilmPageContent extends React.Component {
   render() {
@@ -19,7 +20,7 @@ export default class FilmPageContent extends React.Component {
           {/* Förstår col nedanför vad attributet id är? */}
             <Col xs="12" className="pt-3 pb-5 px-0 px-md-5" id="film-shows">
               <h2 className="mb-5 text-center">Visningar</h2>
-              Visningar för film ska visas här!
+              <Showings data={filmProps} />
             </Col>
           </Row>
         </Container>
