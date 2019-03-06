@@ -10,9 +10,9 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Col
+  Col, 
+  Badge
 } from 'reactstrap';
-import REST from '../REST';
 import Login from '../Login';
 import Store from '../Store';
 
@@ -33,8 +33,6 @@ export default class LoginForm extends React.Component {
     let email = document.getElementById('emailf').value;
     let password = document.getElementById('pwdf').value;
 
-    console.log(email, password);
-
     let login = new Login({
       email: email,
       password: password
@@ -42,28 +40,28 @@ export default class LoginForm extends React.Component {
 
 
     let result = await login.save();
-    console.log(result, 'login result');
+    this.setState({errorLogin: null});
 
     if (result.loggedIn) {
       this.setState({loggedIn: true, loggedInUser: result.user});
       this.loggedInUser = result.user;
       Store.loggedInUser = this.loggedInUser;
-      // if (this.parent instanceof BookingSystem){
-      // this.parent.loggedInUser = this.loggedInUser;
-      // this.parent.registerForm = 0;
-      // this.baseEl.remove();
-      // this.used = true;
-      // this.parent.render();
-      // }
-      this.render();
+
+      //Next if should be fixed after BookingSystem refaktoring
+      if (this.parent === "BookingSystem"){
+      this.parent.loggedInUser = this.loggedInUser;
+      this.parent.registerForm = 0;
+      this.baseEl.remove();
+      this.used = true;
+      this.parent.render();
+      }
     }
     else {
-      window.alert('error while login');
+      this.setState({errorLogin: true});
     }
   }
 
   clickLoginBtn(e) {
-    // this.setState({loggedIn: true});
     e.preventDefault();
     this.login();
     this.checkLogin();
@@ -90,7 +88,6 @@ export default class LoginForm extends React.Component {
 
   componentDidMount() {
     this.checkLogin().then(data => {
-      console.log(data, 'checked');
       if(data.loggedIn) {
         this.setState({loggedIn: true, loggedInUser: data.user});
       }
@@ -105,7 +102,6 @@ export default class LoginForm extends React.Component {
     let result;
 
     if (this.parent === 'NavBar') {
-      console.log(this.state);
       if(this.state.loggedIn) {
 
          result= <div className="login-form"><ButtonGroup><UncontrolledDropdown>
@@ -134,7 +130,9 @@ export default class LoginForm extends React.Component {
               <Label for="pwdf">Lösenord</Label>
               <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password" />
             </FormGroup>
+            {this.state.errorLogin ? <Badge color="danger" >Felaktig epost eller lösenord!</Badge> : null}
             <Button color="primary" className="btn btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
+            
           </Form>
           <DropdownItem divider />
                   
@@ -144,8 +142,8 @@ export default class LoginForm extends React.Component {
 
       }
     }
-
-    else if (this.parent === 'BookingPage') {
+//this else-if should be tested after BookingSystem refaktoring
+    else if (this.parent === 'BookingSystem') {
       result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
            <Col sm="4">
                <Form className="welcome">
@@ -166,16 +164,10 @@ export default class LoginForm extends React.Component {
           
        </div>
           this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
-
     }
     return (
       <div>{result}</div>
     )
-
-
-    
-
-    
   }
 }
 
