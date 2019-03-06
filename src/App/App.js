@@ -22,15 +22,14 @@ class App extends Component {
 
 
   render() {
-    const filmRegex = /^\/film\/[a-z0-9\-]+$/;
+    const filmRegex = /^\/filmer\/[a-z0-9\-]+$/;
     return (
-
       <Router>
         <div className="App">
           <header><NavBar /></header>
           <main>
             <Route exact path="/" component={StartPage} />
-            <Route path="/filmer" component={FilmCollectionPage} />
+            <Route exact path="/filmer" component={FilmCollectionPage} />
             <Route exact path={filmRegex} component={FilmPage} />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
