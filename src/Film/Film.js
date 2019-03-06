@@ -1,4 +1,5 @@
 import React from 'react';
+import Trailer from '../Film/Trailer';
 import {
   Container,
   Row,
@@ -51,7 +52,7 @@ export default class Film extends React.Component {
                 <dd><span>Skådespelare:</span> {this.props.props.actors.join(', ')}</dd>
               </dl>
             </Col>
-            Här ska trailer komponenten vara!!!
+            <Trailer trailerMovie={this.props.props.link}/>
           </Row>
         </Container>
       </Col>
