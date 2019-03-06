@@ -4,13 +4,15 @@ import {
   Row,
   Col
 } from 'reactstrap';
+import Film from './Film';
 
 export default class FilmPageContent extends React.Component {
   render() {
+    let filmProps = this.props.props;
     return (
       <Container fluid className="p-0">
         <Row className="film-page-content">
-          Här ska film visas
+          <Film props={filmProps} />
         </Row>
         <Container className="main-container-fade">
           <Row className="film-page-shows">
