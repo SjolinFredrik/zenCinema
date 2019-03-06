@@ -8,12 +8,14 @@ import KioskPage from '../About-us/KioskPage';
 import RulePage from '../About-us/RulePage';
 import SaloonPage from '../About-us/SaloonPage';
 import Footer from '../Footer/Footer';
+import FilmPage from '../Film/FilmPage';
 
 
 
 
 class App extends Component {
   render() {
+    const filmRegex = /^\/film\/[a-z0-9\-]+$/;
     return (
       <Router>
         <div className="App">
@@ -22,6 +24,7 @@ class App extends Component {
           <Route path="/om-oss/kiosken" component={KioskPage} />
           <Route path="/om-oss/regler" component={RulePage} />
           <Route path="/om-oss/våra-salonger" component={SaloonPage} />
+          <Route exact path={filmRegex} component={FilmPage} />
           <footer><Footer /></footer>
         </div>
       </Router>
