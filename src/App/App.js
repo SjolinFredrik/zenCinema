@@ -19,9 +19,12 @@ import Footer from '../Footer/Footer';
 
 
 class App extends Component {
+
+
   render() {
     const filmRegex = /^\/film\/[a-z0-9\-]+$/;
     return (
+
       <Router>
         <div className="App">
           <header><NavBar /></header>

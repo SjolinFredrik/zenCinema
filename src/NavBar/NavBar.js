@@ -9,9 +9,14 @@ import {
   DropdownMenu,
   UncontrolledDropdown
 } from 'reactstrap';
+import LoginForm from '../User/LoginForm';
 
 class NavBar extends Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.name = 'NavBar'
+  }
+  render () {
     return (
       <Navbar className="navbar-expand-lg navbar-dark bg-primary">
         <Link to="/"><img src="/images/zc-logo.png" alt="ZenCinema Logo" /></Link>
@@ -40,11 +45,11 @@ class NavBar extends Component {
                 </DropdownItem>
                 <DropdownItem >
                   <NavLink className="dropdown-item" to="/om-oss/kiosken">Kiosken</NavLink>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </ul>
-          Plats för Logga In
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+                </ul>
+              Plats för Logga In 
               </div>
       </Navbar>
     )
