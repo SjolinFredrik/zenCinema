@@ -5,6 +5,11 @@
   .btn {
     width: 100%;
   }
+  .badge-danger {
+    position: absolute;
+    z-index: 100;
+    bottom: 110px;
+  }
 }
 
 .booking-system {
