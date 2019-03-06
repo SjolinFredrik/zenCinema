@@ -20,7 +20,6 @@ import Footer from '../Footer/Footer';
 
 class App extends Component {
 
-
   render() {
     const filmRegex = /^\/filmer\/[a-z0-9\-]+$/;
     return (
