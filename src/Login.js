@@ -10,9 +10,7 @@ export default class Login extends REST {
     // But we can still use the REST class
     // to minimize the amount of code we have to write...
     // See test.js
-    constructor() {
-      super();
-    }
+    
    
     static get baseRoute() {
       return 'login/';
