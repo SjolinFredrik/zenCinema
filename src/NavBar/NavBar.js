@@ -9,8 +9,16 @@ import {
   DropdownMenu,
   UncontrolledDropdown
 } from 'reactstrap';
+import LoginForm from '../User/LoginForm';
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.name = 'NavBar'
+
+
+  }
   render () {
     return (
       <Navbar className="navbar-expand-lg navbar-dark bg-primary">
@@ -44,7 +52,7 @@ class NavBar extends Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
                 </ul>
-              Plats för Logga In 
+              <LoginForm myParent={this.name}  />
               </div>
             </Navbar>
     )
