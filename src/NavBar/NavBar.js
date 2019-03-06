@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, NavLink, Link} from "react-router-dom";
+import { withRouter, NavLink, Link } from "react-router-dom";
 import {
   Navbar,
   NavItem,
@@ -45,16 +45,16 @@ class NavBar extends Component {
                 <DropdownToggle className="about-us" nav caret>
                   Om Oss
                 </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem >
+              <DropdownMenu right>
+                <DropdownItem >
                   <NavLink className="dropdown-item" to="/om-oss/våra-salonger">Våra salonger</NavLink>
-                  </DropdownItem>
-                  <DropdownItem >
+                </DropdownItem>
+                <DropdownItem >
                   <NavLink className="dropdown-item" to="/om-oss/regler">Regler</NavLink>
 
-                  
-                  </DropdownItem>
-                  <DropdownItem >
+
+                </DropdownItem>
+                <DropdownItem >
                   <NavLink className="dropdown-item" to="/om-oss/kiosken">Kiosken</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
