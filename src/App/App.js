@@ -35,9 +35,9 @@ class App extends Component {
             <Route exact path={filmRegex} component={FilmPage} />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
-            <Route path="/om-oss/våra-salonger" component={SaloonPage} />
+            <Route path="/om-oss/vara-salonger" component={SaloonPage} />
+            <Route path="/registrera" component={RegisterPage} />
           </main>
-          <Route path="/registrera" component={RegisterPage} />
           <footer><Footer /></footer>
         </div>
       </Router>
