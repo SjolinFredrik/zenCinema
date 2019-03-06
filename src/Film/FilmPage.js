@@ -16,7 +16,12 @@ export default class FilmPage extends React.Component {
     const filmLink = path.split('/')[2];
     this.findFilm(filmLink)
       .then(data => {
-        this.setState({ content: <FilmPageContent props={data} /> });
+        if (data) {
+          this.setState({ content: <FilmPageContent props={data} /> });
+        }
+        else {
+          this.setState({ content: 'FEEEEEEL!' });
+        }
       })
       
   }
