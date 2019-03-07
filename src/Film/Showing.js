@@ -13,7 +13,7 @@ export default class Showing extends React.Component {
 
   render() {
     return (
-      <Col xs="12" md="10" className="offset-md-1 px-0 text-left">
+      <Col xs="12" md="10" className="showing offset-md-1 px-0 text-left">
         <Container fluid>
           <Row className="px-0">
             <Col xs="4" md="3" className="pl-2 pr-0">
@@ -33,7 +33,7 @@ export default class Showing extends React.Component {
               {this.props.data.time}
             </Col>
             <Col xs="3" md="2" className="pr-2 my-auto">
-              <Button title="Boka FILMTITEL" className="btn btn-secondary float-right book-film">Boka</Button>
+              <Button title={'Boka ' + this.props.data.film.title} className="btn btn-secondary float-right book-film">Boka</Button>
             </Col>
           </Row>
         </Container>
