@@ -40,7 +40,7 @@ class NavBar extends Component {
                 <NavItem>
                 <NavLink className="nav-link" to="/">Start</NavLink>
                 </NavItem>
-                <NavItem><NavLink className="nav-link" to="/films">Filmer</NavLink></NavItem>
+                <NavItem><NavLink className="nav-link" to="/filmer">Filmer</NavLink></NavItem>
                 <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle className="about-us" nav caret>
                   Om Oss
