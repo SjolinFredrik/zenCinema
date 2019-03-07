@@ -38,19 +38,19 @@ class NavBar extends Component {
               <Collapse isOpen={!this.state.collapsed} navbar>
                 <Nav navbar className="mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
                 <NavItem>
-                <NavLink className="nav-link" to="/">Start</NavLink>
+                <NavLink activeClassName="a" className="nav-link" to="/">Start</NavLink>
                 </NavItem>
-                <NavItem><NavLink className="nav-link" to="/filmer">Filmer</NavLink></NavItem>
+                <NavItem><NavLink activeClassName="active" className="nav-link" to="/filmer">Filmer</NavLink></NavItem>
                 <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle className="about-us" nav caret>
                   Om Oss
                 </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem >
-                  <NavLink className="dropdown-item" to="/om-oss/våra-salonger">Våra salonger</NavLink>
+                  <NavLink activeClassName="active" className="dropdown-item" to="/om-oss/våra-salonger">Våra salonger</NavLink>
                 </DropdownItem>
                 <DropdownItem >
-                  <NavLink className="dropdown-item" to="/om-oss/regler">Regler</NavLink>
+                  <NavLink activeClassName="active" className="dropdown-item" to="/om-oss/regler">Regler</NavLink>
 
 
                 </DropdownItem>
