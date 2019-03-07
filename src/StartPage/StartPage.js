@@ -5,7 +5,7 @@ import {
   Col
 } from 'reactstrap';
 import ZenCoin from '../StartPage/ZenCoin'
-
+import FilmCarousel from '../FilmCollectionPage/FilmCarousel';
 import CalendarShowing from '../StartPage/CalendarShowing';
 
 export default class StartPage extends React.Component {
@@ -15,7 +15,7 @@ export default class StartPage extends React.Component {
         <Row>
           <Col xs="12" className="px-0">
             <div className="startpage-carousel">
-              Filmkarusell
+              <FilmCarousel />
               <div className="carousel-gradient" />
             </div>
           </Col>
