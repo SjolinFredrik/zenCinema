@@ -21,8 +21,6 @@ export default class Showings extends React.Component {
     let date = '';
     let time = '';
     for (let showing of filmShowings) {
-      console.log(date);
-      console.log(time);
       if (showing.date === date) {
         let index = this.showings.length - 1;
         if (showing.time < time) {
