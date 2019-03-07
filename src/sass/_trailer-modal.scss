@@ -1,18 +1,17 @@
-.trailer-modal {
-  .trailer-modal-dialog {
-    max-width: 1200px;
+#trailerModal {
+  max-width: 1200px;
     margin: 30px auto;
-    .trailer-modal-body {
+    .modal-body {
       position:relative;
       padding:0px;
-      .trailer-close {
+      .close {
         position: absolute;
         right: -30px;
         top: 0;
         z-index:999;
         font-size:2rem;
         font-weight: normal;
-        color:#fff;
+        color:rgb(5, 5, 5);
         opacity:1;
         @include media-breakpoint-down(lg){
           right: 0;
@@ -20,5 +19,4 @@
         }
       }
     }
-  }
 }

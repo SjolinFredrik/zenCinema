@@ -1,4 +1,5 @@
 import React from 'react';
+import Trailer from './Trailer';
 import {
   Container,
   Row,
@@ -6,6 +7,11 @@ import {
 } from 'reactstrap';
 
 export default class Film extends React.Component {
+  constructor(props) {
+    super(props);
+   
+  }
+
   render() {
     return (
       <Col xs="12" className="film-content pb-5 mx-auto px-0">
@@ -26,11 +32,7 @@ export default class Film extends React.Component {
               <p>{Math.floor(this.props.props.length / 60)} tim {this.props.props.length % 60} min | {this.props.props.genre}</p>
               <div className="film-page-btns">
                 <a data-scroll role="button" href="#film-shows" className="btn btn-primary btn-block-sm-down tickets-btn"><i className="fa fa-ticket"></i> Biljetter</a>
-                <button role="button" data-toggle="modal" data-target="#trailerModal" className="btn btn-secondary btn-block-sm-down mt-3 mt-md-0 ml-md-4 trailer-btn"><i className="fa fa-film"></i> Se Trailer</button>
-              </div>
-              <div className="start-page-btns">
-                <a data-scroll role="button" href={'/film/' + this.props.props.link} className="btn btn-primary btn-block-sm-down tickets-btn"><i className="fa fa-ticket"></i> Biljetter</a>
-                <button role="button" data-toggle="modal" data-target="#trailerModal" className="btn btn-secondary btn-block-sm-down mt-3 mt-md-0 ml-md-4 trailer-btn"><i className="fa fa-film"></i> Se Trailer</button>
+                <Trailer trailerMovie={this.props.props.youtubeTrailers[0]}/>
               </div>
             </Col>
           </Row>
@@ -51,11 +53,10 @@ export default class Film extends React.Component {
                 <dd><span>Skådespelare:</span> {this.props.props.actors.join(', ')}</dd>
               </dl>
             </Col>
-            Här ska trailer komponenten vara!!!
           </Row>
         </Container>
       </Col>
     );
   }
-
+  
 }
