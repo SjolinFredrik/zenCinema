@@ -29,7 +29,7 @@ class App extends Component {
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
-          <Route exact path={filmRegex} component={FilmPage} />
+            <Route exact path={filmRegex} component={FilmPage} />
           </main>
           <footer><Footer /></footer>
         </div>
