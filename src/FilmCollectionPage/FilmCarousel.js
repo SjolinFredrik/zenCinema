@@ -71,7 +71,7 @@ export default class FilmCarousel extends React.Component {
           onExited={this.onExited}
           key={film.images[1]}
           >
-            <a className="a-over" href={"/filmer/" + film.link} title={film.title}></a>
+            <a className="a-over" href={"/filmer/" + film.link} title={film.title}> </a>
             <img className="d-block w-100" src={"/images/movies/" + film.images[1]} alt={film.title} />
             <CarouselCaption captionText={film.title} captionHeader={film.title} className="d-block" />
           </CarouselItem>  
