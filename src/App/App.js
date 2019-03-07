@@ -21,7 +21,6 @@ import Footer from '../Footer/Footer';
 class App extends Component {
 
   render() {
-    const filmRegex = /^\/filmer\/[a-z0-9\-]+$/;
     const missingPage = ({ location }) => (
       <div>
         <h3>We are sorry! Beanman do not like <code>{location.pathname}</code> Please try again!</h3>
