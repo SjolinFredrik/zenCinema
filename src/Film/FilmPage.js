@@ -4,16 +4,15 @@ import FilmPageContent from './FilmPageContent';
 
 export default class FilmPage extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       content: ''
     }
   }
 
   componentDidMount() {
-    let path = window.location.pathname;
-    const filmLink = path.split('/')[2];
+    const filmLink = this.props.match.params.link
     this.findFilm(filmLink)
       .then(data => {
         if (data) {
