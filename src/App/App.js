@@ -34,7 +34,7 @@ class App extends Component {
             <Switch>
             <Route exact path="/" component={StartPage} />
             <Route exact path="/filmer" component={FilmCollectionPage} />
-            <Route exact path={filmRegex} component={FilmPage} />
+            <Route exact path="/filmer/:link" component={FilmPage} />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
