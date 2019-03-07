@@ -14,6 +14,7 @@ module.exports = class LoginHandler {
     this.app.post('/json/login', async (req,res) => {
       let data = req.body;
       let user = await this.User.findOne({email: data.email});
+
       if(!user){
         res.json({loggedIn: false, error: 'No such user!'});
         return;

@@ -1,6 +1,9 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 import FilmPageContent from './FilmPageContent';
+import REST from '../REST';
+
+class Film extends REST {}
 
 export default class FilmPage extends React.Component {
 
@@ -25,13 +28,10 @@ export default class FilmPage extends React.Component {
       
   }
 
-  findFilm(filmLink) {
-    return fetch('/json/films/')
-    .then(response => {return response.json()})
-    .then(data => {
-      const found = data.find(element => { return element.link === filmLink });
-      return found;
-    })
+  async findFilm(filmLink) {
+    const films = await Film.find();
+    const found = films.find(film => { return film.link === filmLink });
+    return found;
   }
 
   render() {
