@@ -11,7 +11,6 @@ export default class Film extends React.Component {
   render() {
     return (
       <Col xs="12" className="film-content pb-5 mx-auto px-0">
-        <a className="a-over" href={'/film/' + this.props.props.link}></a>
         <div className="img-fluid film-cover-img d-none d-md-block" style={{ background: "url(/images/movies/" + this.props.props.images[1] + ")" }}>
           <div className="inner-cover-img" />
         </div>
