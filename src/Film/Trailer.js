@@ -22,7 +22,6 @@ export default class Trailer extends React.Component {
     });
   }
 
-
   render() {
     return (
 
