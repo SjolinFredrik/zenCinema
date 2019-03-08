@@ -136,7 +136,7 @@ export default class LoginForm extends React.Component {
           </Form>
           <DropdownItem divider />
                   
-          <DropdownItem className="dropdown-item" href="/register" >Registrera ny användare</DropdownItem>
+          <DropdownItem className="dropdown-item" href="/registrera" >Registrera ny användare</DropdownItem>
         </DropdownMenu>
         </UncontrolledDropdown></ButtonGroup></div>
 

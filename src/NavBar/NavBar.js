@@ -83,7 +83,7 @@ class NavBar extends Component {
                 </NavItem>
                 <NavItem><NavLink onClick={this.clickOnOtherLink} activeClassName="active" className="nav-link" to="/filmer">Filmer</NavLink></NavItem>
                 <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle className="about-us" nav caret style={{color:this.state.colorDropDownParent}} className="nav-link">
+                <DropdownToggle className="nav-link about-us" nav caret style={{color:this.state.colorDropDownParent}}>
                   Om Oss
                 </DropdownToggle>
               <DropdownMenu right>
