@@ -15,9 +15,6 @@ import SaloonPage from '../About-us/SaloonPage';
 // Footer
 import Footer from '../Footer/Footer';
 
-
-
-
 class App extends Component {
 
   render() {

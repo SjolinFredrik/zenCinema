@@ -3,24 +3,43 @@ import {
   Row,
   Col
 } from 'reactstrap';
+import REST from '../REST';
+
+class Showing extends REST{}
 
 export default class CalendarShowing extends React.Component {
-  constructor() {
-    super()
-    this.showingData = [];
-
-    this.loadShowingData();
+  constructor(props) {
+    super(props)
+    this.state = { showings: '' };
+    this.allShowings = [];
+    this.showings = [];
+    this.loadShowingsAndMountThemToCalendar();
   }
 
-  async loadShowingData() {
-    let today = new Date().getTime();
-    //this.showingData = await Showing.find(`.find({date: {$gte: ${today}}}).limit(9).sort({$natural: 1}).populate('film').exec()`);
-    //console.log(this.showingData)    
-    this.showingData = [
-      { name: "Knatte" },
-      { name: "Tjatte" },
-      { name: "Fnatte" }
-    ];
+  async loadShowingsAndMountThemToCalendar() {
+    let today = new Date();
+    today = new Date(today.setDate(today.getDate() - 1)).getTime();
+    this.allShowings = await Showing.find(`.find({date: {$gte: ${today}}}).limit(9).sort({date: 1, time: 1}).populate('film').populate('saloon').exec()`);
+    this.showings = this.allShowings.map((show, i) => {
+      return (
+        <Row className="pl-0 pr-2 mx-auto calendar-item rounded" key={"calendarShowing_" + i}>
+          <Col xs="2" md="3" lg="2">
+            <p className="showings-day">{new Date(show.date).toLocaleDateString('sv-SE', { weekday: 'short' })}</p>
+          </Col>
+          <Col xs="6" md="5" lg="6">
+            <p>{show.film.title}</p>
+          </Col>
+          <Col xs="2">
+            <p>{show.time}</p>
+          </Col>
+          <Col xs="2" className="py-1 px-0 text-right">
+            <a role="button" className="btn btn-outline-dark" href={"/film/" + show.film.link}>></a>
+          </Col>
+        </Row>
+      )
+    })
+
+    this.setState({ showings: this.showings })
   }
 
 
@@ -41,6 +60,7 @@ export default class CalendarShowing extends React.Component {
             <strong>Tid:</strong>
           </Col>
         </Row>
+        {this.state.showings}
         {/* {this.showingData.map(show => {
           return (
             <Row className="pl-0 pr-2 mx-auto calendar-item rounded">
