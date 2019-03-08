@@ -16,7 +16,9 @@ export default class Showings extends React.Component {
   }
 
   async populateFilms() {
-    let allShowings = await Showing.find(`.find().populate('film').populate('saloon')`);
+    let today = new Date();
+    today = new Date(today.setDate(today.getDate() - 1)).getTime();
+    let allShowings = await Showing.find(`.find({ date: {$gte: ${today}} }).populate('film').populate('saloon')`);
     const filmShowings = allShowings.filter(showing => showing.film._id === this.props.data._id);
     let date = '';
     let time = '';
