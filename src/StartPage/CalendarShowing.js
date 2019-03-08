@@ -42,7 +42,6 @@ export default class CalendarShowing extends React.Component {
     this.setState({ showings: this.showings })
   }
 
-
   render() {
     return (
       <section className="calendar-showings text-dark">
@@ -61,22 +60,6 @@ export default class CalendarShowing extends React.Component {
           </Col>
         </Row>
         {this.state.showings}
-        {/* {this.showingData.map(show => {
-          return (
-            <Row className="pl-0 pr-2 mx-auto calendar-item rounded">
-              <Col xs="2" md="3" lg="2">
-                <p>${new Date(show.date).toLocaleDateString('sv-SE', { month: 'numeric', day: 'numeric' })}</p>
-              </Col>
-              <Col xs="6" md="5" lg="6">
-                <p>${show.film.title}</p>
-              </Col>
-              <Col xs="2">
-                <p>${show.time}</p>
-              </Col>
-            </Row>
-          )
-        })
-        } */}
       </section>
     )
   }
