@@ -7,15 +7,11 @@ import {
 } from 'reactstrap';
 
 export default class Film extends React.Component {
-  // constructor(props) {
-  //   super(props);
-   
-  // }
 
   render() {
     return (
       <Col xs="12" className="film-content pb-5 mx-auto px-0">
-        <a className="a-over" href={'/film/' + this.props.props.link}> </a>
+        <a className="a-over" href={'/film/' + this.props.props.link}></a>
         <div className="img-fluid film-cover-img d-none d-md-block" style={{ background: "url(/images/movies/" + this.props.props.images[1] + ")" }}>
           <div className="inner-cover-img" />
         </div>
@@ -25,14 +21,14 @@ export default class Film extends React.Component {
         <Container className="film-information">
           <Row className="mb-5 pb-5">
             <Col xs="12" md="4">
-              <img className="img-fluid mx-auto d-none d-md-block film-poster-img" src={'/images/movies/' + this.props.props.images[0]} alt={this.props.props.title}/>
+              <img className="img-fluid mx-auto d-none d-md-block film-poster-img" src={'/images/movies/' + this.props.props.images[0]} alt={this.props.props.title} />
             </Col>
             <Col xs="12" md="7" lg="8" className="offset-md-1 offset-lg-0 text-center text-md-left">
               <h2 className="mt-2">{this.props.props.title}</h2>
               <p>{Math.floor(this.props.props.length / 60)} tim {this.props.props.length % 60} min | {this.props.props.genre}</p>
               <div className="film-page-btns">
                 <a data-scroll role="button" href="#film-shows" className="btn btn-primary btn-block-sm-down tickets-btn"><i className="fa fa-ticket"></i> Biljetter</a>
-                <Trailer trailerMovie={this.props.props.youtubeTrailers[0]}/>
+                <Trailer trailerMovie={this.props.props.youtubeTrailers[0]} />
               </div>
             </Col>
           </Row>
@@ -56,7 +52,7 @@ export default class Film extends React.Component {
           </Row>
         </Container>
       </Col>
-    );
+    )
   }
   
 }
