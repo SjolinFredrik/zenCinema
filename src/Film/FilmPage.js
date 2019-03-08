@@ -2,31 +2,30 @@ import React from 'react';
 import { Container } from 'reactstrap';
 import FilmPageContent from './FilmPageContent';
 import REST from '../REST';
+import MissingPage from '../MissingPage/MissingPage';
 
 class Film extends REST {}
 
 export default class FilmPage extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       content: ''
     }
   }
 
   componentDidMount() {
-    let path = window.location.pathname;
-    const filmLink = path.split('/')[2];
+    const filmLink = this.props.match.params.link
     this.findFilm(filmLink)
       .then(data => {
         if (data) {
           this.setState({ content: <FilmPageContent props={data} /> });
         }
         else {
-          this.setState({ content: 'FEEEEEEL!' });
+          this.setState({ content: <MissingPage /> });
         }
       })
-      
   }
 
   async findFilm(filmLink) {

@@ -13,9 +13,7 @@ module.exports = class LoginHandler {
   createLoginRoute(){
     this.app.post('/json/login', async (req,res) => {
       let data = req.body;
-      console.log(data, 'data from body');
       let user = await this.User.findOne({email: data.email});
-      console.log(user);
 
       if(!user){
         res.json({loggedIn: false, error: 'No such user!'});

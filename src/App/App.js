@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './styles.scss';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-// Here we want all of our fucking templates Jiimie Beeanman bitch
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Navbar
 import NavBar from '../NavBar/NavBar';
 // Main
@@ -12,31 +10,31 @@ import FilmPage from '../Film/FilmPage';
 import KioskPage from '../About-us/KioskPage';
 import RulePage from '../About-us/RulePage';
 import SaloonPage from '../About-us/SaloonPage';
+import MissingPage from '../MissingPage/MissingPage';
+
 // Footer
 import Footer from '../Footer/Footer';
 import RegisterPage from '../User/RegisterPage';
 
-
-
-
-class App extends Component {
-
+export default class App extends Component {
 
   render() {
-    const filmRegex = /^\/film\/[a-z0-9\-]+$/;
-    return (
 
+    return (
       <Router>
         <div className="App">
           <header><NavBar /></header>
           <main>
+            <Switch>
             <Route exact path="/" component={StartPage} />
-            <Route path="/filmer" component={FilmCollectionPage} />
-            <Route exact path={filmRegex} component={FilmPage} />
+            <Route exact path="/filmer" component={FilmCollectionPage} />
+            <Route exact path="/filmer/:link" component={FilmPage} />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
-            <Route path="/om-oss/vara-salonger" component={SaloonPage} />
+            <Route path="/om-oss/våra-salonger" component={SaloonPage} />
             <Route path="/registrera" component={RegisterPage} />
+            <Route component={MissingPage} />
+            </Switch>
           </main>
           <footer><Footer /></footer>
         </div>
@@ -45,4 +43,3 @@ class App extends Component {
   }
 }
 
-export default App;

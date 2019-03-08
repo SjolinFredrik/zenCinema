@@ -5,6 +5,8 @@ import {
   Col
 } from 'reactstrap';
 import FilmCarousel from './FilmCarousel';
+import FilmPosters from './FilmPosters'; 
+
 
 export default class FilmCollectionPage extends React.Component {
   render() {
@@ -14,14 +16,10 @@ export default class FilmCollectionPage extends React.Component {
           <Col xs="12" className="mt-3 mt-sm-5 text-center">
             <h2>Aktuella filmer</h2>
           </Col>
-          <Col xs="12" class="d-none d-md-block">
-            KARUSELL
-            {/* <FilmCarousel /> */}
+          <Col xs="12" className="d-none d-md-block">
+            <FilmCarousel />
           </Col>
-          <Row className="my-3 my-md-5">
-            FILMPOSTER
-            {/* <FilmPosters /> */}
-          </Row>
+          <FilmPosters />
         </Row>
       </Container>
     )

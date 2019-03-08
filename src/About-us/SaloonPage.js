@@ -5,19 +5,18 @@ import {
   Col
 } from 'reactstrap';
 
-
 export default class SaloonPage extends React.Component {
+
   render() {
     return (
       <Container fluid className="techinfo-content text-secondary">
         <Row>
           <div className="speakers-img mx-auto px-0">
             <img src="/images/techinfo/tech-cover.jpg" className="img-fluid tech-cover-img " alt="Salonger i världsklass"/>
-            <div className="gradient-cover-img "></div>
+            <div className="gradient-cover-img " />
           </div>
         </Row>
         <Container>
-
           <Row>
             <Col xs="12" className="mt-4">
               <h2 className="tech-headline mb-4">Våra salonger</h2>
@@ -57,11 +56,10 @@ export default class SaloonPage extends React.Component {
         <Row>
           <div className="auditorium-img">
             <img className="img-fluid mt-3" src="/images/techinfo/tech-auditorium.jpg" alt="Vår fantastiska ZenTermidiate"/>
-            <div className="gradient-cover-img"></div>
+            <div className="gradient-cover-img" />
           </div>
         </Row>
         <Container>
-
           <Row className="pb-4">
             <Col sm="6" className="mt-4">
               <h4 className="saloon-headline mb-3">ZenTermidiate</h4>
