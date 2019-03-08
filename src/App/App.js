@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// Here we want all of our fucking templates Jiimie Beeanman bitch
-
 // Navbar
 import NavBar from '../NavBar/NavBar';
 // Main
@@ -15,7 +13,7 @@ import SaloonPage from '../About-us/SaloonPage';
 // Footer
 import Footer from '../Footer/Footer';
 
-class App extends Component {
+export default class App extends Component {
 
   render() {
     const missingPage = ({ location }) => (
@@ -45,4 +43,3 @@ class App extends Component {
   }
 }
 
-export default App;

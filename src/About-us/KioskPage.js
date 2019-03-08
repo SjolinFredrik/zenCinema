@@ -5,14 +5,13 @@ import {
   Col
 } from 'reactstrap';
 
-
 export default class KioskPage extends React.Component {
 
   render() {
     return (
       <Container fluid className="kiosk-content px-0">
         <div className="popcorn-img mx-auto px-0">
-          <div className="gradient-cover"></div>
+          <div className="gradient-cover" />
         </div>
         <div className="lower-fade px-0" />
         <Container className="main-container-fade fade-fixer">
@@ -42,11 +41,11 @@ export default class KioskPage extends React.Component {
               <div>
                 <p>
                   Ingen bio utan våra underbara läskedrycker.
-                      <br />
+                  <br />
                   Vi kör sportlovspriser hela veckan och läsken är inget undantag
-                      <br />
+                  <br />
                   Erbjudandet gäller KÖP 3 och betala bara för EN dryck.
-                      <br />
+                  <br />
                   Så vad väntar du på!!
                 </p>
               </div>

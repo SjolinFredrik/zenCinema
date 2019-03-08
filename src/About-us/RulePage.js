@@ -24,7 +24,7 @@ export default class Rulepage extends React.Component {
                   <p>DU skall icke tala högt och störa andra besökare.</p>
                   <p>DU skall icke hälla läsk på andra, inte på dig själv heller.</p>
                   <p>Förstörelse av egendom inom våra dörrar kommer alltid att polisanmälas.</p>
-                  <p className="nice-quote">Följer man våra regler kommer alla besökare att få en Zenmazing upplevelse samt trivselnivån kommer vara Zentastic. Vi strävar därför alltid efter att dessa punkter följes för allas trevnad och säkerhet.</p>
+                  <p className="nice-quote mx-auto">Följer man våra regler kommer alla besökare att få en Zenmazing upplevelse samt trivselnivån kommer vara Zentastic. Vi strävar därför alltid efter att dessa punkter följes för allas trevnad och säkerhet.</p>
                   <Row>
                     <Col xs="12" className="py-3">
                       <img className="img-fluid" src="/images/happy-strivers.jpg" alt="Glada människor som älskar livet, efter bio." />
