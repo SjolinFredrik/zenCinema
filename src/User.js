@@ -1,12 +1,15 @@
-class User extends REST {
+import REST from './REST';
+
+
+export default class User extends REST {
 
   static async createUser() {
 
     let user = new User({
-      "firstName": $('.first-name-input').val(),
-      "lastName": $('.last-name-input').val(),
-      "email": $('.email-input').val(),
-      "password": $('.password-input').val(),
+      "firstName": document.getElementById('firstnamef').value,
+      "lastName": document.getElementById('lastnamef').value,
+      "email": document.getElementById('emailf').value,
+      "password": document.getElementById('passwordf').value
     });
 
     // await user.save();
