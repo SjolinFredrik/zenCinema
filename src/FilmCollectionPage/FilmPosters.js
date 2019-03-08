@@ -5,7 +5,7 @@ import REST from '../REST'
 
 class Film extends REST { }
 
-export default class FilmPoster extends React.Component {
+export default class FilmPosters extends React.Component {
   constructor(props) {
     super(props);
     this.state = { content: '' };
