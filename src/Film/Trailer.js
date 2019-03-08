@@ -3,7 +3,6 @@ import {
   Modal,
   ModalBody,
   Button,
-  ModalHeader,
   Col
 } from 'reactstrap';
 
@@ -35,7 +34,6 @@ export default class Trailer extends React.Component {
               <Button onClick={this.toggle} type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </Button>
-
               <Col xs="12" className="yt-trailer embed-responsive embed-responsive-16by9">
                 <iframe title={this.props.trailerMovie} className="embed-responsive-item" src={'https://www.youtube.com/embed/' + this.props.trailerMovie + '?rel=0&amp;showinfo=0&amp;modestbranding=1'}
                   frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
