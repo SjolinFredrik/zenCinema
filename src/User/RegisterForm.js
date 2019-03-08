@@ -20,7 +20,8 @@ export default class RegisterForm extends React.Component {
       confirmPassword: '',
       existingEmail: false,
       errors: {},
-      welcome: ''
+      welcome: '',
+      openedForm: true
     }
     this.handleChangeUsername = this.handleChangeUsername.bind(this);
     this.handleChangeLastname = this.handleChangeLastname.bind(this);
@@ -145,6 +146,7 @@ export default class RegisterForm extends React.Component {
     if (validUsername && validLastname && validEmail && existingEmail && validPassword && matchingPassword) {
       await User.createUser();
       this.setState({
+        openedForm: false,
         welcome: (
           <Container>
             <Row className="justify-content-center">
@@ -173,10 +175,13 @@ export default class RegisterForm extends React.Component {
 
   render() {
     return (
+       
       <div className="register-form welcome pt-5">
+      
         <h2 className="mb-4 pt-4">Skapa användare</h2>
         <h5 className="mx-auto mb-5">Som en del av Zenfamiljen får du tillgång till exklusiva erbjudanden som du hittar i förbutiken och inom kort även möjligheten att förvärva ZenCoins!</h5>
         {this.state.welcome}
+        {this.state.openedForm ?
         <div className="login-wrapper pb-5">
           <div className="form-group">
             <p>Förnamn:</p>
@@ -206,7 +211,8 @@ export default class RegisterForm extends React.Component {
           </div>
           <button className="btn btn-primary saveNewUser-btn mt-3 mb-5" onClick={this.handleValidRegistration}>Bekräfta</button>
         </div>
-      </div>
+        : ''}
+      </div> 
     )
   }
 }
