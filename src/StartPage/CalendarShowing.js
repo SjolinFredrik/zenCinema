@@ -33,7 +33,7 @@ export default class CalendarShowing extends React.Component {
             <p>{show.time}</p>
           </Col>
           <Col xs="2" className="py-1 px-0 text-right">
-            <a role="button" className="btn btn-outline-dark" href={"/film/" + show.film.link}>></a>
+            <a role="button" className="btn btn-outline-dark" href={"/filmer/" + show.film.link}>></a>
           </Col>
         </Row>
       )
