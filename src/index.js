@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './avoidFOUC';
 import './App/styles.scss';
 import App from './App/App';
 import * as serviceWorker from './serviceWorker';
