@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// Here we want all of our fucking templates Jiimie Beeanman bitch
-
 // Navbar
 import NavBar from '../NavBar/NavBar';
 // Main
@@ -12,20 +10,15 @@ import FilmPage from '../Film/FilmPage';
 import KioskPage from '../About-us/KioskPage';
 import RulePage from '../About-us/RulePage';
 import SaloonPage from '../About-us/SaloonPage';
+import MissingPage from '../MissingPage/MissingPage';
+
 // Footer
 import Footer from '../Footer/Footer';
 
-
-
-
-class App extends Component {
+export default class App extends Component {
 
   render() {
-    const missingPage = ({ location }) => (
-      <div>
-        <h3>We are sorry! Beanman do not like <code>{location.pathname}</code> Please try again!</h3>
-      </div>
-    )
+
     return (
       <Router>
         <div className="App">
@@ -38,7 +31,7 @@ class App extends Component {
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
-            <Route component={missingPage} />
+            <Route component={MissingPage} />
             </Switch>
           </main>
           <footer><Footer /></footer>
@@ -48,4 +41,3 @@ class App extends Component {
   }
 }
 
-export default App;

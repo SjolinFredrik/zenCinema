@@ -5,7 +5,7 @@ import {
   Col
 } from 'reactstrap';
 import FilmCarousel from './FilmCarousel';
-import FilmPoster from './FilmPoster'; 
+import FilmPosters from './FilmPosters'; 
 
 
 export default class FilmCollectionPage extends React.Component {
@@ -19,7 +19,7 @@ export default class FilmCollectionPage extends React.Component {
           <Col xs="12" className="d-none d-md-block">
             <FilmCarousel />
           </Col>
-          <FilmPoster />
+          <FilmPosters />
         </Row>
       </Container>
     )
