@@ -33,12 +33,12 @@ export default class Film extends React.Component {
             </Col>
           </Row>
           <Row className="my-5">
-            <Col xs="12" md="6" className="pt-0">
+            <Col xs="12" md="7" className="pt-0">
               <dl>
                 <dd><p>{this.props.props.description}</p></dd>
               </dl>
             </Col>
-            <Col xs="12" md="6" className="mt-5 mt-md-0 pt-0">
+            <Col xs="12" md="5" className="mt-5 mt-md-0 pt-0">
               <dl className="about-film">
                 <dd><span>Regi:</span> {this.props.props.directors.length > 0 ? this.props.props.directors.join(', ') : this.props.props.directors}</dd>
                 <dd><span>Land:</span> {this.props.props.productionCountries.join(', ')}</dd>
