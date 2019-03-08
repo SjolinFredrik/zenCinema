@@ -93,7 +93,6 @@ export default class RegisterForm extends React.Component {
   async checkExistingEmail() {
     this.checkUserEmail().then(result => {
       if (result !== null) {
-        console.log(result, 'mailen existerar')
         this.setState({ existingEmail: true });
         return false;
       } else {
