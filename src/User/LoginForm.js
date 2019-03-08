@@ -30,7 +30,7 @@ export default class LoginForm extends React.Component {
   }
 
   async login() {
-    let email = document.getElementById('emailf').value;
+    let email = document.getElementById('emailfo').value;
     let password = document.getElementById('pwdf').value;
 
     let login = new Login({
@@ -124,7 +124,7 @@ export default class LoginForm extends React.Component {
           <Form>
             <FormGroup >
                 <Label for="emailf">Epost</Label>
-                <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
+                <Input type="email" className="form-control email-login-input" id="emailfo" placeholder="email@example.com" />
             </FormGroup>
             <FormGroup className="form-group">
               <Label for="pwdf">Lösenord</Label>

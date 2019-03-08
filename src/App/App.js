@@ -14,6 +14,7 @@ import MissingPage from '../MissingPage/MissingPage';
 
 // Footer
 import Footer from '../Footer/Footer';
+import RegisterPage from '../User/RegisterPage';
 
 export default class App extends Component {
 
@@ -31,6 +32,7 @@ export default class App extends Component {
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
+            <Route path="/registrera" component={RegisterPage} />
             <Route component={MissingPage} />
             </Switch>
           </main>
