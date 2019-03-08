@@ -15,4 +15,22 @@ nav {
 }
 .navbar{
   background-image: linear-gradient($primary, rgba(20, 2, 10, 0.8));
+  .dropdown-item {
+    padding: 0;
+    .nav-link {
+      border-top: 1px solid #fff;
+      margin: 0;
+      color: rgba(20, 2, 10, 0.8);
+      text-decoration: none;
+      &.active {
+        color: $white;
+        background-color: $primary;
+      }
+      &:hover {
+        background-color: $primary;
+      }
+    }
+  }
 }
+
+
