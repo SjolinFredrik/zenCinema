@@ -88,13 +88,13 @@ class NavBar extends Component {
                 </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem >
-                  <NavLink onClick={this.clickOnDropdownLink} activeClassName="active" className="dropdown-item" to="/om-oss/våra-salonger">Våra salonger</NavLink>
+                  <NavLink onClick={this.clickOnDropdownLink} className="nav-link" activeClassName="active" to="/om-oss/våra-salonger">Våra salonger</NavLink>
                 </DropdownItem>
                 <DropdownItem >
-                  <NavLink onClick={this.clickOnDropdownLink} activeClassName="active" className="dropdown-item" to="/om-oss/regler">Regler</NavLink>
+                  <NavLink onClick={this.clickOnDropdownLink} className="nav-link" activeClassName="active" to="/om-oss/regler">Regler</NavLink>
                 </DropdownItem>
                 <DropdownItem >
-                  <NavLink onClick={this.clickOnDropdownLink} className="dropdown-item" to="/om-oss/kiosken">Kiosken</NavLink>
+                  <NavLink activeClassName="active" className="nav-link" onClick={this.clickOnDropdownLink} to="/om-oss/kiosken">Kiosken</NavLink>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
