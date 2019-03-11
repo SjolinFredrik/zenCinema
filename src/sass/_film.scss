@@ -42,6 +42,7 @@
     .tickets-btn, .trailer-btn {
       min-width: 150px;
       z-index: 320;
+      cursor: pointer;
     }
     dd {
       color: $secondary;

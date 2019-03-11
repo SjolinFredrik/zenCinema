@@ -1,5 +1,6 @@
 import React from 'react';
 import Trailer from './Trailer';
+import { Link } from "react-scroll";
 import {
   Container,
   Row,
@@ -26,7 +27,17 @@ export default class Film extends React.Component {
               <h2 className="mt-2">{this.props.props.title}</h2>
               <p>{Math.floor(this.props.props.length / 60)} tim {this.props.props.length % 60} min | {this.props.props.genre}</p>
               <div className="film-page-btns">
-                <a data-scroll role="button" href="#film-shows" className="btn btn-primary btn-block-sm-down tickets-btn"><i className="fa fa-ticket"></i> Biljetter</a>
+                <Link 
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration= {500} 
+                  role="button" 
+                  to="film-shows" 
+                  className="btn btn-primary btn-block-sm-down tickets-btn">
+                  <i className="fa fa-ticket"></i>
+                  Biljetter
+                </Link>
                 <Trailer trailerMovie={this.props.props.youtubeTrailers[0]} />
               </div>
             </Col>
