@@ -139,7 +139,7 @@ export default class RegisterForm extends React.Component {
     let matchingPassword = this.checkMatchingPassword();
 
     if (validUsername && validLastname && validEmail && existingEmail && validPassword && matchingPassword) {
-      let new_user = await User.createUser();
+      await User.createUser();
 
       this.setState({
         openedForm: false,
