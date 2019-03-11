@@ -32,10 +32,6 @@ export default class RegisterForm extends React.Component {
     this.handleValidRegistration = this.handleValidRegistration.bind(this);
   }
 
-  async saveUser() {
-
-  }
-
   handleChangeUsername(e) {
     this.setState({ username: e.target.value });
   }
@@ -152,9 +148,6 @@ export default class RegisterForm extends React.Component {
               <Col xs="12" xl="8" md="10">
                 <div className="alert alert-success alert-dismissible fade show" role="alert">
                   <strong>Användare skapad!</strong> Du kan nu logga in.
-                   <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
                 </div>
               </Col>
             </Row>
