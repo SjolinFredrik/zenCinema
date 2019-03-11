@@ -40,13 +40,7 @@ export default class KioskPage extends React.Component {
               <h2 className="drink-header">Avnjut prisbelönta drycker</h2>
               <div>
                 <p>
-                  Ingen bio utan våra underbara läskedrycker.
-                  <br />
-                  Vi kör sportlovspriser hela veckan och läsken är inget undantag
-                  <br />
-                  Erbjudandet gäller KÖP 3 och betala bara för EN dryck.
-                  <br />
-                  Så vad väntar du på!!
+                  Ingen bio utan våra underbara läskedrycker. Vi utlovar dunderpriser varje vecka och läsken är inget undantag. Erbjudandet gäller KÖP 3 och betala bara för EN dryck. Så vad väntar du på!!
                 </p>
               </div>
             </Col>

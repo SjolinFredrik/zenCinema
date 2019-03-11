@@ -23,7 +23,7 @@ export default class FilmPageContent extends React.Component {
             </Col>
           </Row>
         </Container>
-        BookingPage ska visas här!
+        {/* BookingPage ska visas här */}
       </Container>
     );
   }
