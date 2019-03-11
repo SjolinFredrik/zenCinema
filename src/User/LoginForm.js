@@ -44,12 +44,11 @@ export default class LoginForm extends React.Component {
 
     if (result.loggedIn) {
       this.setState({loggedIn: true, loggedInUser: result.user});
-      this.loggedInUser = result.user;
-      Store.loggedInUser = this.loggedInUser;
+      Store.loggedInUser = this.state.loggedInUser;
 
       //Next if should be fixed after BookingSystem refaktoring
       if (this.parent === "BookingSystem"){
-      this.parent.loggedInUser = this.loggedInUser;
+      this.parent.loggedInUser = this.state.loggedInUser;
       this.parent.registerForm = 0;
       this.baseEl.remove();
       this.used = true;
