@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Container,
   Row,
@@ -20,7 +21,7 @@ export default class MissingPage extends React.Component {
             <h2>¯\_(ツ)_/¯</h2>
           </Col>
           <Col xs="12" className="pb-5">
-            <a href="/">Klicka här för att komma tillbaka till startsidan</a>
+            <Link to="/" title="Till StartSidan">Klicka här för att komma tillbaka till startsidan</Link>
           </Col>
         </Row>
       </Container>

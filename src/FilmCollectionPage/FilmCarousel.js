@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Carousel,
   CarouselItem,
@@ -71,7 +72,7 @@ export default class FilmCarousel extends React.Component {
           onExited={this.onExited}
           key={film.images[1]}
           >
-            <a className="a-over" href={"/filmer/" + film.link} title={film.title}> </a>
+            <Link className="a-over" to={"/filmer/" + film.link} title={film.title}> </Link>
             <img className="d-block w-100" src={"/images/movies/" + film.images[1]} alt={film.title} />
             <CarouselCaption captionText="" captionHeader={film.title} className="d-block" />
           </CarouselItem>  

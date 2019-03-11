@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Row, Col } from 'reactstrap';
 import REST from '../REST'
 
@@ -18,13 +19,13 @@ export default class FilmPosters extends React.Component {
       return (
         <Col xs="12" sm="6" md="4" lg="3" className="film-poster" key={'poster_' + film.title}>
           <section className="film-poster-content m-4 m-sm-2 p-1 p-sm-3">
-            <a href={'/filmer/' + film.link}>
+            <Link to={'/filmer/' + film.link}>
               <img
                 className="img-fluid"
                 src={'/images/movies/' + film.images[0]}
                 alt="movie poster" />
               <h5 className="text-center text-light mt-3">{film.title}</h5>
-            </a>
+            </Link>
           </section>
         </Col>
       )

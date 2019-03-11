@@ -4,6 +4,7 @@ import {
   Row,
   Col
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import ZenCoin from '../StartPage/ZenCoin'
 import FilmCarousel from '../FilmCollectionPage/FilmCarousel';
 import CalendarShowing from '../StartPage/CalendarShowing';
@@ -33,9 +34,9 @@ export default class StartPage extends React.Component {
                     </div>
                   </Col>
                   <Col xs="12" className="mb-5 rounded border border-secondary px-0">
-                    <a href="/om-oss/våra-salonger">
+                    <Link title="Till Våra Salonger" to="/om-oss/våra-salonger">
                       <img className="img-fluid rounded-top" src="/images/cinema.jpg" alt="Bild på salong" />
-                    </a>
+                    </Link>
                     <div className="bg-light border-top border-dark p-3">
                       <h3>Våra salonger</h3>
                       <p>Spana in lite information om våra utomordentligt mysiga salonger.</p>
@@ -48,9 +49,9 @@ export default class StartPage extends React.Component {
               <Container fluid>
                 <Row>
                   <Col xs="12" className="mb-5 rounded border cinema-link border-secondary px-0">
-                    <a href="/om-oss/kiosken">
+                    <Link title="Till Kiosken" to="/om-oss/kiosken">
                       <img className="img-fluid rounded-top" src="/images/kiosk/jumbo.jpg" alt="Bild på godis" />
-                    </a>
+                    </Link>
                     <div className="bg-light border-top border-dark p-3">
                       <h3>Kiosken</h3>
                       <p>Ta del av våra fantastiska erbjudanden!</p>
