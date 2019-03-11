@@ -14,7 +14,7 @@ export default class KioskPage extends React.Component {
           <div className="gradient-cover" />
         </div>
         <div className="lower-fade px-0" />
-        <Container className="main-container-fade fade-fixer">
+        <Container className="main-container-fade py-5 fade-fixer">
           <Row>
             <Col xs="12">
               <h1 className="kiosk-headline">Kiosken</h1>
