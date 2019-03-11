@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   ButtonGroup,
   Form,
@@ -14,7 +15,7 @@ import {
   Badge
 } from 'reactstrap';
 import Login from '../Login';
-import Store from '../Store';
+
 
 export default class LoginForm extends React.Component {
 
@@ -44,7 +45,7 @@ export default class LoginForm extends React.Component {
 
     if (result.loggedIn) {
       this.setState({loggedIn: true, loggedInUser: result.user});
-      Store.loggedInUser = this.state.loggedInUser;
+      global.STORE.loggedInUser = this.state.loggedInUser;
 
       //Next if should be fixed after BookingSystem refaktoring
       if (this.parent === "BookingSystem"){
@@ -76,7 +77,7 @@ export default class LoginForm extends React.Component {
   async logout() {
     let loginObj = new Login();
     await loginObj.delete();
-    Store.loggedInUser = undefined;
+    global.STORE.loggedInUser = undefined;
   }
   async checkLogin() {
     return await fetch('/json/login').then(response => {return response.json()}).then(data => {
@@ -93,8 +94,6 @@ export default class LoginForm extends React.Component {
       else {
         this.setState({loggedIn: false, loggedInUser: null});
       }
-    }).then(() => {
-      this.setState({loginIsChecked: true});
     });
   }
   render() {
@@ -108,7 +107,7 @@ export default class LoginForm extends React.Component {
            Hej, {this.state.loggedInUser.firstName}!
            </DropdownToggle>
            <DropdownMenu right className="dropdown-menu-lg-right login-menu">
-            <DropdownItem href="/mina-bokningar">Mina bokningar</DropdownItem>
+            <Link className="dropdown-item" to="/mina-bokningar">Mina bokningar</Link>
             <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}>Logga ut</DropdownItem>
            </DropdownMenu>
          </UncontrolledDropdown></ButtonGroup></div>
@@ -135,7 +134,7 @@ export default class LoginForm extends React.Component {
           </Form>
           <DropdownItem divider />
                   
-          <DropdownItem className="dropdown-item" href="/registrera" >Registrera ny användare</DropdownItem>
+          <Link className="dropdown-item" to="/registrera" >Registrera ny användare</Link>
         </DropdownMenu>
         </UncontrolledDropdown></ButtonGroup></div>
 
