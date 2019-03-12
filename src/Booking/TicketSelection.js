@@ -1,6 +1,10 @@
 import React from 'react';
-import {} from 'reactstrap';
-import TicketPrice from './ticketPrice';
+import {
+  Container,
+  Row
+} from 'reactstrap';
+// import TicketPrice from './TicketPrice';
+
 
 export default class TicketSelection extends React.Component {
 
@@ -11,7 +15,7 @@ export default class TicketSelection extends React.Component {
     this.numOfTickets = 2;
     this.bookingSummary = bookingSum;
     this.grid = grid;
-    Store.numOfTickets = this.numOfTickets;
+    global.STORE.numOfTickets = this.numOfTickets;
     this.setTickets().then(data => {
       for (let i = 0; i < data.length; i++) {
         let ticketData = data[i];
@@ -19,7 +23,7 @@ export default class TicketSelection extends React.Component {
         this.tickets.push(ticket);
         this.render();
       }
-      Store.reservedTickets = this.totalCost(this.tickets);
+      global.STORE.reservedTickets = this.totalCost(this.tickets);
       this.bookingSummary.render();
       this.render();
 
@@ -46,16 +50,17 @@ export default class TicketSelection extends React.Component {
 
   render() {
     return (
-      <section>
-        <div class="mb-3">
-          <h3>Välj antal biljetter</h3>
-          <p>(Max 8st)</p>
-        </div>
-        <div class="row">
-          ${this.tickets}
-        </div>
-      </section>
-
+      <Container>
+        <section>
+          <div className="mb-3">
+            <h3>Välj antal biljetter</h3>
+            <p>(Max 8st)</p>
+          </div>
+          <Row>
+            {this.tickets}
+          </Row>
+        </section>
+      </Container>
     )
   }
 }
