@@ -8,11 +8,10 @@ import {
 export default class SeatsGrid extends React.Component {
   constructor(props) {
     super(props);
-
-    // this.takenSeats = takenSeats;
-    // this.hoveredSeats = [];
-    // this.bookingSum = bookingSum;
-    // this.bestRows = bestRows;
+    this.state = {
+      hoveredSeats: [],
+      bookingSum: '',
+    }
   }
 
   createGrid(schema) {
@@ -23,17 +22,53 @@ export default class SeatsGrid extends React.Component {
       let row = {number: i + 1, seats: []};
       for (let j = seats; j >= 1; j--) {
         let seat = {name: row.number + 1 + '-' + j};
-        // for (let t = 0; t < this.takenSeats.length; t++) {
-        //   let taken = this.takenSeats[t];
-        //   if (taken === seat.name) {
-        //     seat.taken = true;
-        //   }
-        // }
+        if (this.props.takenSeats.length > 0) {
+          for (let t = 0; t < this.props.takenSeats.length; t++) {
+            let taken = this.props.takenSeats[t];
+            if (taken === seat.name) {
+              seat.taken = true;
+            }
+          }
+        }
         row.seats.push(seat);
       }
       hall.push(row);
+    }  
+    for (let i = 0; i < hall.length; i++) {
+      let row = hall[i];
+      let rowIndex = hall.indexOf(row);
+      for (let best = 0; best < this.props.bestRows.length; best++) {
+        if (rowIndex === this.props.bestRows[best] - 1) {
+          row.best = true;
+        }
+      }
     }
-    console.log(hall);
+
+    delete this.state.chosenSeats;
+    delete global.STORE.chosenSeats;
+
+    for (let row of hall.filter(row => row.best)) {
+      let bestSeatIndex = Math.floor((row.seats.length + 1) / 2);
+      let bestRowSeats = row.seats;
+      
+      for (let s = 0; s < bestRowSeats.length; s++) {
+        let seat = bestRowSeats[s];
+        let seatFriend = bestRowSeats[s-1];
+        let seatIndex = bestRowSeats.indexOf(seat);
+        
+        if (!seat.taken && seatIndex === bestSeatIndex && !seatFriend.taken) {
+          seat.best = true;
+          seatFriend.best = true;
+          global.STORE.chosenSeats = [seat.name, seatFriend.name];
+          this.state.chosenSeats = [seat, seatFriend];
+          break;
+        }
+      }
+      if (this.state.chosenSeats) {
+        break;
+      }   
+    }     
+    
     return hall;
   }
 
@@ -42,7 +77,7 @@ export default class SeatsGrid extends React.Component {
   render() {
     const grid = this.createGrid(this.props.schema);
     const hall = grid.map((row, i) => {
-      return <SeatsRow item={row} number={i} seats={row.seats} key={i} />
+      return <SeatsRow item={row} number={i} best={row.best} seats={row.seats} key={i} />
     });
     return (
       <div className="seats-selection">
