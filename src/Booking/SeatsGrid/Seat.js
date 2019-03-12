@@ -3,10 +3,9 @@ import React from 'react';
 
 export default class Seat extends React.Component {
 
-  constructor(name, seatsGrid) {
+  constructor(name) {
     super();
     this.name = name;
-    this.seatsGrid = seatsGrid;
     this.best = false;
     this.state = {
       taken: false

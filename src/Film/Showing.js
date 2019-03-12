@@ -8,12 +8,7 @@ import {
 import BookingPage from '../Booking/BookingPage';
 
 export default class Showing extends React.Component {
-  constructor() {
-    super();
-
-
-
-  }
+  
   BookingPageRef = ({toggle}) => {
     this.showModal = toggle;
   }
