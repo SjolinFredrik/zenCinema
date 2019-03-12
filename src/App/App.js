@@ -11,6 +11,7 @@ import KioskPage from '../About-us/KioskPage';
 import RulePage from '../About-us/RulePage';
 import SaloonPage from '../About-us/SaloonPage';
 import MissingPage from '../MissingPage/MissingPage';
+import TicketPrice from '../Booking/TicketPrice';
 
 // Footer
 import Footer from '../Footer/Footer';
@@ -33,6 +34,7 @@ export default class App extends Component {
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
             <Route path="/registrera" component={RegisterPage} />
+            <Route path="/pris-knappar" component={TicketPrice} />
             <Route component={MissingPage} />
             </Switch>
           </main>
