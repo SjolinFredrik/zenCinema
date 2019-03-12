@@ -3,10 +3,8 @@ import Seat from './Seat';
 
 export default class Row extends React.Component {
 
-  constructor(number) {
-    super();
-    this.seats = [];
-    this.number = number;
+  constructor(props) {
+    super(props);
     this.state = {
       best: false
     }
@@ -14,9 +12,9 @@ export default class Row extends React.Component {
 
   render() {
     return(
-      <div className={this.state.best ? 'best' : ''}>
+      <div className={this.state.best ? 'best' : '' + " seats-row"}>
         {this.props.seats.map((seat, i) => {
-          return <Seat item={seat} name={this.number + '-' + i} key={i} />
+          return <Seat item={seat} name={seat.name} key={i} />
         })}
       </div>
     )

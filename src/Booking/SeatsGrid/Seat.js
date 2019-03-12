@@ -3,16 +3,15 @@ import React from 'react';
 
 export default class Seat extends React.Component {
 
-  constructor(name) {
-    super();
-    this.name = name;
-    this.best = false;
+  constructor(props) {
+    super(props);
+    // this.best = false;
     this.state = {
       taken: false
     };
-    this.hoverMe = this.hoverMe.bind(this);
-    this.unHoverMe = this.unHoverMe.bind(this);
-    this.clickMe = this.clickMe.bind(this);
+    // this.hoverMe = this.hoverMe.bind(this);
+    // this.unHoverMe = this.unHoverMe.bind(this);
+    // this.clickMe = this.clickMe.bind(this);
   }
 
   hoverMe() {
@@ -35,7 +34,7 @@ export default class Seat extends React.Component {
 
   render() {
     return(
-      <div onMouseEnter={this.hoverMe} onMouseLeave={this.unHoverMe} onClick={this.clickMe} className={'seat ' + this.state.taken ? 'taken ' : '' + this.props.best ? 'best chosen-seats' : ''} id={this.props.name}>
+      <div onMouseEnter={this.hoverMe} onMouseLeave={this.unHoverMe} onClick={this.clickMe} className={this.state.taken ? 'taken ' : ''  + " seat"} id={this.props.name}>
         <div className="ghost-div"></div>
       </div>
     )
