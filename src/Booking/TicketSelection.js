@@ -1,11 +1,10 @@
 import React from 'react';
 import {
   Container,
-  Row,
-  Col
+  Row
 } from 'reactstrap';
 import REST from '../REST';
-// import TicketPrice from './TicketPrice';
+import TicketPriceComponent from './TicketPrice';
 
 class TicketPrice extends REST { }
 
@@ -14,9 +13,32 @@ export default class TicketSelection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prices: []
+      prices: [],
+      ticketAmount: 0, // Ge till Zhenya
+      ticketsPrice: 0 // Ge till Zhenya
     }
     this.importPrices();
+    this.incrementTickets = this.incrementTickets.bind(this);
+    this.decrementTickets = this.decrementTickets.bind(this);
+    this.numberOfTickets = this.numberOfTickets.bind(this);
+  }
+
+  numberOfTickets() {
+    return this.state.ticketAmount;
+  }
+
+  incrementTickets(price) {
+    this.setState({
+      ticketAmount: this.state.ticketAmount + 1,
+      ticketsPrice: this.state.ticketsPrice + price
+    })
+  }
+
+  decrementTickets(price) {
+    this.setState({
+      ticketAmount: this.state.ticketAmount - 1,
+      ticketsPrice: this.state.ticketsPrice - price
+    })
   }
 
   async importPrices() {
@@ -24,19 +46,9 @@ export default class TicketSelection extends React.Component {
     console.log(prices);
     const importedPrices = [];
     for (let price of prices) {
+      let parsedPrice = parseInt(price.price);
       importedPrices.push(
-        <TicketPrice name={price.name} price={price.price} />
-      //   <Row className="col-4 ticket-price">
-      //     <Col>
-      //       {price.name} <br /> {price.price}kr/st
-      // </Col>
-      //     <Col className="quantity">
-      //       <i className="fas fa-minus-circle ticket-minus"></i>
-      //       <span className="ticketQuantity mx-3"></span>
-      //       <i className="fas fa-plus-circle ticket-plus"></i>
-      //     </Col>
-      //   </Row>
-
+        <TicketPriceComponent key={price._id} name={price.name} price={parsedPrice} increment={this.incrementTickets} decrement={this.decrementTickets} numberOfTickets={this.numberOfTickets} />
       )
     }
     this.setState({ prices: importedPrices });
@@ -52,7 +64,6 @@ export default class TicketSelection extends React.Component {
         <Row>
           {this.state.prices}
         </Row>
-
       </Container>
     )
   }

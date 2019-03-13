@@ -11,11 +11,11 @@ import KioskPage from '../About-us/KioskPage';
 import RulePage from '../About-us/RulePage';
 import SaloonPage from '../About-us/SaloonPage';
 import MissingPage from '../MissingPage/MissingPage';
+import RegisterPage from '../User/RegisterPage';
+import TicketSelection from '../Booking/TicketSelection';
 
 // Footer
 import Footer from '../Footer/Footer';
-import RegisterPage from '../User/RegisterPage';
-import TicketSelection from '../Booking/TicketSelection';
 
 export default class App extends Component {
 
