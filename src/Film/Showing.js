@@ -46,12 +46,11 @@ export default class Showing extends React.Component {
               {this.props.data.time}
             </Col>
             <Col xs="3" md="2" className="pr-2 my-auto">
-              <Button onClick={this.onBookClick} title={'Boka ' + this.props.data.film.title} className="btn btn-secondary float-right book-film">Boka</Button>
+              <BookingPage showingId={this.props.data._id}  />
             </Col>
           </Row>
         </Container>
       </Col>
-      <BookingPage showingId={this.props.data._id}  ref={this.BookingPageRef} />
       </div>
     )
   }
