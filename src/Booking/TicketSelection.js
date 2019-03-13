@@ -1,67 +1,61 @@
 import React from 'react';
 import {
   Container,
-  Row
+  Row,
+  Col
 } from 'reactstrap';
+import REST from '../REST';
 // import TicketPrice from './TicketPrice';
 
+class TicketPrice extends REST { }
 
 export default class TicketSelection extends React.Component {
 
-  constructor(bookingSum, grid) {
-    super();
-    this.tickets = [];
-    this.maxTickets = 8;
-    this.numOfTickets = 2;
-    this.bookingSummary = bookingSum;
-    this.grid = grid;
-    global.STORE.numOfTickets = this.numOfTickets;
-    this.setTickets().then(data => {
-      for (let i = 0; i < data.length; i++) {
-        let ticketData = data[i];
-        let ticket = new TicketPrice(ticketData, this);
-        this.tickets.push(ticket);
-        this.render();
-      }
-      global.STORE.reservedTickets = this.totalCost(this.tickets);
-      this.bookingSummary.render();
-      this.render();
-
-    });
-  }
-
-  async setTickets() {
-    let tickets = await TicketPrice.find();
-    return tickets;
-  }
-
-  totalCost(tickets) {
-    let totalCost = 0;
-    let ticketType = '';
-    let ticketsCost;
-    for (let i = 0; i < tickets.length; i++) {
-      ticketType = tickets[i];
-      let ticketQuantity = ticketType.ticketQuantity;
-      ticketsCost = parseInt(ticketType.price) * ticketQuantity;
-      totalCost = totalCost + ticketsCost;
+  constructor(props) {
+    super(props);
+    this.state = {
+      prices: []
     }
-    return totalCost;
+    this.importPrices();
+  }
+
+  async importPrices() {
+    let prices = await TicketPrice.find();
+    console.log(prices);
+    const importedPrices = [];
+    for (let price of prices) {
+      importedPrices.push(
+        <TicketPrice name={price.name} price={price.price} />
+      //   <Row className="col-4 ticket-price">
+      //     <Col>
+      //       {price.name} <br /> {price.price}kr/st
+      // </Col>
+      //     <Col className="quantity">
+      //       <i className="fas fa-minus-circle ticket-minus"></i>
+      //       <span className="ticketQuantity mx-3"></span>
+      //       <i className="fas fa-plus-circle ticket-plus"></i>
+      //     </Col>
+      //   </Row>
+
+      )
+    }
+    this.setState({ prices: importedPrices });
   }
 
   render() {
     return (
       <Container>
-        <section>
-          <div className="mb-3">
-            <h3>Välj antal biljetter</h3>
-            <p>(Max 8st)</p>
-          </div>
-          <Row>
-            {this.tickets}
-          </Row>
-        </section>
+        <div className="mb-3">
+          <h3>Välj antal biljetter</h3>
+          <p>(Max 8st)</p>
+        </div>
+        <Row>
+          {this.state.prices}
+        </Row>
+
       </Container>
     )
   }
 }
+
 
