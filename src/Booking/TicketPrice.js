@@ -35,8 +35,8 @@ export default class TicketPrice extends React.Component {
 
   render() {
     return (
-      <Row className="col-4 ticket-price">
-        <Col>
+      <Row>
+        <Col xs="4" className="ticket-price">
           {this.props.name} <br /> {this.props.price}kr/st
         </Col>
         <Col className="quantity">
