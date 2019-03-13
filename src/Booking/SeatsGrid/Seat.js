@@ -13,7 +13,9 @@ export default class Seat extends React.Component {
   }
 
   hoverMe() {
-    // this.seatsGrid.hoverSeats($(this), Store.numOfTickets);
+    console.log(this);
+    this.props.seatsGrid.hoverSeats(this, 2);
+    console.log('hovered');
     return; //temp
   }
 
@@ -32,7 +34,7 @@ export default class Seat extends React.Component {
 
   render() {
     return(
-      <div onMouseEnter={this.hoverMe} onMouseLeave={this.unHoverMe} onClick={this.clickMe} className={"seat " + (this.props.taken ? 'taken ' : '') + (this.props.best ? 'best chosen-seats' : '')} id={this.props.name}>
+      <div onMouseOver={() => {this.hoverMe()}} onMouseLeave={this.unHoverMe} onClick={this.clickMe} className={"seat " + (this.props.taken ? 'taken ' : '') + (this.props.best ? 'best chosen-seats' : '')} id={this.props.name}>
         <div className="ghost-div"></div>
       </div>
     )

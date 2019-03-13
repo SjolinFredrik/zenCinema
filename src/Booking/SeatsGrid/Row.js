@@ -13,7 +13,7 @@ export default class Row extends React.Component {
     return(
       <div className={"seats-row " + (this.props.best ? 'best' : '')}>
         {this.props.seats.map((seat, i) => {
-          return <Seat item={seat} taken={seat.taken} best={seat.best} name={seat.name} key={i} />
+          return <Seat item={seat} taken={seat.taken} best={seat.best} seatsGrid={this.props.seatsGrid} name={seat.name} key={i} />
         })}
       </div>
     )

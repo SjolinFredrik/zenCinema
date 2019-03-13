@@ -8,8 +8,8 @@ import {
 export default class SeatsGrid extends React.Component {
   constructor(props) {
     super(props);
+    this.hoveredSeats = [];
     this.state = {
-      hoveredSeats: [],
       bookingSum: '',
     }
   }
@@ -72,12 +72,39 @@ export default class SeatsGrid extends React.Component {
     return hall;
   }
 
+  hoverSeats(seat, numOfTickets) {
+    let hoveredSeat = seat.props.name;
+    let rowNr = parseInt(hoveredSeat.split('-')[0]);
+    let seatNr = parseInt(hoveredSeat.split('-')[1]);
+
+    for (let i = seatNr; i > seatNr - numOfTickets; i--) {
+      if (i > 0 && !this.props.takenSeats.includes(rowNr + '-' + i)) {
+        this.hoveredSeats.push(rowNr + '-' + i);
+        console.log(this.hoveredSeats);
+      } else {
+        for (let seat of this.hoveredSeats) {
+          // this.baseEl.find(`#${seat}`).addClass('invalid-seats');
+          console.log(seat, 'invalid');
+        }
+        this.hoveredSeats = [];
+        break;
+      }
+    }
+
+    if (this.hoveredSeats.length !== 0) {
+      for (let seat of this.hoveredSeats) {
+        // this.baseEl.find(`#${seat}`).addClass('valid-seats');
+        console.log(seat, 'valid');
+      }
+    }
+  }
+
 
 
   render() {
     const grid = this.createGrid(this.props.schema);
     const hall = grid.map((row, i) => {
-      return <SeatsRow item={row} number={i} best={row.best} seats={row.seats} key={i} />
+      return <SeatsRow item={row} number={i} seatsGrid={this} best={row.best} seats={row.seats} key={i} />
     });
     return (
       <div className="seats-selection">
