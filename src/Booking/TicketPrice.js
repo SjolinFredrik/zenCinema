@@ -1,4 +1,5 @@
 import React from 'react';
+// import TicketSelection from 'ticketSelection';
 import {
   Row,
   Col
@@ -7,32 +8,44 @@ import {
 export default class TicketPrice extends React.Component {
   constructor(data, ticketSelection) {
     super()
-    this.addEvents({
-      'click .ticket-minus': 'removeTicket',
-      'click .ticket-plus': 'addTicket'
-    });
-
     this.ticketSelection = ticketSelection;
     this.name = data.name;
     this.price = data.price;
+    this.state = { isButtonActive: false };
     if (this.name === 'Ordinarie') {
       this.ticketQuantity = 2;
     }
     else {
       this.ticketQuantity = 0;
     }
+
+    this.toggle = this.toggle.bind(this);
+
   }
+
+  toggle() {
+    this.setState ({
+      isButtonActive: !this.state.isButtonActive
+  }); 
+    console.log(this.state.isButtonActive);
+  }
+  // toggleMinus() {
+  //   this.setState({
+  //     count: this.state.count - 1
+  //   });
+  //   console.log(this.state.count);
+  // }
 
   removeTicket() {
     if (this.ticketQuantity > 0) {
       this.ticketSelection.numOfTickets--;
-      Store.numOfTickets--;
+      global.STORE.numOfTickets--;
       this.ticketQuantity--;
-      Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
+      global.STORE.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
       this.ticketSelection.grid.unhoverSeats();
       this.ticketSelection.grid.render();
-      if (Store.chosenSeats !== undefined) {
-        Store.chosenSeats.length = 0;
+      if (global.STORE.chosenSeats !== undefined) {
+        global.STORE.chosenSeats.length = 0;
       }
       this.render();
     }
@@ -41,13 +54,13 @@ export default class TicketPrice extends React.Component {
   addTicket() {
     if (this.ticketSelection.numOfTickets < this.ticketSelection.maxTickets) {
       this.ticketSelection.numOfTickets++;
-      Store.numOfTickets++;
+      global.STORE.numOfTickets++;
       this.ticketQuantity++;
-      Store.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
+      global.STORE.reservedTickets = this.ticketSelection.totalCost(this.ticketSelection.tickets);
       this.ticketSelection.grid.unhoverSeats();
       this.ticketSelection.grid.render();
-      if (Store.chosenSeats !== undefined) {
-        Store.chosenSeats.length = 0;
+      if (global.STORE.chosenSeats !== undefined) {
+        global.STORE.chosenSeats.length = 0;
       }
       this.render();
     }
@@ -60,9 +73,9 @@ export default class TicketPrice extends React.Component {
           {this.name} <br /> {this.price}kr/st
         </Col>
         <Col className="quantity">
-          <i className="fas fa-minus-circle ticket-minus"></i>
+          <i onClick={this.toggle()} className={"fas fa-minus-circle ticket-minus" + (this.state.isButtonActive ? 'active' : null)} ></i>
           <span className="ticketQuantity mx-3">{this.ticketQuantity}</span>
-          <i className="fas fa-plus-circle ticket-plus"></i>
+          <i onClick={this.toggle()} className="fas fa-plus-circle ticket-plus"></i>
         </Col>
       </Row>
     )
