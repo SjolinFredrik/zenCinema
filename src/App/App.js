@@ -34,7 +34,6 @@ export default class App extends Component {
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
             <Route path="/registrera" component={RegisterPage} />
-            <Route path="/ticketselection" component={TicketSelection} />
             <Route component={MissingPage} />
             </Switch>
           </main>
