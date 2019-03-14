@@ -11,10 +11,9 @@ import KioskPage from '../About-us/KioskPage';
 import RulePage from '../About-us/RulePage';
 import SaloonPage from '../About-us/SaloonPage';
 import MissingPage from '../MissingPage/MissingPage';
-
+import RegisterPage from '../User/RegisterPage';
 // Footer
 import Footer from '../Footer/Footer';
-import RegisterPage from '../User/RegisterPage';
 
 export default class App extends Component {
 
