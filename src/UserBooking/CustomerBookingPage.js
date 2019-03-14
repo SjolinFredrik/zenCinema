@@ -50,43 +50,42 @@ export default class CustomerBookingPage extends React.Component {
   }
 
   async findBookings(customer) {
-    this.bookings = [];
-    let showing = '';
+    let bookings = [];
     console.log(customer, 'customer från find bookings')
     let customerBookings = customer.bookings;
 
-    for (let booking of customerBookings) {
-      let showId = booking.show;
-      console.log(showId)
-      this.getShowing(showId).then(result => {
-        showing = result;
-        console.log(showing, 'result')
-      })
+    console.log(customerBookings);
 
-      console.log(showing, 'visning')
-      // this.bookings.push(<CustomerBooking film={showing.film.title} date={showing.date} time={showing.time} bookingNr={booking.bookingNumber} />);
-      this.bookings.push({ film: showing.film.title, date: showing.date, time: showing.time, bookingNr: booking.bookingNumber });
-      function compare(a, b) {
-        const dateA = a.date;
-        const dateB = b.date;
-
-        let comparison = 0;
-        if (dateA > dateB) {
-          comparison = 1;
-        } else if (dateA < dateB) {
-          comparison = -1;
-        }
-        return comparison;
-      }
-
-      this.bookings.sort(compare);
+    for (let i = 0; i < customerBookings.length; i++) {
+      let showId = customerBookings[i].show;
+      let showing = await Showing.find(`.findOne({_id: '${showId}'}).populate('film').exec()`);
+      bookings.push({film: showing.film.title, date: showing.date, time: showing.time, bookingNr: customerBookings[i].bookingNumber});
     }
-    this.appendBookings();
 
+
+        function compare(a, b) {
+          const dateA = a.date;
+          const dateB = b.date;
+  
+          let comparison = 0;
+          if (dateA > dateB) {
+            comparison = 1;
+          } else if (dateA < dateB) {
+            comparison = -1;
+          }
+          return comparison;
+        }
+  
+        bookings.sort(compare);
+
+        console.log(bookings, 'sorted');
+    
+        this.appendBookings(bookings);
   }
 
 
-  appendBookings() {
+
+  async appendBookings(bookings) {
     Date.prototype.customFormat = function (formatString) {
       var YYYY, YY, MMMM, MMM, MM, M, DDDD, DDD, DD, D, hhhh, hhh, hh, h, mm, m, ss, s, ampm, AMPM, dMod, th;
       YY = ((YYYY = this.getFullYear()) + "").slice(-2);
@@ -109,31 +108,44 @@ export default class CustomerBookingPage extends React.Component {
 
     let today = new Date();
     let actualBookings = [];
-    let archiveBookings = []
-    for (let booking of this.bookings) {
+    let archiveBookings = [];
+
+    for (let i = 0; i < bookings.length; i++) {
+      let booking = bookings[i];
+      console.log(booking,'booking from appendBookings');
+
       let bookingDate = new Date(booking.date);
       if (bookingDate >= today) {
         let convertedDate = bookingDate.customFormat('#DDDD# #DD# #MMMM# #YYYY#');
         actualBookings.push(<CustomerBooking film={booking.film} date={convertedDate} time={booking.time} bookingNr={booking.bookingNr} />);
+        console.log(actualBookings, 'from appendBookings');
       }
       else if (bookingDate.getDate() < today.getDate()) {
         let convertedDate = bookingDate.customFormat('#DDDD# #DD# #MMMM# #YYYY#');
         archiveBookings.push(<CustomerBooking film={booking.film} date={convertedDate} time={booking.time} bookingNr={booking.bookingNr} />);
+        console.log(archiveBookings, 'from appendBookings');
+
       }
     }
-    this.setState({
-      customerActualBookings: actualBookings,
-      customerArchiveBookings: archiveBookings
-    });
-    console.log(this.state, 'vad händer?');
+    
+    return {actual: actualBookings, archive: archiveBookings}
+
   }
 
 
 
   render() {
+
+    let bookings = [];
     if (this.state.customer !== undefined) {
       console.log(this.state.customer, 'vem')
-      this.findBookings(this.state.customer)
+      const bookingsParts = this.findBookings(this.state.customer);
+
+      console.log(bookingsParts, 'bookingParts');
+      // this.setState({
+      //   customerActualBookings: bookingsParts.actual,
+      //   customerArchiveBookings: bookingsParts.archive
+      // });
     }
     return (
       <div className="customer-bookings-page dark-bg-content container">
@@ -185,7 +197,6 @@ export default class CustomerBookingPage extends React.Component {
         </Row>
       </div>
     )
-
   }
 
 
