@@ -33,7 +33,7 @@ export default class App extends Component {
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
             <Route path="/registrera" component={RegisterPage} />
-            <Route path="/mina-sidor" component={CustomerBookingPage} />
+            <Route path="/mina-bokningar" component={CustomerBookingPage} />
             <Route component={MissingPage} />
             </Switch>
           </main>
