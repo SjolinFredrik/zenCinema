@@ -51,7 +51,7 @@ export default class Showings extends React.Component {
               <i className="fas fa-pen-square"></i>
             </div>
             <div>
-              <i className="fas fa-trash-alt delete-btn"></i>
+              <i className="fas fa-trash-alt delete-btn" id={i} onClick={this.deleteShowing}></i>
             </div>
           </Col>
         </Row>
