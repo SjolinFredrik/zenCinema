@@ -4,9 +4,11 @@ import {
   Col,
 } from 'reactstrap';
 import Login from '../Login';
+import REST from '../REST';
 import User from '../User';
-import Showing from '../Film/Showing';
 import CustomerBooking from '../UserBooking/CustomerBooking';
+
+class Showing extends REST { }
 
 export default class CustomerBookingPage extends React.Component {
 
@@ -14,34 +16,60 @@ export default class CustomerBookingPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      customer: undefined,
       customerActualBookings: [],
       customerArchiveBookings: []
     }
-    this.findBookings();
+    // this.findBookings();
+    this.checkLogin().then(login => {
+      console.log(login);
+      if (login.loggedIn) {
+        this.getUser(login.user._id).then(customer => {
+          this.setState({ customer: customer });
+        })
+      }
+    });
   }
 
-  
-  
-  async findBookings() {
-    this.bookings = [];
-  let user = await Login.find();
-  if (!user.loggedIn) {
-    return;
-  }
-  else {
-    let userId = user.user._id;
+  async getUser(userId) {
     let customer = await User.find(`.findOne({_id: '${userId}'}).populate('bookings').exec()`);
+    return customer;
+  }
+
+  async checkLogin() {
+    return await fetch('/json/login').then(response => { return response.json() }).then(data => {
+      let result = data;
+      return result;
+    });
+  }
+
+
+  async getShowing(showId) {
+    let showing = await Showing.find(`.findOne({_id: '${showId}'}).populate('film').exec()`);
+    return showing;
+  }
+
+  async findBookings(customer) {
+    this.bookings = [];
+    let showing = '';
+    console.log(customer, 'customer från find bookings')
     let customerBookings = customer.bookings;
-    
+
     for (let booking of customerBookings) {
       let showId = booking.show;
-      let showing = await Showing.find(`.findOne({_id: '${showId}'}).populate('film').exec()`);
-      this.bookings.push(<CustomerBooking film={showing.film.title} date={showing.date} time={showing.time} bookingNr={booking.bookingNumber} />);
-      
+      console.log(showId)
+      this.getShowing(showId).then(result => {
+        showing = result;
+        console.log(showing, 'result')
+      })
+
+      console.log(showing, 'visning')
+      // this.bookings.push(<CustomerBooking film={showing.film.title} date={showing.date} time={showing.time} bookingNr={booking.bookingNumber} />);
+      this.bookings.push({ film: showing.film.title, date: showing.date, time: showing.time, bookingNr: booking.bookingNumber });
       function compare(a, b) {
         const dateA = a.date;
         const dateB = b.date;
-        
+
         let comparison = 0;
         if (dateA > dateB) {
           comparison = 1;
@@ -50,13 +78,14 @@ export default class CustomerBookingPage extends React.Component {
         }
         return comparison;
       }
-      
+
       this.bookings.sort(compare);
     }
     this.appendBookings();
-    this.render();
+
   }
-}
+
+
   appendBookings() {
     Date.prototype.customFormat = function (formatString) {
       var YYYY, YY, MMMM, MMM, MM, M, DDDD, DDD, DD, D, hhhh, hhh, hh, h, mm, m, ss, s, ampm, AMPM, dMod, th;
@@ -79,74 +108,85 @@ export default class CustomerBookingPage extends React.Component {
     };
 
     let today = new Date();
+    let actualBookings = [];
+    let archiveBookings = []
     for (let booking of this.bookings) {
       let bookingDate = new Date(booking.date);
       if (bookingDate >= today) {
         let convertedDate = bookingDate.customFormat('#DDDD# #DD# #MMMM# #YYYY#');
-        this.customerActualBookings.push(new CustomerBooking(booking.film, convertedDate, booking.time, booking.bookingNr));
+        actualBookings.push(<CustomerBooking film={booking.film} date={convertedDate} time={booking.time} bookingNr={booking.bookingNr} />);
       }
       else if (bookingDate.getDate() < today.getDate()) {
         let convertedDate = bookingDate.customFormat('#DDDD# #DD# #MMMM# #YYYY#');
-        this.customerArchiveBookings.push(new CustomerBooking(booking.film, convertedDate, booking.time, booking.bookingNr));
+        archiveBookings.push(<CustomerBooking film={booking.film} date={convertedDate} time={booking.time} bookingNr={booking.bookingNr} />);
       }
     }
+    this.setState({
+      customerActualBookings: actualBookings,
+      customerArchiveBookings: archiveBookings
+    });
+    console.log(this.state, 'vad händer?');
   }
 
 
 
-render() {
-  return (
-    <div className="customer-bookings-page dark-bg-content container">
-      <Row>
-        <Col sm="12" className="mx-auto bookings-heap">
-          <ul className="nav nav-pills mb-3" id="bookings-heap-pills" role="tablist">
-            <li className="nav-item">
-              <a className="nav-link active" id="actual-bookings-pill" data-toggle="pill" href="#actual-bookings-heap" role="tab"
-                aria-controls="actual-bookings-heap" aria-selected="true">Aktuella</a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" id="archive-bookings-pill" data-toggle="pill" href="#archive-bookings-heap" role="tab"
-                aria-controls="archive-bookings-heap" aria-selected="false">Arkiv</a>
-            </li>
-          </ul>
-          <div className="tab-content" id="bookings-heap-content">
-            <div className="tab-pane fade show active" id="actual-bookings-heap" role="tabpanel" aria-labelledby="actual-bookings-pill">
-              <div sm="12" className="customer-booking mx-auto">
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Film</td>
-                      <td>Datum</td>
-                      <td>Tid</td>
-                      <td>Ref.nr</td>
-                    </tr>
-                  </tbody>
-                </table>
-                {this.customerActualBookings ? this.customerActualBookings : 'Vänligen vänta'}
+  render() {
+    if (this.state.customer !== undefined) {
+      console.log(this.state.customer, 'vem')
+      this.findBookings(this.state.customer)
+    }
+    return (
+      <div className="customer-bookings-page dark-bg-content container">
+        <Row>
+          <Col sm="12" className="mx-auto bookings-heap">
+            <ul className="nav nav-pills mb-3" id="bookings-heap-pills" role="tablist">
+              <li className="nav-item">
+                <a className="nav-link active" id="actual-bookings-pill" data-toggle="pill" href="#actual-bookings-heap" role="tab"
+                  aria-controls="actual-bookings-heap" aria-selected="true">Aktuella</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" id="archive-bookings-pill" data-toggle="pill" href="#archive-bookings-heap" role="tab"
+                  aria-controls="archive-bookings-heap" aria-selected="false">Arkiv</a>
+              </li>
+            </ul>
+            <div className="tab-content" id="bookings-heap-content">
+              <div className="tab-pane fade show active" id="actual-bookings-heap" role="tabpanel" aria-labelledby="actual-bookings-pill">
+                <div sm="12" className="customer-booking mx-auto">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Film</td>
+                        <td>Datum</td>
+                        <td>Tid</td>
+                        <td>Ref.nr</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {this.state.customerActualBookings ? this.state.customerActualBookings : 'Vänligen vänta'}
+                </div>
+              </div>
+              <div className="tab-pane fade" id="archive-bookings-heap" role="tabpanel" aria-labelledby="archive-bookings-pill">
+                <div sm="12" className="customer-booking mx-auto">
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td>Film</td>
+                        <td>Datum</td>
+                        <td>Tid</td>
+                        <td>Ref.nr</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {this.state.customerArchiveBookings ? this.customerArchiveBookings : 'Vänligen vänta'}
+                </div>
               </div>
             </div>
-            <div className="tab-pane fade" id="archive-bookings-heap" role="tabpanel" aria-labelledby="archive-bookings-pill">
-              <div sm="12" className="customer-booking mx-auto">
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Film</td>
-                      <td>Datum</td>
-                      <td>Tid</td>
-                      <td>Ref.nr</td>
-                    </tr>
-                  </tbody>
-                </table>
-                {this.customerArchiveBookings ? this.customerArchiveBookings : 'Vänligen vänta'}
-              </div>
-            </div>
-          </div>
-        </Col>
-      </Row>
-    </div>
-  )
-  
-}
+          </Col>
+        </Row>
+      </div>
+    )
+
+  }
 
 
 
