@@ -10,7 +10,7 @@ import Showings from './Showings'
 export default class AdminPage extends React.Component {
   render() {
     return (
-      <Container>
+      <Container className="main-container-fade">
         <Row>
           <Col xs="12">
             <ManageShowing />
