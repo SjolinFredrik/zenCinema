@@ -12,7 +12,7 @@ export default class BookingSystem extends React.Component {
     super(props);
     this.state = {
       content: false,
-      numOfTickets: 4,
+      numOfTickets: 2,
     }
     this.findShowingsDetails(this.props.showingId).then(data =>{
       this.showing = data;
@@ -27,7 +27,7 @@ export default class BookingSystem extends React.Component {
           })
         }
       });
-    })
+    });
   }
 
   async findShowingsDetails(showingId) {
