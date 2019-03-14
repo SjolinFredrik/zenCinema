@@ -11,7 +11,8 @@ export default class BookingSystem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: false
+      content: false,
+      numOfTickets: 4,
     }
     this.findShowingsDetails(this.props.showingId).then(data =>{
       this.showing = data;
@@ -50,7 +51,7 @@ export default class BookingSystem extends React.Component {
       return (
         <section className="booking-system container-fluid">
           <h1>Booking System</h1>
-          <SeatsGrid schema={this.showing.saloon.seatsPerRow} bestRows={this.showing.saloon.bestRows} takenSeats={this.takenSeats} />
+          <SeatsGrid schema={this.showing.saloon.seatsPerRow} bestRows={this.showing.saloon.bestRows} takenSeats={this.takenSeats} numOfTickets={this.state.numOfTickets} />
         </section>
       )
     }

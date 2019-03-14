@@ -5,38 +5,31 @@ export default class Seat extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.best = false;
 
-    // this.hoverMe = this.hoverMe.bind(this);
-    // this.unHoverMe = this.unHoverMe.bind(this);
-    // this.clickMe = this.clickMe.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseClick = this.handleMouseClick.bind(this);
   }
 
-  hoverMe() {
-    console.log(this);
-    this.props.seatsGrid.hoverSeats(this, 2);
-    console.log('hovered');
-    return; //temp
+  handleMouseOver(e) {
+    this.props.onHover(this.props.index); // seat index
   }
 
-  unhoverMe() {
-    // this.seatsGrid.unhoverSeats();
-    return; //temp
+  handleMouseClick() {
+    this.props.onClick(this.props.index); // seat index
   }
-
-  clickMe() {
-    // this.seatsGrid.chooseSeats();
-    this.setState({
-      chosen: true
-    })
-  }
-
 
   render() {
     return(
-      <div onMouseOver={() => {this.hoverMe()}} onMouseLeave={this.unHoverMe} onClick={this.clickMe} className={"seat " + (this.props.taken ? 'taken ' : '') + (this.props.best ? 'best chosen-seats' : '')} id={this.props.name}>
+      <div 
+        onMouseOver={() => {this.handleMouseOver()}}
+        onClick={this.handleMouseClick}
+        className={"seat " + (this.props.taken ? 'taken' : '') + (this.props.chosen ? ' best chosen-seats' : '') + (this.props.highlighted ? ' highlight' : '')}
+        id={this.props.name}>
         <div className="ghost-div"></div>
       </div>
     )
   }
 }
+
+
+// 

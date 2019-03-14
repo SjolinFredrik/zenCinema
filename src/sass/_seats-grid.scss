@@ -12,6 +12,14 @@
       box-shadow: 1px 1px 1px $secondary;
    } 
   }
+  &.invalid {
+    .seat {
+      &.highlight {
+        cursor: default;
+        background-color: $primary;
+      }
+    }
+  }
 
   &:nth-child(6),
     &:nth-child(5){
@@ -55,12 +63,8 @@
       cursor: default;
       background-color: $primary;
     }
-    &.valid-seats {
+    &.highlight {
       background-color: #fff;
-    }
-    &.invalid-seats {
-      cursor: default;
-      background-color: $primary;
     }
     &.chosen-seats {
       animation: blinker 1s linear infinite;
