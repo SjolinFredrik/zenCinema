@@ -38,6 +38,15 @@ export default class ManageShowing extends React.Component {
       }
     };
     this.errorMessages = [];
+    this.showingInfo = {
+      saloon: '',
+      film: {
+        title: '',
+        images: []
+      },
+      date: '',
+      time: ''
+    }
 
     this.importSaloons();
     this.importFilms();
@@ -53,6 +62,7 @@ export default class ManageShowing extends React.Component {
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal,
+      mode: 'form',
       inputs: {
         saloon: '',
         film: '',
@@ -132,7 +142,6 @@ export default class ManageShowing extends React.Component {
 
   async showConfirmation(showing) {
     const foundShowing = await Showing.find(`.findById('${showing._id}').populate('saloon').populate('film')`);
-    console.log(foundShowing);
     this.showingInfo = {
       saloon: foundShowing.saloon.name,
       film: {
@@ -142,17 +151,27 @@ export default class ManageShowing extends React.Component {
       date: new Date(foundShowing.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'}),
       time: foundShowing.time
     }
+    this.setState({ mode: 'confirmation' });
   }
 
   render() {
+    const confirmStyle = {
+      backgroundImage: 'url(/images/movies/' + this.showingInfo.film.images[1] + ')',
+      backgroundSize: 'cover'
+    }
+    const gradientStyle = {
+      background: 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))'
+    }
     const today = new Date().toLocaleDateString();
 
     return (
       <div>
         <Button color="danger" onClick={this.toggle}>Klicka</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Lägg till/ändra visning</ModalHeader>
-          <ModalBody>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className="showing-modal">
+          <ModalHeader toggle={this.toggle}>
+            {this.state.mode === 'form' ? 'Lägg till/ändra visning' : 'Visning skapad!'}
+          </ModalHeader>
+          {this.state.mode === 'form' ? <ModalBody>
             {this.errorMessages.length > 0 ?
             <Alert color="danger">
               Vänligen ange: {this.errorMessages}
@@ -183,11 +202,24 @@ export default class ManageShowing extends React.Component {
                 <option key="2200" value="22:00">22:00</option>
               </Input>
             </FormGroup>
+          </ModalBody> : <ModalBody className="p-0 text-light rounded-bottom" style={confirmStyle}>
+            <Container fluid style={gradientStyle}>
+              <Row className="py-4">
+                <Col xs="6" className="p-3">
+                  <h2 className="pb-2">{this.showingInfo.film.title}</h2>
+                  <p>Salong: {this.showingInfo.saloon}</p>
+                  <p>{this.showingInfo.date} kl {this.showingInfo.time}</p>
+                </Col>
+              </Row>
+            </Container>  
           </ModalBody>
+          }
+          {this.state.mode === 'form' ?
           <ModalFooter>
             <Button color="primary" onClick={this.saveShowing}>Spara</Button>
             <Button color="secondary" onClick={this.toggle}>Avbryt</Button>
           </ModalFooter>
+          : ''}
         </Modal>
       </div>
     );
