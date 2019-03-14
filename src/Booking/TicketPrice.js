@@ -12,6 +12,11 @@ export default class TicketPrice extends React.Component {
     this.onRemove = this.onRemove.bind(this);
   }
 
+  componentDidMount(){
+    this.setDefaultAmountForOrdinarieTicket();
+  }
+
+
   onAdd() {
     const numberOfTickets = this.props.numberOfTickets();
     if (numberOfTickets >= 8) {
@@ -20,7 +25,8 @@ export default class TicketPrice extends React.Component {
     this.setState({
       ticketAmount: this.state.ticketAmount + 1
     });
-    this.props.increment(this.props.price);
+    this.props.increment(this.props.price, 1);
+    console.log(this.state.ticketAmount);
   }
 
   onRemove(){
@@ -31,9 +37,22 @@ export default class TicketPrice extends React.Component {
       ticketAmount: this.state.ticketAmount - 1
     });
     this.props.decrement(this.props.price);
+    console.log(this.state.ticketAmount);
   }
 
-  render() {
+  setDefaultAmountForOrdinarieTicket() {
+    if(this.props.name === 'Ordinarie') {
+      this.setState({
+        ticketAmount: this.state.ticketAmount + 2
+      });
+      this.props.numberOfTickets();
+      this.props.increment(this.props.price, 2);
+    }
+  }
+
+
+  render() {  
+
     return (
       <Col xs="4">
         <div className="ticket-price">

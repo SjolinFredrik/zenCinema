@@ -23,13 +23,17 @@ export default class TicketSelection extends React.Component {
     this.numberOfTickets = this.numberOfTickets.bind(this);
   }
 
+  componentDidMount() {
+    this.numberOfTickets();
+  }
+
   numberOfTickets() {
     return this.state.ticketAmount;
   }
 
-  incrementTickets(price) {
+  incrementTickets(price, qnty) {
     this.setState({
-      ticketAmount: this.state.ticketAmount + 1,
+      ticketAmount: this.state.ticketAmount + qnty,
       ticketsPrice: this.state.ticketsPrice + price
     })
   }
@@ -44,6 +48,8 @@ export default class TicketSelection extends React.Component {
   async importPrices() {
     let prices = await TicketPrice.find();
     console.log(prices);
+    this.numberOfTickets();
+    console.log(this.numberOfTickets());
     const importedPrices = [];
     for (let price of prices) {
       let parsedPrice = parseInt(price.price);
