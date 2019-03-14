@@ -15,12 +15,19 @@
   }
   .showing-btns {
     div {
-      height: 50%
+      height: 50%;
       i {
         float: right;
-        cursor: pointer;
+        color: #555;
         font-size: 2rem;
-        right: 0;
+        &:hover { 
+          color: $dark;
+          cursor: pointer;
+        }
+        @include media-breakpoint-down(md){
+          
+          font-size: 2.5rem;
+        }
       }
     }
   }

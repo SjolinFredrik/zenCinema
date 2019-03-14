@@ -23,8 +23,8 @@ export default class Showings extends React.Component {
 
     this.showingContent = this.allShowings.map((show, i) => {
       return (
-        <Row className="admin-showing p-2 rounded m-2" key={'showing_' + i}>
-          <Col xs="4" sm="3" md="2" lg="1" className="showing-poster px-0">
+        <Row className="admin-showing py-2 rounded m-3" key={'showing_' + i}>
+          <Col xs="3" sm="2" lg="1" className="showing-poster px-0">
             <div className="poster-frame p-1">
               <img
                 src={'/images/movies/' + show.film.images[0]}
@@ -33,17 +33,17 @@ export default class Showings extends React.Component {
               />
             </div>
           </Col>
-          <Col xs="6" sm="7" md="8" lg="9" className="showing-info px-0">
-            <h4 className="mb-2">{show.film.title}</h4>
+          <Col xs="6" sm="5" md="6" className="showing-info offset-sm-2 offset-md-1 offset-lg-2 px-0">
+            <p className="mb-1 font-weight-bold">{show.film.title}</p>
             <p className="mb-1">{show.saloon.name}</p>
             <p className="mb-1">{new Date(show.date).toLocaleDateString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric' }) + ' ' + show.time}</p>
           </Col>
-          <Col xs="2" className="px-0 showing-btns">
+          <Col xs="3" sm="3" className="showing-btns pl-0 pr-1">
             <div>
-              <i class="fas fa-edit"></i>
+              <i className="fas fa-pen-square"></i>
             </div>
             <div>
-              <i class="fas fa-trash-alt"></i>
+              <i className="fas fa-trash-alt delete-btn"></i>
             </div>
           </Col>
         </Row>
