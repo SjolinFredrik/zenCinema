@@ -11,7 +11,7 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Col, 
+  Col,
   Badge
 } from 'reactstrap';
 import Login from '../Login';
@@ -27,7 +27,7 @@ export default class LoginForm extends React.Component {
     this.state = {
       dropdownOpen: false
     };
-    
+
   }
 
   async login() {
@@ -41,23 +41,23 @@ export default class LoginForm extends React.Component {
 
 
     let result = await login.save();
-    this.setState({errorLogin: null});
+    this.setState({ errorLogin: null });
 
     if (result.loggedIn) {
-      this.setState({loggedIn: true, loggedInUser: result.user});
+      this.setState({ loggedIn: true, loggedInUser: result.user });
       global.STORE.loggedInUser = this.state.loggedInUser;
 
       //Next if should be fixed after BookingSystem refaktoring
-      if (this.parent === "BookingSystem"){
-      this.parent.loggedInUser = this.state.loggedInUser;
-      this.parent.registerForm = 0;
-      this.baseEl.remove();
-      this.used = true;
-      this.parent.render();
+      if (this.parent === "BookingSystem") {
+        this.parent.loggedInUser = this.state.loggedInUser;
+        this.parent.registerForm = 0;
+        this.baseEl.remove();
+        this.used = true;
+        this.parent.render();
       }
     }
     else {
-      this.setState({errorLogin: true});
+      this.setState({ errorLogin: true });
     }
   }
 
@@ -69,7 +69,7 @@ export default class LoginForm extends React.Component {
 
   clickLogoutBtn() {
     this.logout();
-    this.setState({loggedIn: false, loggedInUser: null});
+    this.setState({ loggedIn: false, loggedInUser: null });
   }
 
 
@@ -80,7 +80,7 @@ export default class LoginForm extends React.Component {
     global.STORE.loggedInUser = undefined;
   }
   async checkLogin() {
-    return await fetch('/json/login').then(response => {return response.json()}).then(data => {
+    return await fetch('/json/login').then(response => { return response.json() }).then(data => {
       let result = data;
       return result;
     });
@@ -88,11 +88,11 @@ export default class LoginForm extends React.Component {
 
   componentDidMount() {
     this.checkLogin().then(data => {
-      if(data.loggedIn) {
-        this.setState({loggedIn: true, loggedInUser: data.user});
+      if (data.loggedIn) {
+        this.setState({ loggedIn: true, loggedInUser: data.user });
       }
       else {
-        this.setState({loggedIn: false, loggedInUser: null});
+        this.setState({ loggedIn: false, loggedInUser: null });
       }
     });
   }
@@ -100,68 +100,69 @@ export default class LoginForm extends React.Component {
     let result;
 
     if (this.parent === 'NavBar') {
-      if(this.state.loggedIn) {
+      if (this.state.loggedIn) {
 
-         result= <div className="login-form"><ButtonGroup><UncontrolledDropdown>
-           <DropdownToggle  tag="button" type="button" className="btn btn-outline-secondary" caret>
-           Hej, {this.state.loggedInUser.firstName}!
+        result = <div className="login-form"><ButtonGroup><UncontrolledDropdown>
+          <DropdownToggle tag="button" type="button" className="btn btn-outline-secondary" caret>
+            Hej, {this.state.loggedInUser.firstName}!
            </DropdownToggle>
-           <DropdownMenu right className="dropdown-menu-lg-right login-menu">
+          <DropdownMenu right className="dropdown-menu-lg-right login-menu">
             <Link className="dropdown-item" to="/mina-bokningar">Mina bokningar</Link>
-            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}>Logga ut</DropdownItem>
-           </DropdownMenu>
-         </UncontrolledDropdown></ButtonGroup></div>
+            <div className="dropdown-divider" />
+            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}><i class="fas fa-sign-out-alt" /> Logga ut</DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown></ButtonGroup></div>
 
       }
       else if (!this.state.loggedIn) {
         result = <div className="login-form"><ButtonGroup><UncontrolledDropdown >
           <DropdownToggle tag="button" type="button" className="btn btn-outline-secondary" caret>
-          Logga in
+            Logga in
         </DropdownToggle>
-        <DropdownMenu right className="dropdown-menu-lg-right login-menu">
-          <Form>
-            <FormGroup >
+          <DropdownMenu right className="dropdown-menu-lg-right login-menu">
+            <Form>
+              <FormGroup >
                 <Label for="emailf">Epost</Label>
                 <Input type="email" className="form-control email-login-input" id="emailfo" placeholder="email@example.com" />
-            </FormGroup>
-            <FormGroup className="form-group">
-              <Label for="pwdf">Lösenord</Label>
-              <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password" />
-            </FormGroup>
-            {this.state.errorLogin ? <Badge color="danger" >Felaktig epost eller lösenord!</Badge> : null}
-            <Button color="primary" className="btn btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
-            
-          </Form>
-          <DropdownItem divider />
-                  
-          <Link className="dropdown-item" to="/registrera" >Registrera ny användare</Link>
-        </DropdownMenu>
+              </FormGroup>
+              <FormGroup className="form-group">
+                <Label for="pwdf">Lösenord</Label>
+                <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password" />
+              </FormGroup>
+              {this.state.errorLogin ? <Badge color="danger" >Felaktig epost eller lösenord!</Badge> : null}
+              <Button color="primary" className="btn btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
+
+            </Form>
+            <DropdownItem divider />
+
+            <Link className="dropdown-item" to="/registrera" >Registrera ny användare</Link>
+          </DropdownMenu>
         </UncontrolledDropdown></ButtonGroup></div>
 
       }
     }
-//this else-if should be tested after BookingSystem refaktoring
+    //this else-if should be tested after BookingSystem refaktoring
     else if (this.parent === 'BookingSystem') {
       result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
-           <Col sm="4">
-               <Form className="welcome">
-                  <h2>Logga in eller skapa nytt konto</h2>
-                  <FormGroup>
-                    <Label htmlFor="emailf">Epost</Label>
-                     <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
-                  </FormGroup>
-                   <FormGroup >
-                     <Label htmlFor="pwdf">Lösenord</Label>
-                     <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password"/>
-                   </FormGroup>
-                   <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
-                 </Form>
-                <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
-                
-          </Col>
-          
-       </div>
-          this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
+        <Col sm="4">
+          <Form className="welcome">
+            <h2>Logga in eller skapa nytt konto</h2>
+            <FormGroup>
+              <Label htmlFor="emailf">Epost</Label>
+              <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
+            </FormGroup>
+            <FormGroup >
+              <Label htmlFor="pwdf">Lösenord</Label>
+              <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password" />
+            </FormGroup>
+            <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
+          </Form>
+          <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
+
+        </Col>
+
+      </div>
+      this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
     }
     return (
       <div>{result}</div>
