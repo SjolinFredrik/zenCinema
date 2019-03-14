@@ -15,7 +15,16 @@ export default class Showings extends React.Component {
     super()
     this.state = { content: '' }
     this.getAllShowingsAndMount()
+    this.deleteShowing = this.deleteShowing.bind(this)  
   }
+
+  async deleteShowing(e) {
+    const index = e.target.id
+    const showing = new Showing({ _id: this.allShowings[index]._id })
+    await showing.delete()
+    this.getAllShowingsAndMount()
+  }
+
   async getAllShowingsAndMount() {
     let today = new Date()
     today = new Date(today.setDate(today.getDate() - 1)).getTime()
@@ -40,10 +49,10 @@ export default class Showings extends React.Component {
           </Col>
           <Col xs="2" className="px-0 showing-btns">
             <div>
-              <i class="fas fa-edit"></i>
+              <i className="fas fa-edit"></i>
             </div>
             <div>
-              <i class="fas fa-trash-alt"></i>
+              <i className="fas fa-trash-alt" id={i} onClick={this.deleteShowing}></i>
             </div>
           </Col>
         </Row>
