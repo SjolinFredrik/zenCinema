@@ -1,6 +1,9 @@
 import React from 'react';
 import SeatsGrid from './SeatsGrid/SeatsGrid';
+import TicketSelection from './TicketSelection';
 import REST from '../REST';
+import { Col } from 'reactstrap';
+
 
 
 class Showing extends REST {};
@@ -50,7 +53,9 @@ export default class BookingSystem extends React.Component {
     if(this.state.content) {
       return (
         <section className="booking-system container-fluid">
-          <h1>Booking System</h1>
+          <Col sm="8" className="mx-auto" >
+          <TicketSelection /> 
+          </Col>
           <SeatsGrid schema={this.showing.saloon.seatsPerRow} bestRows={this.showing.saloon.bestRows} takenSeats={this.takenSeats} numOfTickets={this.state.numOfTickets} />
         </section>
       )

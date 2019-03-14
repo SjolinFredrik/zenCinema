@@ -35,16 +35,16 @@ export default class TicketPrice extends React.Component {
 
   render() {
     return (
-      <Row>
-        <Col xs="4" className="ticket-price">
+      <Col xs="4">
+        <div className="ticket-price">
           {this.props.name} <br /> {this.props.price}kr/st
-        </Col>
-        <Col className="quantity">
+        </div>
+        <div className="quantity">
           <i onClick={this.onRemove} className="fas fa-minus-circle ticket-minus"></i>
           <span className="ticketQuantity mx-3">{this.state.ticketAmount}</span>
           <i onClick={this.onAdd} className="fas fa-plus-circle ticket-plus"></i>
-        </Col>
-      </Row>
+        </div>
+      </Col>
     )
   }
 }
