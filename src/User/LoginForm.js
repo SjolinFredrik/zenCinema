@@ -107,9 +107,10 @@ export default class LoginForm extends React.Component {
             Hej, {this.state.loggedInUser.firstName}!
            </DropdownToggle>
           <DropdownMenu right className="dropdown-menu-lg-right login-menu">
+            {this.state.loggedInUser.admin ? <Link className="dropdown-item" to="/admin">Admin</Link> : ''}
             <Link className="dropdown-item" to="/mina-bokningar">Mina bokningar</Link>
             <div className="dropdown-divider" />
-            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}><i class="fas fa-sign-out-alt" /> Logga ut</DropdownItem>
+            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}><i className="fas fa-sign-out-alt" /> Logga ut</DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown></ButtonGroup></div>
 
@@ -138,7 +139,6 @@ export default class LoginForm extends React.Component {
             <Link className="dropdown-item" to="/registrera" >Registrera ny användare</Link>
           </DropdownMenu>
         </UncontrolledDropdown></ButtonGroup></div>
-
       }
     }
     //this else-if should be tested after BookingSystem refaktoring
