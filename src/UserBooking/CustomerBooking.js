@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomerBookingPage from '../UserBooking/CustomerBookingPage';
+
 
 export default class CustomerBooking extends React.Component {
   constructor(props) {
@@ -9,14 +9,12 @@ export default class CustomerBooking extends React.Component {
 
   render() {
     return (
-      <div class="usersBooking">
-        <dl>
-          <dt>{this.props.film}</dt>
-          <dd>{this.props.date}</dd>
-          <dd>{this.props.time}</dd>
-          <dd>{this.props.bookingNr}</dd>
-        </dl>
-      </div>
+        <tr className="userBooking">
+          <td>{this.props.film}</td>
+          <td>{new Date(this.props.date).toLocaleDateString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'})}</td>
+          <td>{this.props.time}</td>
+          <td>{this.props.bookingNr}</td>
+        </tr>
     )
   }
 }
