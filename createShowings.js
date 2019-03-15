@@ -42,9 +42,10 @@ async function createAndAddShowingsTo() {
   for (let i = 0; i < 84; i++) {
     if (i % 3 == 0) {
       date = new Date(date.setDate(date.getDate() + 1));
-      date.setHours(00);
+      date.setHours(01);
       date.setMinutes(00);
       date.setSeconds(00);
+      date.setMilliseconds(00);
     }
 
     let showtime = new Showing({
