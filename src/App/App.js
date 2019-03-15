@@ -12,36 +12,35 @@ import RulePage from '../About-us/RulePage';
 import SaloonPage from '../About-us/SaloonPage';
 import MissingPage from '../MissingPage/MissingPage';
 import AdminPage from '../Admin/AdminPage';
+import RegisterPage from '../User/RegisterPage';
 
 // Footer
 import Footer from '../Footer/Footer';
-import RegisterPage from '../User/RegisterPage';
 
 export default class App extends Component {
-
   render() {
-
     return (
       <Router>
         <div className="App">
           <header><NavBar /></header>
           <main>
             <Switch>
-            <Route exact path="/" component={StartPage} />
-            <Route exact path="/filmer" component={FilmCollectionPage} />
-            <Route exact path="/filmer/:link" component={FilmPage} />
-            <Route path="/om-oss/kiosken" component={KioskPage} />
-            <Route path="/om-oss/regler" component={RulePage} />
-            <Route path="/om-oss/våra-salonger" component={SaloonPage} />
-            <Route path="/registrera" component={RegisterPage} />
-            <Route path="/admin" component={AdminPage} />
-            <Route component={MissingPage} />
+              <Route exact path="/" component={StartPage} />
+              <Route exact path="/filmer" component={FilmCollectionPage} />
+              <Route exact path="/filmer/:link" component={FilmPage} />
+              <Route path="/om-oss/kiosken" component={KioskPage} />
+              <Route path="/om-oss/regler" component={RulePage} />
+              <Route path="/om-oss/våra-salonger" component={SaloonPage} />
+              <Route path="/registrera" component={RegisterPage} />
+              <Route path="/admin" component={AdminPage} />
+              <Route component={MissingPage} />
             </Switch>
           </main>
           <footer><Footer /></footer>
+          }
         </div>
       </Router>
-    );
+    )
   }
 }
 

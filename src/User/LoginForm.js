@@ -46,7 +46,6 @@ export default class LoginForm extends React.Component {
     if (result.loggedIn) {
       this.setState({ loggedIn: true, loggedInUser: result.user });
       global.STORE.loggedInUser = this.state.loggedInUser;
-
       //Next if should be fixed after BookingSystem refaktoring
       if (this.parent === "BookingSystem") {
         this.parent.loggedInUser = this.state.loggedInUser;
@@ -70,6 +69,7 @@ export default class LoginForm extends React.Component {
   clickLogoutBtn() {
     this.logout();
     this.setState({ loggedIn: false, loggedInUser: null });
+    window.location.pathname = '/' // In order to make sure that adminpage is no longer in the view after logout
   }
 
 
