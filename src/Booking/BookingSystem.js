@@ -13,10 +13,17 @@ export default class BookingSystem extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.setNumOfTickets = this.setNumOfTickets.bind(this);
+    this.returnNumOfTickets = this.returnNumOfTickets.bind(this);
     this.state = {
       content: false,
-      numOfTickets: 2,
+      numOfTickets: 0,
     }
+    
+  }
+
+  componentDidMount() {
     this.findShowingsDetails(this.props.showingId).then(data =>{
       this.showing = data;
       
@@ -31,6 +38,23 @@ export default class BookingSystem extends React.Component {
         }
       });
     });
+  }
+
+  setNumOfTickets(numOfTickets) {
+    this.setState({
+      numOfTickets: numOfTickets
+    }, this.doSmth());
+    console.log(this.state.numOfTickets, 'setNumOfT');
+  }
+  
+
+
+  doSmth() {
+    console.log('do smth to force re-render');
+  }
+  returnNumOfTickets() {
+    console.log(this.state.numOfTickets,'returned from BS ')
+    return this.state.numOfTickets;
   }
 
   async findShowingsDetails(showingId) {
@@ -49,14 +73,17 @@ export default class BookingSystem extends React.Component {
   }
   
   render() {
+    // const numOfTickets = this.state.numOfTickets;
     
     if(this.state.content) {
       return (
         <section className="booking-system container-fluid">
           <Col sm="8" className="mx-auto" >
-          <TicketSelection /> 
+          <TicketSelection numOfTickets={this.setNumOfTickets} /> 
           </Col>
-          <SeatsGrid schema={this.showing.saloon.seatsPerRow} bestRows={this.showing.saloon.bestRows} takenSeats={this.takenSeats} numOfTickets={this.state.numOfTickets} />
+          <SeatsGrid schema={this.showing.saloon.seatsPerRow} bestRows={this.showing.saloon.bestRows} takenSeats={this.takenSeats} numOfTickets={this.returnNumOfTickets} />
+          <p>NumOfTickets: {this.state.numOfTickets}</p>
+          <p></p>
         </section>
       )
     }
