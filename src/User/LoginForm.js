@@ -69,7 +69,9 @@ export default class LoginForm extends React.Component {
   clickLogoutBtn() {
     this.logout();
     this.setState({ loggedIn: false, loggedInUser: null });
-    window.location.pathname = '/' // In order to make sure that adminpage is no longer in the view after logout
+    if (window.location.pathname === '/admin'){
+      window.location.pathname = '/'
+    } // To make sure that adminpage is no longer in the view after logout
   }
 
 
