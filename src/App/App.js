@@ -32,12 +32,11 @@ export default class App extends Component {
               <Route path="/om-oss/regler" component={RulePage} />
               <Route path="/om-oss/våra-salonger" component={SaloonPage} />
               <Route path="/registrera" component={RegisterPage} />
-              <Route path="/admin" component={AdminPage} />
+              <Route exact path="/admin" component={AdminPage} />
               <Route component={MissingPage} />
             </Switch>
           </main>
           <footer><Footer /></footer>
-          }
         </div>
       </Router>
     )
