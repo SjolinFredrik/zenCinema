@@ -79,6 +79,7 @@ export default class LoginForm extends React.Component {
     await loginObj.delete();
     global.STORE.loggedInUser = undefined;
   }
+  
   async checkLogin() {
     return await fetch('/json/login').then(response => {return response.json()}).then(data => {
       let result = data;
