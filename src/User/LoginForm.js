@@ -83,6 +83,7 @@ export default class LoginForm extends React.Component {
   async checkLogin() {
     return await fetch('/json/login').then(response => {return response.json()}).then(data => {
       let result = data;
+      this.props.userLogIn(result);
       return result;
     });
   }
@@ -143,26 +144,33 @@ export default class LoginForm extends React.Component {
     }
 //this else-if should be tested after BookingSystem refaktoring
     else if (this.parent === 'BookingSystem') {
-      result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
-           <Col sm="4">
-               <Form className="welcome">
-                  <h2>Logga in eller skapa nytt konto</h2>
-                  <FormGroup>
-                    <Label htmlFor="emailf">Epost</Label>
-                     <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
-                  </FormGroup>
-                   <FormGroup >
-                     <Label htmlFor="pwdf">Lösenord</Label>
-                     <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password"/>
-                   </FormGroup>
-                   <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
-                 </Form>
-                <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
-                
-          </Col>
-          
-       </div>
-          this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
+
+      if(this.state.loggedIn) {
+        result = <Button className="btn btn-secondary save-booking">Boka</Button>
+      }
+      else {
+        result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
+        <Col sm="4">
+            <Form className="welcome">
+               <h2>Logga in eller skapa nytt konto</h2>
+               <FormGroup>
+                 <Label htmlFor="emailf">Epost</Label>
+                  <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
+               </FormGroup>
+                <FormGroup >
+                  <Label htmlFor="pwdf">Lösenord</Label>
+                  <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password"/>
+                </FormGroup>
+                <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
+              </Form>
+             <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
+             
+       </Col>
+       
+    </div>
+       this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
+      }
+
     }
     return (
       <div>{result}</div>

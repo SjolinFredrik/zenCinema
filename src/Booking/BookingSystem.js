@@ -2,6 +2,7 @@ import React from 'react';
 import SeatsGrid from './SeatsGrid/SeatsGrid';
 import TicketSelection from './TicketSelection';
 import BookingSummary from './BookingSummary';
+import LoginForm from '../User/LoginForm';
 import REST from '../REST';
 import { Col, Row, Button } from 'reactstrap';
 
@@ -19,6 +20,7 @@ export default class BookingSystem extends React.Component {
     this.getTicketsCost = this.getTicketsCost.bind(this);
     this.getChosenSeats = this.getChosenSeats.bind(this);
     this.convertShowingDate = this.convertShowingDate.bind(this);
+    this.checkUserLogIn = this.checkUserLogIn.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
@@ -45,6 +47,20 @@ export default class BookingSystem extends React.Component {
     });
   }
 
+
+  checkUserLogIn(result) {
+    if(result.loggedIn) {
+      this.setState({
+        userLoggedIn: result.loggedIn,
+        user: result.user
+      });
+    }
+    else {
+      this.setState({
+        userLoggedIn: result.loggedIn
+      });
+    }
+  }
   setNumOfTickets(numOfTickets) {
     this.setState({
       numOfTickets: numOfTickets
@@ -129,14 +145,6 @@ export default class BookingSystem extends React.Component {
             </Col>
           </Row>
 
-
-
-          
-          
-
-
-
-
           <SeatsGrid 
             schema={this.showing.saloon.seatsPerRow} 
             bestRows={this.showing.saloon.bestRows} 
@@ -156,9 +164,27 @@ export default class BookingSystem extends React.Component {
               showingTime={this.showing.time}
               sumToPay={this.state.ticketsCost}
               />
+
+              <Button data-dismiss="modal" aria-label="Close" class="btn btn-outline-secondary">Avbryt</Button>
+              <LoginForm checkUserLogIn={this.checkUserLogIn}></LoginForm>
+      {/* ${this.loggedInUser || Store.loggedInUser ? `
+      <button type="button" class="btn btn-secondary save-booking" >Boka</button> ` : `
+      <button type="button" class="btn btn-secondary open-login-form" >Logga in</button> 
+      <p class="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p>
+      `}
+    </div> */}
+    {/* ${this.message ? this.message : ''}
+    ${this.loginForm && !this.loginForm.used ? this.loginForm : ''}
+    ${this.registerForm && this.registerForm !== 0 ? this.registerForm : ''} */}
+
+
+
+
+
+
             </Col>
           </Row>  
-        </section>
+          </section>
       )
     }
     else {
