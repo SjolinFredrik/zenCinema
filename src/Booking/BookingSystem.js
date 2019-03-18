@@ -1,8 +1,9 @@
 import React from 'react';
 import SeatsGrid from './SeatsGrid/SeatsGrid';
 import TicketSelection from './TicketSelection';
+import BookingSummary from './BookingSummary';
 import REST from '../REST';
-import { Col } from 'reactstrap';
+import { Col, Row, Button } from 'reactstrap';
 
 
 
@@ -17,6 +18,7 @@ export default class BookingSystem extends React.Component {
     this.setNumOfTickets = this.setNumOfTickets.bind(this);
     this.getTicketsCost = this.getTicketsCost.bind(this);
     this.getChosenSeats = this.getChosenSeats.bind(this);
+    this.convertShowingDate = this.convertShowingDate.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
@@ -54,6 +56,11 @@ export default class BookingSystem extends React.Component {
       ticketsCost : ticketsCost
     });
   }
+
+  convertShowingDate(date) {
+    return new Date(date).toLocaleString('sv-SE', { weekday: 'long', month: 'long', day: 'numeric' }); 
+  }
+
 
   getChosenSeats(selectedSeats) {
     if(selectedSeats !== null && selectedSeats.seats.length > 0) {
@@ -116,10 +123,22 @@ export default class BookingSystem extends React.Component {
             bestRows={this.showing.saloon.bestRows} 
             takenSeats={this.takenSeats} 
             numOfTickets={this.state.numOfTickets}
-             selectedSeats={this.getChosenSeats} />
-          <p>NumOfTickets: {this.state.numOfTickets}</p>
-          <p>TicketsCost: {this.state.ticketsCost} SEK</p>
-          <p>selectedSeats:{this.state.selectedSeats && this.state.selectedSeats !== undefined ? this.state.selectedSeats.sort().join(', ') : 'Välj platser'}</p>
+            selectedSeats={this.getChosenSeats} />
+          
+          
+          <Row>
+            <Col sm="7" className="mx-auto py-4">
+              <BookingSummary 
+              selectedSeats={this.state.selectedSeats} 
+              ticketsCost={this.state.ticketsCost}
+              film={this.showing.film}
+              saloonName={this.showing.saloon}
+              showingDate={this.convertShowingDate(this.showing.date)}
+              showingTime={this.showing.time}
+              sumToPay={this.state.ticketsCost}
+              />
+            </Col>
+          </Row>  
         </section>
       )
     }
