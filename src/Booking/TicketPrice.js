@@ -16,7 +16,6 @@ export default class TicketPrice extends React.Component {
 
   componentDidMount() {
     if(this.props.name === 'Ordinarie') {
-      console.log(this.props.price, 'price ordinarie');
       const ticketsCost = this.props.price * 2;
       const newState = {
         ticketAmount: 2,
@@ -25,7 +24,6 @@ export default class TicketPrice extends React.Component {
         this.props.initialNumOfTickets(2, ticketsCost);
       };
       this.setState(newState, callback);
-      console.log('done');
     }
   }
 

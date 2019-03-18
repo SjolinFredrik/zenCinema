@@ -14,12 +14,11 @@ export default class TicketSelection extends React.Component {
     super(props);
     this.state = {
       prices: [],
-      ticketAmount: 0, // Ge till Zhenya
-      ticketsCost: 0 // Ge till Zhenya
+      ticketAmount: 0, 
+      ticketsCost: 0 
     }
     this.importPrices();
     this.numberOfTickets();
-    // this.props.numOfTickets(this.state.ticketAmount);
     this.incrementTickets = this.incrementTickets.bind(this);
     this.decrementTickets = this.decrementTickets.bind(this);
     this.numberOfTickets = this.numberOfTickets.bind(this);
@@ -35,7 +34,6 @@ export default class TicketSelection extends React.Component {
     this.state.ticketsCost = ticketsCost;
     this.props.numOfTickets(this.state.ticketAmount);
     this.props.ticketsCost(this.state.ticketsCost);
-    console.log('initialNumOfTickets done');    
   }
 
   numberOfTickets() {
@@ -49,7 +47,6 @@ export default class TicketSelection extends React.Component {
     };
 
     this.setState(newState, () => {
-      console.log(this.state.ticketAmount, '+');
       this.props.numOfTickets(this.state.ticketAmount);
       this.props.ticketsCost(this.state.ticketsCost);
     });
@@ -59,19 +56,16 @@ export default class TicketSelection extends React.Component {
     const newTicketAmount = this.state.ticketAmount - 1;
     const newTicketsCost = this.state.ticketsCost - price;
     
-    console.log(newTicketAmount, '-');
     this.props.numOfTickets(newTicketAmount);
     this.props.ticketsCost(newTicketsCost);
     this.setState({
       ticketAmount: newTicketAmount,
       ticketsCost: newTicketsCost,
     });
-
   }
 
   async importPrices() {
     let prices = await TicketPrice.find();
-    console.log(prices);
     const importedPrices = [];
     for (let price of prices) {
       let parsedPrice = parseInt(price.price);
@@ -92,8 +86,6 @@ export default class TicketSelection extends React.Component {
   }
 
   render() {
-    console.log(this.state.ticketAmount, 'ticket Amount2');
-
     return (
       <Container>
         <div className="mb-3">
@@ -106,8 +98,6 @@ export default class TicketSelection extends React.Component {
       </Container>
     )
   }
-
-
 }
 
 
