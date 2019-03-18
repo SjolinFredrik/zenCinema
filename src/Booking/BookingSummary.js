@@ -19,7 +19,7 @@ export default class BookingSummary extends React.Component {
           <dd>Salong: {this.props.saloonName.name}</dd>
           <dd>Tid: {this.props.showingDate !==null ? this.props.showingDate : ''} | {this.props.showingTime}</dd>
           <dd>Valda platser: {this.props.selectedSeats && this.props.selectedSeats !== undefined ? this.props.selectedSeats.sort().join(', ') : 'Välj plats(er)'}</dd>
-          <dd>Att Betala: {this.props.ticketsCost ? this.props.ticketsCost + ' SEK' : 'Välj biljetter'}</dd>
+          <dd>Att Betala: {this.props.sumToPay ? this.props.sumToPay + ' SEK' : 'Välj biljetter'}</dd>
         </dl>
       </div>
     )

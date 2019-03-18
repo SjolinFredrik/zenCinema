@@ -135,7 +135,7 @@ export default class BookingSystem extends React.Component {
               saloonName={this.showing.saloon}
               showingDate={this.convertShowingDate(this.showing.date)}
               showingTime={this.showing.time}
-              ticketsCost={this.state.ticketsCost}
+              sumToPay={this.state.ticketsCost}
               />
             </Col>
           </Row>  
