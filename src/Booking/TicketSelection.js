@@ -14,44 +14,75 @@ export default class TicketSelection extends React.Component {
     super(props);
     this.state = {
       prices: [],
-      ticketAmount: 0, // Ge till Zhenya
-      ticketsPrice: 0 // Ge till Zhenya
+      ticketAmount: 0, 
+      ticketsCost: 0 
     }
     this.importPrices();
+    this.numberOfTickets();
     this.incrementTickets = this.incrementTickets.bind(this);
     this.decrementTickets = this.decrementTickets.bind(this);
     this.numberOfTickets = this.numberOfTickets.bind(this);
+    this.initialNumOfTickets = this.initialNumOfTickets.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.numOfTickets(this.state.ticketAmount);    
+  }
+
+  initialNumOfTickets(ticketAmount, ticketsCost) {
+    this.state.ticketAmount = ticketAmount;
+    this.state.ticketsCost = ticketsCost;
+    this.props.numOfTickets(this.state.ticketAmount);
+    this.props.ticketsCost(this.state.ticketsCost);
   }
 
   numberOfTickets() {
     return this.state.ticketAmount;
   }
 
-  incrementTickets(price) {
-    this.setState({
-      ticketAmount: this.state.ticketAmount + 1,
-      ticketsPrice: this.state.ticketsPrice + price
-    })
+  incrementTickets(price, qnty) {
+    const newState = {
+      ticketAmount: this.state.ticketAmount + qnty,
+      ticketsCost: this.state.ticketsCost + price
+    };
+
+    this.setState(newState, () => {
+      this.props.numOfTickets(this.state.ticketAmount);
+      this.props.ticketsCost(this.state.ticketsCost);
+    });
   }
 
   decrementTickets(price) {
+    const newTicketAmount = this.state.ticketAmount - 1;
+    const newTicketsCost = this.state.ticketsCost - price;
+    
+    this.props.numOfTickets(newTicketAmount);
+    this.props.ticketsCost(newTicketsCost);
     this.setState({
-      ticketAmount: this.state.ticketAmount - 1,
-      ticketsPrice: this.state.ticketsPrice - price
-    })
+      ticketAmount: newTicketAmount,
+      ticketsCost: newTicketsCost,
+    });
   }
 
   async importPrices() {
     let prices = await TicketPrice.find();
-    console.log(prices);
     const importedPrices = [];
     for (let price of prices) {
       let parsedPrice = parseInt(price.price);
       importedPrices.push(
-        <TicketPriceComponent key={price._id} name={price.name} price={parsedPrice} increment={this.incrementTickets} decrement={this.decrementTickets} numberOfTickets={this.numberOfTickets} />
+        <TicketPriceComponent 
+        key={price._id} 
+        name={price.name} 
+        price={parsedPrice} 
+        increment={this.incrementTickets} 
+        initialNumOfTickets={this.initialNumOfTickets} 
+        decrement={this.decrementTickets} 
+        numberOfTickets={this.numberOfTickets} />
       )
     }
     this.setState({ prices: importedPrices });
+    
+
   }
 
   render() {
