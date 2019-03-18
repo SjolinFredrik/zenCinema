@@ -16,28 +16,20 @@ export default class TicketPrice extends React.Component {
 
   componentDidMount() {
     if(this.props.name === 'Ordinarie') {
-      this.setState ( {
-        ticketAmount: 2
-      }, this.props.increment(this.props.price, 2), this.props.initialNumOfTickets(2));
+      console.log(this.props.price, 'price ordinarie');
+      const ticketsCost = this.props.price * 2;
+      const newState = {
+        ticketAmount: 2,
+      };
+      const callback = () => {
+        this.props.initialNumOfTickets(2, ticketsCost);
+      };
+      this.setState(newState, callback);
       console.log('done');
     }
   }
 
-  // componentWillMount() {
-  //   if(this.props.name === 'Ordinarie') {
-  //     this.setState ( {
-  //       ticketAmount: 2
-  //     });
-  //     this.props.numberOfTickets();
-  //     this.props.increment(this.props.price, 2);
-  //     // this.props.initialNumOfTickets(2, 'Ticket send');
-  //   }
-  //   else{
-  //     this.setState ({ 
-  //       ticketAmount: 0 
-  //     });
-  //   }
-  // }
+
 
   onAdd() {
     const numberOfTickets = this.props.numberOfTickets();
@@ -62,15 +54,6 @@ export default class TicketPrice extends React.Component {
     console.log(this.state.ticketAmount);
   }
 
-  setDefaultAmountForOrdinarieTicket() {
-    if(this.props.name === 'Ordinarie') {
-      this.setState({
-        ticketAmount: this.state.ticketAmount + 2
-      });
-      // this.props.numberOfTickets();
-      this.props.increment(this.props.price, 2);
-    }
-  }
 
 
   render() {  

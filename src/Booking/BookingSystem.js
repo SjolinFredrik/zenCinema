@@ -15,10 +15,13 @@ export default class BookingSystem extends React.Component {
     super(props);
 
     this.setNumOfTickets = this.setNumOfTickets.bind(this);
-    this.returnNumOfTickets = this.returnNumOfTickets.bind(this);
+    this.getTicketsCost = this.getTicketsCost.bind(this);
+    this.getChosenSeats = this.getChosenSeats.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
+      ticketsCost: 0,
+      selectedSeats: [],
     }
     
   }
@@ -43,18 +46,47 @@ export default class BookingSystem extends React.Component {
   setNumOfTickets(numOfTickets) {
     this.setState({
       numOfTickets: numOfTickets
-    }, this.doSmth());
+    });
     console.log(this.state.numOfTickets, 'setNumOfT');
   }
-  
 
-
-  doSmth() {
-    console.log('do smth to force re-render');
+  getTicketsCost(ticketsCost) {
+    this.setState({
+      ticketsCost : ticketsCost
+    });
   }
-  returnNumOfTickets() {
-    console.log(this.state.numOfTickets,'returned from BS ')
-    return this.state.numOfTickets;
+
+  getChosenSeats(selectedSeats) {
+    console.log(selectedSeats, 'selected seats again');
+    if(selectedSeats !== null && selectedSeats.seats.length > 0) {
+    const schema = this.showing.saloon.seatsPerRow;
+    let numSeats = 0;
+    for (let i = 0; i < schema.length; i++) {
+      if(i === selectedSeats.row) {
+        numSeats = schema[i];
+      }
+    }
+    const rowNumber = selectedSeats.row + 1;
+    const selectedSeatsNames = [];
+
+
+
+    for (let seat of selectedSeats.seats) {
+      let seatName = rowNumber + '-' + Math.abs(seat - numSeats);
+      selectedSeatsNames.push(seatName);
+    }
+
+    selectedSeats = selectedSeatsNames;
+    }
+    else {
+      selectedSeats = undefined;
+    }
+
+    this.setState({
+      selectedSeats: selectedSeats
+    });
+  
+    
   }
 
   async findShowingsDetails(showingId) {
@@ -79,11 +111,20 @@ export default class BookingSystem extends React.Component {
       return (
         <section className="booking-system container-fluid">
           <Col sm="8" className="mx-auto" >
-          <TicketSelection numOfTickets={this.setNumOfTickets} /> 
+          <TicketSelection 
+            numOfTickets={this.setNumOfTickets}
+            ticketsCost={this.getTicketsCost}
+          /> 
           </Col>
-          <SeatsGrid schema={this.showing.saloon.seatsPerRow} bestRows={this.showing.saloon.bestRows} takenSeats={this.takenSeats} numOfTickets={this.returnNumOfTickets} />
+          <SeatsGrid 
+            schema={this.showing.saloon.seatsPerRow} 
+            bestRows={this.showing.saloon.bestRows} 
+            takenSeats={this.takenSeats} 
+            numOfTickets={this.state.numOfTickets}
+             selectedSeats={this.getChosenSeats} />
           <p>NumOfTickets: {this.state.numOfTickets}</p>
-          <p></p>
+          <p>TicketsCost: {this.state.ticketsCost} SEK</p>
+          <p>selectedSeats:{this.state.selectedSeats && this.state.selectedSeats !== undefined ? this.state.selectedSeats.sort().join(', ') : 'Välj platser'}</p>
         </section>
       )
     }

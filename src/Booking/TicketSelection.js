@@ -15,9 +15,8 @@ export default class TicketSelection extends React.Component {
     this.state = {
       prices: [],
       ticketAmount: 0, // Ge till Zhenya
-      ticketsPrice: 0 // Ge till Zhenya
+      ticketsCost: 0 // Ge till Zhenya
     }
-    console.log(this.state, 'ticketSelection state');
     this.importPrices();
     this.numberOfTickets();
     // this.props.numOfTickets(this.state.ticketAmount);
@@ -31,41 +30,43 @@ export default class TicketSelection extends React.Component {
     this.props.numOfTickets(this.state.ticketAmount);    
   }
 
-  initialNumOfTickets(num) {
-    this.setState({
-      ticketAmount: this.state.ticketAmount + num
-    },this.props.numOfTickets(this.state.ticketAmount + num));
-
+  initialNumOfTickets(ticketAmount, ticketsCost) {
+    this.state.ticketAmount = ticketAmount;
+    this.state.ticketsCost = ticketsCost;
+    this.props.numOfTickets(this.state.ticketAmount);
+    this.props.ticketsCost(this.state.ticketsCost);
     console.log('initialNumOfTickets done');    
   }
 
-
   numberOfTickets() {
-    console.log(this.state.ticketAmount, 'from number of tickets');
     return this.state.ticketAmount;
   }
 
   incrementTickets(price, qnty) {
-    this.setState({
+    const newState = {
       ticketAmount: this.state.ticketAmount + qnty,
-      ticketsPrice: this.state.ticketsPrice + price
-    },this.doSmth(), this.props.numOfTickets(this.state.ticketAmount));
-    console.log(this.state.ticketAmount, '+');
+      ticketsCost: this.state.ticketsCost + price
+    };
 
-    ;
-  }
-
-
-  doSmth() {
-    console.log('do smth to force re-render from ticketSelection');
+    this.setState(newState, () => {
+      console.log(this.state.ticketAmount, '+');
+      this.props.numOfTickets(this.state.ticketAmount);
+      this.props.ticketsCost(this.state.ticketsCost);
+    });
   }
 
   decrementTickets(price) {
+    const newTicketAmount = this.state.ticketAmount - 1;
+    const newTicketsCost = this.state.ticketsCost - price;
+    
+    console.log(newTicketAmount, '-');
+    this.props.numOfTickets(newTicketAmount);
+    this.props.ticketsCost(newTicketsCost);
     this.setState({
-      ticketAmount: this.state.ticketAmount - 1,
-      ticketsPrice: this.state.ticketsPrice - price
-    },this.props.numOfTickets(this.state.ticketAmount));
-    console.log(this.state.ticketAmount, '-');
+      ticketAmount: newTicketAmount,
+      ticketsCost: newTicketsCost,
+    });
+
   }
 
   async importPrices() {
@@ -75,7 +76,14 @@ export default class TicketSelection extends React.Component {
     for (let price of prices) {
       let parsedPrice = parseInt(price.price);
       importedPrices.push(
-        <TicketPriceComponent key={price._id} name={price.name} price={parsedPrice} increment={this.incrementTickets} initialNumOfTickets={this.initialNumOfTickets} decrement={this.decrementTickets} numberOfTickets={this.numberOfTickets} />
+        <TicketPriceComponent 
+        key={price._id} 
+        name={price.name} 
+        price={parsedPrice} 
+        increment={this.incrementTickets} 
+        initialNumOfTickets={this.initialNumOfTickets} 
+        decrement={this.decrementTickets} 
+        numberOfTickets={this.numberOfTickets} />
       )
     }
     this.setState({ prices: importedPrices });

@@ -10,24 +10,16 @@ export default class SeatsGrid extends React.Component {
     super(props);
     this.hoveredSeats = [];
     this.seats = [];
-    console.log(this.props.numOfTickets(), 'numofticket, seatsgrid');
-    this.bestRowsAndSeats = this.getBestRowsAndSeats(this.props.schema, this.props.bestRows, this.props.numOfTickets());    
     this.state = {
       bookingSum: '',
-      chosenRowAndSeats: this.getInitialChosenRowAndSeats(this.bestRowsAndSeats, this.props.takenSeats),
+      manualSelection: false,
+      chosenRowAndSeats: null,
     };
     this.handleSeatsChoice = this.handleSeatsChoice.bind(this);
-
   }
 
-  componentDidMount() {
-    console.log(this.state.chosenRowAndSeats, 'chosen');
-  }
-  
-
-  getBestRowsAndSeats(schema, bestRows, numOfTickets) {
+  static getBestRowsAndSeats(schema, bestRows, numOfTickets) {
     const bestRowsAndSeats = [];
-    
 
     for (let row of bestRows) {
       const numOfSeatsInRow = schema[row];
@@ -59,7 +51,7 @@ export default class SeatsGrid extends React.Component {
     return bestRowsAndSeats;
   }
 
-  getInitialChosenRowAndSeats(bestRowsAndSeats, takenSeats) {
+  static getInitialChosenRowAndSeats(bestRowsAndSeats, takenSeats) {
     const takenRowsAndSeats = [];
     for(let takenSeat of takenSeats) {
       const [rowNr, seatNr] = takenSeat.split('-');
@@ -93,8 +85,30 @@ export default class SeatsGrid extends React.Component {
     }
   }
 
-  handleSeatsChoice(row, chosenSeats) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.numOfTickets === this.props.numOfTickets) {
+      return;
+    }
+    
+    let chosenRowAndSeats = null;
+
+    if (!this.state.manualSelection) {
+      const bestRowsAndSeats = SeatsGrid.getBestRowsAndSeats(this.props.schema, this.props.bestRows, this.props.numOfTickets);
+      chosenRowAndSeats = SeatsGrid.getInitialChosenRowAndSeats(bestRowsAndSeats, this.props.takenSeats);
+    }
+
     this.setState({
+      chosenRowAndSeats: chosenRowAndSeats,
+    });
+
+    this.props.selectedSeats(chosenRowAndSeats);
+
+  }
+
+  handleSeatsChoice(row, chosenSeats) {
+    this.props.selectedSeats({row: row, seats: chosenSeats});
+    this.setState({
+      manualSelection: true,
       chosenRowAndSeats: {
         row: row,
         seats: chosenSeats
@@ -104,7 +118,7 @@ export default class SeatsGrid extends React.Component {
 
   render() {
     const schema = this.props.schema;
-    const numOfTickets = this.props.numOfTickets();
+    const numOfTickets = this.props.numOfTickets;
     this.hall = [];
     for (let row = 0; row < schema.length; row++) {
       let numOfSeatsInRow = schema[row];
@@ -114,7 +128,7 @@ export default class SeatsGrid extends React.Component {
         chosenSeats = this.state.chosenRowAndSeats.seats;
       }
 
-      const isRowBest = this.bestRowsAndSeats.some(bestRowAndSeats => bestRowAndSeats.row === row);
+      const isRowBest = this.props.bestRows.includes(row);
       let seatsRow = <SeatsRow 
         numSeatsToSelect={numOfTickets}
         numSeats={numOfSeatsInRow} 
@@ -123,7 +137,7 @@ export default class SeatsGrid extends React.Component {
         index={row} 
         best={isRowBest} 
         takenSeats={this.props.takenSeats}
-        onSeatsChosen={this.handleSeatsChoice}/>;
+        onSeatsChosen={this.handleSeatsChoice} />;
       this.hall.push(seatsRow);
     }
 
