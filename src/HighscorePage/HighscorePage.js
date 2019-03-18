@@ -23,8 +23,8 @@ export default class HighscorePage extends React.Component {
         <tr key={"toplistItem_" + i}>
           <th style={styles}>{film.bookedCount}</th>
           <td style={styles}>
-            {film.title} <br />
-            <Link style={{bottom: 0}} className="btn btn-outline-dark" to={"/filmer/" + film.link}>Mer information</Link>
+            {film.title} {i === 0 ?  <i className="fas fa-crown"></i> : ''} <br />
+            <Link className="btn btn-outline-dark" to={"/filmer/" + film.link}>Mer information</Link>
           </td>
           <td>
             <img
@@ -56,7 +56,7 @@ export default class HighscorePage extends React.Component {
                 <tr>
                   <th>Antal Bokningar</th>
                   <th>Titel</th>
-                  <th> </th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody className="hs-body">
