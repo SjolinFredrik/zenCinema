@@ -47,7 +47,6 @@ export default class BookingSystem extends React.Component {
     this.setState({
       numOfTickets: numOfTickets
     });
-    console.log(this.state.numOfTickets, 'setNumOfT');
   }
 
   getTicketsCost(ticketsCost) {
@@ -57,7 +56,6 @@ export default class BookingSystem extends React.Component {
   }
 
   getChosenSeats(selectedSeats) {
-    console.log(selectedSeats, 'selected seats again');
     if(selectedSeats !== null && selectedSeats.seats.length > 0) {
     const schema = this.showing.saloon.seatsPerRow;
     let numSeats = 0;
@@ -68,8 +66,6 @@ export default class BookingSystem extends React.Component {
     }
     const rowNumber = selectedSeats.row + 1;
     const selectedSeatsNames = [];
-
-
 
     for (let seat of selectedSeats.seats) {
       let seatName = rowNumber + '-' + Math.abs(seat - numSeats);
@@ -105,7 +101,6 @@ export default class BookingSystem extends React.Component {
   }
   
   render() {
-    // const numOfTickets = this.state.numOfTickets;
     
     if(this.state.content) {
       return (

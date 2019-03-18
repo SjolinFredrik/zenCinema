@@ -18,6 +18,8 @@ export default class SeatsGrid extends React.Component {
     this.handleSeatsChoice = this.handleSeatsChoice.bind(this);
   }
 
+
+  //to find out best rows from saloon's schema and find out best seats on these rows
   static getBestRowsAndSeats(schema, bestRows, numOfTickets) {
     const bestRowsAndSeats = [];
 
@@ -51,11 +53,11 @@ export default class SeatsGrid extends React.Component {
     return bestRowsAndSeats;
   }
 
+  //to figure out if best seats are taken or not, set best row and seats as state to show them to user
   static getInitialChosenRowAndSeats(bestRowsAndSeats, takenSeats) {
     const takenRowsAndSeats = [];
     for(let takenSeat of takenSeats) {
       const [rowNr, seatNr] = takenSeat.split('-');
-      console.log(rowNr, seatNr);
       const rowIndex = rowNr - 1;
       const seatIndexFromBack = seatNr - 1;
 
@@ -71,7 +73,6 @@ export default class SeatsGrid extends React.Component {
     }
 
     for(let bestRowAndSeats of bestRowsAndSeats) {
-      console.log(bestRowAndSeats, 'best row and seats');
 
       const takenRowAndSeats = takenRowsAndSeats.find(takenRowAndSeats => takenRowAndSeats.row === bestRowAndSeats.row);
       if (takenRowAndSeats === undefined) {
@@ -79,7 +80,6 @@ export default class SeatsGrid extends React.Component {
       }
       const takenSeats = takenRowAndSeats.seatIndicesFromBack.map(seatIndexFromBack => bestRowAndSeats.numSeats - seatIndexFromBack);
       if (takenSeats.filter(takenSeat => bestRowAndSeats.seats.includes(takenSeat)).length === 0) {
-        console.log(bestRowAndSeats);
         return bestRowAndSeats;
       }
     }
