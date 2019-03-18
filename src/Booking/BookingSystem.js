@@ -88,8 +88,6 @@ export default class BookingSystem extends React.Component {
     this.setState({
       selectedSeats: selectedSeats
     });
-  
-    
   }
 
   async findShowingsDetails(showingId) {
@@ -118,6 +116,27 @@ export default class BookingSystem extends React.Component {
             ticketsCost={this.getTicketsCost}
           /> 
           </Col>
+
+          <Row className="align-items-center justify-content-center no-gutters">
+            <Col lg="6" className="show-info" style={{background: "url(/images/movies/" + this.showing.film.images[1] + ")"}}>
+              <div className="drop"></div>
+              <dl className="col-md-6 mx-auto slideInUp ">
+                <dt>{this.showing.film.title}</dt>
+                <dd>{Math.floor(this.showing.film.length/60)} tim {this.showing.film.length%60} min | {this.showing.film.genre}</dd>
+                <dd>Salong: {this.showing.saloon.name}</dd>
+                <dd>Tid: {this.convertShowingDate(this.showing.date)} | {this.showing.time}</dd>
+              </dl>
+            </Col>
+          </Row>
+
+
+
+          
+          
+
+
+
+
           <SeatsGrid 
             schema={this.showing.saloon.seatsPerRow} 
             bestRows={this.showing.saloon.bestRows} 

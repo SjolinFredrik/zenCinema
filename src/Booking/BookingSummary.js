@@ -5,7 +5,6 @@ export default class BookingSummary extends React.Component {
   constructor(props) {
     super(props);
 
-
   }
 
 

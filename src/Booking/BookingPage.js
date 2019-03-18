@@ -35,10 +35,8 @@ export default class BookingPage extends React.Component {
             <Button type="button" onClick={this.toggle} className="close custom-close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </Button>
-
             <BookingSystem showingId={this.props.showingId}></BookingSystem>
           </ModalBody>
-          
         </Modal>
       </div>
     )
