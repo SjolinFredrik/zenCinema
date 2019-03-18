@@ -24,7 +24,7 @@ export default class HighscorePage extends React.Component {
           <th style={styles}>{film.bookedCount}</th>
           <td style={styles}>
             {film.title} {i === 0 ?  <i className="fas fa-crown"></i> : ''} <br />
-            <Link className="btn btn-outline-dark" to={"/filmer/" + film.link}>Mer information</Link>
+            <Link className="btn btn-outline-dark mt-3" to={"/filmer/" + film.link}>Mer information</Link>
           </td>
           <td>
             <img
@@ -48,8 +48,8 @@ export default class HighscorePage extends React.Component {
     return (
       <Container className="main-container-fade">
         <Row>
-          <Col xs="12" md="8" className="offset-md-2 mt-5">
-            <h2 className="font-weight-bold text-center">Poppislistan</h2>
+          <Col xs="12" md="8" className="font-weight-bold offset-md-2 mt-5">
+            <h2 className="text-center">Poppislistan</h2>
             <h4 className="text-center">Våra mest bokade filmer</h4>
             <Table hover className="hs-table mt-5">
               <thead className="hs-head">
