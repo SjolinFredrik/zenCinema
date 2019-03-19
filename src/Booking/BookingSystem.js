@@ -21,6 +21,7 @@ export default class BookingSystem extends React.Component {
     this.getChosenSeats = this.getChosenSeats.bind(this);
     this.convertShowingDate = this.convertShowingDate.bind(this);
     this.getUserStatus = this.getUserStatus.bind(this);
+    this.createNewBooking = this.createNewBooking.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
@@ -114,7 +115,72 @@ export default class BookingSystem extends React.Component {
     }
     return takenSeats;
   }
+
+  async generateBookingNumber() {
+    let bookings = await Booking.find(`.find().limit(1).sort({$natural: -1})`);
+    let saltArray = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    saltArray = saltArray.split("");
+    let salt = '';
+    let lastBookingNumber = '';
+    for (let i = 0; i <= 3; i++) {
+      let letter = saltArray[Math.floor(Math.random() * saltArray.length)];
+      salt = salt + letter;
+    }
+    let number = 0;
+    if (bookings.length === 0) {
+      number = salt + 1;
+    }
+    if (bookings.length > 0) {
+      lastBookingNumber = bookings[0].bookingNumber;
+      lastBookingNumber = parseInt(lastBookingNumber.split("").splice(4));
+      number = salt + (lastBookingNumber + 1);
+    }
+    return number;
+  }
+
+  async checkUnvailableSeats() {
+    let takenSeats = await this.findTakenSeats();
+    for (let i = 0; i < this.state.selectedSeats.length; i++) {
+      if (takenSeats.includes(this.state.selectedSeats[i])){
+        return true;
+      }
+    }
+  }
   
+  async createNewBooking() {
+    if (global.STORE.loggedInUser && 
+      this.state.selectedSeats !== undefined) {
+      const number = await this.generateBookingNumber();
+      this.newBooking = new Booking({
+        "customer": global.STORE.loggedInUser._id,
+        "show": this.showing._id,
+        "seats": this.state.selectedSeats,
+        "bookingNumber": number,
+        "totalCost": this.state.ticketsCost + " SEK"
+      });
+
+      //try to save and catch an error if chosen seats have been taken before this booking finished
+      try {
+        let savedBooking = await this.newBooking.save();
+        console.log(savedBooking);
+      } catch (error) {
+        if (error.status === 409) {
+          console('error 409');
+      // let takenSeats = await this.findTakenSeats();
+      // for (let i = 0; i < takenSeats.length; i++) {
+      //   for (let j = 0; j < this.seatsGrid.grid.length; j++) {
+      //     let row = this.seatsGrid.grid[j];
+      //     for (let seat = 0; seat < row.seats.length; seat++) {
+      //       if (row.seats[seat].name === takenSeats[i]) {
+      //         row.seats[seat].taken = true;
+      //         row.seats[seat].render();
+      //       }
+          }
+        }
+      }
+
+  }
+
   render() {
     
     if(this.state.content) {
@@ -158,16 +224,19 @@ export default class BookingSystem extends React.Component {
               showingTime={this.showing.time}
               sumToPay={this.state.ticketsCost}
               />
-
+              {global.STORE.loggedInUser ===  null ?
+                <p className="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p> : ''
+              }
               <button type="button" data-dismiss="modal" aria-label="Close" className="btn btn-outline-secondary">Avbryt</button>
+              {global.STORE.loggedInUser !== null ? 
+                <button type="button" className="btn btn-secondary save-booking" onClick={this.createNewBooking}>Boka</button>  : 
+                <button type="button" className="btn btn-secondary open-login-form" >Logga in</button>
+              } 
               <LoginForm checkUserLogIn={this.getUserStatus} parent={this.name}></LoginForm>
               {console.log(this.state)}
-      {/* ${this.loggedInUser || Store.loggedInUser ? `
-      <button type="button" class="btn btn-secondary save-booking" >Boka</button> ` : `
-      <button type="button" class="btn btn-secondary open-login-form" >Logga in</button> 
-      <p class="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p>
-      `}
-    </div> */}
+
+
+
     {/* ${this.message ? this.message : ''}
     ${this.loginForm && !this.loginForm.used ? this.loginForm : ''}
     ${this.registerForm && this.registerForm !== 0 ? this.registerForm : ''} */}

@@ -102,11 +102,12 @@ export default class SeatsGrid extends React.Component {
     });
 
     this.props.selectedSeats(chosenRowAndSeats);
-
+    global.STORE.chosenSeats = chosenRowAndSeats.seats;
   }
 
   handleSeatsChoice(row, chosenSeats) {
     this.props.selectedSeats({row: row, seats: chosenSeats});
+    global.STORE.chosenSeats = chosenSeats;
     this.setState({
       manualSelection: true,
       chosenRowAndSeats: {

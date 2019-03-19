@@ -47,6 +47,8 @@ export default class LoginForm extends React.Component {
       this.setState({loggedIn: true, loggedInUser: result.user});
       global.STORE.loggedInUser = this.state.loggedInUser;
 
+      console.log(global.STORE.loggedInUser);
+
       //Next if should be fixed after BookingSystem refaktoring
       if (this.parent === "BookingSystem"){
       this.parent.loggedInUser = this.state.loggedInUser;
@@ -70,6 +72,8 @@ export default class LoginForm extends React.Component {
   clickLogoutBtn() {
     this.logout();
     this.setState({loggedIn: false, loggedInUser: null});
+    global.STORE.loggedInUser = null;
+    console.log(global.STORE.loggedInUser, 'after logout');
   }
 
 
@@ -91,10 +95,13 @@ export default class LoginForm extends React.Component {
     this.checkLogin().then(data => {
       if(data.loggedIn) {
         this.setState({loggedIn: true, loggedInUser: data.user});
+        global.STORE.loggedInUser = this.state.loggedInUser;
       }
       else {
         this.setState({loggedIn: false, loggedInUser: null});
+        global.STORE.loggedInUser = null;
       }
+      console.log(global.STORE, 'after check');
     });
   }
   render() {
@@ -143,9 +150,10 @@ export default class LoginForm extends React.Component {
     }
 //this else-if should be tested after BookingSystem refaktoring
     else if (this.parent === 'BookingSystem') {
-      this.props.checkUserLogIn(this.state.loggedIn, this.state.loggedInUser);
+      // this.props.checkUserLogIn(this.state.loggedIn, this.state.loggedInUser);
+      console.log(global.STORE.loggedInUser, 'bookingsystem');
 
-      if(this.state.loggedIn) {
+      if(global.STORE.loggedInUser !== null) {
         result = <Button className="save-booking">Boka</Button>
       }
       else {
