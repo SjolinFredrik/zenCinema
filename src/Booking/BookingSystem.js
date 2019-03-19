@@ -10,6 +10,7 @@ import { Col, Row, Button } from 'reactstrap';
 
 class Showing extends REST {};
 class Booking extends REST {};
+class Film extends REST {};
 
 export default class BookingSystem extends React.Component {
 
@@ -163,16 +164,17 @@ export default class BookingSystem extends React.Component {
       //try to save and catch an error if chosen seats have been taken before this booking finished
       try {
         let savedBooking = await this.newBooking.save();
-        this.showing.film.bookedCount = parseInt(this.showing.film.bookedCount) + 1;
-        console.log(this.showing.film);
-        console.log(savedBooking);
+        const film = this.showing.film;
+        const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
+        filmModel.bookedCount++;
+        await filmModel.save();
       } catch (error) { 
         if (error.status === 409) {
-          const takenSeats = await this.findTakenSeats();
+          const takenSeats = await this.findTakenSeats(this.showing._id);
           this.setState({
             takenSeats: takenSeats
           });  
-          console.log(takenSeats,'already booked');
+          console.log('already booked');
       // this.message = new Message('alreadyBooked');
           return;
         }
@@ -195,7 +197,7 @@ export default class BookingSystem extends React.Component {
           </Col>
 
           <Row className="align-items-center justify-content-center no-gutters">
-            <Col lg="6" className="show-info" style={{background: "url(/images/movies/" + this.showing.film.images[1] + ")"}}>
+            <Col lg="6" className="show-info" style={{backgroundImage: "url('/images/movies/" + this.showing.film.images[1] + "')"}}>
               <div className="drop"></div>
               <dl className="col-md-6 mx-auto slideInUp ">
                 <dt>{this.showing.film.title}</dt>
@@ -228,12 +230,12 @@ export default class BookingSystem extends React.Component {
               {global.STORE.loggedInUser ===  null ?
                 <p className="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p> : ''
               }
-              <button type="button" data-dismiss="modal" aria-label="Close" className="btn btn-outline-secondary">Avbryt</button>
+              <button type="button" onClick={this.props.toggle} className="btn btn-outline-secondary">Avbryt</button>
               {global.STORE.loggedInUser !== null ? 
                 <button type="button" className="btn btn-secondary save-booking" onClick={this.createNewBooking}>Boka</button>  : 
-                <button type="button" className="btn btn-secondary open-login-form" >Logga in</button>
+                <button type="button"   className="btn btn-secondary open-login-form" >Logga in</button>
               } 
-              <LoginForm checkUserLogIn={this.getUserStatus} parent={this.name}></LoginForm>
+              <LoginForm checkUserLo  gIn={this.getUserStatus} parent={this.name}></LoginForm>
               {console.log(this.state)}
 
 
