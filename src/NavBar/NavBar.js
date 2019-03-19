@@ -51,11 +51,11 @@ class NavBar extends Component {
     this.setState({
       color: '',
       colorDropDownParent: '#fff'
-    });  
+    });
   }
 
   checkStartPage() {
-    if(window.location.pathname === '/') {
+    if (window.location.pathname === '/') {
       this.setState({
         color: '#fff'
       });
@@ -70,21 +70,26 @@ class NavBar extends Component {
   componentDidMount() {
     this.checkStartPage();
   }
-  render () {
+  render() {
     return (
       <Navbar className="navbar-expand-lg navbar-dark bg-primary">
-              <Link onClick={this.clickOnStartLink} to="/"><img src="/images/zc-logo.png" alt="ZenCinema Logo"/></Link>
+        <Link onClick={this.clickOnStartLink} to="/"><img src="/images/zc-logo.png" alt="ZenCinema Logo" /></Link>
 
-              <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-              <Collapse isOpen={!this.state.collapsed} navbar>
-                <Nav navbar className="mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
-                <NavItem>
-                <NavLink activeClassName='' onClick={this.clickOnStartLink} style={{color:this.state.color}} className="nav-link" to="/">Start</NavLink>
-                </NavItem>
-                <NavItem><NavLink onClick={this.clickOnOtherLink} activeClassName="active" className="nav-link" to="/filmer">Filmer</NavLink></NavItem>
-                <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle className="nav-link about-us" nav caret style={{color:this.state.colorDropDownParent}}>
-                  Om Oss
+        <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+        <Collapse isOpen={!this.state.collapsed} navbar>
+          <Nav navbar className="mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
+            <NavItem>
+              <NavLink activeClassName='' onClick={this.clickOnStartLink} style={{ color: this.state.color }} className="nav-link" to="/">Start</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={this.clickOnOtherLink} activeClassName="active" className="nav-link" to="/filmer">Filmer</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink onClick={this.clickOnOtherLink} activeClassName="active" className="nav-link" to="/poppislistan">Poppislistan</NavLink>
+            </NavItem>
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle className="nav-link about-us" nav caret style={{ color: this.state.colorDropDownParent }}>
+                Om Oss
                 </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem >
@@ -95,13 +100,13 @@ class NavBar extends Component {
                 </DropdownItem>
                 <DropdownItem >
                   <NavLink activeClassName="active" className="nav-link" onClick={this.clickOnDropdownLink} to="/om-oss/kiosken">Kiosken</NavLink>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-                </Nav>
-                <LoginForm myParent={this.name}  />
-              </Collapse>
-            </Navbar>
+                </DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
+          </Nav>
+          <LoginForm myParent={this.name} />
+        </Collapse>
+      </Navbar>
     )
   }
 }
