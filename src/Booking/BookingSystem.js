@@ -20,14 +20,14 @@ export default class BookingSystem extends React.Component {
     this.getTicketsCost = this.getTicketsCost.bind(this);
     this.getChosenSeats = this.getChosenSeats.bind(this);
     this.convertShowingDate = this.convertShowingDate.bind(this);
-    this.checkUserLogIn = this.checkUserLogIn.bind(this);
+    this.getUserStatus = this.getUserStatus.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
       ticketsCost: 0,
       selectedSeats: [],
-    }
-    
+    };
+    this.name = 'BookingSystem';
   }
 
   componentDidMount() {
@@ -48,18 +48,12 @@ export default class BookingSystem extends React.Component {
   }
 
 
-  checkUserLogIn(result) {
-    if(result.loggedIn) {
-      this.setState({
-        userLoggedIn: result.loggedIn,
-        user: result.user
-      });
-    }
-    else {
-      this.setState({
-        userLoggedIn: result.loggedIn
-      });
-    }
+  getUserStatus(loggedIn, user) {
+    this.setState({
+      loggedIn: loggedIn,
+      user: user
+    });
+    console.log(loggedIn, user, 'getUserStatus');
   }
   setNumOfTickets(numOfTickets) {
     this.setState({
@@ -165,8 +159,9 @@ export default class BookingSystem extends React.Component {
               sumToPay={this.state.ticketsCost}
               />
 
-              <Button data-dismiss="modal" aria-label="Close" class="btn btn-outline-secondary">Avbryt</Button>
-              <LoginForm checkUserLogIn={this.checkUserLogIn}></LoginForm>
+              <button type="button" data-dismiss="modal" aria-label="Close" className="btn btn-outline-secondary">Avbryt</button>
+              <LoginForm checkUserLogIn={this.getUserStatus} parent={this.name}></LoginForm>
+              {console.log(this.state)}
       {/* ${this.loggedInUser || Store.loggedInUser ? `
       <button type="button" class="btn btn-secondary save-booking" >Boka</button> ` : `
       <button type="button" class="btn btn-secondary open-login-form" >Logga in</button> 

@@ -83,7 +83,6 @@ export default class LoginForm extends React.Component {
   async checkLogin() {
     return await fetch('/json/login').then(response => {return response.json()}).then(data => {
       let result = data;
-      this.props.userLogIn(result);
       return result;
     });
   }
@@ -144,9 +143,10 @@ export default class LoginForm extends React.Component {
     }
 //this else-if should be tested after BookingSystem refaktoring
     else if (this.parent === 'BookingSystem') {
+      this.props.checkUserLogIn(this.state.loggedIn, this.state.loggedInUser);
 
       if(this.state.loggedIn) {
-        result = <Button className="btn btn-secondary save-booking">Boka</Button>
+        result = <Button className="save-booking">Boka</Button>
       }
       else {
         result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
