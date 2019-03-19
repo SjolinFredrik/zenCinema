@@ -38,10 +38,11 @@ export default class BookingSystem extends React.Component {
     })
     .then(() => {
       return this.findTakenSeats(this.props.showingId).then(data => {
-        this.takenSeats = data;
+        // this.takenSeats = data;
         if (data) {
           this.setState({
-            content: true
+            content: true,
+            takenSeats: data
           })
         }
       });
@@ -74,7 +75,7 @@ export default class BookingSystem extends React.Component {
 
 
   getChosenSeats(selectedSeats) {
-    if(selectedSeats !== null && selectedSeats.seats.length > 0) {
+    if(selectedSeats !== undefined && selectedSeats.seats.length > 0) {
     const schema = this.showing.saloon.seatsPerRow;
     let numSeats = 0;
     for (let i = 0; i < schema.length; i++) {
@@ -162,21 +163,21 @@ export default class BookingSystem extends React.Component {
       //try to save and catch an error if chosen seats have been taken before this booking finished
       try {
         let savedBooking = await this.newBooking.save();
+        this.showing.film.bookedCount = parseInt(this.showing.film.bookedCount) + 1;
+        console.log(this.showing.film);
         console.log(savedBooking);
-      } catch (error) {
+      } catch (error) { 
         if (error.status === 409) {
-          console('error 409');
-      // let takenSeats = await this.findTakenSeats();
-      // for (let i = 0; i < takenSeats.length; i++) {
-      //   for (let j = 0; j < this.seatsGrid.grid.length; j++) {
-      //     let row = this.seatsGrid.grid[j];
-      //     for (let seat = 0; seat < row.seats.length; seat++) {
-      //       if (row.seats[seat].name === takenSeats[i]) {
-      //         row.seats[seat].taken = true;
-      //         row.seats[seat].render();
-      //       }
-          }
+          const takenSeats = await this.findTakenSeats();
+          this.setState({
+            takenSeats: takenSeats
+          });  
+          console.log(takenSeats,'already booked');
+      // this.message = new Message('alreadyBooked');
+          return;
         }
+        throw error;
+      }
       }
 
   }
@@ -208,7 +209,7 @@ export default class BookingSystem extends React.Component {
           <SeatsGrid 
             schema={this.showing.saloon.seatsPerRow} 
             bestRows={this.showing.saloon.bestRows} 
-            takenSeats={this.takenSeats} 
+            takenSeats={this.state.takenSeats} 
             numOfTickets={this.state.numOfTickets}
             selectedSeats={this.getChosenSeats} />
           
