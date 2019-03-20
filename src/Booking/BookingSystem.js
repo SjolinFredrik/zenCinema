@@ -23,11 +23,13 @@ export default class BookingSystem extends React.Component {
     this.convertShowingDate = this.convertShowingDate.bind(this);
     this.getUserStatus = this.getUserStatus.bind(this);
     this.createNewBooking = this.createNewBooking.bind(this);
+    this.openLoginForm = this.openLoginForm.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
       ticketsCost: 0,
       selectedSeats: [],
+      isOpen: false
     };
     this.name = 'BookingSystem';
   }
@@ -187,6 +189,13 @@ export default class BookingSystem extends React.Component {
 
   }
 
+  openLoginForm() {
+    const isOpen = true;
+    this.setState({
+      isOpen: isOpen,
+      display: 'block'
+    });
+  }
   render() {
     
     if(this.state.content) {
@@ -236,9 +245,9 @@ export default class BookingSystem extends React.Component {
               <button type="button" onClick={this.props.toggle} className="btn btn-outline-secondary">Avbryt</button>
               {global.STORE.loggedInUser !== null ? 
                 <button type="button" className="btn btn-secondary save-booking" onClick={this.createNewBooking}>Boka</button>  : 
-                <button type="button"   className="btn btn-secondary open-login-form" >Logga in</button>
+                <button type="button"   className="btn btn-secondary open-login-form" onClick={this.openLoginForm} >Logga in</button>
               } 
-              <LoginForm checkUserLo  gIn={this.getUserStatus} parent={this.name}></LoginForm>
+              <LoginForm myParent={this.name} isOpen={this.state.isOpen} display="none"></LoginForm>
               {/* {console.log(this.state)} */}
 
 

@@ -21,11 +21,11 @@ export default class LoginForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.parent = props.myParent;
     this.clickLoginBtn = this.clickLoginBtn.bind(this);
     this.clickLogoutBtn = this.clickLogoutBtn.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      isOpen: false
     };
     
   }
@@ -71,6 +71,7 @@ export default class LoginForm extends React.Component {
     this.logout();
     this.setState({loggedIn: false, loggedInUser: null});
     global.STORE.loggedInUser = null;
+    console.log(global.STORE.loggedInUser, 'global user');
   }
 
 
@@ -99,11 +100,12 @@ export default class LoginForm extends React.Component {
         global.STORE.loggedInUser = null;
       }
     });
+    // this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
   }
   render() {
     let result;
 
-    if (this.parent === 'NavBar') {
+    if (this.props.myParent === 'NavBar') {
       if(this.state.loggedIn) {
 
          result= <div className="login-form"><ButtonGroup><UncontrolledDropdown>
@@ -145,36 +147,39 @@ export default class LoginForm extends React.Component {
       }
     }
 //this else-if should be tested after BookingSystem refaktoring
-    else if (this.parent === 'BookingSystem') {
+    if (this.props.myParent === 'BookingSystem') {
       // this.props.checkUserLogIn(this.state.loggedIn, this.state.loggedInUser);
       console.log(global.STORE.loggedInUser, 'bookingsystem');
 
-      if(global.STORE.loggedInUser !== null) {
-        result = <Button className="save-booking">Boka</Button>
-      }
-      else {
+      // if(global.STORE.loggedInUser !== null) {
+      //   result = <Button className="save-booking" onClick={this.props.bookBtnHandler}>BokaB</Button>
+      // }
+      // else {
+      console.log(this.state.isOpen, 'isOpen');
+      if(this.props.isOpen) {
         result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
-        <Col sm="4">
-            <Form className="welcome">
-               <h2>Logga in eller skapa nytt konto</h2>
-               <FormGroup>
-                 <Label htmlFor="emailf">Epost</Label>
-                  <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
-               </FormGroup>
-                <FormGroup >
-                  <Label htmlFor="pwdf">Lösenord</Label>
-                  <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password"/>
-                </FormGroup>
-                <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
-              </Form>
-             <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
-             
-       </Col>
-       
-    </div>
-       this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
+                    <Col sm="4">
+                        <Form className="welcome">
+                          <h2>Logga in eller skapa nytt konto</h2>
+                          <FormGroup>
+                            <Label htmlFor="emailf">Epost</Label>
+                              <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
+                          </FormGroup>
+                            <FormGroup >
+                              <Label htmlFor="pwdf">Lösenord</Label>
+                              <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password"/>
+                            </FormGroup>
+                            <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
+                          </Form>
+                        <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
+                  </Col>
+         </div>
       }
-
+        
+        
+        
+      //   
+      // }
     }
     return (
       <div>{result}</div>
