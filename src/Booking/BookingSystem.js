@@ -4,7 +4,7 @@ import TicketSelection from './TicketSelection';
 import BookingSummary from './BookingSummary';
 import LoginForm from '../User/LoginForm';
 import REST from '../REST';
-import { Col, Row, Button } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 
 
 
@@ -56,8 +56,8 @@ export default class BookingSystem extends React.Component {
       loggedIn: loggedIn,
       user: user
     });
-    console.log(loggedIn, user, 'getUserStatus');
   }
+
   setNumOfTickets(numOfTickets) {
     this.setState({
       numOfTickets: numOfTickets
@@ -76,7 +76,7 @@ export default class BookingSystem extends React.Component {
 
 
   getChosenSeats(selectedSeats) {
-    if(selectedSeats !== undefined && selectedSeats.seats.length > 0) {
+    if(selectedSeats !== undefined && selectedSeats !== null && selectedSeats.seats.length > 0) {
     const schema = this.showing.saloon.seatsPerRow;
     let numSeats = 0;
     for (let i = 0; i < schema.length; i++) {
@@ -168,11 +168,14 @@ export default class BookingSystem extends React.Component {
         const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
         filmModel.bookedCount++;
         await filmModel.save();
+        console.log(savedBooking, 'Booking is saved to DB');
+
       } catch (error) { 
         if (error.status === 409) {
           const takenSeats = await this.findTakenSeats(this.showing._id);
           this.setState({
-            takenSeats: takenSeats
+            takenSeats: takenSeats,
+            selectedSeats: undefined
           });  
           console.log('already booked');
       // this.message = new Message('alreadyBooked');
@@ -236,7 +239,7 @@ export default class BookingSystem extends React.Component {
                 <button type="button"   className="btn btn-secondary open-login-form" >Logga in</button>
               } 
               <LoginForm checkUserLo  gIn={this.getUserStatus} parent={this.name}></LoginForm>
-              {console.log(this.state)}
+              {/* {console.log(this.state)} */}
 
 
 

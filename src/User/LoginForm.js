@@ -47,8 +47,6 @@ export default class LoginForm extends React.Component {
       this.setState({loggedIn: true, loggedInUser: result.user});
       global.STORE.loggedInUser = this.state.loggedInUser;
 
-      console.log(global.STORE.loggedInUser);
-
       //Next if should be fixed after BookingSystem refaktoring
       if (this.parent === "BookingSystem"){
       this.parent.loggedInUser = this.state.loggedInUser;
@@ -73,7 +71,6 @@ export default class LoginForm extends React.Component {
     this.logout();
     this.setState({loggedIn: false, loggedInUser: null});
     global.STORE.loggedInUser = null;
-    console.log(global.STORE.loggedInUser, 'after logout');
   }
 
 
@@ -101,7 +98,6 @@ export default class LoginForm extends React.Component {
         this.setState({loggedIn: false, loggedInUser: null});
         global.STORE.loggedInUser = null;
       }
-      console.log(global.STORE, 'after check');
     });
   }
   render() {

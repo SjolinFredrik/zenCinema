@@ -31,15 +31,12 @@ export default class TicketPrice extends React.Component {
 
   onAdd() {
     const numberOfTickets = this.props.numberOfTickets();
-    console.log(numberOfTickets, 'numberOfTickets')
     if (numberOfTickets >= 8) {
       return;
     }
     this.setState({
       ticketAmount: this.state.ticketAmount + 1
-    }, this.props.increment(this.props.price, 1));
-    
-    console.log(this.state.ticketAmount);
+    }, this.props.increment(this.props.price, 1));    
   }
 
   onRemove(){
@@ -49,7 +46,6 @@ export default class TicketPrice extends React.Component {
     this.setState({
       ticketAmount: this.state.ticketAmount - 1
     },this.props.decrement(this.props.price));
-    console.log(this.state.ticketAmount);
   }
 
 
