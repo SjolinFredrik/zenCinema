@@ -24,10 +24,10 @@ export default class ManageShowing extends React.Component {
     this.state = {
       mode: 'form',
       inputs: {
-        saloon: '',
-        film: '',
-        date: '',
-        time: ''
+        saloon: this.props.showingToUpdate ? this.props.showingToUpdate.saloon._id : '',
+        film: this.props.showingToUpdate ? this.props.showingToUpdate.film._id : '',
+        date: this.props.showingToUpdate ? this.props.showingToUpdate.date : '',
+        time: this.props.showingToUpdate ? this.props.showingToUpdate.time : ''
       },
       errors: {
         saloon: false,
@@ -85,11 +85,12 @@ export default class ManageShowing extends React.Component {
     const validInputs = this.validateInputs()
     if (validInputs) {
       const showing = new Showing({
+        _id: this.props.showingToUpdate._id ? this.props.showingToUpdate._id : '',
         saloon: this.state.inputs.saloon,
         film: this.state.inputs.film,
         date: this.state.inputs.date,
         time: this.state.inputs.time
-      });
+      })
       const saveShowing = await showing.save()
       this.showConfirmation(saveShowing)
     }
@@ -146,7 +147,7 @@ export default class ManageShowing extends React.Component {
       <div>
         <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className="showing-modal">
           <ModalHeader toggle={this.props.toggle} className={this.state.mode !== 'form' ? 'success' : ''}>
-            {this.state.mode === 'form' ? 'Lägg till/ändra visning' : 'Visning skapad!'}
+            {this.state.mode === 'form' ? 'Lägg till/ändra visning' : this.props.showingToUpdate ? 'Visning uppdaterad!' : 'Visning skapad!'}
           </ModalHeader>
           {this.state.mode === 'form' ?
           <ModalBody>
@@ -157,23 +158,23 @@ export default class ManageShowing extends React.Component {
             : ''}
             <FormGroup>
               <Label for="saloonSelect" className={this.state.errors.saloon ? 'error' : ''}>Salong</Label>
-              <Input type="select" name="saloon" id="saloonSelect" onChange={this.handleChange} className={this.state.errors.saloon ? 'error' : ''}>
+              <Input type="select" name="saloon" id="saloonSelect" onChange={this.handleChange} className={this.state.errors.saloon ? 'error' : ''} value={this.state.inputs.saloon}>
                 {this.saloons}
               </Input>
             </FormGroup>
             <FormGroup>
               <Label for="filmSelect" className={this.state.errors.film ? 'error' : ''}>Film</Label>
-              <Input type="select" name="film" id="filmSelect" onChange={this.handleChange} className={this.state.errors.film ? 'error' : ''}>
+              <Input type="select" name="film" id="filmSelect" onChange={this.handleChange} className={this.state.errors.film ? 'error' : ''} value={this.state.inputs.film}>
                 {this.films}
               </Input>
             </FormGroup>
             <FormGroup>
               <Label for="dateSelect" className={this.state.errors.date ? 'error' : ''}>Datum</Label>
-              <Input type="date" name="date" id="dateSelect" min={today} onChange={this.handleChange} className={this.state.errors.date ? 'error' : ''} />
+              <Input type="date" name="date" id="dateSelect" min={today} onChange={this.handleChange} className={this.state.errors.date ? 'error' : ''} value={this.state.inputs.date ? new Date(this.state.inputs.date).toISOString().substring(0, 10) : ''} />
             </FormGroup>
             <FormGroup>
               <Label for="timeSelect" className={this.state.errors.time ? 'error' : ''}>Tid</Label>
-              <Input type="select" name="time" id="timeSelect" onChange={this.handleChange} className={this.state.errors.time ? 'error' : ''}>
+              <Input type="select" name="time" id="timeSelect" onChange={this.handleChange} className={this.state.errors.time ? 'error' : ''} value={this.state.inputs.time}>
                 <option key="choose-time" value="">Välj tid...</option>
                 <option key="1700" value="17:00">17:00</option>
                 <option key="1930" value="19:30">19:30</option>
@@ -197,7 +198,7 @@ export default class ManageShowing extends React.Component {
           {this.state.mode === 'form' ?
           <ModalFooter>
             <Button color="primary" onClick={this.saveShowing}>Spara</Button>
-            <Button color="secondary" onClick={this.toggle}>Avbryt</Button>
+            <Button color="secondary" onClick={this.props.toggle}>Avbryt</Button>
           </ModalFooter>
           : ''}
         </Modal>
