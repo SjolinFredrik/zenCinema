@@ -153,11 +153,11 @@ export default class BookingSystem extends React.Component {
   }
   
   async createNewBooking() {
-    if (global.STORE.auth.loggedIn && 
+    if (this.props.auth && this.props.auth.loggedIn && 
       this.state.selectedSeats !== undefined) {
       const number = await this.generateBookingNumber();
       this.newBooking = new Booking({
-        "customer": global.STORE.auth.loggedIn._id,
+        "customer": this.props.auth.user._id,
         "show": this.showing._id,
         "seats": this.state.selectedSeats,
         "bookingNumber": number,
