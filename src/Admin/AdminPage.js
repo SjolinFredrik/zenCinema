@@ -19,22 +19,33 @@ export default class AdminPage extends React.Component {
       modal: true,
       modalComponent: ''
     }
-    //this.checkIfAdmin()
+    this.checkIfAdmin()
     this.toggle = this.toggle.bind(this)
     this.updateShowing = this.updateShowing.bind(this)
   }
-  /* async checkIfAdmin() {
+  async checkIfAdmin() {
     let user = await Login.find()
+    console.log(user)
     if (user.loggedIn && user.user.admin) {
       this.setState({
         admin:
           <Container className="main-container-fade">
             <Row>
               <Col xs="12">
-                <ManageShowing />
+                <h2 className="text-light text-center mt-5 font-weight-bold">Hantera visningar</h2>
+              </Col>
+            </Row>
+            <Row className="m-3">
+              <Col xs="12" className="px-0">
+                <Button color="success" onClick={this.toggle} className="float-right">Lägg till visning <i className="fas fa-plus pl-1"></i></Button>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs="12">
+                {this.state.modalComponent}
               </Col>
               <Col xs="12" className="p-0">
-                <Showings />
+                <Showings updateShowing={this.updateShowing} />
               </Col>
             </Row>
           </Container>
@@ -45,7 +56,7 @@ export default class AdminPage extends React.Component {
           <MissingPage />
       })
     }
-  } */
+  }
 
   toggle(showing = '') {
     this.setState(prevState => ({
@@ -59,32 +70,6 @@ export default class AdminPage extends React.Component {
   }
 
   render() {
-    //return this.state.admin
-    return (
-      <Container className="main-container-fade">
-        <Row>
-          <Col xs="12">
-            <h2 className="text-light text-center mt-5 font-weight-bold">Hantera visningar</h2>
-          </Col>
-        </Row>
-        <Row className="m-3">
-          <Col xs="12" className="px-0">
-            <Button color="success" onClick={this.toggle} className="float-right">Lägg till visning <i className="fas fa-plus pl-1"></i></Button>
-            {/* <div className="btn-group float-right" role="group" aria-label="Add showing">
-              <Button color="success">Lägg till visning</Button>
-              <Button color="light"><i className="fas fa-plus success"></i></Button>
-            </div> */}
-          </Col>
-        </Row>
-        <Row>
-          <Col xs="12">
-            {this.state.modalComponent}
-          </Col>
-          <Col xs="12" className="p-0">
-            <Showings updateShowing={this.updateShowing} />
-          </Col>
-        </Row>
-      </Container>
-    )
+    return this.state.admin
   }
 }
