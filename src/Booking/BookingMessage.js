@@ -6,7 +6,7 @@ class Showing extends REST { }
 export default class BookingMessage extends React.Component {
   constructor(props) {
     super(props)
-    this.removeMe = this.removeMe.bind(this)
+    // this.removeMe = this.removeMe.bind(this)
     this.state = {
       type: this.props.type,
       data: this.props.data,

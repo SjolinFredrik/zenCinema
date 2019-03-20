@@ -211,6 +211,7 @@ export default class BookingSystem extends React.Component {
     this.setState({
       message: ''
     })
+    this.props.toggle()
   }
 
 
