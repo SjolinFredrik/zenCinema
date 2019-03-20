@@ -102,7 +102,6 @@ export default class SeatsGrid extends React.Component {
     });
 
     this.props.selectedSeats(chosenRowAndSeats);
-
   }
 
   handleSeatsChoice(row, chosenSeats) {
@@ -116,7 +115,7 @@ export default class SeatsGrid extends React.Component {
     });
   }
 
-  render() {
+  render() {  
     const schema = this.props.schema;
     const numOfTickets = this.props.numOfTickets;
     this.hall = [];
@@ -124,7 +123,7 @@ export default class SeatsGrid extends React.Component {
       let numOfSeatsInRow = schema[row];
 
       let chosenSeats = [];
-      if (this.state.chosenRowAndSeats !== null && this.state.chosenRowAndSeats.row === row) {
+      if ((this.state.chosenRowAndSeats !== undefined && this.state.chosenRowAndSeats !== null) && this.state.chosenRowAndSeats.row === row) {
         chosenSeats = this.state.chosenRowAndSeats.seats;
       }
 

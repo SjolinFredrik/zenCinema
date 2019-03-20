@@ -2,13 +2,15 @@ import React from 'react';
 import SeatsGrid from './SeatsGrid/SeatsGrid';
 import TicketSelection from './TicketSelection';
 import BookingSummary from './BookingSummary';
+import LoginForm from '../User/LoginForm';
 import REST from '../REST';
-import { Col, Row, Button } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 
 
 
 class Showing extends REST {};
 class Booking extends REST {};
+class Film extends REST {};
 
 export default class BookingSystem extends React.Component {
 
@@ -19,13 +21,15 @@ export default class BookingSystem extends React.Component {
     this.getTicketsCost = this.getTicketsCost.bind(this);
     this.getChosenSeats = this.getChosenSeats.bind(this);
     this.convertShowingDate = this.convertShowingDate.bind(this);
+    this.getUserStatus = this.getUserStatus.bind(this);
+    this.createNewBooking = this.createNewBooking.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
       ticketsCost: 0,
       selectedSeats: [],
-    }
-    
+    };
+    this.name = 'BookingSystem';
   }
 
   componentDidMount() {
@@ -35,13 +39,22 @@ export default class BookingSystem extends React.Component {
     })
     .then(() => {
       return this.findTakenSeats(this.props.showingId).then(data => {
-        this.takenSeats = data;
+        // this.takenSeats = data;
         if (data) {
           this.setState({
-            content: true
+            content: true,
+            takenSeats: data
           })
         }
       });
+    });
+  }
+
+
+  getUserStatus(loggedIn, user) {
+    this.setState({
+      loggedIn: loggedIn,
+      user: user
     });
   }
 
@@ -63,7 +76,7 @@ export default class BookingSystem extends React.Component {
 
 
   getChosenSeats(selectedSeats) {
-    if(selectedSeats !== null && selectedSeats.seats.length > 0) {
+    if(selectedSeats !== undefined && selectedSeats !== null && selectedSeats.seats.length > 0) {
     const schema = this.showing.saloon.seatsPerRow;
     let numSeats = 0;
     for (let i = 0; i < schema.length; i++) {
@@ -88,8 +101,6 @@ export default class BookingSystem extends React.Component {
     this.setState({
       selectedSeats: selectedSeats
     });
-  
-    
   }
 
   async findShowingsDetails(showingId) {
@@ -106,7 +117,76 @@ export default class BookingSystem extends React.Component {
     }
     return takenSeats;
   }
+
+  async generateBookingNumber() {
+    let bookings = await Booking.find(`.find().limit(1).sort({$natural: -1})`);
+    let saltArray = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    saltArray = saltArray.split("");
+    let salt = '';
+    let lastBookingNumber = '';
+    for (let i = 0; i <= 3; i++) {
+      let letter = saltArray[Math.floor(Math.random() * saltArray.length)];
+      salt = salt + letter;
+    }
+    let number = 0;
+    if (bookings.length === 0) {
+      number = salt + 1;
+    }
+    if (bookings.length > 0) {
+      lastBookingNumber = bookings[0].bookingNumber;
+      lastBookingNumber = parseInt(lastBookingNumber.split("").splice(4));
+      number = salt + (lastBookingNumber + 1);
+    }
+    return number;
+  }
+
+  async checkUnvailableSeats() {
+    let takenSeats = await this.findTakenSeats();
+    for (let i = 0; i < this.state.selectedSeats.length; i++) {
+      if (takenSeats.includes(this.state.selectedSeats[i])){
+        return true;
+      }
+    }
+  }
   
+  async createNewBooking() {
+    if (global.STORE.loggedInUser && 
+      this.state.selectedSeats !== undefined) {
+      const number = await this.generateBookingNumber();
+      this.newBooking = new Booking({
+        "customer": global.STORE.loggedInUser._id,
+        "show": this.showing._id,
+        "seats": this.state.selectedSeats,
+        "bookingNumber": number,
+        "totalCost": this.state.ticketsCost + " SEK"
+      });
+
+      //try to save and catch an error if chosen seats have been taken before this booking finished
+      try {
+        let savedBooking = await this.newBooking.save();
+        const film = this.showing.film;
+        const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
+        filmModel.bookedCount++;
+        await filmModel.save();
+        console.log(savedBooking, 'Booking is saved to DB');
+
+      } catch (error) { 
+        if (error.status === 409) {
+          const takenSeats = await this.findTakenSeats(this.showing._id);
+          this.setState({
+            takenSeats: takenSeats,
+            selectedSeats: undefined
+          });  
+          console.log('already booked');
+      // this.message = new Message('alreadyBooked');
+          return;
+        }
+        throw error;
+      }
+      }
+
+  }
+
   render() {
     
     if(this.state.content) {
@@ -118,10 +198,23 @@ export default class BookingSystem extends React.Component {
             ticketsCost={this.getTicketsCost}
           /> 
           </Col>
+
+          <Row className="align-items-center justify-content-center no-gutters">
+            <Col lg="6" className="show-info" style={{backgroundImage: "url('/images/movies/" + this.showing.film.images[1] + "')"}}>
+              <div className="drop"></div>
+              <dl className="col-md-6 mx-auto slideInUp ">
+                <dt>{this.showing.film.title}</dt>
+                <dd>{Math.floor(this.showing.film.length/60)} tim {this.showing.film.length%60} min | {this.showing.film.genre}</dd>
+                <dd>Salong: {this.showing.saloon.name}</dd>
+                <dd>Tid: {this.convertShowingDate(this.showing.date)} | {this.showing.time}</dd>
+              </dl>
+            </Col>
+          </Row>
+
           <SeatsGrid 
             schema={this.showing.saloon.seatsPerRow} 
             bestRows={this.showing.saloon.bestRows} 
-            takenSeats={this.takenSeats} 
+            takenSeats={this.state.takenSeats} 
             numOfTickets={this.state.numOfTickets}
             selectedSeats={this.getChosenSeats} />
           
@@ -137,9 +230,31 @@ export default class BookingSystem extends React.Component {
               showingTime={this.showing.time}
               sumToPay={this.state.ticketsCost}
               />
+              {global.STORE.loggedInUser ===  null ?
+                <p className="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p> : ''
+              }
+              <button type="button" onClick={this.props.toggle} className="btn btn-outline-secondary">Avbryt</button>
+              {global.STORE.loggedInUser !== null ? 
+                <button type="button" className="btn btn-secondary save-booking" onClick={this.createNewBooking}>Boka</button>  : 
+                <button type="button"   className="btn btn-secondary open-login-form" >Logga in</button>
+              } 
+              <LoginForm checkUserLo  gIn={this.getUserStatus} parent={this.name}></LoginForm>
+              {/* {console.log(this.state)} */}
+
+
+
+    {/* ${this.message ? this.message : ''}
+    ${this.loginForm && !this.loginForm.used ? this.loginForm : ''}
+    ${this.registerForm && this.registerForm !== 0 ? this.registerForm : ''} */}
+
+
+
+
+
+
             </Col>
           </Row>  
-        </section>
+          </section>
       )
     }
     else {

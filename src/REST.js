@@ -22,6 +22,11 @@ export default class REST {
       },
       body: JSON.stringify(this)
     });
+    if(!response.ok) {
+      const err = new Error(response.statusText);
+      err.status = response.status;
+      throw err;
+    }
     let saved = await response.json();
     Object.assign(this, saved);
     return this;
