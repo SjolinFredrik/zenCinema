@@ -24,6 +24,7 @@ export default class BookingSystem extends React.Component {
     this.getUserStatus = this.getUserStatus.bind(this);
     this.createNewBooking = this.createNewBooking.bind(this);
     this.openLoginForm = this.openLoginForm.bind(this);
+    this.setIsOpen = this.setIsOpen.bind(this);
     this.state = {
       content: false,
       numOfTickets: 0,
@@ -152,11 +153,11 @@ export default class BookingSystem extends React.Component {
   }
   
   async createNewBooking() {
-    if (global.STORE.loggedInUser && 
+    if (global.STORE.auth.loggedIn && 
       this.state.selectedSeats !== undefined) {
       const number = await this.generateBookingNumber();
       this.newBooking = new Booking({
-        "customer": global.STORE.loggedInUser._id,
+        "customer": global.STORE.auth.loggedIn._id,
         "show": this.showing._id,
         "seats": this.state.selectedSeats,
         "bookingNumber": number,
@@ -190,12 +191,18 @@ export default class BookingSystem extends React.Component {
   }
 
   openLoginForm() {
-    const isOpen = true;
     this.setState({
-      isOpen: isOpen,
-      display: 'block'
+      isOpen: true,
     });
   }
+
+  setIsOpen(state) {
+    this.setState({
+      isOpen: state
+    });
+  }
+
+
   render() {
     
     if(this.state.content) {
@@ -239,17 +246,14 @@ export default class BookingSystem extends React.Component {
               showingTime={this.showing.time}
               sumToPay={this.state.ticketsCost}
               />
-              {global.STORE.loggedInUser ===  null ?
+              {!this.props.auth || !this.props.auth.loggedIn ?
                 <p className="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p> : ''
               }
               <button type="button" onClick={this.props.toggle} className="btn btn-outline-secondary">Avbryt</button>
-              {global.STORE.loggedInUser !== null ? 
+              {this.props.auth && this.props.auth.loggedIn ? 
                 <button type="button" className="btn btn-secondary save-booking" onClick={this.createNewBooking}>Boka</button>  : 
                 <button type="button"   className="btn btn-secondary open-login-form" onClick={this.openLoginForm} >Logga in</button>
-              } 
-              <LoginForm myParent={this.name} isOpen={this.state.isOpen} display="none"></LoginForm>
-              {/* {console.log(this.state)} */}
-
+              }
 
 
     {/* ${this.message ? this.message : ''}
@@ -262,7 +266,8 @@ export default class BookingSystem extends React.Component {
 
 
             </Col>
-          </Row>  
+          </Row>
+          <LoginForm auth={this.props.auth} changeAuth={this.props.changeAuth} isOpen={this.state.isOpen} changeOpen={this.setIsOpen}></LoginForm>
           </section>
       )
     }

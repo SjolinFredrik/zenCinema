@@ -2,9 +2,9 @@ import React from 'react';
 import {
   Container,
   Row,
-  Col
+  Col,
+  Button
 } from 'reactstrap';
-import BookingPage from '../Booking/BookingPage';
 
 export default class Showing extends React.Component {
   
@@ -45,7 +45,7 @@ export default class Showing extends React.Component {
               {this.props.data.time}
             </Col>
             <Col xs="3" md="2" className="pr-2 my-auto">
-              <BookingPage showingId={this.props.data._id}  />
+              <Button onClick={() => this.props.showBookingPage(this.props.data._id)} title="Boka" className="btn btn-secondary float-right book-film">Boka</Button>
             </Col>
           </Row>
         </Container>
