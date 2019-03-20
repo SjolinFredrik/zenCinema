@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Button, 
   Modal, 
@@ -11,8 +11,8 @@ import {
   Alert,
   Container,
   Row,
-  Col } from 'reactstrap';
-import REST from '../REST';
+  Col } from 'reactstrap'
+import REST from '../REST'
 
 class Saloon extends REST { }
 class Film extends REST { }
@@ -20,9 +20,8 @@ class Showing extends REST { }
 
 export default class ManageShowing extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      modal: false,
       mode: 'form',
       inputs: {
         saloon: '',
@@ -36,8 +35,8 @@ export default class ManageShowing extends React.Component {
         date: false,
         time: false
       }
-    };
-    this.errorMessages = [];
+    }
+    this.errorMessages = []
     this.showingInfo = {
       saloon: '',
       film: {
@@ -48,63 +47,42 @@ export default class ManageShowing extends React.Component {
       time: ''
     }
 
-    this.importSaloons();
-    this.importFilms();
+    this.importSaloons()
+    this.importFilms()
 
-    this.saloons = [<option key="choose-saloon" value="">Välj salong...</option>];
-    this.films = [<option key="choose-film" value="">Välj film...</option>];
+    this.saloons = [<option key="choose-saloon" value="">Välj salong...</option>]
+    this.films = [<option key="choose-film" value="">Välj film...</option>]
 
-    this.toggle = this.toggle.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.saveShowing = this.saveShowing.bind(this);
-  }
-
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal,
-      mode: 'form',
-      inputs: {
-        saloon: '',
-        film: '',
-        date: '',
-        time: ''
-      },
-      errors: {
-        saloon: false,
-        film: false,
-        date: false,
-        time: false
-      }
-    }));
-    this.errorMessages = [];
+    this.handleChange = this.handleChange.bind(this)
+    this.saveShowing = this.saveShowing.bind(this)
   }
 
   async importSaloons() {
-    const saloons = await Saloon.find();
-    saloons.forEach(saloon => this.saloons.push(<option key={saloon._id} value={saloon._id}>{saloon.name}</option>));
+    const saloons = await Saloon.find()
+    saloons.forEach(saloon => this.saloons.push(<option key={saloon._id} value={saloon._id}>{saloon.name}</option>))
   }
 
   async importFilms() {
-    const films = await Film.find();
-    films.forEach(film => this.films.push(<option key={film._id} value={film._id}>{film.title}</option>));
+    const films = await Film.find()
+    films.forEach(film => this.films.push(<option key={film._id} value={film._id}>{film.title}</option>))
   }
 
   handleChange(e) {
-    const inputs = Object.assign({}, this.state.inputs);
-    const errors = Object.assign({}, this.state.errors);
+    const inputs = Object.assign({}, this.state.inputs)
+    const errors = Object.assign({}, this.state.errors)
     if (e.target.name === 'date') {
-      inputs.date = new Date(e.target.value).getTime();
-      errors.date = false;
+      inputs.date = new Date(e.target.value).getTime()
+      errors.date = false
     }
     else {
-      inputs[e.target.name] = e.target.value;
-      errors[e.target.name] = false;
+      inputs[e.target.name] = e.target.value
+      errors[e.target.name] = false
     }
-    this.setState({ inputs, errors });
+    this.setState({ inputs, errors })
   }
 
   async saveShowing() {
-    const validInputs = this.validateInputs();
+    const validInputs = this.validateInputs()
     if (validInputs) {
       const showing = new Showing({
         saloon: this.state.inputs.saloon,
@@ -112,8 +90,8 @@ export default class ManageShowing extends React.Component {
         date: this.state.inputs.date,
         time: this.state.inputs.time
       });
-      const saveShowing = await showing.save();
-      this.showConfirmation(saveShowing);
+      const saveShowing = await showing.save()
+      this.showConfirmation(saveShowing)
     }
   }
 
@@ -124,24 +102,24 @@ export default class ManageShowing extends React.Component {
       date: 'Datum',
       time: 'Tid'
     }
-    this.errorMessages = [];
+    this.errorMessages = []
 
-    let returnValue = true;
+    let returnValue = true
 
-    const errors = Object.assign({}, this.state.errors);
+    const errors = Object.assign({}, this.state.errors)
     for (let key in this.state.inputs) {
       if (!this.state.inputs[key]) {
         errors[key] = true;
-        this.errorMessages.push(<li key={'error-message-' + key}>{translateErrors[key]}</li>);
-        returnValue = false;
+        this.errorMessages.push(<li key={'error-message-' + key}>{translateErrors[key]}</li>)
+        returnValue = false
       }
     }
-    this.setState({ errors });
-    return returnValue;
+    this.setState({ errors })
+    return returnValue
   }
 
   async showConfirmation(showing) {
-    const foundShowing = await Showing.find(`.findById('${showing._id}').populate('saloon').populate('film')`);
+    const foundShowing = await Showing.find(`.findById('${showing._id}').populate('saloon').populate('film')`)
     this.showingInfo = {
       saloon: foundShowing.saloon.name,
       film: {
@@ -151,7 +129,7 @@ export default class ManageShowing extends React.Component {
       date: new Date(foundShowing.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'}),
       time: foundShowing.time
     }
-    this.setState({ mode: 'confirmation' });
+    this.setState({ mode: 'confirmation' })
   }
 
   render() {
@@ -162,16 +140,16 @@ export default class ManageShowing extends React.Component {
     const gradientStyle = {
       background: 'linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))'
     }
-    const today = new Date().toLocaleDateString();
+    const today = new Date().toLocaleDateString()
 
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>Klicka</Button>
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className="showing-modal">
-          <ModalHeader toggle={this.toggle}>
+        <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className="showing-modal">
+          <ModalHeader toggle={this.props.toggle} className={this.state.mode !== 'form' ? 'success' : ''}>
             {this.state.mode === 'form' ? 'Lägg till/ändra visning' : 'Visning skapad!'}
           </ModalHeader>
-          {this.state.mode === 'form' ? <ModalBody>
+          {this.state.mode === 'form' ?
+          <ModalBody>
             {this.errorMessages.length > 0 ?
             <Alert color="danger">
               Vänligen ange: {this.errorMessages}
@@ -202,7 +180,9 @@ export default class ManageShowing extends React.Component {
                 <option key="2200" value="22:00">22:00</option>
               </Input>
             </FormGroup>
-          </ModalBody> : <ModalBody className="p-0 text-light rounded-bottom" style={confirmStyle}>
+          </ModalBody>
+          :
+          <ModalBody className="p-0 text-light rounded-bottom" style={confirmStyle}>
             <Container fluid style={gradientStyle}>
               <Row className="py-4">
                 <Col xs="6" className="p-3">
@@ -211,7 +191,7 @@ export default class ManageShowing extends React.Component {
                   <p>{this.showingInfo.date} kl {this.showingInfo.time}</p>
                 </Col>
               </Row>
-            </Container>  
+            </Container> 
           </ModalBody>
           }
           {this.state.mode === 'form' ?
@@ -222,6 +202,6 @@ export default class ManageShowing extends React.Component {
           : ''}
         </Modal>
       </div>
-    );
+    )
   }
 }
