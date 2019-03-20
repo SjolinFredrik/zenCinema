@@ -170,7 +170,7 @@ export default class BookingSystem extends React.Component {
         const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
         filmModel.bookedCount += this.newBooking.seats.length;
         await filmModel.save();
-        console.log(savedBooking, 'Booking is saved to DB');
+        // console.log(savedBooking, 'Booking is saved to DB');
 
       } catch (error) {
         if (error.status === 409) {
@@ -179,7 +179,7 @@ export default class BookingSystem extends React.Component {
             takenSeats: takenSeats,
             selectedSeats: undefined
           });
-          console.log('already booked');
+          // console.log('already booked');
           this.setState({
             message: <BookingMessage type='alreadyBooked' handler={this.messageHandler} data={this.newBooking} />
           })
@@ -213,8 +213,6 @@ export default class BookingSystem extends React.Component {
     })
     this.props.toggle()
   }
-
-
   render() {
 
     if (this.state.content) {
