@@ -40,11 +40,15 @@ export default class CustomerBookingPage extends React.Component {
   }
 
   async getUserBookings(user) {
-    let today = new Date().getTime();
+    let today = new Date();
+    today = new Date(today.setDate(today.getDate() - 1)).getTime();
     for (let booking of user.bookings) {
       const foundBooking = await Booking.find(`.findOne({_id: '${booking._id}'}).populate('show').exec()`);
       const foundShowing = await Showing.find(`.findOne({_id: '${foundBooking.show._id}'}).populate('film').exec()`);
-      if (today > foundShowing.date) {
+      console.log('today: ', today);
+      console.log('foundshowing date: ', foundShowing.date);
+
+      if (today >= foundShowing.date) {
 
       this.oldBookings.push(<CustomerBooking key={foundBooking._id} film={foundShowing.film.title} date={foundShowing.date} time={foundShowing.time} bookingNr={booking.bookingNumber} />)
 
