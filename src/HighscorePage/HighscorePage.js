@@ -30,12 +30,9 @@ export default class HighscorePage extends React.Component {
             <img
               style={{
                 maxWidth: 75,
-
               }}
               src={"/images/movies/" + film.images[0]}
               alt="movie poster image" />
-          </td>
-          <td>
           </td>
         </tr>
       )
