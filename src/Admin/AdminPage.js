@@ -20,7 +20,8 @@ export default class AdminPage extends React.Component {
       modalComponent: ''
     }
     //this.checkIfAdmin()
-    this.toggle = this.toggle.bind(this);
+    this.toggle = this.toggle.bind(this)
+    this.updateShowing = this.updateShowing.bind(this)
   }
   /* async checkIfAdmin() {
     let user = await Login.find()
@@ -46,11 +47,15 @@ export default class AdminPage extends React.Component {
     }
   } */
 
-  toggle() {
+  toggle(showing = '') {
     this.setState(prevState => ({
       modal: !prevState.modal,
-      modalComponent: this.state.modal ? <ManageShowing isOpen={this.state.modal} toggle={this.toggle} /> : ''
+      modalComponent: this.state.modal ? <ManageShowing isOpen={this.state.modal} toggle={this.toggle} showingToUpdate={showing._id ? showing : ''} /> : ''
     }))
+  }
+
+  updateShowing(showing) {
+    this.toggle(showing)
   }
 
   render() {
@@ -67,7 +72,7 @@ export default class AdminPage extends React.Component {
                 {this.state.modalComponent}
               </Col>
               <Col xs="12" className="p-0">
-                <Showings />
+                <Showings updateShowing={this.updateShowing} />
               </Col>
             </Row>
           </Container>

@@ -48,7 +48,7 @@ export default class Showings extends React.Component {
           </Col>
           <Col xs="3" sm="3" className="showing-btns pl-0 pr-1">
             <div>
-              <i className="fas fa-pen-square"></i>
+              <i className="fas fa-pen-square" onClick={this.props.updateShowing.bind(this, show)}></i>
             </div>
             <div>
               <i className="fas fa-trash-alt delete-btn" id={i} onClick={this.deleteShowing}></i>
