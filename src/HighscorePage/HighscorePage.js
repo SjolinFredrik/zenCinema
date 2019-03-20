@@ -51,7 +51,7 @@ export default class HighscorePage extends React.Component {
             <Table hover className="hs-table mt-5 rounded">
               <thead className="hs-head">
                 <tr>
-                  <th>Antal Bokningar</th>
+                  <th># Platser bokade</th>
                   <th>Titel</th>
                   <th></th>
                 </tr>

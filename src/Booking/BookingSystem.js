@@ -166,7 +166,7 @@ export default class BookingSystem extends React.Component {
         let savedBooking = await this.newBooking.save();
         const film = this.showing.film;
         const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
-        filmModel.bookedCount++;
+        filmModel.bookedCount += this.newBooking.seats.length;        
         await filmModel.save();
         console.log(savedBooking, 'Booking is saved to DB');
 
