@@ -45,13 +45,13 @@ export default class HighscorePage extends React.Component {
     return (
       <Container className="main-container-fade">
         <Row>
-          <Col xs="12" md="8" className="font-weight-bold offset-md-2 mt-5">
+          <Col xs="12" md="8" className="font-weight-bold offset-md-2 my-5">
             <h2 className="text-center font-weight-bold text-light">Poppislistan</h2>
             <h4 className="text-center">Våra mest bokade filmer</h4>
             <Table hover className="hs-table mt-5 rounded">
               <thead className="hs-head">
                 <tr>
-                  <th>Antal Bokningar</th>
+                  <th># Platser bokade</th>
                   <th>Titel</th>
                   <th></th>
                 </tr>
