@@ -2,18 +2,30 @@ import React from 'react';
 import {
   Container,
   Row,
-  Col,
-  Button
+  Col
 } from 'reactstrap';
+import BookingPage from '../Booking/BookingPage';
 
 export default class Showing extends React.Component {
+  
+  BookingPageRef = ({toggle}) => {
+    this.showModal = toggle;
+  }
+ 
+  onBookClick = () => {
+   this.showModal();
+  }
+
+
   get dateToString() {
     return new Date(this.props.data.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
   }
 
+
   render() {
     return (
-      <Col xs="12" md="10" className="showing offset-md-1 px-0 text-left">
+      <div>
+        <Col xs="12" md="10" className="showing offset-md-1 px-0 text-left">
         <Container fluid>
           <Row className="px-0">
             <Col xs="4" md="3" className="pl-2 pr-0">
@@ -33,11 +45,12 @@ export default class Showing extends React.Component {
               {this.props.data.time}
             </Col>
             <Col xs="3" md="2" className="pr-2 my-auto">
-              <Button title={'Boka ' + this.props.data.film.title} className="btn btn-secondary float-right book-film">Boka</Button>
+              <BookingPage showingId={this.props.data._id}  />
             </Col>
           </Row>
         </Container>
       </Col>
+      </div>
     )
   }
 }

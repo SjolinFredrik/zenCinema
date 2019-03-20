@@ -44,7 +44,8 @@
         "max": "5"
       }
     ],
-    "link": "husdjurens-hemliga-liv"
+    "link": "husdjurens-hemliga-liv",
+    "bookedCount": 0
   },
   {
     "title": "Bohemian Rhapsody",
@@ -94,7 +95,8 @@
         "max": "5"
       }
     ],
-    "link": "bohemian-rhapsody"
+    "link": "bohemian-rhapsody",
+    "bookedCount": 0
   },
   {
     "title": "A Star is Born",
@@ -140,7 +142,8 @@
         "max": "5"
       }
     ],
-    "link": "a-star-is-born"
+    "link": "a-star-is-born",
+    "bookedCount": 0
   },
   {
     "title": "Bumblebee",
@@ -189,7 +192,8 @@
         "max": "5"
       }
     ],
-    "link": "bumblebee"
+    "link": "bumblebee",
+    "bookedCount": 0
   },
   {
     "title": "Glass",
@@ -238,6 +242,7 @@
         "max": "5"
       }
     ],
-    "link": "glass"
+    "link": "glass",
+    "bookedCount": 0
   }
 ]

@@ -3,16 +3,27 @@
   padding-bottom: 5rem;
 }
 
-.bookings-heap {
-  margin-top: 5rem;
-  .nav-link {
+.booking-heap {
+  padding-top: 5rem;
+  .nav-link  {
     border: 1px solid $secondary;
     color: $secondary;
     margin-right: 15px;
+    border-radius: 3px 3px 3px 3px;
+    font-weight: 600;
+    cursor: pointer;
     @include transition(.5s);
     &.active {
       border-color: $primary;
+      background-color: $primary;
+      color: rgb(243, 158, 158);
     }
+    &:hover {
+      background-color: $primary;
+    }
+  }
+  .nav-tabs {
+    border-bottom: 0px;
   }
 }
 
