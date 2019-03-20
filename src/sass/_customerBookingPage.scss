@@ -18,6 +18,9 @@
       background-color: $primary;
       color: rgb(243, 158, 158);
     }
+    &:hover {
+      background-color: $primary;
+    }
   }
   .nav-tabs {
     border-bottom: 0px;
