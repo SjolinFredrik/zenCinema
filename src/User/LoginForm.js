@@ -109,7 +109,7 @@ export default class LoginForm extends React.Component {
             Hej, {this.state.loggedInUser.firstName}!
            </DropdownToggle>
           <DropdownMenu right className="dropdown-menu-lg-right login-menu">
-            {this.state.loggedInUser.admin ? <Link className="dropdown-item" to="/admin">Admin</Link> : ''}
+            {this.state.loggedInUser.admin ? <Link className="dropdown-item" to="/admin">Hantera visningar</Link> : ''}
             <Link className="dropdown-item" to="/mina-bokningar">Mina bokningar</Link>
             <div className="dropdown-divider" />
             <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}><i className="fas fa-sign-out-alt" /> Logga ut</DropdownItem>
