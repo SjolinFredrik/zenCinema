@@ -23,7 +23,7 @@ export default class Seat extends React.Component {
       <div 
         onMouseOver={() => {this.handleMouseOver()}}
         onClick={this.handleMouseClick}
-        className={"seat " + (this.props.taken ? 'taken' : '') + (this.props.chosen ? ' best chosen-seats' : '') + (this.props.highlighted ? ' highlight' : '')}
+        className={"seat " + (this.props.taken ? 'taken' : '') + (this.props.chosen && !this.props.taken ? ' best chosen-seats' : '') + (this.props.highlighted ? ' highlight' : '')}
         id={this.props.name}>
         <div className="ghost-div"></div>
       </div>
