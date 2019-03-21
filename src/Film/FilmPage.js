@@ -8,7 +8,7 @@ import BookingPage from '../Booking/BookingPage';
 
 
 
-class Film extends REST {}
+class Film extends REST {};
 
 export default class FilmPage extends React.Component {
 
@@ -68,7 +68,7 @@ export default class FilmPage extends React.Component {
             </Col>
           </Row>
         </Container>
-        <BookingPage showingId={this.state.bookingPageShowingId} changeAuth={this.props.changeAuth} auth={this.props.auth} onClose={this.closeBookingPage} />
+        {/* <BookingPage showingId={this.state.bookingPageShowingId} changeAuth={this.props.changeAuth} auth={this.props.auth} onClose={this.closeBookingPage} /> */}
       </Container>
     }
     return (

@@ -17,6 +17,7 @@ import CustomerBookingPage from '../UserBooking/CustomerBookingPage';
 import AdminPage from '../Admin/AdminPage';
 // Footer
 import Footer from '../Footer/Footer';
+import BookingPage from '../Booking/BookingPage';
 
 export default class App extends Component {
   constructor(props) {
@@ -57,6 +58,9 @@ export default class App extends Component {
             <Route exact path="/filmer" component={FilmCollectionPage} />
             <Route exact path="/filmer/:link" 
               render={props => <FilmPage {...props} auth={this.state.auth} changeAuth={this.onAuthChange} />}
+            />
+            <Route exact path="/filmer/:link/:showingId" 
+              render={props => <BookingPage {...props} auth={this.state.auth} changeAuth={this.onAuthChange} />}
             />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />

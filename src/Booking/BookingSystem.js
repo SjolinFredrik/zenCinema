@@ -7,7 +7,6 @@ import REST from '../REST';
 import { Col, Row } from 'reactstrap';
 import RegisterForm from '../User/RegisterForm';
 import BookingMessage from './BookingMessage';
-import App from '../App/App';
 
 
 
@@ -32,7 +31,7 @@ export default class BookingSystem extends React.Component {
     this.setRegisterOpen = this.setRegisterOpen.bind(this);
 
     this.state = {
-	  message: '',	  
+	    message: '',	  
       content: false,
       numOfTickets: 0,
       ticketsCost: 0,
