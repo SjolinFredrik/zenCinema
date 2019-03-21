@@ -6,10 +6,12 @@ import {
   Button
 } from 'reactstrap';
 import ManageShowing from './ManageShowing'
-import Showings from './Showings'
+import ShowingComponent from './Showing'
 import Login from '../Login'
-import MissingPage from '../MissingPage/MissingPage';
+import MissingPage from '../MissingPage/MissingPage'
+import REST from '../REST'
 
+class Showing extends REST { }
 
 export default class AdminPage extends React.Component {
   constructor() {
@@ -17,15 +19,19 @@ export default class AdminPage extends React.Component {
     this.state = {
       admin: '',
       modal: true,
-      modalComponent: ''
+      modalComponent: '',
+      showingComponents: ''
     }
     this.checkIfAdmin()
+    this.getAllShowingsAndMount()
+
     this.toggle = this.toggle.bind(this)
+    this.getAllShowingsAndMount = this.getAllShowingsAndMount.bind(this)
     this.updateShowing = this.updateShowing.bind(this)
+    this.deleteShowing = this.deleteShowing.bind(this)
   }
   async checkIfAdmin() {
     let user = await Login.find()
-    console.log(user)
     if (user.loggedIn && user.user.admin) {
       this.setState({
         admin:
@@ -45,7 +51,9 @@ export default class AdminPage extends React.Component {
                 {this.state.modalComponent}
               </Col>
               <Col xs="12" className="p-0">
-                <Showings updateShowing={this.updateShowing} />
+                <Container fluid>
+                  {this.state.showingComponents}
+                </Container>
               </Col>
             </Row>
           </Container>
@@ -61,12 +69,32 @@ export default class AdminPage extends React.Component {
   toggle(showing = '') {
     this.setState(prevState => ({
       modal: !prevState.modal,
-      modalComponent: this.state.modal ? <ManageShowing isOpen={this.state.modal} toggle={this.toggle} showingToUpdate={showing._id ? showing : ''} /> : ''
+      modalComponent: this.state.modal ? <ManageShowing isOpen={this.state.modal} toggle={this.toggle} showingToUpdate={showing._id ? showing : ''} getAllShowingsAndMount={this.getAllShowingsAndMount} /> : ''
     }))
+  }
+
+  async getAllShowingsAndMount() {
+    let today = new Date()
+    today = new Date(today.setDate(today.getDate() - 1)).getTime()
+    const allShowings = await Showing.find(`.find({ date: {$gte: ${today}} }).sort({date: 1, time: 1}).populate('film').populate('saloon').exec()`)
+
+    const showingComponents = allShowings.map((show, i) => {
+      return <ShowingComponent key={i} show={show} i={i} updateShowing={this.updateShowing} deleteShowing={this.deleteShowing} />
+    })
+
+    this.setState({
+      showingComponents: showingComponents
+    })
   }
 
   updateShowing(showing) {
     this.toggle(showing)
+  }
+
+  async deleteShowing(show) {
+    const showing = new Showing({ _id: show._id })
+    await showing.delete()
+    this.getAllShowingsAndMount()
   }
 
   render() {
