@@ -5,7 +5,7 @@ import {
   Label,
   Button,
   Input,
-  Col,
+  Col
 } from 'reactstrap';
 import Login from '../Login';
 

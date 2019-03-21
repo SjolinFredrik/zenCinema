@@ -7,6 +7,7 @@ import REST from '../REST';
 import { Col, Row } from 'reactstrap';
 import RegisterForm from '../User/RegisterForm';
 import BookingMessage from './BookingMessage';
+import App from '../App/App';
 
 
 
@@ -18,7 +19,8 @@ export default class BookingSystem extends React.Component {
 
   constructor(props) {
     super(props);
-	  this.messageHandler = this.messageHandler.bind(this);
+    this.listenOnBookedSeats();
+    this.messageHandler = this.messageHandler.bind(this);
     this.setNumOfTickets = this.setNumOfTickets.bind(this);
     this.getTicketsCost = this.getTicketsCost.bind(this);
     this.getChosenSeats = this.getChosenSeats.bind(this);
@@ -156,7 +158,20 @@ export default class BookingSystem extends React.Component {
       }
     }
   }
-  
+
+  listenOnBookedSeats() {
+    App.socket.on('takenSeats', msg => {
+      console.log(msg)
+    })
+  }
+
+  broadcastBookedSeats() {
+    App.socket.emit('seatsBooked', {
+      seats: this.state.selectedSeats,
+      show: this.showing._id
+    });  
+  }
+
   async createNewBooking() {
     if (this.props.auth && this.props.auth.loggedIn && 
       this.state.selectedSeats !== undefined) {
@@ -172,6 +187,7 @@ export default class BookingSystem extends React.Component {
       //try to save and catch an error if chosen seats have been taken before this booking finished
       try {
         let savedBooking = await this.newBooking.save();
+        this.broadcastBookedSeats()
         const film = this.showing.film;
         const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
         filmModel.bookedCount += this.newBooking.seats.length;
@@ -192,7 +208,7 @@ export default class BookingSystem extends React.Component {
         throw error;
       }
 	  this.setState({
-        message: <BookingMessage type='newBooking' handler={this.messageHandler} data={this.newBooking} />
+        message: <BookingMessage type='newBooking' handler={this.props.toggle} data={this.newBooking} />
       })
       this.newBooking = '';
       delete global.STORE.chosenSeats;
@@ -207,7 +223,6 @@ export default class BookingSystem extends React.Component {
     this.setState({
       message: ''
     })
-    this.props.toggle();
   }	
 		
 

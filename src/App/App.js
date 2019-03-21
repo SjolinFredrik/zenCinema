@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import io from 'socket.io-client';
 // Navbar
 import NavBar from '../NavBar/NavBar';
 // Main
@@ -19,13 +20,13 @@ import AdminPage from '../Admin/AdminPage';
 import Footer from '../Footer/Footer';
 
 export default class App extends Component {
-
   constructor(props) {
     super(props);
     this.onAuthChange = this.onAuthChange.bind(this);
     this.state = {
       auth: null
     };
+    App.socket = io('http://localhost:3000')
 
     this.checkLogin().then(data => {
       this.setState({
