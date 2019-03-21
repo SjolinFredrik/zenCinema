@@ -85,7 +85,7 @@ export default class ManageShowing extends React.Component {
     const validInputs = this.validateInputs()
     if (validInputs) {
       const showing = new Showing({
-        _id: this.props.showingToUpdate._id ? this.props.showingToUpdate._id : '',
+        _id: this.props.showingToUpdate._id ? this.props.showingToUpdate._id : undefined,
         saloon: this.state.inputs.saloon,
         film: this.state.inputs.film,
         date: this.state.inputs.date,
@@ -93,6 +93,7 @@ export default class ManageShowing extends React.Component {
       })
       const saveShowing = await showing.save()
       this.showConfirmation(saveShowing)
+      this.props.getAllShowingsAndMount()
     }
   }
 
