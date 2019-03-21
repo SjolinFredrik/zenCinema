@@ -14,6 +14,7 @@ import MissingPage from '../MissingPage/MissingPage';
 import RegisterPage from '../User/RegisterPage';
 import HighscorePage from '../HighscorePage/HighscorePage';
 import CustomerBookingPage from '../UserBooking/CustomerBookingPage';
+import AdminPage from '../Admin/AdminPage';
 // Footer
 import Footer from '../Footer/Footer';
 
@@ -47,7 +48,6 @@ export default class App extends Component {
   }
 
   render() {
-
     return (
       <Router>
         <div className="App">
@@ -65,13 +65,14 @@ export default class App extends Component {
             <Route path="/registrera" component={RegisterPage} />
             <Route exact path="/poppislistan" component={HighscorePage} />
             <Route path="/mina-bokningar" component={CustomerBookingPage} />
-            <Route component={MissingPage} />
+              <Route exact path="/admin" component={AdminPage} />
+              <Route component={MissingPage} />
             </Switch>
           </main>
           <footer><Footer /></footer>
         </div>
       </Router>
-    );
+    )
   }
 }
 

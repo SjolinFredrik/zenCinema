@@ -13,8 +13,8 @@ export default class FilmCollectionPage extends React.Component {
     return (
       <Container className="film-collection main-container-fade">
         <Row>
-          <Col xs="12" className="mt-3 mt-sm-5 text-center">
-            <h2>Aktuella filmer</h2>
+          <Col xs="12" className="mt-5 mb-3">
+            <h2 className="text-center text-light font-weight-bold">Aktuella filmer</h2>
           </Col>
           <Col xs="12" className="d-none d-md-block">
             <FilmCarousel />

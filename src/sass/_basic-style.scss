@@ -30,6 +30,14 @@ body > div > div{
   min-height: 80vh;
 }
 
+.lower-fade {
+  height: 10vh;
+  background: linear-gradient(rgba(0,0,0,1),rgba(0,0,0,0));
+}
+.fade-fixer {
+  margin-top: -10vh;
+}
+
 .welcome{
   text-align: center;
   .film-page-btns {

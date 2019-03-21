@@ -21,7 +21,8 @@ export default class StartPage extends React.Component {
             </div>
           </Col>
         </Row>
-        <Container className="main-container-fade text-dark">
+        <Row className="lower-fade" />
+        <Container className="main-container-fade fade-fixer text-dark">
           <Row className="py-5">
             <Col xs="12" md="6">
               <Container fluid>

@@ -11,7 +11,7 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Col, 
+  Col,
   Badge
 } from 'reactstrap';
 import Login from '../Login';
@@ -26,7 +26,7 @@ export default class LoginForm extends React.Component {
     this.state = {
       dropdownOpen: false,
     };
-    
+
   }
 
   async login() {
@@ -51,7 +51,7 @@ export default class LoginForm extends React.Component {
       this.props.changeAuth(result);
     }
     else {
-      this.setState({errorLogin: true});
+      this.setState({ errorLogin: true });
     }
   }
 
@@ -64,7 +64,7 @@ export default class LoginForm extends React.Component {
   }
   
   async checkLogin() {
-    return await fetch('/json/login').then(response => {return response.json()}).then(data => {
+    return await fetch('/json/login').then(response => { return response.json() }).then(data => {
       let result = data;
       return result;
     });
