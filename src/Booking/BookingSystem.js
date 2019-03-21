@@ -19,7 +19,6 @@ export default class BookingSystem extends React.Component {
 
   constructor(props) {
     super(props);
-    this.listenOnBookedSeats();
     this.messageHandler = this.messageHandler.bind(this);
     this.setNumOfTickets = this.setNumOfTickets.bind(this);
     this.getTicketsCost = this.getTicketsCost.bind(this);
@@ -159,18 +158,7 @@ export default class BookingSystem extends React.Component {
     }
   }
 
-  listenOnBookedSeats() {
-    App.socket.on('takenSeats', msg => {
-      console.log(msg)
-    })
-  }
-
-  broadcastBookedSeats() {
-    App.socket.emit('seatsBooked', {
-      seats: this.state.selectedSeats,
-      show: this.showing._id
-    });  
-  }
+  
 
   async createNewBooking() {
     if (this.props.auth && this.props.auth.loggedIn && 
@@ -187,7 +175,6 @@ export default class BookingSystem extends React.Component {
       //try to save and catch an error if chosen seats have been taken before this booking finished
       try {
         let savedBooking = await this.newBooking.save();
-        this.broadcastBookedSeats()
         const film = this.showing.film;
         const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
         filmModel.bookedCount += this.newBooking.seats.length;

@@ -47,10 +47,10 @@ export default class CustomerBookingPage extends React.Component {
       const foundShowing = await Showing.find(`.findOne({_id: '${foundBooking.show._id}'}).populate('film').exec()`);
       if (today >= foundShowing.date) {
 
-      this.oldBookings.push(<CustomerBooking key={foundBooking._id} film={foundShowing.film.title} date={foundShowing.date} time={foundShowing.time} bookingNr={booking.bookingNumber} />)
+      this.oldBookings.push(<CustomerBooking key={foundBooking._id} film={foundShowing.film.title} date={foundShowing.date} time={foundShowing.time} seats={booking.seats} bookingNr={booking.bookingNumber} />)
 
       } else {
-      this.newBookings.push(<CustomerBooking key={foundBooking._id} film={foundShowing.film.title} date={foundShowing.date} time={foundShowing.time} bookingNr={booking.bookingNumber} />)
+      this.newBookings.push(<CustomerBooking key={foundBooking._id} film={foundShowing.film.title} date={foundShowing.date} time={foundShowing.time} seats={booking.seats} bookingNr={booking.bookingNumber} />)
       }
     }
     let allBookings = this.oldBookings;
@@ -89,10 +89,11 @@ export default class CustomerBookingPage extends React.Component {
                   <table>
                     <tbody>
                       <tr>
-                        <td>Film</td>
-                        <td>Datum</td>
-                        <td>Tid</td>
-                        <td>Ref.nr</td>
+                        <th>Film</th>
+                        <th>Datum</th>
+                        <th>Tid</th>
+                        <th>Plats(er)</th>
+                        <th>Ref.nr</th>
                       </tr>
                       {this.state.newBookings ? this.state.newBookings : 'Vänligen vänta'}
                     </tbody>

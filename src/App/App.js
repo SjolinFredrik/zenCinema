@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import io from 'socket.io-client';
 // Navbar
 import NavBar from '../NavBar/NavBar';
 // Main
@@ -27,7 +26,6 @@ export default class App extends Component {
     this.state = {
       auth: null
     };
-    App.socket = io('http://localhost:3000')
 
     this.checkLogin().then(data => {
       this.setState({

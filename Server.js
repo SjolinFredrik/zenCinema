@@ -12,9 +12,6 @@ const MongoStore = require('connect-mongo')(session);
 const fs = require('fs');
 const path = require('path');
 
-/***********Socket*********/
-const SocketController = require('./SocketController');
-const http = require('http');
 
 
 global.passwordSalt = settings.passwordSalt;
@@ -101,10 +98,7 @@ module.exports = class Server {
     // });
 
     // Start the web server
-    // Added some code for the socket to start when the server starts
-    let server = http.Server(app);
-    server.listen(3001, () => console.log('Go to the cinema on port 3001'));
-    new SocketController(server);
+    app.listen(3001, () => console.log('Go to the cinema on port 3001'));
       
   }
 

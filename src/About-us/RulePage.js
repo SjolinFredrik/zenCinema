@@ -11,8 +11,8 @@ export default class Rulepage extends React.Component {
     return (
       <Container className="rule-page main-container-fade">
         <Row>
-          <Col xs="12" className="text-center pt-5">
-            <h2>Förhållningsregler:</h2>
+          <Col xs="12" className="text-center mt-5">
+            <h2 className="text-light font-weight-bold">Förhållningsregler:</h2>
             <Container>
               <Row>
                 <Col xs="12" className="rules-of-engagement pt-5">
