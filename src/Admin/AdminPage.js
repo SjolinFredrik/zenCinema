@@ -17,7 +17,7 @@ export default class AdminPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      admin: '',
+      admin: false,
       modal: true,
       modalComponent: '',
       showingComponents: ''
@@ -34,34 +34,11 @@ export default class AdminPage extends React.Component {
     let user = await Login.find()
     if (user.loggedIn && user.user.admin) {
       this.setState({
-        admin:
-          <Container className="main-container-fade">
-            <Row>
-              <Col xs="12">
-                <h2 className="text-light text-center mt-5 font-weight-bold">Hantera visningar</h2>
-              </Col>
-            </Row>
-            <Row className="m-3">
-              <Col xs="12" className="px-0">
-                <Button color="success" onClick={this.toggle} className="float-right">Lägg till visning <i className="fas fa-plus pl-1"></i></Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs="12">
-                {this.state.modalComponent}
-              </Col>
-              <Col xs="12" className="p-0">
-                <Container fluid>
-                  {this.state.showingComponents}
-                </Container>
-              </Col>
-            </Row>
-          </Container>
+        clientIsAdmin: true
       })
     } else {
       this.setState({
-        admin:
-          <MissingPage />
+        clientIsAdmin: false
       })
     }
   }
@@ -98,6 +75,33 @@ export default class AdminPage extends React.Component {
   }
 
   render() {
-    return this.state.admin
+    return (
+      <div>
+        {this.state.clientIsAdmin ?
+        <Container className="main-container-fade">
+        <Row>
+          <Col xs="12">
+            <h2 className="text-light text-center mt-5 font-weight-bold">Hantera visningar</h2>
+          </Col>
+        </Row>
+        <Row className="m-3">
+          <Col xs="12" className="px-0">
+            <Button color="success" onClick={this.toggle} className="float-right">Lägg till visning <i className="fas fa-plus pl-1"></i></Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12">
+            {this.state.modalComponent}
+          </Col>
+          <Col xs="12" className="p-0">
+            <Container fluid>
+              {this.state.showingComponents}
+            </Container>
+          </Col>
+        </Row>
+      </Container>
+      : <MissingPage />}
+      </div>
+    )
   }
 }

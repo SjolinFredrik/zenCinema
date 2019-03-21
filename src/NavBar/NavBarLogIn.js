@@ -70,6 +70,9 @@ export default class NavBarLogIn extends React.Component {
     let loginObj = new Login();
     await loginObj.delete();
     this.props.changeAuth(null);
+    if (window.location.pathname === '/admin' || window.location.pathname === '/mina-bokningar'){
+      window.location.pathname = '/'
+    }
   }
 
   render() {
