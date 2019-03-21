@@ -7,7 +7,6 @@ import REST from '../REST';
 import { Col, Row } from 'reactstrap';
 import RegisterForm from '../User/RegisterForm';
 import BookingMessage from './BookingMessage';
-import App from '../App/App';
 
 
 
