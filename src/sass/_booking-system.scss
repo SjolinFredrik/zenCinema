@@ -5,6 +5,14 @@
     display: none;
     &.openedForm {
       display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(39,35,58,0.99);
+      z-index: 300;
+      padding-top: 50px;
     }
   }
 }

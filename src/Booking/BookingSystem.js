@@ -30,6 +30,7 @@ export default class BookingSystem extends React.Component {
     this.openLoginForm = this.openLoginForm.bind(this);
     this.setIsOpen = this.setIsOpen.bind(this);
     this.openRegisterForm = this.openRegisterForm.bind(this);
+    this.setRegisterOpen = this.setRegisterOpen.bind(this);
 
     this.state = {
 	  message: '',	  
@@ -39,7 +40,7 @@ export default class BookingSystem extends React.Component {
       selectedSeats: [],
       isOpen: false
     };
-    this.name = 'BookingSystem';
+    this.name = 'bookingSystem';
   }
 
   componentDidMount() {
@@ -49,7 +50,6 @@ export default class BookingSystem extends React.Component {
     })
     .then(() => {
       return this.findTakenSeats(this.props.showingId).then(data => {
-        // this.takenSeats = data;
         if (data) {
           this.setState({
             content: true,
@@ -200,7 +200,7 @@ export default class BookingSystem extends React.Component {
             takenSeats: takenSeats,
             selectedSeats: undefined
           });  
-			this.setState({
+			    this.setState({
             message: <BookingMessage type='alreadyBooked' handler={this.messageHandler} data={this.newBooking} />
           })			 
           return;
@@ -247,7 +247,9 @@ export default class BookingSystem extends React.Component {
 
   setRegisterOpen(state) {
     this.setState({
-      registerOpen: state
+      registerOpen: state,
+      isOpen: true,
+      newUserEmail: global.STORE.newUserEmail
     });
   }
 
@@ -303,8 +305,8 @@ export default class BookingSystem extends React.Component {
               }
             </Col>
           </Row>
-          <LoginForm auth={this.props.auth} changeAuth={this.props.changeAuth} isOpen={this.state.isOpen} changeOpen={this.setIsOpen} openRegisterForm={this.openRegisterForm}></LoginForm>
-          <RegisterForm registerOpen={this.state.registerOpen} changeRegisterOpen={this.setRegisterOpen}/>
+          <LoginForm email={this.state.newUserEmail} auth={this.props.auth} changeAuth={this.props.changeAuth} isOpen={this.state.isOpen} changeOpen={this.setIsOpen} openRegisterForm={this.openRegisterForm}></LoginForm>
+          <RegisterForm  parent={this.name} registerOpen={this.state.registerOpen} changeRegisterOpen={this.setRegisterOpen}/>
           </section>
       )
     }

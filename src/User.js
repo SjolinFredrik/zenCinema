@@ -3,16 +3,15 @@ import REST from './REST';
 
 export default class User extends REST {
 
-  static async createUser() {
+  static async createUser(firstName, lastName,email,password) {
 
     let user = new User({
-      "firstName": document.getElementById('firstnamef').value,
-      "lastName": document.getElementById('lastnamef').value,
-      "email": document.getElementById('emailf').value,
-      "password": document.getElementById('passwordf').value
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email,
+      "password": password
     });
 
-    // await user.save();
     return await user.save();
   }
 
