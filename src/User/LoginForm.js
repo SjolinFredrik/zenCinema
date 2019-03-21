@@ -46,7 +46,6 @@ export default class LoginForm extends React.Component {
     if (result.loggedIn) {
       this.setState({ loggedIn: true, loggedInUser: result.user });
       global.STORE.loggedInUser = this.state.loggedInUser;
-
       //Next if should be fixed after BookingSystem refaktoring
       if (this.parent === "BookingSystem") {
         this.parent.loggedInUser = this.state.loggedInUser;
@@ -71,6 +70,9 @@ export default class LoginForm extends React.Component {
     this.logout();
     this.setState({ loggedIn: false, loggedInUser: null });
     global.STORE.loggedInUser = null;
+    if (window.location.pathname === '/admin'){
+      window.location.pathname = '/'
+    } // To make sure that adminpage is no longer in the view after logout
   }
 
 
@@ -108,11 +110,13 @@ export default class LoginForm extends React.Component {
 
         result = <div className="login-form"><ButtonGroup><UncontrolledDropdown>
           <DropdownToggle tag="button" type="button" className="btn btn-outline-secondary" caret>
-            Hej, {this.state.loggedInUser.firstName}! 
+            Hej, {this.state.loggedInUser.firstName}!
            </DropdownToggle>
           <DropdownMenu right className="dropdown-menu-lg-right login-menu">
+            {this.state.loggedInUser.admin ? <Link className="dropdown-item" to="/admin">Hantera visningar</Link> : ''}
             <Link className="dropdown-item" to="/mina-bokningar">Mina bokningar</Link>
-            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}>Logga ut</DropdownItem>
+            <div className="dropdown-divider" />
+            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}><i className="fas fa-sign-out-alt" /> Logga ut</DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown></ButtonGroup></div>
 
@@ -141,8 +145,30 @@ export default class LoginForm extends React.Component {
             <Link className="dropdown-item" to="/registrera" >Registrera ny användare</Link>
           </DropdownMenu>
         </UncontrolledDropdown></ButtonGroup></div>
-
       }
+    }
+    //this else-if should be tested after BookingSystem refaktoring
+    else if (this.parent === 'BookingSystem') {
+      result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
+        <Col sm="4">
+          <Form className="welcome">
+            <h2>Logga in eller skapa nytt konto</h2>
+            <FormGroup>
+              <Label htmlFor="emailf">Epost</Label>
+              <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
+            </FormGroup>
+            <FormGroup >
+              <Label htmlFor="pwdf">Lösenord</Label>
+              <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password" />
+            </FormGroup>
+            <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
+          </Form>
+          <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
+
+        </Col>
+
+      </div>
+      this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
     }
     //this else-if should be tested after BookingSystem refaktoring
     else if (this.parent === 'BookingSystem') {

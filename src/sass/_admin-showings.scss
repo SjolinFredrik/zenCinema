@@ -1,0 +1,34 @@
+.admin-showing {
+  background: #fff;
+  color: $dark;
+  .showing-poster {
+    .poster-frame {
+      box-shadow: 0 0 2px #000;
+      width: 80%;
+      margin: 0 auto;
+
+    }
+    img {
+      width: 100%;
+      border: solid 1px #777;
+    }
+  }
+  .showing-btns {
+    div {
+      height: 50%;
+      i {
+        float: right;
+        color: #555;
+        font-size: 2rem;
+        &:hover { 
+          color: $dark;
+          cursor: pointer;
+        }
+        @include media-breakpoint-down(md){
+          
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+}

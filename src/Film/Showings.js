@@ -2,10 +2,10 @@ import React from 'react';
 import REST from '../REST';
 import ShowingComp from './Showing';
 
-class Showing extends REST {}
+class Showing extends REST { }
 
 export default class Showings extends React.Component {
- 
+
   constructor(props) {
     super(props);
     this.populateFilms();
