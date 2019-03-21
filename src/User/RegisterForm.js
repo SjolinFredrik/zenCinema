@@ -159,49 +159,55 @@ export default class RegisterForm extends React.Component {
         email: '',
         password: '',
         confirmPassword: ''
-      })
+      });
+
+      if(this.props.changeRegisterOpen) {
+        this.props.changeRegisterOpen(false);
+      }
     }
   }
 
   render() {
     return (
        
-      <div className="register-form welcome pt-5">
+      <div className={'registerFormWrap ' + (this.props.registerOpen ? 'openedForm' : '')}>
+        <div className="register-form welcome pt-5">
       
-        <h2 className="mb-4 pt-4">Skapa användare</h2>
-        <h5 className="mx-auto mb-5">Som en del av Zenfamiljen får du tillgång till exklusiva erbjudanden som du hittar i förbutiken och inom kort även möjligheten att förvärva ZenCoins!</h5>
-        {this.state.welcome}
-        {this.state.openedForm ?
-        <div className="login-wrapper pb-5">
-          <div className="form-group">
-            <p>Förnamn:</p>
-            <input onChange={this.handleChangeUsername} id="firstnamef" className="first-name-input mb-3" type="text" value={this.state.username} />
-            <p className={"invalid-input " + (this.state.errors.firstName ? 'show' : '')}>Felaktigt förnamn, minst två tecken</p>
-          </div>
-          <div className="form-group">
-            <p>Efternamn:</p>
-            <input onChange={this.handleChangeLastname} id="lastnamef" className="last-name-input mb-3" type="text" value={this.state.lastname} />
-            <p className={"invalid-input " + (this.state.errors.lastName ? 'show' : '')}>Felaktigt efternamn, minst två tecken</p>
-          </div>
-          <div className="form-group">
-            <p>Email:</p>
-            <input onChange={this.handleChangeEmail} id="emailf" className="email-input mb-3" type="text" value={this.state.email} />
-            <p className={"email-invalid invalid-input " + (this.state.errors.emailInput ? 'show' : '')}>Felaktigt emailformat</p>
-            <p className={"email-exists invalid-input " + (this.state.existingEmail ? 'show' : '')}>Denna email existerar redan</p>
-          </div>
-          <div className="form-group">
-            <p>Lösenord:</p>
-            <input onChange={this.handlePasswordInput} id="passwordf" className="password-input mb-3" type="password" value={this.state.password} />
-            <p className={"invalid-password invalid-input " + (this.state.errors.invalidPasswordType ? 'show' : '')}>Ogiltligt lösenord, använd minst 4 tecken och en siffra</p>
-          </div>
-          <div className="form-group">
-            <p>Bekräfta lösenord:</p>
-            <input onChange={this.handleMatchingPassword} className="passwordConfirm-input mb-3" type="password" value={this.state.confirmPassword} />
-            <p className={"password-mismatch invalid-input " + (this.state.errors.invalidPasswordMatch ? 'show' : '')}>Lösenordet matchar ej</p>
-          </div>
-          <button className="btn btn-primary saveNewUser-btn mt-3 mb-5" onClick={this.handleValidRegistration}>Bekräfta</button>
+      <h2 className="mb-4 pt-4">Skapa användare</h2>
+      <h5 className="mx-auto mb-5">Som en del av Zenfamiljen får du tillgång till exklusiva erbjudanden som du hittar i förbutiken och inom kort även möjligheten att förvärva ZenCoins!</h5>
+      {this.state.welcome}
+      {this.state.openedForm ?
+      <div className="login-wrapper pb-5">
+        <div className="form-group">
+          <p>Förnamn:</p>
+          <input onChange={this.handleChangeUsername} id="firstnamef" className="first-name-input mb-3" type="text" value={this.state.username} />
+          <p className={"invalid-input " + (this.state.errors.firstName ? 'show' : '')}>Felaktigt förnamn, minst två tecken</p>
         </div>
-        : ''}
+        <div className="form-group">
+          <p>Efternamn:</p>
+          <input onChange={this.handleChangeLastname} id="lastnamef" className="last-name-input mb-3" type="text" value={this.state.lastname} />
+          <p className={"invalid-input " + (this.state.errors.lastName ? 'show' : '')}>Felaktigt efternamn, minst två tecken</p>
+        </div>
+        <div className="form-group">
+          <p>Email:</p>
+          <input onChange={this.handleChangeEmail} id="emailf" className="email-input mb-3" type="text" value={this.state.email} />
+          <p className={"email-invalid invalid-input " + (this.state.errors.emailInput ? 'show' : '')}>Felaktigt emailformat</p>
+          <p className={"email-exists invalid-input " + (this.state.existingEmail ? 'show' : '')}>Denna email existerar redan</p>
+        </div>
+        <div className="form-group">
+          <p>Lösenord:</p>
+          <input onChange={this.handlePasswordInput} id="passwordf" className="password-input mb-3" type="password" value={this.state.password} />
+          <p className={"invalid-password invalid-input " + (this.state.errors.invalidPasswordType ? 'show' : '')}>Ogiltligt lösenord, använd minst 4 tecken och en siffra</p>
+        </div>
+        <div className="form-group">
+          <p>Bekräfta lösenord:</p>
+          <input onChange={this.handleMatchingPassword} className="passwordConfirm-input mb-3" type="password" value={this.state.confirmPassword} />
+          <p className={"password-mismatch invalid-input " + (this.state.errors.invalidPasswordMatch ? 'show' : '')}>Lösenordet matchar ej</p>
+        </div>
+        <button className="btn btn-primary saveNewUser-btn mt-3 mb-5" onClick={this.handleValidRegistration}>Bekräfta</button>
+      </div>
+      : ''}
+    </div>
       </div> 
     )
   }

@@ -15,42 +15,65 @@ import MissingPage from '../MissingPage/MissingPage';
 import RegisterPage from '../User/RegisterPage';
 import HighscorePage from '../HighscorePage/HighscorePage';
 import CustomerBookingPage from '../UserBooking/CustomerBookingPage';
+import AdminPage from '../Admin/AdminPage';
 // Footer
 import Footer from '../Footer/Footer';
 
 export default class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
+    this.onAuthChange = this.onAuthChange.bind(this);
+    this.state = {
+      auth: null
+    };
     App.socket = io('http://localhost:3000')
-    // App.socket.emit('socket client connected',{hello:'moon'});
-    // App.socket.on('socket server connected', msg => {
-    //   console.log('socket server connected', msg)
-    // });
-  }
-  render() {
 
+    this.checkLogin().then(data => {
+      this.setState({
+        auth: data
+      });
+    });
+  }
+
+  async checkLogin() {
+    return await fetch('/json/login').then(response => {return response.json()}).then(data => {
+      let result = data;
+      return result;
+    });
+  }
+
+  onAuthChange(auth) {
+    this.setState({
+      auth: auth
+    });
+  }
+
+  render() {
     return (
       <Router>
         <div className="App">
-          <header><NavBar /></header>
+          <header><NavBar auth={this.state.auth} changeAuth={this.onAuthChange} /></header>
           <main>
             <Switch>
             <Route exact path="/" component={StartPage} />
             <Route exact path="/filmer" component={FilmCollectionPage} />
-            <Route exact path="/filmer/:link" component={FilmPage} />
+            <Route exact path="/filmer/:link" 
+              render={props => <FilmPage {...props} auth={this.state.auth} changeAuth={this.onAuthChange} />}
+            />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
             <Route path="/registrera" component={RegisterPage} />
             <Route exact path="/poppislistan" component={HighscorePage} />
             <Route path="/mina-bokningar" component={CustomerBookingPage} />
-            <Route component={MissingPage} />
+              <Route exact path="/admin" component={AdminPage} />
+              <Route component={MissingPage} />
             </Switch>
           </main>
           <footer><Footer /></footer>
         </div>
       </Router>
-    );
+    )
   }
 }
 
