@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import io from 'socket.io-client';
 // Navbar
 import NavBar from '../NavBar/NavBar';
 // Main
@@ -18,7 +19,14 @@ import CustomerBookingPage from '../UserBooking/CustomerBookingPage';
 import Footer from '../Footer/Footer';
 
 export default class App extends Component {
-
+  constructor(props){
+    super(props);
+    App.socket = io('http://localhost:3000')
+    // App.socket.emit('socket client connected',{hello:'moon'});
+    // App.socket.on('socket server connected', msg => {
+    //   console.log('socket server connected', msg)
+    // });
+  }
   render() {
 
     return (

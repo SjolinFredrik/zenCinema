@@ -12,6 +12,11 @@ const MongoStore = require('connect-mongo')(session);
 const fs = require('fs');
 const path = require('path');
 
+/***********Socket*********/
+const SocketController = require('./SocketController');
+const http = require('http');
+
+
 global.passwordSalt = settings.passwordSalt;
 
 const flexjson = require('jsonflex')({
@@ -74,29 +79,33 @@ module.exports = class Server {
       saloons: require('./models/Saloon'),
       ticketprices: require('./models/TicketPrice')
     }
+    
     //create all necessary rest routes for the models
     new CreateRestRoutes(app, db, models);
     //create special routes for login
     new LoginHandler(app, models.users);
 
-    // Serve static files from public
-    app.use(express.static('public'));
+    // // Serve static files from public
+    // app.use(express.static('public'));
 
-    app.use(flexjson);
+    // app.use(flexjson);
 
-    // Serve the index page everywhere so that the
-    // frontend router can decide what to do
-    app.use((req, res, next) => {
-      if (req.url === '/jsonflex.js' || req.url == '/json-save') {
-        next();
-        return;
-      }
-      res.sendFile(path.join(__dirname, '/public/index.html'));
-    });
+    // // Serve the index page everywhere so that the
+    // // frontend router can decide what to do
+    // app.use((req, res, next) => {
+    //   if (req.url === '/jsonflex.js' || req.url == '/json-save' || req.url.includes('socket.io')) {
+    //     next();
+    //     return;
+    //   }
+    //   res.sendFile(path.join(__dirname, '/public/index.html'));
+    // });
 
     // Start the web server
-    app.listen(3001, () => console.log('Go to the cinema on port 3001'));
-
+    // Added some code for the socket to start when the server starts
+    let server = http.Server(app);
+    server.listen(3001, () => console.log('Go to the cinema on port 3001'));
+    new SocketController(server);
+      
   }
 
 }
