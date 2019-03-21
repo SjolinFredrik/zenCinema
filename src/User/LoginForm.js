@@ -1,18 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
-  ButtonGroup,
   Form,
   FormGroup,
-  DropdownMenu,
   Label,
   Button,
   Input,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
   Col,
-  Badge
 } from 'reactstrap';
 import Login from '../Login';
 
@@ -41,8 +34,6 @@ export default class LoginForm extends React.Component {
 
 
     let result = await login.save();
-    console.log('I am loggedIn')
-    console.log(result);
     this.setState({errorLogin: null});
 
     if (result.loggedIn) {
@@ -72,26 +63,23 @@ export default class LoginForm extends React.Component {
 
   render() {
     let result;
-
-
-//this else-if should be tested after BookingSystem refaktoring
     if(this.props.isOpen) {
         result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
-                    <Col sm="4">
-                        <Form className="welcome">
-                          <h2>Logga in eller skapa nytt konto</h2>
-                          <FormGroup>
-                            <Label htmlFor="emailf">Epost</Label>
-                              <Input type="email" className="form-control email-login-input" id="emailfbs" placeholder="email@example.com" />
-                          </FormGroup>
-                            <FormGroup >
-                              <Label htmlFor="pwdf">Lösenord</Label>
-                              <Input type="password" className="form-control password-login-input" id="pwdfbs" placeholder="Password"/>
-                            </FormGroup>
-                            <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
-                          </Form>
-                        <Button className="btn-primary new-account-btn mt-2" onClick={this.props.openRegisterForm}>Skapa konto</Button>
-                  </Col>
+            <Col sm="4">
+                <Form className="welcome">
+                  <h2>Logga in eller skapa nytt konto</h2>
+                  <FormGroup>
+                    <Label htmlFor="emailfbs">Epost</Label>
+                      <Input type="email" className="form-control email-login-input" id="emailfbs" placeholder="email@example.com" defaultValue={this.props.email && this.props.email !== undefined ? this.props.email : ''} />
+                  </FormGroup>
+                    <FormGroup >
+                      <Label htmlFor="pwdfbs">Lösenord</Label>
+                      <Input type="password" className="form-control password-login-input" id="pwdfbs" placeholder="Password" />
+                    </FormGroup>
+                    <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
+                  </Form>
+                <Button className="btn-primary new-account-btn mt-2" onClick={this.props.openRegisterForm}>Skapa konto</Button>
+            </Col>
          </div>
       }
     return (

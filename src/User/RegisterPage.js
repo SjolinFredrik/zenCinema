@@ -8,7 +8,7 @@ export default class RegisterPage extends React.Component {
   render() {
     return (
       <Container className="registerPage main-container-fade">
-        <RegisterForm parent={this} creator={undefined} />
+        <RegisterForm parent={'registerPage'} />
       </Container>
     )
   }

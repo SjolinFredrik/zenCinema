@@ -33,8 +33,8 @@ export default class NavBarLogIn extends React.Component {
 
     let email = '';
     let password = '';
-    email = document.getElementById('emailf').value;
-    password = document.getElementById('pwdf').value;
+    email = document.getElementById('emailfnav').value;
+    password = document.getElementById('pwdfnav').value;
 
     
 
@@ -96,12 +96,12 @@ export default class NavBarLogIn extends React.Component {
         <DropdownMenu right className="dropdown-menu-lg-right login-menu">
           <Form>
             <FormGroup >
-                <Label for="emailf">Epost</Label>
-                <Input type="email" className="form-control email-login-input" id="emailf" placeholder="email@example.com" />
+                <Label for="emailfnav">Epost</Label>
+                <Input type="email" className="form-control email-login-input" id="emailfnav" placeholder="email@example.com" />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label for="pwdf">Lösenord</Label>
-              <Input type="password" className="form-control password-login-input" id="pwdf" placeholder="Password" />
+              <Label for="pwdfnav">Lösenord</Label>
+              <Input type="password" className="form-control password-login-input" id="pwdfnav" placeholder="Password" />
             </FormGroup>
             {this.state.errorLogin ? <Badge color="danger" >Felaktig epost eller lösenord!</Badge> : null}
             <Button color="primary" className="btn btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
