@@ -1,18 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
-  ButtonGroup,
   Form,
   FormGroup,
-  DropdownMenu,
   Label,
   Button,
   Input,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Col,
-  Badge
+  Col
 } from 'reactstrap';
 import Login from '../Login';
 

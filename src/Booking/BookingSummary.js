@@ -2,12 +2,6 @@ import React from 'react'
 import { } from 'reactstrap'
 
 export default class BookingSummary extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-
   render() {
     return (
       <div className="booking-summary clearfix">

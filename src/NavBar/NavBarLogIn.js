@@ -10,8 +10,7 @@ import {
   Input,
   DropdownItem,
   UncontrolledDropdown,
-  DropdownToggle,
-  Col, 
+  DropdownToggle, 
   Badge
 } from 'reactstrap';
 import Login from '../Login';
