@@ -22,7 +22,6 @@ export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.clickLoginBtn = this.clickLoginBtn.bind(this);
-    // this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
 
     this.state = {
       dropdownOpen: false,
@@ -91,7 +90,7 @@ export default class LoginForm extends React.Component {
                             </FormGroup>
                             <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
                           </Form>
-                        <Button className="btn-primary new-account-btn mt-2" onClick={this.clickCreateAccountBtn}>Skapa konto</Button>
+                        <Button className="btn-primary new-account-btn mt-2" onClick={this.props.openRegisterForm}>Skapa konto</Button>
                   </Col>
          </div>
       }

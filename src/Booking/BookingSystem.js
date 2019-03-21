@@ -5,6 +5,7 @@ import BookingSummary from './BookingSummary';
 import LoginForm from '../User/LoginForm';
 import REST from '../REST';
 import { Col, Row } from 'reactstrap';
+import RegisterForm from '../User/RegisterForm';
 
 
 
@@ -25,6 +26,8 @@ export default class BookingSystem extends React.Component {
     this.createNewBooking = this.createNewBooking.bind(this);
     this.openLoginForm = this.openLoginForm.bind(this);
     this.setIsOpen = this.setIsOpen.bind(this);
+    this.openRegisterForm = this.openRegisterForm.bind(this);
+
     this.state = {
       content: false,
       numOfTickets: 0,
@@ -196,12 +199,24 @@ export default class BookingSystem extends React.Component {
     });
   }
 
+  openRegisterForm() {
+    this.setState({
+      registerOpen: true,
+      isOpen: false
+    });
+  }
+
   setIsOpen(state) {
     this.setState({
       isOpen: state
     });
   }
 
+  setRegisterOpen(state) {
+    this.setState({
+      registerOpen: state
+    });
+  }
 
   render() {
     
@@ -232,9 +247,7 @@ export default class BookingSystem extends React.Component {
             bestRows={this.showing.saloon.bestRows} 
             takenSeats={this.state.takenSeats} 
             numOfTickets={this.state.numOfTickets}
-            selectedSeats={this.getChosenSeats} />
-          
-          
+            selectedSeats={this.getChosenSeats} />       
           <Row>
             <Col sm="7" className="mx-auto py-4">
               <BookingSummary 
@@ -267,7 +280,8 @@ export default class BookingSystem extends React.Component {
 
             </Col>
           </Row>
-          <LoginForm auth={this.props.auth} changeAuth={this.props.changeAuth} isOpen={this.state.isOpen} changeOpen={this.setIsOpen}></LoginForm>
+          <LoginForm auth={this.props.auth} changeAuth={this.props.changeAuth} isOpen={this.state.isOpen} changeOpen={this.setIsOpen} openRegisterForm={this.openRegisterForm}></LoginForm>
+          <RegisterForm registerOpen={this.state.registerOpen} changeRegisterOpen={this.setRegisterOpen}/>
           </section>
       )
     }

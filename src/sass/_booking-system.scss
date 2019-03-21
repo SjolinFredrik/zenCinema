@@ -1,6 +1,12 @@
 .booking-system {
   text-align: center;
   background-color: $accent-dark;
+  .registerFormWrap {
+    display: none;
+    &.openedForm {
+      display: block;
+    }
+  }
 }
 #booking-modal {
   .custom-modal-body {
