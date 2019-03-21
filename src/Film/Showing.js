@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 import {
   Container,
   Row,
@@ -7,15 +9,6 @@ import {
 } from 'reactstrap';
 
 export default class Showing extends React.Component {
-  
-  BookingPageRef = ({toggle}) => {
-    this.showModal = toggle;
-  }
- 
-  onBookClick = () => {
-   this.showModal();
-  }
-
 
   get dateToString() {
     return new Date(this.props.data.date).toLocaleString('sv-SE', {weekday: 'short', month: 'long', day: 'numeric'});
@@ -45,7 +38,9 @@ export default class Showing extends React.Component {
               {this.props.data.time}
             </Col>
             <Col xs="3" md="2" className="pr-2 my-auto">
-              <Button onClick={() => this.props.showBookingPage(this.props.data._id)} title="Boka" className="btn btn-secondary float-right book-film">Boka</Button>
+              <Button  title="Boka" className="btn btn-secondary float-right book-film">
+                <Link onClick={() => this.props.showBookingPage(this.props.data._id)} to={{pathname: '/filmer/' + this.props.data.film.link + '/' + this.props.data._id, state: {modal: true}}}>Boka</Link>
+              </Button>
             </Col>
           </Row>
         </Container>
