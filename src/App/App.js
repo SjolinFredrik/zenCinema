@@ -60,7 +60,7 @@ export default class App extends Component {
               render={props => <FilmPage {...props} auth={this.state.auth} changeAuth={this.onAuthChange} />}
             />
             <Route exact path="/filmer/:link/:showingId" 
-              render={props => <FilmPage {...props} auth={this.state.auth} changeAuth={this.onAuthChange} />}
+              render={props => <BookingPage {...props} auth={this.state.auth} changeAuth={this.onAuthChange} />}
             />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />

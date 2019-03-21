@@ -39,7 +39,7 @@ export default class Showing extends React.Component {
             </Col>
             <Col xs="3" md="2" className="pr-2 my-auto">
               <Button  title="Boka" className="btn btn-secondary float-right book-film">
-                <Link onClick={() => this.props.showBookingPage(this.props.data._id)} to={{pathname: '/filmer/' + this.props.data.film.link + '/' + this.props.data._id, state: {modal: true}}}>Boka</Link>
+                <Link style={{color: '#fff', textDecoration: 'none'}} onClick={() => this.props.showBookingPage(this.props.data._id)} to={{pathname: '/filmer/' + this.props.data.film.link + '/' + this.props.data._id, state: {modal: true}}}>Boka</Link>
               </Button>
             </Col>
           </Row>
