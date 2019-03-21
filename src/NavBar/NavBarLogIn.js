@@ -82,8 +82,10 @@ export default class NavBarLogIn extends React.Component {
            Hej, {this.props.auth.user.firstName}!
            </DropdownToggle>
            <DropdownMenu right className="dropdown-menu-lg-right login-menu">
+           {this.props.auth.user.admin ? <Link className="dropdown-item" to="/admin">Hantera visningar</Link> : ''}
             <Link className="dropdown-item" to="/mina-bokningar">Mina bokningar</Link>
-            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}>Logga ut</DropdownItem>
+            <div className="dropdown-divider" />
+            <DropdownItem className="logout-btn mb-0" onClick={this.clickLogoutBtn}><i className="fas fa-sign-out-alt" /> Logga ut</DropdownItem>
            </DropdownMenu>
          </UncontrolledDropdown></ButtonGroup></div>
 
