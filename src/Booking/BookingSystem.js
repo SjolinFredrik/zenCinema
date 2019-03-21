@@ -192,7 +192,7 @@ export default class BookingSystem extends React.Component {
         throw error;
       }
 	  this.setState({
-        message: <BookingMessage type='newBooking' handler={this.messageHandler} data={this.newBooking} />
+        message: <BookingMessage type='newBooking' handler={this.props.toggle} data={this.newBooking} />
       })
       this.newBooking = '';
       delete global.STORE.chosenSeats;
@@ -207,7 +207,6 @@ export default class BookingSystem extends React.Component {
     this.setState({
       message: ''
     })
-    this.props.toggle();
   }	
 		
 
