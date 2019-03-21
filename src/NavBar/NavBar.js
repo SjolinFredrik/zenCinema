@@ -11,7 +11,7 @@ import {
   Nav,
   Collapse
 } from 'reactstrap';
-import LoginForm from '../User/LoginForm';
+import NavBarLogIn from './NavBarLogIn';
 
 class NavBar extends Component {
   constructor(props) {
@@ -104,7 +104,8 @@ class NavBar extends Component {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <LoginForm myParent={this.name} />
+          
+          <NavBarLogIn auth={this.props.auth} changeAuth={this.props.changeAuth} />
         </Collapse>
       </Navbar>
     )

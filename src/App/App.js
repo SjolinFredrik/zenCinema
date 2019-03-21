@@ -19,16 +19,46 @@ import AdminPage from '../Admin/AdminPage';
 import Footer from '../Footer/Footer';
 
 export default class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.onAuthChange = this.onAuthChange.bind(this);
+    this.state = {
+      auth: null
+    };
+
+    this.checkLogin().then(data => {
+      this.setState({
+        auth: data
+      });
+    });
+  }
+
+  async checkLogin() {
+    return await fetch('/json/login').then(response => {return response.json()}).then(data => {
+      let result = data;
+      return result;
+    });
+  }
+
+  onAuthChange(auth) {
+    this.setState({
+      auth: auth
+    });
+  }
+
   render() {
     return (
       <Router>
         <div className="App">
-          <header><NavBar /></header>
+          <header><NavBar auth={this.state.auth} changeAuth={this.onAuthChange} /></header>
           <main>
             <Switch>
             <Route exact path="/" component={StartPage} />
             <Route exact path="/filmer" component={FilmCollectionPage} />
-            <Route exact path="/filmer/:link" component={FilmPage} />
+            <Route exact path="/filmer/:link" 
+              render={props => <FilmPage {...props} auth={this.state.auth} changeAuth={this.onAuthChange} />}
+            />
             <Route path="/om-oss/kiosken" component={KioskPage} />
             <Route path="/om-oss/regler" component={RulePage} />
             <Route path="/om-oss/våra-salonger" component={SaloonPage} />
