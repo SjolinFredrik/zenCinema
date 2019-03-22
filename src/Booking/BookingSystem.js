@@ -173,7 +173,7 @@ export default class BookingSystem extends React.Component {
 
       //try to save and catch an error if chosen seats have been taken before this booking finished
       try {
-        let savedBooking = await this.newBooking.save();
+        await this.newBooking.save();
         const film = this.showing.film;
         const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
         filmModel.bookedCount += this.newBooking.seats.length;
