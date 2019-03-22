@@ -21,11 +21,13 @@ export default class LoginForm extends React.Component {
     this.state = {
       dropdownOpen: false,
     };
-
   }
 
   async login() {
     let email = this.state.username;
+    if(this.props.email) {
+      email = this.props.email;
+    }
     let password = this.state.password;
     
 
@@ -36,6 +38,7 @@ export default class LoginForm extends React.Component {
 
 
     let result = await login.save();
+    console.log(result);
     this.setState({errorLogin: null});
 
     if (result.loggedIn) {
@@ -58,7 +61,6 @@ export default class LoginForm extends React.Component {
   clickLoginBtn(e) {
     e.preventDefault();
     this.login();
-    this.props.changeOpen(false);
   }
   
   async checkLogin() {
