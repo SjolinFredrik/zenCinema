@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
 import Login from '../Login';
 import REST from '../REST';
 import classnames from 'classnames';
@@ -17,7 +17,8 @@ export default class CustomerBookingPage extends React.Component {
     this.state = {
       newBookings: [],
       oldBookings: [],
-      activeTab: 'actualBookings'
+      activeTab: 'actualBookings',
+      content: false
     }
     this.newBookings = [];
     this.oldBookings = [];
@@ -56,72 +57,56 @@ export default class CustomerBookingPage extends React.Component {
     let allBookings = this.oldBookings;
     this.setState({
       newBookings: this.newBookings,
-      oldBookings: allBookings
+      oldBookings: allBookings,
+      content: true
     })
   }
 
   render() {
-    return (
-      <div className="customer-bookings-page dark-bg-content container">
-        <div  className="booking-heap">
-          <Nav tabs>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === 'actualBookings' })}
-                onClick={() => { this.toggleButton('actualBookings'); }}
-              >
-                Aktuella
-            </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === 'archivedBookings' })}
-                onClick={() => { this.toggleButton('archivedBookings'); }}
-              >
-                Arkiv
-            </NavLink>
-            </NavItem>
-          </Nav>
-          <TabContent activeTab={this.state.activeTab}>
-            <TabPane tabId="actualBookings">
-              <Row>
-                <Col sm="12" className="customer-booking mx-auto">
-                  <table>
-                    <tbody>
-                      <tr>
-                        <th>Film</th>
-                        <th>Datum</th>
-                        <th>Tid</th>
-                        <th>Plats(er)</th>
-                        <th>Ref.nr</th>
-                      </tr>
-                      {this.state.newBookings ? this.state.newBookings : 'Vänligen vänta'}
-                    </tbody>
-                  </table>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="archivedBookings">
-              <Row>
-                <Col sm="12" className="customer-booking mx-auto">
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>Film</td>
-                        <td>Datum</td>
-                        <td>Tid</td>
-                        <th>Plats(er)</th>
-                        <td>Ref.nr</td>
-                      </tr>
-                      {this.state.oldBookings}
-                    </tbody>
-                  </table>
-                </Col>
-              </Row>
-            </TabPane>
-          </TabContent>
+    if(this.state.content) {
+      return (
+        <div className="customer-bookings-page dark-bg-content container">
+          <div  className="booking-heap">
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === 'actualBookings' })}
+                  onClick={() => { this.toggleButton('actualBookings'); }}
+                >
+                  Aktuella
+              </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({ active: this.state.activeTab === 'archivedBookings' })}
+                  onClick={() => { this.toggleButton('archivedBookings'); }}
+                >
+                  Arkiv
+              </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="actualBookings">
+                <Row>
+                    {this.state.newBookings ? this.state.newBookings : 'Vänligen vänta'}
+                </Row>
+              </TabPane>
+              <TabPane tabId="archivedBookings">
+                <Row>
+                  {this.state.oldBookings}
+                </Row>
+              </TabPane>
+            </TabContent>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    else {
+      return (
+        <h2 className="my-5 mx-auto text-center">Vänligen vänta</h2>
+      )
+    }
+    
+    
   }
 }
