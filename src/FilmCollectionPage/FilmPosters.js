@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import REST from '../REST'
 
 class Film extends REST { }
@@ -17,7 +17,7 @@ export default class FilmPosters extends React.Component {
     this.allFilms = await Film.find();
     this.filmPosters = this.allFilms.map(film => {
       return (
-        <Col xs="12" sm="6" md="4" lg="3" className="film-poster" key={'poster_' + film.title}>
+        <Col xs="12" sm="6" md="4" lg="3" className="film-poster p-0" key={'poster_' + film.title}>
           <section className="film-poster-content m-4 m-sm-2 p-1 p-sm-3">
             <Link to={'/filmer/' + film.link}>
               <img
@@ -35,9 +35,11 @@ export default class FilmPosters extends React.Component {
 
   render() {
     return (
-      <Row className="my-3 my-md-5">
-        {this.state.content}
-      </Row>
+      <Container fluid>
+        <Row className="my-3 my-md-5">
+          {this.state.content}
+        </Row>
+      </Container>
     )
   }
 }
