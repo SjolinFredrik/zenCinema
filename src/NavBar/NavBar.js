@@ -80,7 +80,7 @@ class NavBar extends Component {
 
         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
         <Collapse isOpen={!this.state.collapsed} navbar>
-          <Nav navbar className="mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
+          <Nav navbar className="mr-auto ml-0 ml-lg-5 pl-0 pl-lg-3 font-weight-bold">
             <NavItem>
               <NavLink activeClassName='' onClick={this.clickOnStartLink} style={{ color: this.state.color }} className="nav-link" to="/">Start</NavLink>
             </NavItem>
@@ -102,7 +102,7 @@ class NavBar extends Component {
                   <NavLink onClick={this.clickOnDropdownLink} className="nav-link" activeClassName="active" to="/om-oss/regler">Regler</NavLink>
                 </DropdownItem>
                 <DropdownItem >
-                  <NavLink activeClassName="active" className="nav-link" onClick={this.clickOnDropdownLink} to="/om-oss/kiosken">Kiosken</NavLink>
+                  <NavLink onClick={this.clickOnDropdownLink} className="nav-link" activeClassName="active" to="/om-oss/kiosken">Kiosken</NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
