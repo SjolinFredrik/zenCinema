@@ -35,8 +35,7 @@ export default class Film extends React.Component {
                   role="button" 
                   to="film-shows" 
                   className="btn btn-primary btn-block-sm-down tickets-btn">
-                  <i className="fa fa-ticket"></i>
-                  Biljetter
+                  <i className="fa fa-ticket"></i> Biljetter
                 </Link>
                 <Trailer trailerMovie={this.props.youtubeTrailers[0]} />
               </div>

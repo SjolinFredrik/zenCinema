@@ -26,7 +26,7 @@ export default class Trailer extends React.Component {
     return (
 
       <div className="d-inline">
-        <Button onClick={this.toggle} role="button" data-toggle="modal" data-target="#trailerModal" className="btn btn-secondary btn-block-sm-down mt-3 mt-md-0 ml-md-4 trailer-btn"><i className="fa fa-film"></i> Se Trailer</Button>
+        <Button onClick={this.toggle} role="button" data-toggle="modal" data-target="#trailerModal" className="btn btn-secondary btn-block-sm-down mt-3 mt-md-0 ml-md-4 trailer-btn"><i className="fa fa-film"></i> Trailer</Button>
         {this.state.modal ?
           <Modal isOpen={true} toggle={this.toggle} id="trailerModal" tabIndex="-1" role="dialog" aria-hidden="false">
             <ModalBody>
