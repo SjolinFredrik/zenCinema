@@ -110,6 +110,7 @@ export default class CustomerBookingPage extends React.Component {
                         <td>Film</td>
                         <td>Datum</td>
                         <td>Tid</td>
+                        <th>Plats(er)</th>
                         <td>Ref.nr</td>
                       </tr>
                       {this.state.oldBookings}
