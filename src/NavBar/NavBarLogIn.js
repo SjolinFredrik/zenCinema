@@ -21,7 +21,6 @@ export default class NavBarLogIn extends React.Component {
     super(props);
     this.clickLoginBtn = this.clickLoginBtn.bind(this);
     this.clickLogoutBtn = this.clickLogoutBtn.bind(this);
-    // this.clickCreateAccountBtn = this.clickCreateAccountBtn.bind(this);
 
     this.state = {
       dropdownOpen: false,
@@ -44,8 +43,6 @@ export default class NavBarLogIn extends React.Component {
 
 
     let result = await login.save();
-    console.log('I am loggedIn')
-    console.log(result);
 
     this.props.changeAuth(result);
 
@@ -118,8 +115,6 @@ export default class NavBarLogIn extends React.Component {
         </UncontrolledDropdown></ButtonGroup></div>
 
       }
-
-
       return(
         <div>{result}</div>
       )
