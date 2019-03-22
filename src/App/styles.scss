@@ -1,0 +1,39 @@
+// Here we can add our overrides to the bootstrap !default values. If this file is empty bootstrap goes default.
+@import '../sass/_bootstrap-overrides';
+
+@import 'node_modules/bootstrap/scss/functions';
+// @import '_bootstrap-variables';
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+//Here we include all our styles
+
+@import '../sass/_admin-showings';
+@import '../sass/_basic-style';
+@import '../sass/_booking-summary';
+@import '../sass/_booking-system';
+@import '../sass/_calendar-showing';
+@import '../sass/_custom-mixins';
+@import '../sass/_custom-modal';
+@import '../sass/_custom-variables';
+@import '../sass/_customerBookingPage';
+@import '../sass/_film';
+@import '../sass/_films-collection';
+@import '../sass/_footer-style';
+@import '../sass/highscore-list';
+@import '../sass/_kiosk';
+@import '../sass/_login-form';
+@import '../sass/_message';
+@import '../sass/_nav-bar';
+@import '../sass/_register-page';
+@import '../sass/_rule-page';
+@import '../sass/_saloon-techinfo';
+@import '../sass/_seats-grid';
+@import '../sass/_showing';
+@import '../sass/_start-page';
+@import '../sass/_ticketPrice';
+@import '../sass/_trailer-modal';
+@import '../sass/_zen-coin';
+@import '../sass/_manage-showing-modal';
+
+
+

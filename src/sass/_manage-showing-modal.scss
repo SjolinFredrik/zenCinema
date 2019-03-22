@@ -1,0 +1,46 @@
+.showing-modal {
+  
+  .modal-content {
+    background-color: $primary;
+    color: #000;
+  }
+  
+  .modal-header {
+    background-color: $primary;
+    border-bottom: 0 !important;
+    .modal-title {
+      color: #fff;
+    }
+    span {
+      color: #fff;
+    }
+  }
+
+  .success {
+    background-color: green;
+  }
+  
+  .confirmation-body {
+    min-height: 250px !important;
+  }
+
+  .modal-body {
+    background-color: #fff;
+
+    .error {
+      border-color: $danger;
+      color: $danger;
+    }
+  
+    select:focus, input:focus {
+      outline: none;
+      box-shadow: none !important;
+      border: 1px solid #ccc;
+      color: #495057;
+    }
+  }
+  
+  .modal-footer {
+    background: #fff;
+  }
+}

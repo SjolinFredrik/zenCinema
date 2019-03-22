@@ -1,0 +1,50 @@
+.customer-bookings-page {
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.booking-heap {
+  padding-top: 5rem;
+  .nav-link  {
+    border: 1px solid $secondary;
+    color: $secondary;
+    margin-right: 15px;
+    border-radius: 3px 3px 3px 3px;
+    font-weight: 600;
+    cursor: pointer;
+    @include transition(.5s);
+    &.active {
+      border-color: $primary;
+      background-color: $primary;
+      color: rgb(243, 158, 158);
+    }
+    &:hover {
+      background-color: $primary;
+    }
+  }
+  .nav-tabs {
+    border-bottom: 0px;
+  }
+}
+
+.customer-booking {
+  padding-top: 4rem;
+  @include media-breakpoint-down(xs) {
+    font-size: .875rem;
+  }
+  table {
+    table-layout: fixed;
+    width: 100%;
+    td, th {
+      padding: 12px;
+      vertical-align: middle;
+      text-align: center;
+    }
+    tr {
+      border-bottom: 1px solid $secondary;
+      &:first-child {
+        border-top: 1px solid $secondary;
+      }
+    }
+  }
+}
