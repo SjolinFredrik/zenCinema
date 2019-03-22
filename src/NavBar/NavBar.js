@@ -36,21 +36,24 @@ class NavBar extends Component {
     // document.getElementsByClassName('nav-link').classList.remove('activeLink');
     this.setState({
       colorDropDownParent: '',
-      color: '#fff'
+      color: '#fff',
+      collapsed: true
     });
   }
 
   clickOnOtherLink() {
     this.setState({
       color: '',
-      colorDropDownParent: ''
+      colorDropDownParent: '',
+      collapsed: true
     });
   }
 
   clickOnDropdownLink() {
     this.setState({
       color: '',
-      colorDropDownParent: '#fff'
+      colorDropDownParent: '#fff',
+      collapsed: true
     });
   }
 
