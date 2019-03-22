@@ -5,8 +5,6 @@ import MissingPage from '../MissingPage/MissingPage';
 import Showings from './Showings';
 import FilmComponent from './Film';
 
-
-
 class Film extends REST {};
 
 export default class FilmPage extends React.Component {

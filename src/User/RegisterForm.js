@@ -179,7 +179,7 @@ export default class RegisterForm extends React.Component {
       const lastName = document.getElementById('lastnameb').value;
       const email = document.getElementById('emailb').value;
       const password = document.getElementById('passwordb').value;
-      const newUser = await User.createUser(firstName,lastName,email,password);
+      await User.createUser(firstName,lastName,email,password);
       global.STORE.newUserEmail = email;
       this.props.changeRegisterOpen(false);
       this.setState({

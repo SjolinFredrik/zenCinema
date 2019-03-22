@@ -173,7 +173,7 @@ export default class BookingSystem extends React.Component {
 
       //try to save and catch an error if chosen seats have been taken before this booking finished
       try {
-        let savedBooking = await this.newBooking.save();
+        await this.newBooking.save();
         const film = this.showing.film;
         const filmModel = await Film.find(`.findOne({_id: '${film._id}'})`);
         filmModel.bookedCount += this.newBooking.seats.length;
@@ -284,7 +284,7 @@ export default class BookingSystem extends React.Component {
               {!this.props.auth || !this.props.auth.loggedIn ?
                 <p className="mt-1">Vänligen logga in eller skapa nytt konto för att boka biljetter</p> : ''
               }
-              <button type="button" onClick={this.props.toggle} className="btn btn-outline-secondary">Avbryt</button>
+              <button type="button" onClick={this.props.toggle} className="btn btn-outline-secondary mr-3">Avbryt</button>
               {this.props.auth && this.props.auth.loggedIn ? 
                 <button type="button" className="btn btn-secondary save-booking" onClick={this.createNewBooking}>Boka</button>  : 
                 <button type="button"   className="btn btn-secondary open-login-form" onClick={this.openLoginForm} >Logga in</button>
