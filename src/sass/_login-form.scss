@@ -22,8 +22,5 @@
     background-color: transparentize($accent-dark, .01);
     z-index: 300;
     padding-top: 50px;
-    @include media-breakpoint-down(xs) {
-      top: 50%;
-    }
   }
 }
