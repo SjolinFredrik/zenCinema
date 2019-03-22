@@ -15,16 +15,20 @@ export default class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.clickLoginBtn = this.clickLoginBtn.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
 
     this.state = {
       dropdownOpen: false,
     };
-
   }
 
   async login() {
-    let email = document.getElementById('emailfbs').value;
-    let password = document.getElementById('pwdfbs').value;
+    let email = this.state.username;
+    if(this.props.email) {
+      email = this.props.email;
+    }
+    let password = this.state.password;
     
 
     let login = new Login({
@@ -34,6 +38,7 @@ export default class LoginForm extends React.Component {
 
 
     let result = await login.save();
+    console.log(result);
     this.setState({errorLogin: null});
 
     if (result.loggedIn) {
@@ -45,13 +50,17 @@ export default class LoginForm extends React.Component {
       this.setState({ errorLogin: true });
     }
   }
+  handleUsername(e) {
+    this.setState({ username: e.target.value });
+  }
 
-
+  handlePassword(e) {
+    this.setState({ password: e.target.value });
+  }
 
   clickLoginBtn(e) {
     e.preventDefault();
     this.login();
-    this.props.changeOpen(false);
   }
   
   async checkLogin() {
@@ -70,11 +79,11 @@ export default class LoginForm extends React.Component {
                   <h2>Logga in eller skapa nytt konto</h2>
                   <FormGroup>
                     <Label htmlFor="emailfbs">Epost</Label>
-                      <Input type="email" className="form-control email-login-input" id="emailfbs" placeholder="email@example.com" defaultValue={this.props.email && this.props.email !== undefined ? this.props.email : ''} />
+                      <Input onChange={this.handleUsername} type="email" className="form-control email-login-input" id="emailfbs" placeholder="email@example.com" defaultValue={this.props.email && this.props.email !== undefined ? this.props.email : ''} />
                   </FormGroup>
                     <FormGroup >
                       <Label htmlFor="pwdfbs">Lösenord</Label>
-                      <Input type="password" className="form-control password-login-input" id="pwdfbs" placeholder="Password" />
+                      <Input onChange={this.handlePassword} type="password" className="form-control password-login-input" id="pwdfbs" placeholder="Password" />
                     </FormGroup>
                     <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
                   </Form>

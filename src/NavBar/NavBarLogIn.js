@@ -21,20 +21,20 @@ export default class NavBarLogIn extends React.Component {
     super(props);
     this.clickLoginBtn = this.clickLoginBtn.bind(this);
     this.clickLogoutBtn = this.clickLogoutBtn.bind(this);
-
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
     this.state = {
       dropdownOpen: false,
     };
   }
 
+
+  
+
    async login() {
 
-    let email = '';
-    let password = '';
-    email = document.getElementById('emailfnav').value;
-    password = document.getElementById('pwdfnav').value;
-
-    
+    let email = this.state.username;
+    let password = this.state.password;
 
     let login = new Login({
       email: email,
@@ -43,7 +43,6 @@ export default class NavBarLogIn extends React.Component {
 
 
     let result = await login.save();
-
     this.props.changeAuth(result);
 
     this.setState({errorLogin: null});
@@ -51,6 +50,14 @@ export default class NavBarLogIn extends React.Component {
     if (!result.loggedIn) {
       this.setState({errorLogin: true});
     }
+  }
+
+  handleUsername(e) {
+    this.setState({ username: e.target.value });
+  }
+
+  handlePassword(e) {
+    this.setState({ password: e.target.value });
   }
 
   clickLoginBtn(e) {
@@ -98,11 +105,11 @@ export default class NavBarLogIn extends React.Component {
           <Form>
             <FormGroup >
                 <Label for="emailfnav">Epost</Label>
-                <Input type="email" className="form-control email-login-input" id="emailfnav" placeholder="email@example.com" />
+                <Input type="email" onChange={this.handleUsername} className="form-control email-login-input" id="emailfnav" placeholder="email@example.com" />
             </FormGroup>
             <FormGroup className="form-group">
               <Label for="pwdfnav">Lösenord</Label>
-              <Input type="password" className="form-control password-login-input" id="pwdfnav" placeholder="Password" />
+              <Input type="password" onChange={this.handlePassword} className="form-control password-login-input" id="pwdfnav" placeholder="Password" />
             </FormGroup>
             {this.state.errorLogin ? <Badge color="danger" >Felaktig epost eller lösenord!</Badge> : null}
             <Button color="primary" className="btn btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
