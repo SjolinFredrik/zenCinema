@@ -19,6 +19,7 @@ export default class Showing extends React.Component {
     return (
       <div>
         <Col xs="12" md="10" className="showing offset-md-1 px-0 text-left">
+        <Link className="a-over" style={{color: '#fff', textDecoration: 'none'}} onClick={() => this.props.showBookingPage(this.props.data._id)} to={{pathname: '/filmer/' + this.props.data.film.link + '/' + this.props.data._id, state: {modal: true}}}></Link>
         <Container fluid>
           <Row className="px-0">
             <Col xs="4" md="3" className="pl-2 pr-0">
@@ -39,7 +40,7 @@ export default class Showing extends React.Component {
             </Col>
             <Col xs="3" md="2" className="pr-2 my-auto">
               <Button  title="Boka" className="btn btn-secondary float-right book-film">
-                <Link style={{color: '#fff', textDecoration: 'none'}} onClick={() => this.props.showBookingPage(this.props.data._id)} to={{pathname: '/filmer/' + this.props.data.film.link + '/' + this.props.data._id, state: {modal: true}}}>Boka</Link>
+                Boka
               </Button>
             </Col>
           </Row>

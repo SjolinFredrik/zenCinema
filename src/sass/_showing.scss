@@ -11,9 +11,11 @@
   @include media-breakpoint-down(xs) {
     font-size: .85rem;
   }
+  .a-over {
+    height: 100%;
+  }
   .book-film {
     display: block;
-    padding: 5px 7px;
     border-radius: 3px;
     text-decoration: none;
     background-color: $accent-light;
