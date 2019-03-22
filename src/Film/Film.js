@@ -6,12 +6,27 @@ import {
   Row,
   Col
 } from 'reactstrap';
+import MissingPage from '../MissingPage/MissingPage';
 
 export default class Film extends React.Component {
 
-  render() {
-    return (
-      <Col xs="12" className="film-content pb-5 mx-auto px-0">
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: undefined
+    }
+  }
+
+  componentDidMount() {
+    const filmId = this.props._id;
+    if (filmId === undefined) {
+      this.setState({
+        content: <MissingPage />
+      });
+    }
+    else {
+      let content = 
+        <div>
         <div className="img-fluid film-cover-img d-none d-md-block" style={{ background: "url(/images/movies/" + this.props.images[1] + ")" }}>
           <div className="inner-cover-img" />
         </div>
@@ -61,7 +76,18 @@ export default class Film extends React.Component {
             </Col>
           </Row>
         </Container>
-      </Col>
+        </div>
+      this.setState({
+        content: content
+      });
+    }
+  }
+
+  render() {
+
+    
+    return (
+      <Col xs="12" className="film-content pb-5 mx-auto px-0">{this.state.content}</Col>
     )
   }
   

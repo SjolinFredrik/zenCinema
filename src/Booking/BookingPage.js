@@ -50,7 +50,6 @@ export default class BookingPage extends React.Component {
           film: data
         });
       });
-      console.log(this.state.film);
   }
 
   async findFilm(filmLink) {
