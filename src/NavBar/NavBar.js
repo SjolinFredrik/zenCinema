@@ -36,21 +36,24 @@ class NavBar extends Component {
     // document.getElementsByClassName('nav-link').classList.remove('activeLink');
     this.setState({
       colorDropDownParent: '',
-      color: '#fff'
+      color: '#fff',
+      collapsed: true
     });
   }
 
   clickOnOtherLink() {
     this.setState({
       color: '',
-      colorDropDownParent: ''
+      colorDropDownParent: '',
+      collapsed: true
     });
   }
 
   clickOnDropdownLink() {
     this.setState({
       color: '',
-      colorDropDownParent: '#fff'
+      colorDropDownParent: '#fff',
+      collapsed: true
     });
   }
 
@@ -77,7 +80,7 @@ class NavBar extends Component {
 
         <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
         <Collapse isOpen={!this.state.collapsed} navbar>
-          <Nav navbar className="mr-auto ml-0 ml-md-5 pl-0 pl-md-3 font-weight-bold">
+          <Nav navbar className="mr-auto ml-0 ml-lg-5 pl-0 pl-lg-3 font-weight-bold">
             <NavItem>
               <NavLink activeClassName='' onClick={this.clickOnStartLink} style={{ color: this.state.color }} className="nav-link" to="/">Start</NavLink>
             </NavItem>
