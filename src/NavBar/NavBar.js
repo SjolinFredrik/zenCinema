@@ -99,7 +99,7 @@ class NavBar extends Component {
                   <NavLink onClick={this.clickOnDropdownLink} className="nav-link" activeClassName="active" to="/om-oss/regler">Regler</NavLink>
                 </DropdownItem>
                 <DropdownItem >
-                  <NavLink activeClassName="active" className="nav-link" onClick={this.clickOnDropdownLink} to="/om-oss/kiosken">Kiosken</NavLink>
+                  <NavLink onClick={this.clickOnDropdownLink} className="nav-link" activeClassName="active" to="/om-oss/kiosken">Kiosken</NavLink>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
