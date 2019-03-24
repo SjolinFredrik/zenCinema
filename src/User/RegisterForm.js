@@ -36,13 +36,9 @@ export default class RegisterForm extends React.Component {
 
   checkValidUsername() {
     if (this.state.username.length < 2) {
-      this.state.errors.firstName = true;
-      this.setState({ errors: this.state.errors });
       return false;
     } else {
       this.username = this.state.username;
-      delete this.state.errors.firstName;
-      this.setState({ errors: this.state.errors });
       return true;
     }
   }
@@ -53,13 +49,9 @@ export default class RegisterForm extends React.Component {
 
   checkValidLastname() {
     if (this.state.lastname.length < 2) {
-      this.state.errors.lastName = true;
-      this.setState({ errors: this.state.errors });
       return false;
     } else {
       this.lastname = this.state.lastname;
-      delete this.state.errors.lastName;
-      this.setState({ errors: this.state.errors });
       return true;
     }
   }
@@ -72,18 +64,15 @@ export default class RegisterForm extends React.Component {
   async handleChangeEmail(e) {
     this.setState({ email: e.target.value, existingEmail: false });
   }
+
   checkValidEmail() {
     let regEx = /\w\w+@\w\w+\.\w\w+/;
 
     if (!regEx.test(this.state.email)) {
-      this.state.errors.emailInput = true;
-      this.setState({ errors: this.state.errors })
-      return false
+      return false;
     } else {
       this.email = this.state.email;
-      delete this.state.errors.emailInput;
-      this.setState({ errors: this.state.errors })
-      return true
+      return true;
     }
   }
 
@@ -97,6 +86,7 @@ export default class RegisterForm extends React.Component {
       }
     })
   }
+  
   handlePasswordInput(e) {
     this.setState({ password: e.target.value });
   }
@@ -105,13 +95,9 @@ export default class RegisterForm extends React.Component {
     let regEx = /^(?=.*\d).{4,15}$/;
 
     if (!regEx.test(this.state.password)) {
-      this.state.errors.invalidPasswordType = true;
-      this.setState({ error: this.state.errors });
       return false;
     } else {
       this.password = this.state.password;
-      delete this.state.errors.invalidPasswordType;
-      this.setState({ error: this.state.errors });
       return true;
     }
   }
@@ -122,23 +108,30 @@ export default class RegisterForm extends React.Component {
 
   checkMatchingPassword() {
     if (this.state.password !== this.state.confirmPassword) {
-      this.state.errors.invalidPasswordMatch = true;
-      this.setState({ error: this.state.errors });
       return false;
     } else {
-      delete this.state.errors.invalidPasswordMatch;
-      this.setState({ error: this.state.errors });
       return true;
     }
   }
 
   async handleValidRegistration() {
-    let validUsername = this.checkValidUsername();
-    let validLastname = this.checkValidLastname();
-    let validEmail = this.checkValidEmail();
-    let existingEmail = this.checkExistingEmail();
-    let validPassword = this.checkValidPassword();
-    let matchingPassword = this.checkMatchingPassword();
+    let validUsername = this.checkValidUsername(); //firstName
+    let validLastname = this.checkValidLastname(); //lastName
+    let validEmail = this.checkValidEmail(); //emailInput
+    let existingEmail = this.checkExistingEmail(); //existingEmail
+    let validPassword = this.checkValidPassword(); //invalidPasswordType
+    let matchingPassword = this.checkMatchingPassword(); //invalidPasswordMatch
+
+    this.setState({
+      errors: {
+        firstName: !validUsername,
+        lastName: !validLastname,
+        emailInput: !validEmail,
+        invalidPasswordType: !validPassword,
+        existingEmail: !existingEmail,
+        invalidPasswordMatch: !matchingPassword
+      }
+    });
 
     if (validUsername && validLastname && validEmail && existingEmail && validPassword && matchingPassword) {
       await User.createUser(this.username,this.lastname,this.email,this.password);
