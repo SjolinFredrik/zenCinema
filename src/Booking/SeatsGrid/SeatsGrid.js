@@ -108,10 +108,16 @@ export default class SeatsGrid extends React.Component {
     this.props.selectedSeats({row: row, seats: chosenSeats});
     this.setState({
       manualSelection: true,
-      chosenRowAndSeats: {
-        row: row,
-        seats: chosenSeats
-      }
+      chosenRowAndSeats: null
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          chosenRowAndSeats: {
+            row: row,
+            seats: chosenSeats
+          }
+        })
+      }, 500);
     });
   }
 
