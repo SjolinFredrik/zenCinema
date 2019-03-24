@@ -7,7 +7,6 @@ Continue with following steps:
 2. execute ```node importer```
 3. execute ```node addPricesToDB```
 4. execute ```node addSaloonsToDB```
-5. execute ```node updateSaloonsBestRows```
 6. execute ```node createShowings```
 7. start application with ```npm start```
 
