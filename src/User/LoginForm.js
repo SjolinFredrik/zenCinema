@@ -39,7 +39,6 @@ export default class LoginForm extends React.Component {
 
 
     let result = await login.save();
-    console.log(result);
     this.setState({errorLogin: null});
 
     if (result.loggedIn) {

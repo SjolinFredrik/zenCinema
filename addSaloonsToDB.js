@@ -22,15 +22,18 @@ async function addSaloonsToDb() {
 
   let schemaOne = {
     name: 'Zenmongouse',
-    schema: [8, 9, 10, 10, 10, 10, 12, 12]
+    schema: [8, 9, 10, 10, 10, 10, 12, 12],
+    bestRows: [4,5,6]
   };
   let schemaTwo = {
     name: 'Zentermidiate',
-    schema: [6, 8, 9, 10, 10, 12]
+    schema: [6, 8, 9, 10, 10, 12],
+    bestRows: [4,5]
   };
   let schemaThree = {
-    name: 'Zenpetit',
-    schema: [5, 7, 9, 9, 12]
+    name: 'Zenpetite',
+    schema: [5, 7, 9, 9, 12],
+    bestRows: [3,4]
   };
 
   schemas = [schemaOne, schemaTwo, schemaThree];
@@ -39,7 +42,8 @@ async function addSaloonsToDb() {
     let saloon = new Saloon({
       name: schemas[i].name,
       seatsPerRow: schemas[i].schema,
-      showings: []
+      showings: [],
+      bestRows: schemas[i].bestRows
     });
     await saloon.save();
   }
