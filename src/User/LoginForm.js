@@ -5,7 +5,8 @@ import {
   Label,
   Button,
   Input,
-  Col
+  Col,
+  Badge
 } from 'reactstrap';
 import Login from '../Login';
 
@@ -75,7 +76,8 @@ export default class LoginForm extends React.Component {
     if(this.props.isOpen) {
         result = <div className="login-form d-flex justify-content-sm-center align-items-sm-center">
             <Col sm="4">
-                <Form className="welcome">
+            <div className="welcome">
+            <Form >
                   <h2>Logga in eller skapa nytt konto</h2>
                   <FormGroup>
                     <Label htmlFor="emailfbs">Epost</Label>
@@ -85,9 +87,10 @@ export default class LoginForm extends React.Component {
                       <Label htmlFor="pwdfbs">Lösenord</Label>
                       <Input onChange={this.handlePassword} type="password" className="form-control password-login-input" id="pwdfbs" placeholder="Password" />
                     </FormGroup>
+                    {this.state.errorLogin ? <Badge color="danger">Felaktig epost eller lösenord!</Badge> : null}
                     <Button className="btn-primary login-btn mt-2" onClick={this.clickLoginBtn}>Logga in</Button>
                   </Form>
-                <Button className="btn-primary new-account-btn mt-2" onClick={this.props.openRegisterForm}>Skapa konto</Button>
+                <Button className="btn-primary new-account-btn mt-2" onClick={this.props.openRegisterForm}>Skapa konto</Button></div>
             </Col>
          </div>
       }

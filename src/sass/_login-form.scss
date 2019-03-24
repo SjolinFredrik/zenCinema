@@ -22,5 +22,16 @@
     background-color: transparentize($accent-dark, .01);
     z-index: 300;
     padding-top: 50px;
+    .badge-danger {
+      bottom: 87px;
+    }
+  }
+  .welcome {
+    position: relative;
+    left: 0;
+    @include media-breakpoint-down(xs) {
+      position: absolute;
+      bottom: 20%;
+    }
   }
 }
