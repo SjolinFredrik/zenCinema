@@ -68,8 +68,13 @@ export default class BookingSystem extends React.Component {
 
   setNumOfTickets(numOfTickets) {
     this.setState({
-      numOfTickets: numOfTickets
+      numOfTickets: null
     });
+    setTimeout(() => {
+      this.setState({
+        numOfTickets: numOfTickets
+      });
+    }, 500);
   }
 
   getTicketsCost(ticketsCost) {

@@ -30,10 +30,12 @@ export default class TicketSelection extends React.Component {
   }
 
   initialNumOfTickets(ticketAmount, ticketsCost) {
-    this.state.ticketAmount = ticketAmount;
-    this.state.ticketsCost = ticketsCost;
-    this.props.numOfTickets(this.state.ticketAmount);
-    this.props.ticketsCost(this.state.ticketsCost);
+    this.setState({
+      ticketAmount: ticketAmount,
+      ticketsCost: ticketsCost
+    });
+    this.props.numOfTickets(ticketAmount);
+    this.props.ticketsCost(ticketsCost);
   }
 
   numberOfTickets() {
