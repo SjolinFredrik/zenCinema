@@ -16,15 +16,20 @@ export default class Row extends React.Component {
   }
   
   highlightSeat(seatIndex) {
-    const highlightedSeats = [];
-    const startSeatIndex = seatIndex;
-    for(; seatIndex < startSeatIndex + this.props.numSeatsToSelect && seatIndex < this.props.numSeats; seatIndex++) {
-      highlightedSeats.push(seatIndex);
-    }
-
     this.setState({
-      highlightedSeats: highlightedSeats
+      highlightedSeats: null
+    }, () => {
+      const highlightedSeats = [];
+      const startSeatIndex = seatIndex;
+      for(; seatIndex < startSeatIndex + this.props.numSeatsToSelect && seatIndex < this.props.numSeats; seatIndex++) {
+        highlightedSeats.push(seatIndex);
+      }
+  
+      this.setState({
+        highlightedSeats: highlightedSeats
+      });
     });
+    
   }
 
   selectSeat() {
@@ -42,7 +47,7 @@ export default class Row extends React.Component {
     const row = this.props.index;
     
     let highlightValid = true;
-    if (this.state.highlightedSeats.length < this.props.numSeatsToSelect) {
+    if (this.state.highlightedSeats !== null && this.state.highlightedSeats.length < this.props.numSeatsToSelect) {
       highlightValid = false;
     }
 
@@ -50,8 +55,8 @@ export default class Row extends React.Component {
       const seatName = row + 1 + '-' + j;
       const isSeatTaken = this.props.takenSeats.includes(seatName);
       const seatIndex = this.props.numSeats - j;
-      const isSeatChosen = this.props.chosenSeats.includes(seatIndex);
-      const isSeatHighlighted = this.state.highlightedSeats.includes(seatIndex);
+      const isSeatChosen = this.props.chosenSeats && this.props.chosenSeats.includes(seatIndex);
+      const isSeatHighlighted = this.state.highlightedSeats && this.state.highlightedSeats.includes(seatIndex);
 
       if (isSeatHighlighted && isSeatTaken) {
         highlightValid = false;
